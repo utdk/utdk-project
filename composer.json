@@ -22,15 +22,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/composer/{$name}": ["type:drupal-module"],
-            "web/profiles/composer/{$name}": ["type:drupal-profile"],
-            "web/themes/composer/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
-        },
+        "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
@@ -49,6 +41,15 @@
                 "[project-root]/.gitattributes": false,
                 "[web-root]/sites/default/default.services.pantheon.preproduction.yml": false
             }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/composer/{$name}": ["type:drupal-module"],
+            "web/profiles/composer/{$name}": ["type:drupal-profile"],
+            "web/themes/composer/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
         }
     },
     "config": {
