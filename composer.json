@@ -14,8 +14,7 @@
         }
     ],
     "require": {
-        "utexas/upstream-configuration": "*",
-        "drush/drush": "^10"
+        "utexas/upstream-configuration": "*"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -61,5 +60,8 @@
         },
         "process-timeout": 0,
         "sort-packages": true
+    },
+    "require-dev": {
+        "drush/drush": "^10"
     }
 }
