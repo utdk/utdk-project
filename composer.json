@@ -1,5 +1,5 @@
 {
-    "name": "vendor/project-name",
+    "name": "utexas/utdk-project",
     "description": "UT Drupal Kit site",
     "type": "project",
     "license": ["GPL-2.0-or-later"],
