@@ -41,6 +41,7 @@
                 "[project-root]/.gitattributes": false
             }
         },
+        "installer-types": ["utexas-development"],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
             "web/libraries/{$name}": ["type:drupal-library"],
@@ -48,7 +49,8 @@
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
+            ".docksal": ["type:utexas-development"]
         }
     },
     "config": {
