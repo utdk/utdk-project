@@ -19,8 +19,9 @@
 /web/safari-pinned-tab.svg
 /web/site.webmanifest
 
-# Ignore simplesaml directory
+# Ignore simplesaml scaffolded components
 /web/simplesaml
+/web/sites/default/settings.pantheon.saml.php
 
 web/sites/default/default.services.pantheon.preproduction.yml
 web/sites/default/default.services.yml
