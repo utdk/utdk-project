@@ -2,6 +2,52 @@
 
 // @codingStandardsIgnoreFile
 
+/***
+ *          ___
+ *         /__/\          ___
+ *         \  \:\        /  /\
+ *          \  \:\      /  /:/
+ *      ___  \  \:\    /  /:/
+ *     /__/\  \__\:\  /  /::\
+ *     \  \:\ /  /:/ /__/:/\:\
+ *      \  \:\  /:/  \__\/  \:\
+ *       \  \:\/:/        \  \:\
+ *        \  \::/          \__\/
+ *         \__\/
+ *         _____          ___           ___           ___         ___
+ *        /  /::\        /  /\         /__/\         /  /\       /  /\
+ *       /  /:/\:\      /  /::\        \  \:\       /  /::\     /  /::\
+ *      /  /:/  \:\    /  /:/\:\        \  \:\     /  /:/\:\   /  /:/\:\    ___     ___
+ *     /__/:/ \__\:|  /  /:/~/:/    ___  \  \:\   /  /:/~/:/  /  /:/~/::\  /__/\   /  /\
+ *     \  \:\ /  /:/ /__/:/ /:/___ /__/\  \__\:\ /__/:/ /:/  /__/:/ /:/\:\ \  \:\ /  /:/
+ *      \  \:\  /:/  \  \:\/:::::/ \  \:\ /  /:/ \  \:\/:/   \  \:\/:/__\/  \  \:\  /:/
+ *       \  \:\/:/    \  \::/~~~~   \  \:\  /:/   \  \::/     \  \::/        \  \:\/:/
+ *        \  \::/      \  \:\        \  \:\/:/     \  \:\      \  \:\         \  \::/
+ *         \__\/        \  \:\        \  \::/       \  \:\      \  \:\         \__\/
+ *                       \__\/         \__\/         \__\/       \__\/
+ *          ___
+ *         /__/|        ___           ___
+ *        |  |:|       /  /\         /  /\
+ *        |  |:|      /  /:/        /  /:/
+ *      __|  |:|     /__/::\       /  /:/
+ *     /__/\_|:|____ \__\/\:\__   /  /::\
+ *     \  \:\/:::::/    \  \:\/\ /__/:/\:\
+ *      \  \::/~~~~      \__\::/ \__\/  \:\
+ *       \  \:\          /__/:/       \  \:\
+ *        \  \:\         \__\/         \__\/
+ *         \__\/
+ *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! VERY IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DO NOT MODIFY THIS FILE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *
+ * Settings defined in this file are defaults, set by ITS, that should work for most sites.
+ * Developers should not directly modify this file, but rather should use context-specific
+ * PHP includes to override or supplement these defaults (see the list of pre-defined
+ * includes, below).
+
 /**
  * Load services definition file.
  */
@@ -44,7 +90,7 @@ if (file_exists($pantheon_settings)) {
 /**
  * If using Enterprise Login with Pantheon, this file is required.
  *
- * The file itself is provided by `utexas/utexas_pantheon_saml`
+ * The file itself is provided by `utexas/pantheon_saml_integration`
  */
 $pantheon_saml_settings = __DIR__ . "/settings.pantheon.saml.php";
 if (file_exists($pantheon_saml_settings)) {
@@ -57,7 +103,9 @@ if (file_exists($pantheon_saml_settings)) {
  * directly in settings.php. Typical settings include SMTP integration, trusted
  * host patterns, redirects, and environment-specific overrides.
  *
- * The file itself is provided by `utexas/utexas_pantheon_saml`
+ * The file itself should be added by the developer and committed to version
+ * control. It should not include sensitive information. Those should be
+ * referenced externally. See https://pantheon.io/docs/private-paths#private-path-for-files
  */
 $site_settings = __DIR__ . "/settings.site.php";
 if (file_exists($site_settings)) {
