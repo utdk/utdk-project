@@ -4,6 +4,10 @@
     "type": "project",
     "license": ["GPL-2.0-or-later"],
     "repositories": {
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
         "upstream": {
             "type": "path",
             "url": "upstream-configuration"
