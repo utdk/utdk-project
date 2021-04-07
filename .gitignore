@@ -23,17 +23,12 @@
 /web/simplesaml
 /web/sites/default/settings.pantheon.saml.php
 
-web/sites/default/default.services.pantheon.preproduction.yml
-web/sites/default/default.services.yml
-web/sites/default/default.settings.php
-web/sites/default/settings.pantheon.php
-web/sites/development.services.yml
-web/sites/example.settings.local.php
-
 # Pantheon commits a settings.php for environment-specific settings.
 # Place local settings in settings.local.php
+web/sites/default/settings.pantheon.php
 web/sites/*/settings.local.php
 web/sites/*/services*.yml
+/web/sites/default/default.services.pantheon.preproduction.yml
 !web/sites/*/services.pantheon.*.yml
 !web/sites/*/services.yml
 
@@ -43,7 +38,6 @@ web/sites/*/services*.yml
 
 # Ignore SimpleTest multi-site environment.
 /web/sites/simpletest
-
 
 # Ignore custom modules managed by Composer.
 #
@@ -131,7 +125,6 @@ upstream/web/
 /web/profiles/README.txt
 /web/sites/README.txt
 /web/sites/default/default.services.yml
-/web/sites/default/default.services.pantheon.preproduction.yml
 /web/sites/default/default.settings.php
 /web/sites/default/config/.htaccess
 /web/sites/default/config/README
