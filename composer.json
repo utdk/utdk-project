@@ -33,8 +33,7 @@
         "drupal-scaffold": {
             "allowed-packages": [
                 "pantheon-systems/drupal-integrations",
-                "utexas/utdk_profile",
-                "utexas/upstream-configuration"
+                "utexas/utdk_profile"
             ],
             "locations": {
                 "web-root": "./web"
