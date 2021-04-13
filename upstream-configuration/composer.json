@@ -3,6 +3,16 @@
     "description": "Defines requirements specific to the UT Drupal Kit.",
     "type": "project",
     "version": "3.0.0-rc.2",
+    "repositories": {
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
     "require": {
         "php": ">=7.3",
         "composer/installers": "^1.9",
