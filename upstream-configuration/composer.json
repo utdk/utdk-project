@@ -7,8 +7,7 @@
         "php": ">=7.3",
         "drupal/core-composer-scaffold": "^9",
         "utexas/utdk_profile": "3.0.0-beta.10.2",
-        "pantheon-systems/drupal-integrations": "^9",
-        "oomphinc/composer-installers-extender": "^2"
+        "pantheon-systems/drupal-integrations": "^9"
     },
     "minimum-stability": "dev"
 }
