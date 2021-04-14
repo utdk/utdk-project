@@ -5,10 +5,8 @@
     "version": "3.0.0-rc.2",
     "require": {
         "php": ">=7.3",
-        "composer/installers": "^1.9",
-        "cweagans/composer-patches": "^1.0",
         "drupal/core-composer-scaffold": "^9",
-        "utexas/utdk_profile": "dev-develop",
+        "utexas/utdk_profile": "3.0.0-beta.10.2",
         "pantheon-systems/drupal-integrations": "^9",
         "oomphinc/composer-installers-extender": "^2"
     },
