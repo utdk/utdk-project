@@ -71,11 +71,6 @@ $settings['rebuild_access'] = FALSE;
 // $settings['skip_permissions_hardening'] = TRUE;
 
 /**
- * Place the config directory outside of the Drupal root.
- */
-$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config';
-
-/**
  * If using Pantheon, including its settings file.
  *
  * n.b. The settings.pantheon.php file makes some changes
@@ -86,6 +81,11 @@ $pantheon_settings = __DIR__ . "/settings.pantheon.php";
 if (file_exists($pantheon_settings)) {
   include $pantheon_settings;
 }
+
+/**
+ * Place the config directory outside of the Drupal root.
+ */
+$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config';
 
 /**
  * If using Enterprise Login with Pantheon, this file is required.
