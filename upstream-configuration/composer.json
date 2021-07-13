@@ -6,7 +6,8 @@
     "require": {
         "php": ">=7.3",
         "drupal/core-composer-scaffold": "^9",
-        "utexas/utdk_profile": "3.0.0",
+        "drush/drush": "^10",
+        "utexas/utdk_profile": "3.1.0",
         "pantheon-systems/drupal-integrations": "^9"
     }
 }
