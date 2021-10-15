@@ -44,10 +44,18 @@
                 "[project-root]/.gitattributes": false
             }
         },
-        "installer-types": ["utexas-development"],
+        "installer-types": [
+            "utexas-development",
+            "npm-asset",
+            "bower-asset"
+        ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/modules/custom/{$name}": ["type:drupal-custom-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
