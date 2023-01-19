@@ -68,6 +68,22 @@
             "drupal/core": "-p2"
         }
     },
+    "autoload": {
+        "classmap": [
+            "upstream-configuration/scripts/ComposerScripts.php"
+        ]
+    },
+    "scripts": {
+        "pre-update-cmd": [
+            "DrupalComposerManaged\\ComposerScripts::preUpdate"
+        ],
+        "upstream-require": [
+            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
+        ]
+    },
+    "scripts-descriptions": {
+        "upstream-require": "Add a dependency to an upstream. See https://pantheon.io/docs/create-custom-upstream for information on creating custom upstreams."
+    },
     "config": {
         "allow-plugins": {
             "composer/installers": true,
