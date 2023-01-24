@@ -27,9 +27,6 @@
     "prefer-stable": true,
     "extra": {
         "enable-patching": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
         "drupal-scaffold": {
             "allowed-packages": [
                 "pantheon-systems/drupal-integrations",
@@ -65,7 +62,27 @@
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
             ".docksal": ["type:utexas-development"]
+        },
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
         }
+    },
+    "autoload": {
+        "classmap": [
+            "upstream-configuration/scripts/ComposerScripts.php"
+        ]
+    },
+    "scripts": {
+        "pre-update-cmd": [
+            "DrupalComposerManaged\\ComposerScripts::preUpdate"
+        ],
+        "upstream-require": [
+            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
+        ]
+    },
+    "scripts-descriptions": {
+        "upstream-require": "Add a dependency to an upstream. See https://pantheon.io/docs/create-custom-upstream for information on creating custom upstreams."
     },
     "config": {
         "allow-plugins": {
