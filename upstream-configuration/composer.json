@@ -6,10 +6,10 @@
     "require": {
         "php": ">=7.3",
         "composer/installers": "^1.9",
-        "drupal/core-composer-scaffold": "^9",
+        "drupal/core-composer-scaffold": "^9 || ^10",
         "drush/drush": "^11 || ^12",
         "oomphinc/composer-installers-extender": "^2.0",
         "utexas/utdk_profile": "3.11.1",
-        "pantheon-systems/drupal-integrations": "^9"
+        "pantheon-systems/drupal-integrations": "^9 || ^10"
     }
 }
