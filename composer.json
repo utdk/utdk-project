@@ -4,6 +4,11 @@
     "type": "project",
     "license": ["GPL-2.0-or-later"],
     "repositories": {
+        "utexas_simplesamlphp": {
+            "type": "vcs",
+            "url": "git@github.com:utdk/simplesamlphp.git",
+            "canonical": false
+        },
         "asset-packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
