@@ -142,7 +142,7 @@ class ComposerScripts {
 
       // Allow php-http/discovery in preparation for Drupal 10.2.0.
       if (!isset($composerJson['config']['allow-plugins']['php-http/discovery'])) {
-        $io->write("<info>Allow phpstan/extension-installer in preparation for Drupal 10.2.0</info>");
+        $io->write("<info>Allow php-http/discovery in preparation for Drupal 10.2.0</info>");
         $composerJson['config']['allow-plugins']['php-http/discovery'] = true;
       }
     }
