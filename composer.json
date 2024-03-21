@@ -4,6 +4,10 @@
     "type": "project",
     "license": ["GPL-2.0-or-later"],
     "repositories": {
+        "utdk_localdev": {
+            "type": "vcs",
+            "url": "git@github.austin.utexas.edu:eis1-wcs/utdk_localdev.git"
+        },
         "asset-packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
@@ -18,7 +22,9 @@
         }
     },
     "require": {
-        "utexas/upstream-configuration": "*"
+        "mglaman/composer-drupal-lenient": "dev-main",
+        "utexas/upstream-configuration": "*",
+        "utexas/utdk_localdev": "dev-drupal11"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -66,23 +72,58 @@
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
+        },
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/addtoany",
+                "drupal/admin_toolbar",
+                "drupal/breadcrumbs_visibility",
+                "drupal/config_update",
+                "drupal/ctools",
+                "drupal/date_ap_style",
+                "drupal/diff",
+                "drupal/editor_advanced_link",
+                "drupal/embed",
+                "drupal/entity_clone",
+                "drupal/features",
+                "drupal/feed_block",
+                "drupal/google_cse",
+                "drupal/google_tag",
+                "drupal/iframe_title_filter",
+                "drupal/layout_builder_iframe_modal",
+                "drupal/layout_builder_restrictions",
+                "drupal/layout_builder_styles",
+                "drupal/linkit",
+                "drupal/media_library_form_element",
+                "drupal/menu_block",
+                "drupal/menu_trail_by_path",
+                "drupal/metatag",
+                "drupal/page_title_visibility",
+                "drupal/pantheon_advanced_page_cache",
+                "drupal/pathauto",
+                "drupal/pathologic",
+                "drupal/redirect",
+                "drupal/responsive_tables_filter",
+                "drupal/role_delegation",
+                "drupal/seckit",
+                "drupal/schema_metatag",
+                "drupal/token",
+                "drupal/svg_upload_sanitizer",
+                "drupal/twitter_profile_widget",
+                "drupal/updated",
+                "drupal/url_embed",
+                "drupal/xmlsitemap",
+                "utexas/forty_acres",
+                "utexas/utexas_qualtrics_filter"
+            ]
         }
     },
     "autoload": {
-        "classmap": [
-            "upstream-configuration/scripts/ComposerScripts.php"
-        ]
+        "classmap": ["upstream-configuration/scripts/ComposerScripts.php"]
     },
     "scripts": {
-        "pre-update-cmd": [
-            "DrupalComposerManaged\\ComposerScripts::preUpdate"
-        ],
-        "upstream-require": [
-            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
-        ]
-    },
-    "scripts-descriptions": {
-        "upstream-require": "Add a dependency to an upstream. See https://pantheon.io/docs/create-custom-upstream for information on creating custom upstreams."
+        "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
+        "post-update-cmd": ["DrupalComposerManaged\\ComposerScripts::postUpdate"]
     },
     "config": {
         "allow-plugins": {
@@ -91,11 +132,18 @@
             "drupal/core-composer-scaffold": true,
             "oomphinc/composer-installers-extender": true,
             "simplesamlphp/composer-module-installer": true,
-            "utexas/*": true
+            "utexas/*": true,
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true,
+            "mglaman/composer-drupal-lenient": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "process-timeout": 0,
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.13"
+        }
     }
 }
