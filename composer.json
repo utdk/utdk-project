@@ -22,6 +22,7 @@
         }
     },
     "require": {
+        "drupal/backward_compatibility": "^1.0",
         "mglaman/composer-drupal-lenient": "dev-main",
         "utexas/upstream-configuration": "*",
         "utexas/utdk_localdev": "dev-drupal11"
