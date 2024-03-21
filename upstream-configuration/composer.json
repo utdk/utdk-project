@@ -9,7 +9,7 @@
         "drupal/core-composer-scaffold": "^11",
         "drush/drush": "^12.4.3",
         "oomphinc/composer-installers-extender": "^2.0",
-        "utexas/utdk_profile": "11.x-dev",
+        "utexas/utdk_profile": "dev-develop",
         "pantheon-systems/drupal-integrations": "^9 || ^10"
     }
 }

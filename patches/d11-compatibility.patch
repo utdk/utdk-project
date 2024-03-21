@@ -1,0 +1,12 @@
+diff --git a/utexas.info.yml b/utexas.info.yml
+index b267ce34..58427342 100644
+--- a/utexas.info.yml
++++ b/utexas.info.yml
+@@ -40,6 +40,7 @@ install:
+   # Contrib
+   - drupal:addtoany
+   - drupal:admin_toolbar_links_access_filter
++  - drupal:backward_compatibility
+   - drupal:breadcrumbs_visibility
+   - drupal:diff
+   - drupal:entity_clone

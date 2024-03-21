@@ -24,6 +24,8 @@
     "require": {
         "drupal/backward_compatibility": "^1.0",
         "mglaman/composer-drupal-lenient": "dev-main",
+        "drupal/core-composer-scaffold": "11.x-dev as 10.2.4",
+        "drupal/core-recommended": "11.x-dev as 10.2.4",
         "utexas/upstream-configuration": "*",
         "utexas/utdk_localdev": "dev-drupal11"
     },
@@ -34,6 +36,11 @@
     "prefer-stable": true,
     "extra": {
         "enable-patching": true,
+        "patches": {
+            "utexas/utdk_profile": {
+              "Drupal 11 compatibility": "patches/d11-compatibility.patch"
+            }
+        },
         "drupal-scaffold": {
             "allowed-packages": [
                 "pantheon-systems/drupal-integrations",
