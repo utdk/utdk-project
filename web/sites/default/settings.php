@@ -78,7 +78,7 @@ function ip_is_blocked($request_remote_addr, $blocked_ip_filepath) {
         // Only evaluate lines that have a / and do not have # or characters.
         if (strpos($_cidr, '/') !== FALSE && strpos($_cidr, '#') === FALSE && strpos($_cidr, ':') === FALSE) {
           $_ip = ip2long($request_remote_addr);
-          list($_net, $_mask) = explode('/', $_cidr, 2);
+          [$_net, $_mask] = explode('/', $_cidr, 2);
           $_ip_net = ip2long($_net);
           $_ip_mask = ~((1 << (32 - $_mask)) - 1);
           if ($request_ip_forbidden = ($_ip & $_ip_mask) == ($_ip_net & $_ip_mask)) {
