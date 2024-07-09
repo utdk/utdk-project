@@ -50,7 +50,7 @@
 */
 
 // BEGIN IP ADDRESS BLOCKING.
-// Check the site's private filesystem for the presence of a ip block file.
+// Check the site's private filesystem for the presence of an IP block file.
 $blocked_ip_filepath = __DIR__ . '/files/private/blocked_ips.txt';
 /**
  * Check if a specified IP address is in a blocklist.
