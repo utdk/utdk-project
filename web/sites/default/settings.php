@@ -53,7 +53,7 @@
 // BEGIN IP ADDRESS BLOCKING.
 if (!function_exists('ip_is_blocked')) {
   // Check the site's private filesystem for the presence of an IP block file.
-  $blocked_ip_filepath = __DIR__ . '/files/private/blocked_ips.txt';
+  $blocked_ip_filepath = __DIR__ . '/files/private/utexas_pantheon_ip_deny_list.txt';
   /**
    * Check if a specified IP address is in a blocklist.
    *
