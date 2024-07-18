@@ -76,9 +76,6 @@
     "scripts": {
         "pre-update-cmd": [
             "DrupalComposerManaged\\ComposerScripts::preUpdate"
-        ],
-        "upstream-require": [
-            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
         ]
     },
     "scripts-descriptions": {
