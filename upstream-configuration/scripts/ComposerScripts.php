@@ -109,25 +109,6 @@ class ComposerScripts {
       $io->write("<info>Adding post-update-cmd hook to composer.json</info>");
       $composerJson['scripts']['post-update-cmd'][] = $our_hook;
 
-      // We're making our other changes if and only if we're already adding our hook
-      // so that we don't overwrite customer's changes if they undo these changes.
-      // We don't want customers to remove our hook, so it will be re-added if they remove it.
-
-      // Remove our upstream convenience scripts, if the user has not removed them.
-      if (isset($composerJson['scripts']['upstream-require'])) {
-        unset($composerJson['scripts']['upstream-require']);
-      }
-
-      // Also remove it from the scripts-descriptions section.
-      if (isset($composerJson['scripts-descriptions']['upstream-require'])) {
-        unset($composerJson['scripts-descriptions']['upstream-require']);
-      }
-
-      // This may have been the last item in the scripts-descriptions section, so remove it.
-      if (isset($composerJson['scripts-descriptions']) && empty($composerJson['scripts-descriptions'])) {
-        unset($composerJson['scripts-descriptions']);
-      }
-
       // enable patching if it isn't already enabled
       if(! isset($composerJson['extra']['enable-patching'])) {
         $io->write("<info>Setting enable-patching to true</info>");
