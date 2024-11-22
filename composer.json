@@ -84,7 +84,7 @@
             "cweagans/composer-patches": true,
             "drupal/core-composer-scaffold": true,
             "oomphinc/composer-installers-extender": true,
-            "simplesamlphp/composer-module-installer": true,
+            "simplesamlphp/*": true,
             "utexas/*": true
         },
         "optimize-autoloader": true,
