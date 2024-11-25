@@ -136,6 +136,11 @@ class ComposerScripts {
         $io->write("<info>Allow tbachert/spi for Drupal core</info>");
         $composerJson['config']['allow-plugins']['tbachert/spi'] = true;
       }
+
+      if (!isset($composerJson['config']['allow-plugins']['simplesamlphp/*'])) {
+        $io->write("<info>Allow simplesamlphp/* for Enterprise Authentication</info>");
+        $composerJson['config']['allow-plugins']['simplesamlphp/*'] = true;
+      }
     }
 
     if(serialize($composerJson) == serialize($originalComposerJson)) {
