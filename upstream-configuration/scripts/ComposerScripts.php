@@ -126,6 +126,21 @@ class ComposerScripts {
         $io->write("<info>Allow php-http/discovery in preparation for Drupal 10.2.0</info>");
         $composerJson['config']['allow-plugins']['php-http/discovery'] = true;
       }
+
+      if (!isset($composerJson['config']['allow-plugins']['dealerdirect/phpcodesniffer-composer-installer'])) {
+        $io->write("<info>Allow dealerdirect/phpcodesniffer-composer-installer for Drupal core</info>");
+        $composerJson['config']['allow-plugins']['dealerdirect/phpcodesniffer-composer-installer'] = true;
+      }
+
+      if (!isset($composerJson['config']['allow-plugins']['tbachert/spi'])) {
+        $io->write("<info>Allow tbachert/spi for Drupal core</info>");
+        $composerJson['config']['allow-plugins']['tbachert/spi'] = true;
+      }
+
+      if (!isset($composerJson['config']['allow-plugins']['simplesamlphp/*'])) {
+        $io->write("<info>Allow simplesamlphp/* for Enterprise Authentication</info>");
+        $composerJson['config']['allow-plugins']['simplesamlphp/*'] = true;
+      }
     }
 
     if(serialize($composerJson) == serialize($originalComposerJson)) {
