@@ -4,7 +4,7 @@ web_docroot: true
 enforce_https: full
 php_version: 8.1
 database:
-  version: 10.4
+  version: 10.6
 build_step: true
 protected_web_paths:
   - /private/
