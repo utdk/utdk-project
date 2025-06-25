@@ -66,6 +66,11 @@
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
+        },
+        "drupal-lenient": {
+            "allowed-list": [
+                "drupal/features"
+            ]
         }
     },
     "autoload": {
