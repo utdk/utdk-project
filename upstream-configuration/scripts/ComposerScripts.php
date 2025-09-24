@@ -105,32 +105,18 @@ class ComposerScripts {
         $composerJson['extra']['enable-patching'] = TRUE;
       }
 
-      // allow phpstan/extension-installer in preparation for Drupal 10
-      if (!isset($composerJson['config']['allow-plugins']['phpstan/extension-installer'])) {
-        $io->write("<info>Allow phpstan/extension-installer in preparation for Drupal 10</info>");
-        $composerJson['config']['allow-plugins']['phpstan/extension-installer'] = TRUE;
-      }
-
-      // Allow php-http/discovery in preparation for Drupal 10.2.0.
-      if (!isset($composerJson['config']['allow-plugins']['php-http/discovery'])) {
-        $io->write("<info>Allow php-http/discovery in preparation for Drupal 10.2.0</info>");
-        $composerJson['config']['allow-plugins']['php-http/discovery'] = TRUE;
-      }
-
-      if (!isset($composerJson['config']['allow-plugins']['dealerdirect/phpcodesniffer-composer-installer'])) {
-        $io->write("<info>Allow dealerdirect/phpcodesniffer-composer-installer for Drupal core</info>");
-        $composerJson['config']['allow-plugins']['dealerdirect/phpcodesniffer-composer-installer'] = TRUE;
-      }
-
-      // allow tbachert/spi
-      if (!isset($composerJson['config']['allow-plugins']['tbachert/spi'])) {
-        $io->write("<info>Allow tbachert/spi</info>");
-        $composerJson['config']['allow-plugins']['tbachert/spi'] = TRUE;
-      }
-
-      if (!isset($composerJson['config']['allow-plugins']['simplesamlphp/*'])) {
-        $io->write("<info>Allow simplesamlphp/* for Enterprise Authentication</info>");
-        $composerJson['config']['allow-plugins']['simplesamlphp/*'] = true;
+      $allowed_composer_plugins = [
+        'phpstan/extension-installer' => 'Drupal core-dev requires phpstan/extension-installer (https://www.drupal.org/docs/develop/development-tools/phpstan/getting-started)',
+        'php-http/discovery' => 'Drupal 10.2 requires php-http/discovery (https://www.drupal.org/project/drupal/issues/3393151)',
+        'dealerdirect/phpcodesniffer-composer-installer' => 'Drupal 9.3 requires dealerdirect/phpcodesniffer-composer-installer (https://www.drupal.org/project/drupal/issues/3255749)',
+        'tbachert/spi' => 'Drupal core 10.4 requires tbachert/spi (https://www.drupal.org/node/3492353)',
+        'drupal/core-recipe-unpack' => 'Drupal core 11.2 requires drupal/core-recipe-unpack (https://www.drupal.org/node/3522189)',
+      ];
+      foreach ($allowed_composer_plugins as $plugin => $description) {
+        if (!isset($composerJson['config']['allow-plugins'][$plugin])) {
+          $io->write("<info>$description</info>");
+          $composerJson['config']['allow-plugins'][$plugin] = TRUE;
+        }
       }
     }
 
