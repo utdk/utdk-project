@@ -6,7 +6,6 @@
     "require": {
         "php": ">=7.3",
         "composer/installers": "^1.9 || ^2.0",
-        "drupal/core-composer-scaffold": "^10 || ^11",
         "drush/drush": "^12.4.3 || ^13",
         "oomphinc/composer-installers-extender": "^2.0",
         "utexas/utdk_profile": "3.26.2",
