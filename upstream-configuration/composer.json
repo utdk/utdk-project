@@ -9,6 +9,6 @@
         "drush/drush": "^12.4.3 || ^13",
         "oomphinc/composer-installers-extender": "^2.0",
         "utexas/utdk_profile": "3.26.2",
-        "pantheon-systems/drupal-integrations": "^10 || ^11"
+        "pantheon-systems/drupal-integrations": "^11"
     }
 }
