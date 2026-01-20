@@ -78,7 +78,7 @@ class ComposerScripts {
     $pantheonPhpVersion = static::getPantheonPhpVersion($event);
     $updatedPlatformPhpVersion = static::bestPhpPatchVersion($pantheonPhpVersion);
     if (!empty($updatedPlatformPhpVersion) && (empty($platformPhpVersion) || (substr($platformPhpVersion, 0, strlen($pantheonPhpVersion)) != $pantheonPhpVersion))) {
-      $io->write("<info>Setting platform.php from '$platformPhpVersion' to '$updatedPlatformPhpVersion' to conform to Pantheon php version.</info>");
+      $io->write("<info>Setting platform.php from '$platformPhpVersion' to '$updatedPlatformPhpVersion' to conform to Pantheon PHP version.</info>");
       $composerJson['config']['platform']['php'] = $updatedPlatformPhpVersion;
     }
 
