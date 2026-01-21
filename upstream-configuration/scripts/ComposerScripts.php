@@ -78,7 +78,7 @@ class ComposerScripts {
     $pantheonPhpVersion = static::getPantheonPhpVersion($event);
     $updatedPlatformPhpVersion = static::bestPhpPatchVersion($pantheonPhpVersion);
     if (!empty($updatedPlatformPhpVersion) && (empty($platformPhpVersion) || (substr($platformPhpVersion, 0, strlen($pantheonPhpVersion)) != $pantheonPhpVersion))) {
-      $io->write("<info>Setting platform.php from '$platformPhpVersion' to '$updatedPlatformPhpVersion' to conform to pantheon php version.</info>");
+      $io->write("<info>Setting platform.php from '$platformPhpVersion' to '$updatedPlatformPhpVersion' to conform to Pantheon PHP version.</info>");
       $composerJson['config']['platform']['php'] = $updatedPlatformPhpVersion;
     }
 
@@ -206,6 +206,7 @@ class ComposerScripts {
     // Drupal 9 requires PHP 7.3 at a minimum.
     // Integrated Composer requires PHP 7.1 at a minimum.
     $patchVersions = [
+      '8.4' => '8.4.17',
       '8.3' => '8.3.14',
       '8.2' => '8.2.26',
       '8.1' => '8.1.31',
