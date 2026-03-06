@@ -180,3 +180,6 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+# Ignore Drupal Recipes (https://project.pages.drupalcode.org/distributions_recipes/getting_started.html#gitignore-configuration)
+/recipes
