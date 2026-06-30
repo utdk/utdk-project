@@ -65,10 +65,38 @@ class ComposerScripts {
    */
   public static function applyComposerJsonUpdates(Event $event) {
     $io = $event->getIO();
+    $composer = $event->getComposer();
+    $package = $composer->getPackage();
 
     $composerJsonContents = file_get_contents("composer.json");
     $composerJson = json_decode($composerJsonContents, TRUE);
     $originalComposerJson = $composerJson;
+
+    // Remove Composer-based UTDK add-ons, which are present in the kernel
+    // as of release 3.31.0.
+    $needs_rebuild = FALSE;
+    $requires = $package->getRequires();
+    if (isset($composerJson['require']['utexas/utnews'])) {
+      $io->write("<info>Removing Composer requirement for UTNews. It is now provided by the UTexas installation profile.</info>");
+      unset($composerJson['require']['utexas/utnews']);
+      unset($requires['utexas/utnews']);
+      $needs_rebuild = TRUE;
+    }
+    if (isset($composerJson['require']['utexas/utprof'])) {
+      $io->write("<info>Removing Composer requirement for UTProf. It is now provided by the UTexas installation profile.</info>");
+      unset($composerJson['require']['utexas/utprof']);
+      unset($requires['utexas/utprof']);
+      $needs_rebuild = TRUE;
+    }
+    if (isset($composerJson['require']['utexas/utevent'])) {
+      $io->write("<info>Removing Composer requirement for UTEvent. It is now provided by the UTexas installation profile.</info>");
+      unset($composerJson['require']['utexas/utevent']);
+      unset($requires['utexas/utevent']);
+      $needs_rebuild = TRUE;
+    }
+    if ($needs_rebuild === TRUE) {
+      $package->setRequires($requires);
+    }
 
     // Check to see if the platform PHP version (which should be major.minor.patch)
     // is the same as the Pantheon PHP version (which is only major.minor).
