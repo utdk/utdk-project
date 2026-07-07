@@ -117,6 +117,7 @@
 /web/INSTALL.txt
 /web/README.txt
 /web/autoload.php
+/web/autoload_runtime.php
 /web/example.gitignore
 /web/index.php
 /web/robots.txt
