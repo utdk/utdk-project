@@ -65,10 +65,35 @@ class ComposerScripts {
    */
   public static function applyComposerJsonUpdates(Event $event) {
     $io = $event->getIO();
+    $composer = $event->getComposer();
+    $package = $composer->getPackage();
 
     $composerJsonContents = file_get_contents("composer.json");
     $composerJson = json_decode($composerJsonContents, TRUE);
     $originalComposerJson = $composerJson;
+
+    // Remove packages now provided by the UTexas installation profile.
+    $packages_to_remove = [
+      'utexas/utevent',
+      'utexas/utnews',
+      'utexas/utprof',
+      'drupal/smtp',
+      'utexas/utexas_pantheon_logs_http',
+      'utexas/utexas_saml_auth_helper',
+    ];
+    $needs_rebuild = FALSE;
+    $requires = $package->getRequires();
+    foreach ($packages_to_remove as $value) {
+      if (isset($composerJson['require'][$value])) {
+        $io->write("<info>Removing Composer requirement for $value. It is now provided by the UTexas installation profile.</info>");
+        unset($composerJson['require'][$value]);
+        unset($requires[$value]);
+        $needs_rebuild = TRUE;
+      }
+    }
+    if ($needs_rebuild === TRUE) {
+      $package->setRequires($requires);
+    }
 
     // Check to see if the platform PHP version (which should be major.minor.patch)
     // is the same as the Pantheon PHP version (which is only major.minor).
@@ -82,45 +107,46 @@ class ComposerScripts {
       $composerJson['config']['platform']['php'] = $updatedPlatformPhpVersion;
     }
 
-    // add our post-update-cmd hook if it's not already present
     $our_hook = 'DrupalComposerManaged\\ComposerScripts::postUpdate';
-    // if does not exist, add as an empty arry
+    // Add our post-update-cmd hook if it's not already present.
     if (!isset($composerJson['scripts']['post-update-cmd'])) {
       $composerJson['scripts']['post-update-cmd'] = [];
     }
 
-    // if exists and is a string, convert to a single-item array (n.b. do not actually need the if exists check because we just assured that it does)
+    // If it exists and is a string, convert to a single-item array.
     if (is_string($composerJson['scripts']['post-update-cmd'])) {
       $composerJson['scripts']['post-update-cmd'] = [$composerJson['scripts']['post-update-cmd']];
     }
 
-    // if exists and is an array and does not contain our hook, add our hook (again, only the last check is needed)
+    // If it does not contain our hook, add our hook.
     if (!in_array($our_hook, $composerJson['scripts']['post-update-cmd'])) {
       $io->write("<info>Adding post-update-cmd hook to composer.json</info>");
       $composerJson['scripts']['post-update-cmd'][] = $our_hook;
+    }
 
-      // enable patching if it isn't already enabled
-      if (!isset($composerJson['extra']['enable-patching'])) {
-        $io->write("<info>Setting enable-patching to true</info>");
-        $composerJson['extra']['enable-patching'] = TRUE;
-      }
+    // Enable patching if it isn't already enabled.
+    if (!isset($composerJson['extra']['enable-patching'])) {
+      $io->write("<info>Setting enable-patching to true</info>");
+      $composerJson['extra']['enable-patching'] = TRUE;
+    }
 
-      $allowed_composer_plugins = [
-        'phpstan/extension-installer' => 'Drupal core-dev requires phpstan/extension-installer (https://www.drupal.org/docs/develop/development-tools/phpstan/getting-started)',
-        'php-http/discovery' => 'Drupal 10.2 requires php-http/discovery (https://www.drupal.org/project/drupal/issues/3393151)',
-        'dealerdirect/phpcodesniffer-composer-installer' => 'Drupal 9.3 requires dealerdirect/phpcodesniffer-composer-installer (https://www.drupal.org/project/drupal/issues/3255749)',
-        'tbachert/spi' => 'Drupal core 10.4 requires tbachert/spi (https://www.drupal.org/node/3492353)',
-        'drupal/core-recipe-unpack' => 'Drupal core 11.2 requires drupal/core-recipe-unpack (https://www.drupal.org/node/3522189)',
-      ];
-      foreach ($allowed_composer_plugins as $plugin => $description) {
-        if (!isset($composerJson['config']['allow-plugins'][$plugin])) {
-          $io->write("<info>$description</info>");
-          $composerJson['config']['allow-plugins'][$plugin] = TRUE;
-        }
+    // Populate allowed Composer plugins.
+    $allowed_composer_plugins = [
+      'phpstan/extension-installer' => 'Drupal core-dev requires phpstan/extension-installer (https://www.drupal.org/docs/develop/development-tools/phpstan/getting-started)',
+      'php-http/discovery' => 'Drupal 10.2 requires php-http/discovery (https://www.drupal.org/project/drupal/issues/3393151)',
+      'dealerdirect/phpcodesniffer-composer-installer' => 'Drupal 9.3 requires dealerdirect/phpcodesniffer-composer-installer (https://www.drupal.org/project/drupal/issues/3255749)',
+      'tbachert/spi' => 'Drupal core 10.4 requires tbachert/spi (https://www.drupal.org/node/3492353)',
+      'drupal/core-recipe-unpack' => 'Drupal core 11.2 requires drupal/core-recipe-unpack (https://www.drupal.org/node/3522189)',
+      'symfony/*' => 'Drupal 11.4 requires symfony/runtime (https://www.drupal.org/node/3553275)',
+    ];
+    foreach ($allowed_composer_plugins as $plugin => $description) {
+      if (!isset($composerJson['config']['allow-plugins'][$plugin])) {
+        $io->write("<info>$description</info>");
+        $composerJson['config']['allow-plugins'][$plugin] = TRUE;
       }
     }
 
-    // Ignore everything in the 'recipes' directory, if it isn't already ignored.
+    // Ignore everything in the 'recipes' directory if it isn't already ignored.
     if (!file_exists('recipes/.gitignore')) {
       $io->write("<info>Adding .gitignore to recipes directory</info>");
       mkdir('recipes');
@@ -131,7 +157,7 @@ class ComposerScripts {
       return;
     }
 
-    // Write the updated composer.json file
+    // Write the updated composer.json file.
     $composerJsonContents = static::jsonEncodePretty($composerJson);
     file_put_contents("composer.json", $composerJsonContents . PHP_EOL);
   }
