@@ -1,7 +1,80 @@
 name: Sync to public mirror
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+  delete:
+env:
+  REF: ${{ github.ref_name }}
+  DELETE_BRANCH: ${{ github.event.ref }}
+  GH_TOKEN: ${{ secrets.GH_CLI_PAT_FOR_VMS_USING_GITHUB_ACTIONS }}
+  PUBLIC_TOKEN: ${{ secrets.PAT_FOR_PUBLIC_GITHUB_SYNC }}
+  TRIGGER: ${{ github.event_name }}
 jobs:
-  noop:
-    runs-on: ubuntu-latest
+  build:
+    # Prevent the job from executing on downstream repositories.
+    if: ${{ github.repository == 'utexas-utdk/utdk-project' }}
+    runs-on: [ ubuntu-latest ]
     steps:
-      - run: true
+      - name: Add SSH key for use with GitHub
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.ID_ED25519_DEVOPS }}
+          name: id_ed25519_devops
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: |
+            Host github.com
+            IdentityFile ~/.ssh/id_ed25519_devops
+
+      - uses: actions/checkout@v4
+      - name: Associate Git with EIS1-wcms-devops user
+        run: |
+          gh config set git_protocol ssh
+          git config --global user.email "eis1-wcms-devops@austin.utexas.edu"
+          git config --global user.name "EIS1-wcms-devops"
+
+      - uses: actions/checkout@v4
+      - name: SYNC TO PUBLIC MIRROR
+        run: |
+          gh repo clone "utexas-utdk/utdk-project"
+          cd utdk-project
+          git remote add "public" "https://$PUBLIC_TOKEN@github.com/utdk/utdk-project.git"
+          if [ "$TRIGGER" == "push" ]; then
+            echo "Syncing $REF..."
+            git fetch && git checkout $REF
+            git push -f public $REF
+            exit 0
+          fi
+          if [ "$TRIGGER" == "delete" ]; then
+            echo "Syncing deleted branch $DELETE_BRANCH..."
+            git push public -d -f $DELETE_BRANCH
+            exit 0
+          fi
+          if [ "$TRIGGER" == "workflow_dispatch" ]; then
+            # Retrieve all branches from remote: https://stackoverflow.com/a/4754797
+            for BRANCH in $(git branch --all | grep '^\s*remotes' | egrep --invert-match '(:?HEAD|develop)$'); do
+                git branch --track "${BRANCH##*/}" "$BRANCH"
+            done
+            git fetch --tags
+            echo "Tags found:"
+            git tag
+            git fetch --all
+            echo "Branches found:"
+            git branch
+            git remote add "public" "https://$PUBLIC_TOKEN@github.com/utdk/utdk-project.git"
+            git push public --all
+            git push public --tags
+          fi
+      - name: Notify on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v9
+        with:
+          server_address: authenticated.relay.mail.utexas.edu
+          server_port: 25
+          secure: false # connect over plain SMTP, then it will upgrade to TLS (ie, STARTTLS)
+          username: ${{ secrets.SMTP_USER_FOR_ACTIONS }}
+          password: ${{secrets.SMTP_PASSWORD_FOR_ACTIONS }}
+          from: '"Pantheon Stewards" <pantheon-stewards@utlists.utexas.edu>' # name + address required; just address throws an error
+          to: 'pantheon-stewards@utlists.utexas.edu'
+          subject: "Failure: ${{ github.workflow }}"
+          html_body: '[Review build output](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+          convert_markdown: true
