@@ -8,7 +8,7 @@
         "composer/installers": "^1.9 || ^2.0",
         "drush/drush": "^13",
         "oomphinc/composer-installers-extender": "^2.0",
-        "utexas/utdk_profile": "3.31.3",
+        "utexas/utdk_profile": "dev-develop as 3.31.3",
         "pantheon-systems/drupal-integrations": "^11"
     }
 }
