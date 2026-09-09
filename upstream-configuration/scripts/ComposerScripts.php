@@ -146,13 +146,6 @@ class ComposerScripts {
       }
     }
 
-    // Ignore everything in the 'recipes' directory if it isn't already ignored.
-    if (!file_exists('recipes/.gitignore')) {
-      $io->write("<info>Adding .gitignore to recipes directory</info>");
-      mkdir('recipes');
-      file_put_contents('recipes/.gitignore', '*' . PHP_EOL . '!/.gitignore' . PHP_EOL);
-    }
-
     if (serialize($composerJson) == serialize($originalComposerJson)) {
       return;
     }
