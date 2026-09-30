@@ -11,6 +11,8 @@ env:
   GH_TOKEN: ${{ secrets.GH_CLI_PAT_FOR_VMS_USING_GITHUB_ACTIONS }}
 jobs:
   unit_tests:
+    # Prevent the job from executing on downstream repositories.
+    if: ${{ github.repository == 'utexas-utdk/utdk-project' }}
     runs-on: ubuntu-latest
     name: Run automated tests
     steps:
