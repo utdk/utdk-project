@@ -1,0 +1,7 @@
+id: utexas_archive_action
+label: 'Workflow: Archive content'
+status: true
+langcode: en
+type: node
+plugin: entity:utexas_archive_action:node
+configuration: { }

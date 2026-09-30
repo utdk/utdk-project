@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override to display the Social Sharing icons provided by
+ * the AddToAny module.
+ *
+ * This file diverges from a standard block.html.twig file by:
+ * - Adding the `d-inline-block` Bootstrap class to the header and content
+ *  to display inline, but keep icons together on narrow contexts.
+ * - Relocating the `title_suffix` above the h2 so that the "Configure" link
+ * does not interfere with the inline display for signed in users.
+ */
+#}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'clearfix',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('d-inline-block') }}>{{ label }}</h2>
+  {% endif %}
+  {% block content %}
+    <div class="d-inline-block">
+      {{ content }}
+    </div>
+  {% endblock %}
+</div>

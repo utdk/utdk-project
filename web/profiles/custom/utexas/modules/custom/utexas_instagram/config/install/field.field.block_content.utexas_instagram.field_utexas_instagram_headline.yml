@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_instagram
+    - field.storage.block_content.field_utexas_instagram_headline
+id: block_content.utexas_instagram.field_utexas_instagram_headline
+field_name: field_utexas_instagram_headline
+entity_type: block_content
+bundle: utexas_instagram
+label: Headline
+description: 'Optional. Displays as a medium-sized heading.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

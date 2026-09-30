@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_flex_page_metatags
+    - node.type.utexas_flex_page
+  module:
+    - metatag
+id: node.utexas_flex_page.field_flex_page_metatags
+field_name: field_flex_page_metatags
+entity_type: node
+bundle: utexas_flex_page
+label: Metatags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

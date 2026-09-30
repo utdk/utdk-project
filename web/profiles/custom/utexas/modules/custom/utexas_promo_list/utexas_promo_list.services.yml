@@ -1,0 +1,2 @@
+parameters:
+  utexas_promo_list.skip_procedural_hook_scan: true

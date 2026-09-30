@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for UTexas Entity Usage module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function utexas_entity_usage_install() {
+  $config = \Drupal::service('config.factory')->getEditable('entity_usage.settings');
+  // Warn when someone tries to delete media with recorded references.
+  $config->set('delete_warning_message_entity_types', ['media']);
+  // Warn when someone tries to edit media with recorded references.
+  $config->set('edit_warning_message_entity_types', ['media']);
+  // Set which entities referencing media to track.
+  $config->set('track_enabled_source_entity_types', [
+    'block_content',
+    'media',
+    'node',
+  ]);
+  // Add a tab at /media/<mid>/usage to show stats.
+  $config->set('local_task_enabled_entity_types', ['media']);
+  // Our default config only tracks media entity usage.
+  $config->set('track_enabled_target_entity_types', [
+    'media',
+    'block_content',
+  ]);
+  $config->save();
+}
+
+/**
+ * Rebuild usage information for existing site media (#3357).
+ */
+function utexas_entity_usage_update_11000() {
+  \Drupal::service('entity_usage.batch_manager')->recreate();
+}

@@ -1,0 +1,2 @@
+parameters:
+  utexas_promo_unit.skip_procedural_hook_scan: true

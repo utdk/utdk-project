@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.utexas_video_external.field_media_oembed_video
+    - media.type.utexas_video_external
+  module:
+    - image
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: media.utexas_video_external.media_library
+targetEntityType: media
+bundle: utexas_video_external
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_media_oembed_video: true
+  name: true
+  uid: true

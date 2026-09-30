@@ -1,0 +1,29 @@
+services:
+  # LOGGER
+  logger.channel.utexas_media_types:
+    parent: logger.channel_base
+    arguments:
+      - utexas_media_types
+
+  # HELPER
+  utexas_media_types.helper.file:
+    class: Drupal\utexas_media_types\Helper\FileHelper
+    calls:
+      - [setLogger, ["@logger.channel.utexas_media_types"]]
+    arguments:
+      - "@file_system"
+
+  utexas_media_types.helper.sanitizer:
+    class: Drupal\utexas_media_types\Helper\SanitizerHelper
+    calls:
+      - [setLogger, ["@logger.channel.utexas_media_types"]]
+    arguments:
+      - "@file_system"
+      - "@utexas_media_types.sanitizer.svg"
+
+  # SANITIZER
+  utexas_media_types.sanitizer.svg:
+    class: enshrined\svgSanitize\Sanitizer
+
+parameters:
+  utexas_media_types.skip_procedural_hook_scan: true

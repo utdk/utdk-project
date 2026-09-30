@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_resources
+    - core.entity_view_mode.block_content.utexas_resources_2
+    - field.field.block_content.utexas_resources.field_block_resources
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: block_content.utexas_resources.utexas_resources_2
+targetEntityType: block_content
+bundle: utexas_resources
+mode: utexas_resources_2
+content:
+  field_block_resources:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_resources_2
+    region: content
+hidden: {  }

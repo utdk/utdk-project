@@ -1,0 +1,3 @@
+administer drupalkit settings:
+  title: 'Administer Drupal Kit settings'
+  description: 'Allows a user to configure settings related to Drupal Kit base functionality.'

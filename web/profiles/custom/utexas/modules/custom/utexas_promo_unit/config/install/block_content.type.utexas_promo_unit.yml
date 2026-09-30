@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_promo_unit
+label: 'Promo Unit'
+revision: 1
+description: 'Image, headline, copy text & link, with image display variations.'

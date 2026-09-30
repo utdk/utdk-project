@@ -1,0 +1,185 @@
+<?php
+
+/**
+ * @file
+ * UT News view listing page installation file.
+ */
+
+use Drupal\block\Entity\Block;
+use Drupal\utexas\InstallationHelper;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function utnews_view_listing_page_install() {
+  // Import default configuration that can subsequently be managed by sites.
+  // For SaaS-type sites to inherit changes to this configuration, an update
+  // hook needs to be added that will programmatically load the configuration
+  // entity and update it.
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('utnews_view_listing_page')->getPath();
+  $config = 'utnews_view_listing_page.config';
+  $config_path = $module_path . '/config/default/' . $config . '.yml';
+  $data = Yaml::parse(file_get_contents($config_path));
+  \Drupal::configFactory()->getEditable($config)->setData($data)->save();
+}
+
+/**
+ * Install search modules and import news listing filters config.
+ */
+function utnews_view_listing_page_update_8101() {
+  \Drupal::service('module_installer')->install([
+    'search_api',
+    'search_api_db',
+    'facets',
+    'facets_summary',
+  ]);
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Add facet blocks to Block Layout (Resolves #50).
+ */
+function utnews_view_listing_page_update_8102() {
+  // Import updated configuration to facets.
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Update views handler for listings (#33).
+ */
+function utnews_view_listing_page_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+  // Set display options to "true" for existing sites.
+  $settings = 'utnews_view_listing_page.config';
+  $config = \Drupal::configFactory()->getEditable($settings);
+  $config->set('display_thumbnail', 1)->save();
+  $config->set('display_summary', 1)->save();
+  $config->set('display_date', 1)->save();
+}
+
+/**
+ * Issue #162: Add horizontal dividers and improve consistency in vertical...
+ */
+function utnews_view_listing_page_update_8104() {
+  // Import updated configuration to facets.
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Date-only based News listing pagination has inconsistent sorting (#352).
+ */
+function utnews_view_listing_page_update_8105() {
+  // Import updated configuration to facets.
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Add News RSS feed view (#3266).
+ */
+function utnews_view_listing_page_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utnews_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Replace existing facet-based News view with new exposed filter News view.
+ */
+function utnews_view_listing_page_update_8107() {
+  // De-register page_cache_ignore_query service.
+  drupal_flush_all_caches();
+  $logger = \Drupal::logger('utnews_view_listing');
+  $t = \Drupal::service('string_translation');
+  // If the View `utnews_listing_page` exists in config, delete and recreate.
+  $view_config = 'views.view.utnews_listing_page';
+  $view = \Drupal::configFactory()->getEditable($view_config);
+  if (!empty($view)) {
+    $logger->notice($t->translate('Deleting facet-based News listing page...'));
+    $view->delete();
+
+    // Deleting associated facet blocks.
+    $blocks_to_delete = [
+      'utnews_facets_summary_block',
+      'utnews_categories',
+      'utnews_tags',
+      'utnews_author',
+    ];
+    foreach ($blocks_to_delete as $block_id) {
+      $block = Block::load($block_id);
+      if (!empty($block)) {
+        $logger->notice($t->translate('Deleting @config...', ['@config' => $block_id]));
+        $block->delete();
+      }
+    }
+
+    // Deleting associated facet configuration.
+    $facet_configuration_to_delete = [
+      'author',
+      'categories',
+      'tags',
+    ];
+    foreach ($facet_configuration_to_delete as $facet_id) {
+      $facet = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id);
+      if (!empty($facet)) {
+        $logger->notice($t->translate('Deleting @config...', ['@config' => $facet_id]));
+        $facet->delete();
+      }
+    }
+    $facet_summary = \Drupal::configFactory()->getEditable('facets_summary.facets_summary.utnews');
+    if (!empty($facet_summary)) {
+      $logger->notice($t->translate('Deleting @config...', ['@config' => 'facets_summary.facets_summary.utnews']));
+      $facet_summary->delete();
+    }
+    // Deleting associated search_api configuration.
+    $search_index = \Drupal::configFactory()->getEditable('search_api.index.utnews');
+    if (!empty($search_index)) {
+      $logger->notice($t->translate('Deleting @config...', ['@config' => 'search_api.index.utnews']));
+      $search_index->delete();
+    }
+    $search_server = \Drupal::configFactory()->getEditable('search_api.server.utnews');
+    if (!empty($search_server)) {
+      $logger->notice($t->translate('Deleting @config...', ['@config' => 'search_api.server.utnews']));
+      $search_server->delete();
+    }
+    $module_handler = \Drupal::service('module_handler');
+    $module_path = $module_handler->getModule('utnews_view_listing_page')->getPath();
+    $config_path = $module_path . '/config/install/' . $view_config . '.yml';
+    $data = Yaml::parse(file_get_contents($config_path));
+    $logger->notice($t->translate('Installing exposed-filter-based News listing page...'));
+    \Drupal::configFactory()->getEditable($view_config)->setData($data)->save();
+  }
+}
+
+/**
+ * If after #8107, no dependencies require facets or search_api, uninstall.
+ */
+function utnews_view_listing_page_update_8108() {
+  // These need to be checked in this specific order!
+  $modules_to_safely_uninstall = [
+    'facets_summary',
+    'facets',
+    'search_api_db',
+    'search_api',
+  ];
+  foreach ($modules_to_safely_uninstall as $module) {
+    if (InstallationHelper::moduleHasNoActiveDependencies($module, TRUE)) {
+      $logger = \Drupal::logger('utnews_view_listing');
+      $t = \Drupal::service('string_translation');
+      $logger->notice($t->translate('Uninstalling @module...', ['@module' => $module]));
+      \Drupal::service('module_installer')->uninstall([$module], FALSE);
+    }
+  }
+
+}

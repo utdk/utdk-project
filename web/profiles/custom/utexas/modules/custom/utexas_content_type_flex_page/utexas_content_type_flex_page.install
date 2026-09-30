@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for the Flex Page.
+ */
+
+/**
+ * Update configuration related to Layout Builder sections.
+ */
+function utexas_content_type_flex_page_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_content_type_flex_page',
+  ], TRUE);
+}
+
+/**
+ * Remove content moderation field from default display.
+ */
+function utexas_content_type_flex_page_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_content_type_flex_page',
+  ], TRUE);
+}
+
+/**
+ * Add "Page Summary" field to Flex Page content type (#2006).
+ */
+function utexas_content_type_flex_page_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_content_type_flex_page',
+  ], TRUE);
+}
+
+/**
+ * Update default section to 2-column (50/50) container width (#2855).
+ */
+function utexas_content_type_flex_page_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utexas_content_type_flex_page',
+  ], TRUE);
+}
+
+/**
+ * Add Chaos Tools to Layout Builder Restrictions (#3082).
+ */
+function utexas_content_type_flex_page_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utexas_content_type_flex_page',
+  ], TRUE);
+}
+
+/**
+ * Issue #3258: Remove implicit dependencies on Layout Builder Restrictions.
+ */
+function utexas_content_type_flex_page_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utexas_content_type_flex_page',
+  ], TRUE);
+}

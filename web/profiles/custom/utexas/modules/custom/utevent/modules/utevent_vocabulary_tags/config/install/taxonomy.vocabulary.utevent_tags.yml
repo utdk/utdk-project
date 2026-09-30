@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event tags'
+vid: utevent_tags
+description: 'Use Event tags to categorize Events.'
+weight: 0

@@ -1,0 +1,104 @@
+{#
+/**
+ * @file
+ * Template for UTNews "full" node view.
+ *
+ * Available custom variables:
+ * - has_sidebar_fields: Used for defining layouts with/without sidebar
+ * - author_information: Author information - for the author image, name, description
+ * - main_image: The news story image
+ * - news_tags: News story tags
+ * - news_categories: News story categories
+ * - linked_title: The title field pointing to the node or external URL
+ * - body_summary: The summary of the body field
+ */
+#}
+
+{%
+  set classes = [
+    view_mode ? view_mode|clean_class,
+    not node.isPublished() ? 'is-unpublished',
+    node.bundle|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <div class="utnews__top-row row mb-3">
+    {% if author_information %}
+      <div class="utnews__author-wrapper">
+        <span class="field__label">By </span>
+        <span class="utnews__author">{{ author_information.name }}</span>
+      </div>
+    {% endif %}
+
+    {% if content.field_utnews_publication_date|render is not empty %}
+      <div class="utnews__published-wrapper">
+        <span class="utnews__published">{{ content.field_utnews_publication_date }}</span>
+      </div>
+    {% endif %}
+    {% if content.field_utnews_external_link|render is not empty %}
+      <div class="utnews__external-link-wrapper">
+        <span>External link:</span>
+        {{ content.field_utnews_external_link }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="utnews__wrapper row">
+    <div class="utnews__left-col col-lg-8">
+      {% if main_image %}
+        <div class="utnews__image-wrapper mb-2">
+          {{ main_image }}
+        </div>
+      {% endif %}
+
+      {% if content.field_utnews_body %}
+        <div class="utnews__body-wrapper">
+          {{ content.field_utnews_body }}
+        </div>
+      {% endif %}
+    </div>
+    {% if has_sidebar_fields %}
+      <div class="utnews__right-col col-lg-4">
+        {% if news_categories %}
+          <div class="utnews__categories-wrapper mb-3">
+            <h2 class="ut-h5 field__label">News category</h2>
+            <span class="utnews__categories">
+              {% for category in news_categories %}
+                <div>{{ category }}</div>
+              {% endfor %}
+            </span>
+          </div>
+        {% endif %}
+
+        {% if news_tags %}
+          <div class="utnews__tags-wrapper">
+            <h2 class="ut-h5 field__label">News tags</h2>
+            <span class="utnews__tags">
+              {% for tag in news_tags %}
+                <div class="utnews__tag">{{ tag }}</div>
+              {% endfor %}
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+  {% if author_information %}
+    <div class="utnews__author-information-wrapper col-lg-8 mt-2 p-3 clearfix">
+      {% if author_information.image %}
+        <div class="utnews__image me-3 align-left">{{ author_information.image }}</div>
+      {% endif %}
+      {% if author_information.name or author_information.description %}
+        <div class="data-wrapper">
+          {% if author_information.name %}
+            <h3 class="ut-headline">{{ author_information.name }}</h3>
+          {% endif %}
+          {% if author_information.description %}
+            <div class="utnews__description-wrapper">{{ author_information.description }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</article>

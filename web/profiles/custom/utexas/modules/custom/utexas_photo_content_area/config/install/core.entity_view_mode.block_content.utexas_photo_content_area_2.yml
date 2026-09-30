@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.utexas_photo_content_area_2
+label: 'Photo Content Area: Stacked'
+description: ''
+targetEntityType: block_content
+cache: true

@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for UTexas Google Search.
+ */
+
+use Drupal\utexas_google_search\MigrateHelper;
+
+/**
+ * Move legacy Google CSE settings to new UTexas Google Search.
+ */
+function utexas_google_search_install() {
+  // Set default search ID, but check if there is an existing (legacy)
+  // Google CSE ID.
+  \Drupal::state()->set('utexas.google_pse_id', '000942273509853053164:aaajrnruaja');
+  MigrateHelper::migrateFromGoogleCse();
+}

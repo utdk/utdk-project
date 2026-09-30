@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_building_room_numb
+    - node.type.utprof_profile
+id: node.utprof_profile.field_utprof_building_room_numb
+field_name: field_utprof_building_room_numb
+entity_type: node
+bundle: utprof_profile
+label: 'Building room number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

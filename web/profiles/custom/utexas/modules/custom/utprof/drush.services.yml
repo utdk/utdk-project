@@ -1,0 +1,5 @@
+services:
+  utprof.commands:
+    class: \Drupal\utprof\Commands\UtprofPermissions
+    tags:
+      - { name: drush.command }

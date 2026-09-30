@@ -1,0 +1,53 @@
+/**
+ * @file
+ * Styles for system messages. Copied from Core themes/claro/css/components/messages.css
+ * and modified.
+ */
+
+:root {
+  --messages-bg-color: #353641;
+  --messages-fg-color: #fff;
+  --messages--status-color: #42a877;
+  --messages--warning-color: #e0ac00;
+  --messages--error-color: #e34f4f;
+  --messages__link-color: #ffff00;
+  --messages__link--hover-color: #fff;
+}
+.status-messages {
+  overflow: auto;
+  /* Required to prevent text clipping. */
+  box-sizing: border-box;
+  margin-block: 1rem;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  color: var(--messages-fg-color);
+  border-width: 0 0 0 0.3125rem;
+  border-style: solid;
+  border-color: var(--messages-bg-color);
+  border-radius: 2px;
+  background-color: var(--messages-bg-color);
+}
+.status-messages a,
+.status-messages a:link,
+.status-messages a:visited {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  color: var(--messages__link-color);
+}
+.status-messages a:hover {
+  color: var(--messages__link--hover-color);
+}
+.status-messages pre {
+  margin: 0;
+}
+[aria-label="Error message"].status-messages,
+.status-messages.messages--error {
+  border-color: var(--messages--error-color);
+}
+[aria-label="Status message"].status-messages {
+  border-color: var(--messages--status-color);
+}
+[aria-label="Warning message"].status-messages,
+.status-messages.messages--warning {
+  border-color: var(--messages--warning-color);
+}

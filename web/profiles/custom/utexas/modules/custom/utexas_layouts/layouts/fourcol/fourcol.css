@@ -1,0 +1,39 @@
+/*
+ * @file
+ * Provides the layout styles for two-column layout section.
+ */
+
+.utexas-layout--fourcol .utexas-layout--fourcol-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3%;
+}
+
+.utexas-layout--fourcol .utexas-layout--fourcol-wrapper > .layout__region {
+  flex: 1 1 100%;
+  margin-left: 3%;
+}
+
+/* Reset for container fluid with no padding */
+.utexas-layout--fourcol.utexas-layout-no-padding .utexas-layout--fourcol-wrapper,
+.utexas-layout--fourcol.utexas-layout-no-padding .utexas-layout--fourcol-wrapper > * {
+  margin-left: 0;
+}
+
+@media screen and (min-width: 600px) and (max-width:991px) {
+  .utexas-layout--fourcol .utexas-layout--fourcol-wrapper > .layout__region {
+    flex: 1 1 40%;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width:1199px) {
+  .utexas-layout--fourcol .utexas-layout--fourcol-wrapper > .layout__region {
+    flex: 1 1 30%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .utexas-layout--fourcol .utexas-layout--fourcol-wrapper > .layout__region {
+    flex: 1 1 22%;
+  }
+}

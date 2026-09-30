@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_utexas_full_name
+  module:
+    - path
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  field_utexas_full_name:
+    type: string_textfield
+    weight: -11
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  account:
+    weight: -10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  language:
+    weight: -9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: -8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  timezone:
+    weight: -7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

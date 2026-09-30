@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_block_bottom_margin_increase
+label: 'Increase bottom margin'
+classes: utexas-block-bottom-margin-increase
+type: component
+group: utexas_block_margins_padding
+weight: 13
+block_restrictions: {  }

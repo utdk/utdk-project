@@ -1,0 +1,222 @@
+.utexas-primary-menu {
+  .nav-item {
+    display: flex;
+    &.active {
+      .l1-link {
+        color: var(--ut-burntorange);
+      }
+    }
+  }
+  .l1-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ut-charcoal--s40);
+    margin: 0;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      color: var(--ut-burntorange);
+    }
+    &.is-active {
+      color: var(--ut-burntorange);
+    }
+  }
+  /* L1s without hyperlinks should not look like hyperlinks */
+  span.l1-link:hover,
+  span.l1-link:focus {
+    color: var(--ut-body-font-color);
+    text-decoration: none;
+  }
+  .dropdown-menu {
+    font-size: 0.875rem;
+    .dropdown-item {
+      color: var(--ut-body-font-color);
+      margin: 1rem 0;
+      padding-left: 0.5rem;
+      white-space: break-spaces;
+      &:hover,
+      &:focus {
+        color: var(--ut-burntorange);
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      &.is-active {
+        color: var(--ut-burntorange);
+      }
+    }
+  }
+  .dropdown-toggle {
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    &:hover,
+    &:focus {
+      outline-offset: -3px;
+    }
+    &::after {
+      position: relative;
+      padding-top: 3px;
+      transform: rotate(225deg) translate(0, 0);
+    }
+    &.show {
+      &::after {
+        transform: rotate(45deg);
+        margin-top: 8px;
+      }
+    }
+  }
+  /* Styles for mobile. */
+  @media (width <1200px) {
+    padding: 20px 1px;
+    gap: 10px;
+    .nav-item {
+      flex-wrap: wrap;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+    .l1-link {
+      padding: .5rem .5rem .5rem 0;
+      width: calc(100% - 94px);
+    }
+    .dropdown-toggle {
+      display: flex;
+      /* Match width of MENU/CLOSE button width */
+      width: 94px;
+      &::after {
+        margin-left: 0;
+        height: 9px;
+        width: 9px;
+        border: none;
+        border-left: 2px solid var(--ut-charcoal);
+        border-top: 2px solid var(--ut-charcoal);
+        top: -4px;
+      }
+      &.show {
+        &::after {
+          transform: rotate(45deg);
+          transition: transform 0.25s;
+          margin-top: 8px;
+        }
+      }
+    }
+    .dropdown-menu {
+      padding: 0 .625rem;
+      font-size: .875rem;
+      border: 0;
+      border-radius: 0;
+      background-color: var(--ut-white);
+      width: 100%;
+      margin-right: 12px;
+    }
+    .dropdown .l1-link {
+      border-right: 1px solid var(--ut-limestone);
+    }
+  }
+  /* Styles for desktop. */
+  @media (width >= 1200px) {
+    padding: unset;
+    .nav-item {
+      border: 1px solid transparent;
+    }
+    .l1-link {
+      font-size: 1rem;
+      overflow-wrap: break-word;
+      padding: .5rem 1.75rem .5rem 1rem;
+      position: relative;
+      bottom: -2px;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-item:not(.dropdown) {
+      .l1-link {
+        padding-right: 0;
+      }
+    }
+    .dropdown-toggle {
+      position: absolute;
+      right: 0;
+      top: 8px;
+      z-index: 2;
+      display: inline-block;
+      padding-left: 12px;
+      &::after {
+        right: 8px;
+        height: 8px;
+        border: 2px solid var(--ut-charcoal);
+        border-right-width: 0;
+        border-bottom-width: 0;
+        width: 8px;
+        top: 2px;
+      }
+    }
+    .dropdown-menu {
+      font-size: 1rem;
+      border-radius: 0;
+      max-width: 400px;
+      z-index: 1;
+      margin-left: -1px;
+      padding: 1rem 1.5625rem;
+      top: 100%;
+      border: 1px solid var(--ut-limestone--t70);
+      flex-flow: row wrap;
+      justify-content: space-between;
+      width: max-content;
+      &:hover::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-top: 1px solid var(--ut-white);
+        z-index: 2;
+      }
+      li {
+        &:not(:only-child) {
+        flex: 1 1 48%;
+        }
+        /* Style links inside dropdown menu. */
+        .dropdown-item {
+          font-weight: 600;
+          margin: .75rem 0;
+          overflow-wrap: break-word;
+          &.is-active {
+            color: var(--ut-burntorange);
+          }
+        }
+      }
+    }
+    .dropdown {
+      &:hover,
+      &:focus,
+      &:has(> .dropdown-menu.show) {
+        border: 1px solid var(--ut-limestone--t70);
+        border-bottom: 0;
+        z-index: 2;
+        /* Arrange L2 items in a FlexBox grid */
+        .dropdown-menu {
+          display: flex;
+          &.show {
+            margin-top: 0;
+          }
+        }
+        .dropdown-toggle::after {
+          transform: rotate(45deg);
+          transition: transform 0.25s;
+          margin-top: 8px;
+        }
+        .l1-link {
+          background-color: var(--ut-white);
+          z-index: 2;
+        }
+      }
+      /* Right-align last item's dropdown to avoid going off-screen */
+      &:last-child .dropdown-menu,
+      &:nth-last-child(2):not(:first-child) .dropdown-menu {
+        right: 0;
+        left: unset;
+        margin-left: -1px;
+        margin-right: -1px;
+      }
+    }
+  }
+}

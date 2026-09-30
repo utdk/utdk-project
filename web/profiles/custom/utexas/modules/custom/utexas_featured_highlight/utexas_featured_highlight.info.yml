@@ -1,0 +1,15 @@
+name: 'UTexas Featured Highlight'
+type: module
+description: 'Defines schema & configuration for Featured Highlight widget.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'date_ap_style:date_ap_style'
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:layout_builder'
+  - 'drupal:responsive_image'
+  - 'media_library_form_element:media_library_form_element'
+  - 'utexas_featured_highlight:utexas_featured_highlight'
+  - 'utexas_image_styles:utexas_image_styles'
+core_incompatible: false

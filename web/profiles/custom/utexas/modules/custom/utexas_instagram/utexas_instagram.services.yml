@@ -1,0 +1,2 @@
+parameters:
+  utexas_instagram.skip_procedural_hook_scan: true

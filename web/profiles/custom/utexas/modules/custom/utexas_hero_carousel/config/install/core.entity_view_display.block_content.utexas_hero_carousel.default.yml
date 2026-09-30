@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_hero_carousel
+    - field.field.block_content.utexas_hero_carousel.field_hero_carousel
+    - field.field.block_content.utexas_hero_carousel.field_hero_carousel_autoplay
+    - field.field.block_content.utexas_hero_carousel.field_hero_carousel_fade
+    - field.field.block_content.utexas_hero_carousel.field_hero_carousel_speed
+  module:
+    - utexas_hero_carousel
+id: block_content.utexas_hero_carousel.default
+targetEntityType: block_content
+bundle: utexas_hero_carousel
+mode: default
+content:
+  field_hero_carousel:
+    type: utexas_hero_carousel
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      utexas_hero_carousel:
+        style: utexas_hero_3
+    weight: 0
+    region: content
+hidden:
+  field_hero_carousel_autoplay: true
+  field_hero_carousel_fade: true
+  field_hero_carousel_speed: true
+  search_api_excerpt: true

@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display the site announcement.
+ *
+ * Available custom variables:
+ * - title : a brief string of text.
+ * - icon : an SVG icon.
+ * - message : a medium-length string of text.
+ * - cta: a link and title.
+ * - scheme: a class name intended to indicate a corresponding color scheme.
+ *
+ * @ingroup themeable
+ */
+#}
+<section id="{{ unique_id }}" class="announcement-content" aria-labelledby="{{ header_id }}">
+  {{ edit_link }}
+  <div>
+    <span class="announcement-icon">{{ icon }}</span>
+    {% if title %}
+      <h2 class="announcement-title" id="{{ header_id }}">
+        {{ title }}
+      </h2>
+    {% endif %}
+  </div>
+  <div class="announcement-body container readable">{{ message }}</div>
+  {% if cta %}
+    <div class="cta">{{ cta }}</div>
+  {% endif %}
+</section>

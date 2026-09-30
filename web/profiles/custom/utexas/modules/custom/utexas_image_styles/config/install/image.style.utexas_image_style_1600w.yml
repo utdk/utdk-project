@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_1600w
+label: 1600w
+effects:
+  0255779a-b2d6-407b-ad07-0262080a8131:
+    uuid: 0255779a-b2d6-407b-ad07-0262080a8131
+    id: image_scale
+    weight: 1
+    data:
+      width: 1600
+      height: null
+      upscale: false

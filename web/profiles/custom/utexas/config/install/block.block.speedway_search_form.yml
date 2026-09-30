@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - utexas_google_search
+  theme:
+    - speedway
+id: speedway_search_form
+theme: speedway
+region: header_tertiary
+weight: 4
+provider: null
+plugin: utexas_google_search
+settings:
+  id: utexas_google_search
+  label: 'Search form'
+  label_display: '0'
+  provider: utexas_google_search
+  page_id: null
+visibility: {  }

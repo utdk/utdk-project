@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_64w_64h
+label: '64w x 64h (1:1)'
+effects:
+  33df4464-dffe-4034-90cc-473fd11c1256:
+    uuid: 33df4464-dffe-4034-90cc-473fd11c1256
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 64
+      height: 64
+      anchor: center-center

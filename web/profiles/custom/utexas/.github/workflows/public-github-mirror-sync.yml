@@ -1,0 +1,65 @@
+name: Sync to public mirror
+on: [push, delete]
+env:
+  OWNER: "utexas-utdk"
+  REPO: ${{ github.event.repository.name }}
+  REF: ${{ github.ref_name }}
+  DELETE_BRANCH: ${{ github.event.ref }}
+  GH_TOKEN: ${{ secrets.GH_CLI_PAT_FOR_VMS_USING_GITHUB_ACTIONS }}
+  PUBLIC_TOKEN: ${{ secrets.PAT_FOR_PUBLIC_GITHUB_SYNC }}
+  TRIGGER: ${{ github.event_name }}
+jobs:
+  build:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - name: Add SSH key for use with GitHub
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.ID_ED25519_DEVOPS }}
+          name: id_ed25519_devops
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: |
+            Host github.com
+            IdentityFile ~/.ssh/id_ed25519_devops
+
+      - uses: actions/checkout@v4
+      - name: Associate Git with EIS1-wcms-devops user
+        run: |
+          gh config set git_protocol ssh
+          git config --global user.email "eis1-wcms-devops@austin.utexas.edu"
+          git config --global user.name "EIS1-wcms-devops"
+
+      - uses: actions/checkout@v4
+      - name: SYNC TO PUBLIC MIRROR
+        run: |
+          rm -rf $REPO
+          gh repo clone "$OWNER/$REPO"
+          cd $REPO
+          git remote add "public" "https://$PUBLIC_TOKEN@github.com/utdk/$REPO.git"
+          if [ $TRIGGER == "push" ]; then
+            echo "Syncing $REF..."
+            git fetch && git checkout $REF
+            git push -f public $REF
+            exit 0
+          fi
+          if [ $TRIGGER == "delete" ]; then
+            echo "Syncing deleted branch $DELETE_BRANCH..."
+            git push public -d -f $DELETE_BRANCH
+            exit 0
+          fi
+          cd ..
+          rm -rf $REPO
+      - name: Notify on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v9
+        with:
+          server_address: authenticated.relay.mail.utexas.edu
+          server_port: 25
+          secure: false # connect over plain SMTP, then it will upgrade to TLS (ie, STARTTLS)
+          username: ${{ secrets.SMTP_USER_FOR_ACTIONS }}
+          password: ${{secrets.SMTP_PASSWORD_FOR_ACTIONS }}
+          from: '"Pantheon Stewards" <pantheon-stewards@utlists.utexas.edu>' # name + address required; just address throws an error
+          to: 'pantheon-stewards@utlists.utexas.edu'
+          subject: "Failure: ${{ github.workflow }}"
+          html_body: '[Review build output](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
+          convert_markdown: true

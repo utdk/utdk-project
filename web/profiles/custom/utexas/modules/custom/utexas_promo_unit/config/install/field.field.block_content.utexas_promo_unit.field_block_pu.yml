@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_promo_unit
+    - field.storage.block_content.field_block_pu
+  module:
+    - utexas_promo_unit
+id: block_content.utexas_promo_unit.field_block_pu
+field_name: field_block_pu
+entity_type: block_content
+bundle: utexas_promo_unit
+label: 'Promo Unit'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: utexas_promo_unit

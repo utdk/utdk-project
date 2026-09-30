@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Media Types module.
+ */
+
+/**
+ * Issue #982: Add utexas_document media type.
+ */
+function utexas_media_types_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_media_types',
+  ], TRUE);
+}
+
+/**
+ * Select between predefined image sizes for images in WYSIWYGs (#1625).
+ */
+function utexas_media_types_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_media_types',
+  ], TRUE);
+}
+
+/**
+ * Render default utexas_image view mode with sensible image style (#957).
+ */
+function utexas_media_types_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_media_types',
+  ], TRUE);
+}

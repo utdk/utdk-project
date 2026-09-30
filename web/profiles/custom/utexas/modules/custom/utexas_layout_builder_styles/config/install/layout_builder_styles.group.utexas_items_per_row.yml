@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_items_per_row
+label: 'Limit Items Per Row'
+multiselect: single
+form_type: checkboxes
+required: false
+weight: -9

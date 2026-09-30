@@ -1,0 +1,32 @@
+entity.utexas_ig_auth.collection:
+  path: '/admin/config/media/utexas-instagram-api/instagram-authorization'
+  defaults:
+    _controller: '\Drupal\utexas_instagram_api\Controller\InstagramAuthListController::listing'
+    _entity_list: 'utexas_ig_auth'
+    _title: 'Instagram account configuration'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.utexas_ig_auth.add_form:
+  path: '/admin/config/media/utexas-instagram-api/instagram-authorization/add'
+  defaults:
+    _entity_form: 'utexas_ig_auth.add'
+    _title: 'Add Instagram account'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.utexas_ig_auth.edit_form:
+  path: '/admin/config/media/utexas-instagram-api/instagram-authorization/{utexas_ig_auth}'
+  defaults:
+    _entity_form: 'utexas_ig_auth.edit'
+    _title: 'Edit Instagram account'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.utexas_ig_auth.delete_form:
+  path: '/admin/config/media/utexas-instagram-api/instagram-authorization/{utexas_ig_auth}/delete'
+  defaults:
+    _entity_form: 'utexas_ig_auth.delete'
+    _title: 'Delete Instagram account'
+  requirements:
+    _permission: 'administer site configuration'

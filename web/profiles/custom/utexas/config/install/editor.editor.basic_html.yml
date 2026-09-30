@@ -1,0 +1,74 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - ckeditor5
+format: basic_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - '|'
+      - link
+      - '|'
+      - bulletedList
+      - numberedList
+      - '|'
+      - blockQuote
+      - drupalInsertImage
+      - '|'
+      - heading
+      - '|'
+      - sourceEditing
+  plugins:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<a class target rel href hreflang>'
+        - '<em>'
+        - '<strong>'
+        - '<cite>'
+        - '<blockquote cite>'
+        - '<code>'
+        - '<ul type>'
+        - '<ol start type>'
+        - '<li>'
+        - '<dl>'
+        - '<dt>'
+        - '<dd>'
+        - '<h2 id>'
+        - '<h3 id>'
+        - '<h4 id>'
+        - '<h5 id>'
+        - '<h6 id>'
+        - '<p>'
+        - '<br>'
+        - '<span>'
+        - '<img src alt height width data-entity-type data-entity-uuid data-align data-caption>'
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+    ckeditor5_imageResize:
+      allow_resize: true
+    linkit_extension:
+      linkit_enabled: true
+      linkit_profile: flex_html
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: 0
+    height: 0

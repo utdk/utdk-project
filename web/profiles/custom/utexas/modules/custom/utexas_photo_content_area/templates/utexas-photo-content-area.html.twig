@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display a Photo Content Area field.
+ *
+ * Available custom variables:
+ * - image: The Photo Content Area image field.
+ * - photo_credit: Photo credit for the image.
+ * - headline: The Photo Content Area headline field.
+ * - copy: The Photo Content Area copy field.
+ * - links: The array for the links field.
+ *   - title: The text of each link.
+ *   - url: The URL of the each link.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{%
+  set classes = [
+    'ut-photo-content-area'
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% if image %}
+    <div class="photo-wrapper">
+      {{ image }}
+      <div class="caption">
+        <span>{{ photo_credit }}</span>
+      </div>
+    </div>
+  {% endif %}
+  <div class="content-wrapper">
+    {{ date }}
+    {% if headline %}
+      <h2 class="ut-headline">{{ headline }}</h2>
+    {% endif %}
+    {% if copy %}
+      <div class="ut-copy">
+        {{ copy }}
+      </div>
+    {% endif %}
+    {% if links %}
+      <ul class="link-list">
+        {% for link in links %}
+        <li>
+          {{ link }}
+        </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>

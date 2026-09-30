@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - utprof_content_type_profile
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Profile
+type: utprof_profile
+description: 'Use <em>profiles</em> for featuring persona-based content. Includes individual pages and group listings.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

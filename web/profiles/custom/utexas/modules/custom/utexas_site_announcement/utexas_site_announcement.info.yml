@@ -1,0 +1,7 @@
+name: 'UTexas Site Announcement'
+type: module
+description: 'Display a prominent message on the homepage or on a select list of pages.'
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - 'drupal:block'
+package: UTexas

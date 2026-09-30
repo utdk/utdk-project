@@ -1,0 +1,10 @@
+name: 'UTexas Image Styles'
+type: module
+description: 'Provides "shell" module for managing image styles via dependencies of this module.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - image
+  - responsive_image
+  - utexas_image_styles
+core_incompatible: false

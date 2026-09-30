@@ -1,0 +1,2 @@
+parameters:
+  utexas_block_social_links.skip_procedural_hook_scan: true

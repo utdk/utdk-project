@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_add_contact_info
+    - node.type.utprof_profile
+  module:
+    - text
+id: node.utprof_profile.field_utprof_add_contact_info
+field_name: field_utprof_add_contact_info
+entity_type: node
+bundle: utprof_profile
+label: 'Additional contact information'
+description: 'Optionally add additional contact information, such as a mailing address.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

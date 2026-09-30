@@ -1,0 +1,4 @@
+.utexas-image-border .image-wrapper img,
+.utexas-image-border .photo-wrapper img {
+  border: 1px solid #cbcbcb;
+}

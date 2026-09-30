@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - utexas_promo_unit
+id: block_content.field_block_pu
+field_name: field_block_pu
+entity_type: block_content
+type: utexas_promo_unit
+settings: {  }
+module: utexas_promo_unit
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

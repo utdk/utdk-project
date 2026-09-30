@@ -1,0 +1,112 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.utnews_news.field_utnews_article_author
+    - field.field.node.utnews_news.field_utnews_body
+    - field.field.node.utnews_news.field_utnews_display_image
+    - field.field.node.utnews_news.field_utnews_external_link
+    - field.field.node.utnews_news.field_utnews_featured
+    - field.field.node.utnews_news.field_utnews_main_media
+    - field.field.node.utnews_news.field_utnews_metatags
+    - field.field.node.utnews_news.field_utnews_news_categories
+    - field.field.node.utnews_news.field_utnews_news_tags
+    - field.field.node.utnews_news.field_utnews_publication_date
+    - node.type.utnews_news
+  module:
+    - datetime
+    - link
+    - metatag
+    - text
+    - user
+id: node.utnews_news.default
+targetEntityType: node
+bundle: utnews_news
+mode: default
+content:
+  field_utnews_article_author:
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utnews_body:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_utnews_external_link:
+    type: link
+    weight: 9
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_utnews_featured:
+    weight: 8
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_utnews_main_media:
+    type: entity_reference_entity_id
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_utnews_metatags:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_utnews_news_categories:
+    weight: 5
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utnews_news_tags:
+    weight: 6
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utnews_publication_date:
+    weight: 2
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: 'F j, Y'
+    third_party_settings: {  }
+    type: datetime_custom
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  display_breadcrumbs: true
+  display_page_title: true
+  display_updated: true
+  field_utnews_display_image: true

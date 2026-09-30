@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_metatags
+    - node.type.utprof_profile
+  module:
+    - metatag
+id: node.utprof_profile.field_utprof_metatags
+field_name: field_utprof_metatags
+entity_type: node
+bundle: utprof_profile
+label: Metatags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

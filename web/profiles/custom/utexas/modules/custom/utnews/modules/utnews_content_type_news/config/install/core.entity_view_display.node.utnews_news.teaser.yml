@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.utnews_news.field_utnews_article_author
+    - field.field.node.utnews_news.field_utnews_body
+    - field.field.node.utnews_news.field_utnews_display_image
+    - field.field.node.utnews_news.field_utnews_external_link
+    - field.field.node.utnews_news.field_utnews_featured
+    - field.field.node.utnews_news.field_utnews_main_media
+    - field.field.node.utnews_news.field_utnews_metatags
+    - field.field.node.utnews_news.field_utnews_news_categories
+    - field.field.node.utnews_news.field_utnews_news_tags
+    - field.field.node.utnews_news.field_utnews_publication_date
+    - node.type.utnews_news
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.utnews_news.teaser
+targetEntityType: node
+bundle: utnews_news
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  display_breadcrumbs: true
+  display_page_title: true
+  display_updated: true
+  field_utnews_article_author: true
+  field_utnews_body: true
+  field_utnews_display_image: true
+  field_utnews_external_link: true
+  field_utnews_featured: true
+  field_utnews_main_media: true
+  field_utnews_metatags: true
+  field_utnews_news_categories: true
+  field_utnews_news_tags: true
+  field_utnews_publication_date: true
+  links: true

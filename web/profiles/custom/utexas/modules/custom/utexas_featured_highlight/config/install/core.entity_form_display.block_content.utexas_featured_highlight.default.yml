@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_featured_highlight
+    - field.field.block_content.utexas_featured_highlight.field_block_featured_highlight
+  module:
+    - utexas_featured_highlight
+id: block_content.utexas_featured_highlight.default
+targetEntityType: block_content
+bundle: utexas_featured_highlight
+mode: default
+content:
+  field_block_featured_highlight:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_featured_highlight
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

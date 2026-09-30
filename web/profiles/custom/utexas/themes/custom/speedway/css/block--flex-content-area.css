@@ -1,0 +1,60 @@
+/* Styling for the Flex Content Area component - Default appearance */
+.ut-flex-content-area-wrapper {
+  --ipr-grid-gap: 2vw;
+  --ipr-grid-min-min-size: 200px;
+  --ipr-grid-min-max-size: 200px;
+  display: grid;
+  grid-gap: var(--ipr-grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+
+  .ut-flex-content-area {
+    margin-bottom: 1.25rem;
+    min-width: var(--ipr-grid-min-min-size);
+
+    .image-wrapper {
+      margin-bottom: .625rem;
+
+      .ut-img--fluid {
+        width: 100%;
+      }
+    }
+
+    .link-list {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        margin-bottom: .5625rem;
+      }
+    }
+  }
+}
+
+.utexas-onecol .ut-flex-content-area-wrapper,
+.utexas-twocol .ut-flex-content-area-wrapper,
+.utexas-threecol .ut-flex-content-area-wrapper,
+.utexas-fourcol .ut-flex-content-area-wrapper {
+  /* Maximum total width of all grid gaps (gutters) possible at --ipr-grid-num-columns. */
+  --ipr-grid-gap-total: calc((var(--ipr-grid-num-columns) - 1) * var(--ipr-grid-gap));
+  /* Total width of the container minus the width of maximum total possible grid gaps. */
+  --ipr-grid-available-space: calc(100% - var(--ipr-grid-gap-total));
+  /* Total available space divided by the maximum number of columns. */
+  /* Subract 1px from total to prevent odd rounding behavior in Firefox. */
+  --ipr-grid-min-max-size: calc(var(--ipr-grid-available-space) / var(--ipr-grid-num-columns) - 1px);
+}
+
+.utexas-onecol .ut-flex-content-area-wrapper {
+  --ipr-grid-num-columns: 1;
+}
+
+.utexas-twocol .ut-flex-content-area-wrapper {
+  --ipr-grid-num-columns: 2;
+}
+
+.utexas-threecol .ut-flex-content-area-wrapper {
+  --ipr-grid-num-columns: 3;
+}
+
+.utexas-fourcol .ut-flex-content-area-wrapper {
+  --ipr-grid-num-columns: 4;
+}

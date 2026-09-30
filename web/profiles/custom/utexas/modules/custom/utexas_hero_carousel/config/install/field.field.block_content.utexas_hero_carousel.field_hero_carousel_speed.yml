@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_hero_carousel
+    - field.storage.block_content.field_hero_carousel_speed
+id: block_content.utexas_hero_carousel.field_hero_carousel_speed
+field_name: field_hero_carousel_speed
+entity_type: block_content
+bundle: utexas_hero_carousel
+label: Slide Transition Delay
+description: 'The length of time, in seconds, before a slide transitions'
+required: true
+translatable: false
+default_value:
+  -
+    value: !!float 5
+default_value_callback: ''
+settings:
+  min: !!float 1
+  max: !!float 10
+  prefix: ''
+  suffix: ''
+field_type: decimal

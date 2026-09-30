@@ -1,0 +1,3 @@
+bundle: utevent
+required:
+  - views.view.utevent_calendar_page

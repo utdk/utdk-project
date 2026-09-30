@@ -1,0 +1,3 @@
+.local-actions [data-drupal-link-system-path*="utevent"] {
+  display: none!important;
+}

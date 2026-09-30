@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Quick Links field.
+ *
+ * Available variables:
+ * - headline: The Quick Link Headline..
+ * - copy: The Quck Links copy field.
+ * - links: An array containing the link title and link url for each item.
+ *   - url: The URL of the each link.
+ *   - title: The text of each link.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="utexas-quick-links">
+  {% if headline %}
+    <h3 class="ut-headline">{{ headline }}</h3>
+  {% endif %}
+  {% if copy %}
+    <div class="ut-copy">{{ copy }}</div>
+  {% endif %}
+  <ul class="link-list">
+      {% for link in links %}
+      <li>
+        {{ link }}
+      </li>
+      {% endfor %}
+  </ul>
+</div>

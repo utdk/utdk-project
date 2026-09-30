@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_utprof_image_ratio_opt
+field_name: field_utprof_image_ratio_opt
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: true
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

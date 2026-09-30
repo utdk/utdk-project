@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Hero field when Style 2 has been chosen.
+ *
+ * Available variables:
+ * - media: An image or video -- ensure that you handle display for either.
+ * - heading: a string of text meant to be prominently displayed.
+ * - subheading: a string of text, subsidiary to the heading.
+ * - cta_uri: a URI. May be use to wrap other elements.
+ * - cta_title: a string of text meant to be displayed as a button.
+ *
+ */
+#}
+{% if media_identifier %}
+  <div id="{{ media_identifier }}" class="ut-hero hero--photo-gradient {{ anchor_position }}">
+    <span class="visually-hidden">{{ alt }}</span>
+    {% if heading or subheading or cta_uri %}
+      <div class="hero-content">
+        <div class="hero-callout">
+          {% if heading %}
+            <h2 class="hero-headline">{{ heading }}</h2>
+          {% endif %}
+          {% if cta %}
+            <div class="hero-cta">
+              {{ cta }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

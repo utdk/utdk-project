@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_no_padding
+label: 'No padding between columns'
+classes: utexas-layout-no-padding
+type: section
+group: utexas_section_margins_padding
+weight: 0
+block_restrictions: {  }

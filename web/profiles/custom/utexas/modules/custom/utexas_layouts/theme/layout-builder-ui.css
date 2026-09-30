@@ -1,0 +1,47 @@
+.layout-builder .layout-builder-block {
+  padding: .75em;
+  cursor: move;
+  cursor: grab;
+  cursor: -webkit-grab;
+  outline: 1px solid #800080;
+}
+
+.layout-builder__section .ui-sortable-helper {
+  box-shadow: 5px 5px 5px #666;
+  -moz-box-shadow: 5px 5px 5px #666;
+  -webkit-box-shadow: 5px 5px 5px #666;
+  cursor: grabbing;
+}
+
+/* Style node status form on layouts page */
+#edit-moderation-state-wrapper {
+  margin-bottom: 30px;
+}
+#edit-moderation-state-wrapper .js-form-type-select,
+#edit-moderation-state-wrapper .js-form-type-item label {
+  font-weight: bold;
+  margin-top: 25px;
+}
+#edit-moderation-state-wrapper .js-form-type-select label {
+  margin-top: 0;
+}
+#edit-moderation-state-wrapper select.form-select {
+  display: inline-block;
+  max-width: fit-content;
+}
+
+.layout-builder .layout__region {
+  container-type: inline-size;
+  container-name: layout-region;
+  /* Prevent columns from wrapping */
+  margin-left: 1% !important;
+}
+@container layout-region (width <= 350px) {
+  /* Prevent blocks from breaking out of columns */
+  .layout-builder * {
+    --ipr-grid-min-min-size: 0 !important;
+  }
+  .layout-builder .data-wrapper {
+    min-width: auto;
+  }
+}

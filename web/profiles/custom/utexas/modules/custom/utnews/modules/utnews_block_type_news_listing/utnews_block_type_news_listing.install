@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * News listing block installation file.
+ */
+
+use Drupal\utexas_layout_builder_styles\StyleUpdateHelper;
+
+/**
+ * Implements hook_install().
+ */
+function utnews_block_type_news_listing_install() {
+  // Allow News Listings for 1, 2, 3, and 4 column Layout Builder Styles.
+  _utnews_block_type_news_listing_block_restriction_add();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function utnews_block_type_news_listing_uninstall() {
+  // Disallow Profile Listings for 1, 2, 3, and 4 column Layout Builder Styles.
+  _utnews_block_type_news_listing_block_restriction_remove();
+}
+
+/**
+ * Helper function to add block to Layout Builder Styles.
+ */
+function _utnews_block_type_news_listing_block_restriction_add() {
+  $layout_builder_styles = [
+    'layout_builder_styles.style.utexas_onecol',
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  foreach ($layout_builder_styles as $layout_builder_style) {
+    StyleUpdateHelper::modifyConfigValue($layout_builder_style, 'block_restrictions', 'inline_block:utnews_article_listing');
+  }
+}
+
+/**
+ * Helper function to remove block from Layout Builder Styles.
+ */
+function _utnews_block_type_news_listing_block_restriction_remove() {
+  $layout_builder_styles = [
+    'layout_builder_styles.style.utexas_onecol',
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  foreach ($layout_builder_styles as $layout_builer_style) {
+    StyleUpdateHelper::removeConfigArrayValue($layout_builer_style, 'block_restrictions', 'inline_block:utnews_article_listing');
+  }
+}
+
+/**
+ * Issue #73: Make 1-4 items per row available for News Listing blocks.
+ */
+function utnews_block_type_news_listing_update_8101() {
+  _utnews_block_type_news_listing_block_restriction_add();
+}
+
+/**
+ * Issue #73: Update LBSs in existing News Listing blocks one item per row.
+ */
+function utnews_block_type_news_listing_update_8102() {
+  StyleUpdateHelper::addStyleToBlock('utnews_article_listing', 'utexas_onecol');
+}
+
+/**
+ * Issue #75: Add classes to views block wrapper.
+ */
+function utnews_block_type_news_listing_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utnews_block_type_news_listing',
+  ], TRUE);
+}
+
+/**
+ * Issue #177: Exposed filters showing on News listing blocks.
+ */
+function utnews_block_type_news_listing_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utnews_block_type_news_listing',
+  ], TRUE);
+}
+
+/**
+ * Issue #233: Convert News teaser variations to separate view modes.
+ */
+function utnews_block_type_news_listing_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utnews_block_type_news_listing',
+  ], TRUE);
+}

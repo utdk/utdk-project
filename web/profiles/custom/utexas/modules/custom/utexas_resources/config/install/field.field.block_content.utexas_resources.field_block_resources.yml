@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_resources
+    - field.storage.block_content.field_block_resources
+  module:
+    - utexas_resources
+id: block_content.utexas_resources.field_block_resources
+field_name: field_block_resources
+entity_type: block_content
+bundle: utexas_resources
+label: Resources
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: utexas_resources

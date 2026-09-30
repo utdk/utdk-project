@@ -1,0 +1,11 @@
+name: 'UTexas Block : Social Links'
+description: 'Provides a custom block type with a configurarable list of social links.'
+type: module
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - block_content
+  - config_update
+  - field
+  - text
+  - utexas_block_social_links
+package: UTexas

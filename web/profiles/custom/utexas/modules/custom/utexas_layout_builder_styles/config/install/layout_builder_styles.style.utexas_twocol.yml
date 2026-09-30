@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_twocol
+label: 'Limit to 2 items per row'
+classes: utexas-twocol
+type: component
+group: utexas_items_per_row
+weight: 101
+block_restrictions:
+  - 'inline_block:social_links'
+  - 'inline_block:utexas_flex_content_area'
+  - 'inline_block:utexas_promo_unit'
+  - 'inline_block:utexas_quick_links'
+  - 'inline_block:utexas_resources'

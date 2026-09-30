@@ -1,0 +1,9 @@
+utnews.configuration:
+  route_name: utnews.configuration
+  title: 'Display settings'
+  base_route: utnews.configuration
+utnews.permissions:
+  route_name: utnews.permissions
+  title: 'Permissions configuration'
+  base_route: utnews.configuration
+  weight: 100

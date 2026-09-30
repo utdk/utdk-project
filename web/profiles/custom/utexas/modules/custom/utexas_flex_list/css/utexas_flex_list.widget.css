@@ -1,0 +1,11 @@
+.field--type-utexas-flex-list table td details {
+  margin-left: 2rem;
+  float: left;
+  width: min-content;
+  min-width: 79%;
+  max-width: 95%;
+  margin-right: 20px;
+}
+.field--type-utexas-flex-list table td input[value^="Remove"] {
+  margin-left: 24px;
+}

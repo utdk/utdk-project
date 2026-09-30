@@ -1,0 +1,7 @@
+flex-content-area:
+  js:
+    js/flex-content-area.js: {}
+widget:
+  css:
+    theme:
+      css/utexas_flex_content_area.widget.css: {}

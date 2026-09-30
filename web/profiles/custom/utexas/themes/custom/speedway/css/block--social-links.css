@@ -1,0 +1,97 @@
+
+/* Only center icons within the main content block */
+.block-system-main-block .block__ut-social-links,
+.block__ut-social-links .ut-headline {
+  text-align: center;
+}
+.block__ut-social-links {
+  /* Icons have no inherent height; reset to specified height below */
+  line-height: 0;
+
+  .block__ut-social-links--link {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-color: var(--ut-limestone--s50);
+    border-radius: 4px;
+    width: 22px;
+    height: 22px;
+  }
+  &.ut-social-links--medium .block__ut-social-links--link {
+    border-radius: 7px;
+    width: 40px;
+    height: 40px
+  }
+  &.ut-social-links--large .block__ut-social-links--link {
+    border-radius: 10px;
+    width: 80px;
+    height: 80px
+  }
+}
+
+.block__ut-social-links--items {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: max(10px, 1vw);
+}
+
+/* Limited to social link blocks placed using Layout Builder (.layout_region) */
+.layout__region {
+
+  .block__ut-social-links {
+    --ipr-grid-gap: max(10px, 1vw);
+    margin: 0 auto;
+    &.ut-social-links--small {
+      --ipr-grid-min-min-size: 22px;
+      --ipr-grid-min-max-size: 22px;
+    }
+    &.ut-social-links--medium {
+      --ipr-grid-min-min-size: 40px;
+      --ipr-grid-min-max-size: 40px;
+    }
+    &.ut-social-links--large {
+      --ipr-grid-min-min-size: 80px;
+      --ipr-grid-min-max-size: 80px;
+    }
+  }
+
+  .utexas-onecol {
+    .block__ut-social-links {
+      --ipr-grid-num-columns: 1;
+    }
+  }
+  .utexas-twocol {
+    --ipr-grid-num-columns: 2;
+    .block__ut-social-links {
+      max-width: calc((var(--ipr-grid-min-max-size) * 2) + (var(--ipr-grid-gap) * 1));
+    }
+  }
+  .utexas-threecol {
+    --ipr-grid-num-columns: 3;
+    .block__ut-social-links {
+      max-width: calc((var(--ipr-grid-min-max-size) * 3) + (var(--ipr-grid-gap) * 2));
+    }
+  }
+  .utexas-fourcol {
+    --ipr-grid-num-columns: 4;
+    .block__ut-social-links {
+      max-width: calc((var(--ipr-grid-min-max-size) * 4) + (var(--ipr-grid-gap) * 3));
+    }
+  }
+}
+
+/* Items Per Row Styles */
+.layout__region .utexas-onecol .block__ut-social-links--items,
+.layout__region .utexas-twocol .block__ut-social-links--items,
+.layout__region .utexas-threecol .block__ut-social-links--items,
+.layout__region .utexas-fourcol .block__ut-social-links--items {
+  display: grid;
+  grid-gap: var(--ipr-grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+  /* Maximum total width of all grid gaps (gutters) possible at --ipr-grid-num-columns. */
+  --ipr-grid-gap-total: calc((var(--ipr-grid-num-columns) - 1) * var(--ipr-grid-gap));
+  /* Total width of the container minus the width of maximum total possible grid gaps. */
+  --ipr-grid-available-space: calc(100% - var(--ipr-grid-gap-total));
+  /* Total available space divided by the maximum number of columns. */
+  /* Subract 1px from total to prevent odd rounding behavior in Firefox. */
+  --ipr-grid-min-max-size: calc(var(--ipr-grid-available-space) / var(--ipr-grid-num-columns) - 1px);
+}

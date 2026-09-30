@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for Internal Profile tags vocabulary.
+ */
+
+/**
+ * Change label to 'Internal Profile tags'.
+ */
+function utprof_vocabulary_tags_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utprof_vocabulary_tags',
+  ], TRUE);
+}

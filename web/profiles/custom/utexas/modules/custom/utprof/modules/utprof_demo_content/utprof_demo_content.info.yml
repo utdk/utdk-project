@@ -1,0 +1,7 @@
+name: 'Demo Content - Profiles'
+description: 'Install demonstration profiles for evaluation purposes.'
+type: module
+core_version_requirement: ^10 || ^11
+package: 'UT Drupal Kit Profile Feature'
+dependencies:
+  - utprof:utprof_content_type_profile

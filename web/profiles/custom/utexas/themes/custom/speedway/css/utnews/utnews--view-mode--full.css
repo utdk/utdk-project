@@ -1,0 +1,32 @@
+.utnews-news.full {
+  .utnews__external-link-wrapper span {
+    font-weight: 600;
+  }
+  .utnews__author-wrapper span {
+    font-weight: normal;
+  }
+  .utnews__author,
+  .utnews__published,
+  .utnews__external-link-wrapper .field__item {
+    display: inline-block;
+  }
+  .utnews__author a {
+    text-decoration: underline;
+  }
+  .utnews__author a:hover {
+    text-decoration: none;
+  }
+  .utnews__author-information-wrapper {
+    background-color: var(--ut-shade--t20);
+    border: 1px solid var(--ut-limestone--t40);
+  }
+  .utnews__published {
+    font-style: italic;
+  }
+  /* Remove margin on the last paragraph of the author description */
+  .utnews__description-wrapper > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+

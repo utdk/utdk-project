@@ -1,0 +1,5 @@
+utexas_missing_blocks.report:
+  route_name: utexas_missing_blocks.report
+  title: 'Missing Block Report'
+  base_route: utexas.configuration
+  weight: 101

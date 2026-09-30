@@ -1,0 +1,2 @@
+parameters:
+  utexas_hero_carousel.skip_procedural_hook_scan: true

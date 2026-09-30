@@ -1,0 +1,8 @@
+name: Profile
+type: module
+description: Provides the generalized 'Profile' content type and supporting components.
+core_version_requirement: ^10 || ^11
+version: '3.30.0'
+package: UT Drupal Kit Profile Feature
+
+configure: utprof.configuration

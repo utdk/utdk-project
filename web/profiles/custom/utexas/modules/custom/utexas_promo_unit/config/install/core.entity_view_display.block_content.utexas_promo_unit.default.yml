@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_promo_unit
+    - field.field.block_content.utexas_promo_unit.field_block_pu
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+    sections: {  }
+id: block_content.utexas_promo_unit.default
+targetEntityType: block_content
+bundle: utexas_promo_unit
+mode: default
+content:
+  field_block_pu:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_promo_unit
+    region: content
+hidden: {  }

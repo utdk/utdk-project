@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Image Styles module.
+ */
+
+/**
+ * Issue #986: Add new image style for consistent 500px square aspect ratio.
+ */
+function utexas_image_styles_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_styles',
+  ], TRUE);
+}
+
+/**
+ * Issue #1199: Add new image style for 280x152 size.
+ */
+function utexas_image_styles_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_styles',
+  ], TRUE);
+}
+
+/**
+ * Issue #1593: Add aspect ratio information to Image Style display names.
+ */
+function utexas_image_styles_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_styles',
+  ], TRUE);
+}
+
+/**
+ * Add webp conversion (#1591).
+ */
+function utexas_image_styles_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_styles',
+  ], TRUE);
+}
+
+/**
+ * Issue #2827: Use larger image styles 1x/2x desktop presentations.
+ */
+function utexas_image_styles_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_styles',
+  ], TRUE);
+}
+
+/**
+ * Remove webp conversion (#2829).
+ */
+function utexas_image_styles_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_styles',
+  ], TRUE);
+}

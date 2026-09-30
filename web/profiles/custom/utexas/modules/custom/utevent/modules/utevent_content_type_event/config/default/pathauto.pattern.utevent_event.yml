@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: utevent_event
+label: 'Pathauto : Event content type'
+type: 'canonical_entities:node'
+pattern: '/events/[node:title]'
+selection_criteria:
+  254188eb-b42a-49cf-a4b0-f51a0c972796:
+    id: 'entity_bundle:node'
+    bundles:
+      utevent_event: utevent_event
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 254188eb-b42a-49cf-a4b0-f51a0c972796
+selection_logic: and
+weight: -10
+relationships: {  }

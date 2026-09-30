@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - bootstrap_horizontal_tabs
+    - node
+id: node.field_utprof_content
+field_name: field_utprof_content
+entity_type: node
+type: bootstrap_horizontal_tabs
+settings: {  }
+module: bootstrap_horizontal_tabs
+locked: true
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,5 @@
+entity.utexas_ig_auth.add_form:
+  route_name: 'entity.utexas_ig_auth.add_form'
+  title: 'Add Instagram account authorization'
+  appears_on:
+    - entity.utexas_ig_auth.collection

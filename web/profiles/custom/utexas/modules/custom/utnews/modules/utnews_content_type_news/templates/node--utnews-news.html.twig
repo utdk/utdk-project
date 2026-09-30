@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Template for UTNews "teaser" node view.
+
+ *
+ * Available custom variables:
+ * - has_sidebar_fields: Used for defining layouts with/without sidebar
+ * - author_information: Author information - for the author image, name, description
+ * - main_image: The news story image
+ * - news_tags: News story tags
+ * - news_categories: News story categories
+ * - linked_title: The title field pointing to the node or external URL
+ * - body_summary: The summary of the body field
+ */
+#}
+
+{%
+  set classes = [
+    view_mode ? view_mode|clean_class,
+    not node.isPublished() ? 'is-unpublished',
+    node.bundle|clean_class,
+    'clearfix',
+    'utnews__content-wrapper',
+    'utnews--teaser-variation'
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <div>
+    {% if content.field_utnews_main_media|render|trim is not empty %}
+      <div class="utnews__thumbnail ms-3 mb-1 align-right">
+        {{ content.field_utnews_main_media }}
+      </div>
+    {% endif %}
+    {% if linked_title %}
+      <h3 class="ut-headline">{{ linked_title }}</h3>
+    {% endif %}
+
+    {% if content.field_utnews_publication_date %}
+      <span class="utnews__published d-block mb-2">{{ content.field_utnews_publication_date }}</span>
+    {% endif %}
+    {% if content.field_utnews_body %}
+      <div class="ut-copy">
+          {{ content.field_utnews_body }}
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,16 @@
+utnews_view_listing_page.config:
+  type: config_entity
+  label: 'UTNews Listing Page Configuration'
+  mapping:
+    page_title:
+      type: string
+      label: 'Page Title'
+    display_thumbnail:
+      type: int
+      label: 'Display image'
+    display_date:
+      type: int
+      label: 'Display date'
+    display_summary:
+      type: int
+      label: 'Display summary'

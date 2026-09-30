@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_featured_highlight
+    - core.entity_view_mode.block_content.utexas_featured_highlight_2
+    - field.field.block_content.utexas_featured_highlight.field_block_featured_highlight
+  module:
+    - layout_builder
+    - utexas_featured_highlight
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: block_content.utexas_featured_highlight.utexas_featured_highlight_2
+targetEntityType: block_content
+bundle: utexas_featured_highlight
+mode: utexas_featured_highlight_2
+content:
+  field_block_featured_highlight:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_featured_highlight_2
+    region: content
+hidden: {  }

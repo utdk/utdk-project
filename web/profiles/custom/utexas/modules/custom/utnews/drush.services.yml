@@ -1,0 +1,5 @@
+services:
+  utnews.commands:
+    class: \Drupal\utnews\Commands\UtnewsPermissions
+    tags:
+      - { name: drush.command }

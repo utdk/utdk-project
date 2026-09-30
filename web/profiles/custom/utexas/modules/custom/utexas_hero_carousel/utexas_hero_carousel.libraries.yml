@@ -1,0 +1,7 @@
+widget:
+  css:
+    theme:
+      css/utexas_hero_carousel.widget.css: {}
+formatter:
+  js:
+    js/bootstrap-carousel.js: {}

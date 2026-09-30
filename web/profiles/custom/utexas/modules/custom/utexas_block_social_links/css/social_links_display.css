@@ -1,0 +1,9 @@
+/* Add a focus-visible indicator for the <a> tag for the social media icon which uses a mask image that obscures the browser's normal focus indicator. See #2943. */
+.block__ut-social-links--item:has(a:focus-visible) {
+  border: 1px solid black;
+  padding: 2px;
+}
+.block__ut-social-links--item {
+  border: 1px solid transparent;
+  padding: 2px;
+}

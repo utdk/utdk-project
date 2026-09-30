@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_instagram
+    - field.field.block_content.utexas_instagram.field_utexas_instagram_acct
+    - field.field.block_content.utexas_instagram.field_utexas_instagram_handle
+    - field.field.block_content.utexas_instagram.field_utexas_instagram_headline
+id: block_content.utexas_instagram.default
+targetEntityType: block_content
+bundle: utexas_instagram
+mode: default
+content:
+  field_utexas_instagram_acct:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_utexas_instagram_handle:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_utexas_instagram_headline:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

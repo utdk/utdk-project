@@ -1,0 +1,149 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.utevent_event.field_utevent_body
+    - field.field.node.utevent_event.field_utevent_datetime
+    - field.field.node.utevent_event.field_utevent_display_media
+    - field.field.node.utevent_event.field_utevent_featured
+    - field.field.node.utevent_event.field_utevent_localist_unlisted
+    - field.field.node.utevent_event.field_utevent_location
+    - field.field.node.utevent_event.field_utevent_main_media
+    - field.field.node.utevent_event.field_utevent_metatags
+    - field.field.node.utevent_event.field_utevent_status
+    - field.field.node.utevent_event.field_utevent_tags
+    - image.style.utexas_image_style_280w_280h
+    - node.type.utevent_event
+  module:
+    - date_augmenter
+    - layout_builder
+    - media
+    - options
+    - text
+    - user
+    - utevent_content_type_event
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.utevent_event.full
+targetEntityType: node
+bundle: utevent_event
+mode: full
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_utevent_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_utevent_datetime:
+    type: utevent_smartdate_recurring
+    label: above
+    settings:
+      timezone_override: ''
+      format: default
+      time_wrapper: '1'
+      past_display: '0'
+      upcoming_display: '5'
+      force_chronological: 0
+      add_classes: 0
+      show_next: 0
+      current_upcoming: 0
+      format_type: medium
+    third_party_settings:
+      date_augmenter:
+        instances:
+          status:
+            addtocal: true
+          weights:
+            order:
+              addtocal:
+                weight: 0
+          settings:
+            addtocal:
+              label: 'Add to calendar'
+              event_title: '[node:title]'
+              location: '[node:field_utevent_location:entity:name]'
+              description: |-
+                [node:field_utevent_body:summary]
+
+                Event link: [node:url:absolute]
+              retain_spacing: true
+              max_desc: 0
+              past_events: false
+              target: modal
+          augmenter_settings:
+            fields__field_utevent_datetime__settings_edit_form__third_party_settings__date_augmenter__instances__augmenter_settings__active_tab: ''
+        rule:
+          status:
+            addtocal: true
+          weights:
+            order:
+              addtocal:
+                weight: 0
+          settings:
+            addtocal:
+              label: 'Add series to calendar'
+              event_title: '[node:title]'
+              location: '[node:field_utevent_location:entity:name]'
+              description: |-
+                [node:field_utevent_body:summary]
+
+                Event link: [node:url:absolute]
+              retain_spacing: true
+              max_desc: 0
+              past_events: false
+              target: modal
+          augmenter_settings:
+            fields__field_utevent_datetime__settings_edit_form__third_party_settings__date_augmenter__rule__augmenter_settings__active_tab: ''
+    weight: 3
+    region: content
+  field_utevent_location:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_utevent_main_media:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: utexas_image_style_280w_280h
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_utevent_status:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_utevent_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  display_breadcrumbs: true
+  display_page_title: true
+  display_updated: true
+  field_utevent_display_media: true
+  field_utevent_featured: true
+  field_utevent_localist_unlisted: true
+  field_utevent_metatags: true
+  links: true

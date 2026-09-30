@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Install file for utexas_block_social_links.
+ */
+
+use Drupal\Core\Database\Database;
+use Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup utexas_block_social_links
+ */
+function utexas_block_social_links_install() {
+  /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+  $file_system = \Drupal::service('file_system');
+  // Create default social networks.
+  $social_networks_entity_manager = \Drupal::entityTypeManager()->getStorage('utexas_social_links_data');
+  $filedir = 'public://social_icons/';
+  $file_system->prepareDirectory($filedir, FileSystemInterface::CREATE_DIRECTORY);
+  $dir = \Drupal::service('extension.list.module')->getPath('utexas_block_social_links') . '/icons/';
+  $default_icons = $file_system->scanDirectory($dir, '/^.*\.(svg)$/i', ['key' => 'name'], 0);
+  foreach ($default_icons as $key => $value) {
+    $uri = $value->uri;
+    $file = file_get_contents($uri);
+    $saved_file = \Drupal::service('file_system')->saveData($file, $filedir . $value->filename);
+    $social_networks_entity_manager->create([
+      'id' => $key,
+      'label' => ucwords($key),
+      'icon' => $saved_file,
+    ])
+      ->save();
+  }
+}
+
+/**
+ * Issue #1180: Allow content editors to set icon sizes in social media links.
+ */
+function utexas_block_social_links_update_8101() {
+  $icon_size = [
+    'type' => 'varchar_ascii',
+    'length' => 255,
+    'binary' => TRUE,
+  ];
+  $database = Database::getConnection();
+  $query = $database->query(
+    "SELECT value FROM {key_value} WHERE name=:name",
+    [
+      ':name' => "block_content.field_schema_data.field_utexas_sl_social_links",
+    ]
+  );
+  $result = $query->fetchAssoc();
+  $tables = array_keys(unserialize($result['value']));
+  $schema = $database->schema();
+  foreach ($tables as $table_name) {
+    $schema->addField($table_name, 'field_utexas_sl_social_links_icon_size', $icon_size);
+  }
+}

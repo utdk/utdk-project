@@ -1,0 +1,59 @@
+.utprof__views-list {
+  --ipr-grid-gap: 2.5vw;
+  --ipr-grid-min-min-size: 300px;
+  --ipr-grid-min-max-size: 325px;
+  display: grid;
+  grid-gap: var(--ipr-grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+  padding-left: 0;
+}
+
+.utprof__profile-item {
+  list-style-type: none;
+}
+
+.utprof__directory-link,
+.utprof__email {
+  font-size: 1rem;
+}
+
+h3.utprof__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+ /* Applies to both Basic and Prominent displays */
+.utprof__list-img {
+  width: 66px;
+  @media (min-width: 576px) {
+    width: 112px;
+  }
+  @media (min-width: 768px) {
+    width: 140px;
+  }
+}
+
+.utexas-onecol .utprof__views-list,
+.utexas-twocol .utprof__views-list,
+.utexas-threecol .utprof__views-list,
+.utexas-fourcol .utprof__views-list {
+  /* Maximum total width of all grid gaps (gutters) possible at --ipr-grid-num-columns. */
+  --ipr-grid-gap-total: calc((var(--ipr-grid-num-columns) - 1) * var(--ipr-grid-gap));
+  /* Total width of the container minus the width of maximum total possible grid gaps. */
+  --ipr-grid-available-space: calc(100% - var(--ipr-grid-gap-total));
+  /* Total available space divided by the maximum number of columns. */
+  /* Subract 1px from total to prevent odd rounding behavior in Firefox. */
+  --ipr-grid-min-max-size: calc(var(--ipr-grid-available-space) / var(--ipr-grid-num-columns) - 1px);
+}
+.utexas-onecol .utprof__views-list {
+  --ipr-grid-num-columns: 1;
+}
+.utexas-twocol .utprof__views-list {
+  --ipr-grid-num-columns: 2;
+}
+.utexas-threecol .utprof__views-list {
+  --ipr-grid-num-columns: 3;
+}
+.utexas-fourcol .utprof__views-list {
+  --ipr-grid-num-columns: 4;
+}

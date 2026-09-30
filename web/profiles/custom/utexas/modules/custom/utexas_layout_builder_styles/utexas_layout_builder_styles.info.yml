@@ -1,0 +1,7 @@
+name: 'UTexas Layout Builder Styles'
+type: module
+description: 'Block and section level styling for Layout Builder'
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - layout_builder_styles
+package: UTexas

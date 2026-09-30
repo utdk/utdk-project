@@ -1,0 +1,7 @@
+name: 'Demo Content - Event'
+type: module
+description: 'Install demonstration events for evaluation purposes.'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - utevent:utevent_content_type_event
+package: 'UT Drupal Kit Event Feature'

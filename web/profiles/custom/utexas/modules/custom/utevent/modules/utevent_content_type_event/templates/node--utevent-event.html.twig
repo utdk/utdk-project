@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ */
+#}
+
+{#
+/**
+ * These classes are copied verbatim from the core theme Classy node.html.twig
+ * template. Additionally, "node__meta", "node__submitted" and "node__content"
+ * have been preserved in the body of the template according to their
+ * implementation in the Classy theme node.html.twig template. "node__title" has
+ * been added for the sake of consistancy.
+ */
+#}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    canceled ? 'event-status--canceled'
+  ]
+%}
+
+{# These classes are part of a BEM implentation used by the utevent module. #}
+{% set bem_block =  node.bundle|clean_class %}
+{% set classes_utevent = [
+    bem_block,
+    not node.isPublished() ? bem_block ~ '--unpublished',
+    view_mode ? bem_block ~ '--' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+
+{# The "classes" array from the Classy theme and the BEM classes used to style
+  the utevent module are merged. #}
+{% set classes = classes|merge(classes_utevent) %}
+
+{# An array of additional classes can be added when this template is embedded in
+  a child template.#}
+{% set classes = classes|merge(classes_additional|default([])) %}
+
+<article{{ attributes.addClass(classes) }}>
+
+    {% block node_title %}
+      {{ title_prefix }}
+      {% if label and not page %}
+        <h2{{ title_attributes.addClass('node__title', bem_block ~ '__title') }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% endif %}
+      {{ title_suffix }}
+    {% endblock node_title %}
+
+    {% block display_submitted %}
+      {% if display_submitted %}
+        <footer class="node__meta {{ bem_block }}__meta">
+          {{ author_picture }}
+          <div{{ author_attributes.addClass('node__submitted', bem_block ~ '__submitted') }}>
+            {% trans %}Submitted by
+            {{ author_name }}
+            on
+            {{ date }}{% endtrans %}
+            {{ metadata }}
+          </div>
+        </footer>
+      {% endif %}
+    {% endblock display_submitted %}
+
+    {% block node_content %}
+      <div{{ content_attributes.addClass('node__content', bem_block ~ '__content', 'row') }}>
+        <div class="{{ bem_block }}__content-primary col-md-8 mb-4">
+          {{ content|without('field_utevent_datetime', 'field_utevent_location', 'field_utevent_tags') }}
+        </div>
+        <div class="{{ bem_block }}__content-secondary col px-4 pt-0 pb-2">
+          <div class="{{ bem_block }}__content-label py-3 fs-5 mb-3">Event Details</div>
+          {{ content.field_utevent_datetime }}
+          {{ content.field_utevent_location }}
+          {{ content.field_utevent_tags }}
+        </div>
+      </div>
+    {% endblock node_content %}
+
+</article>

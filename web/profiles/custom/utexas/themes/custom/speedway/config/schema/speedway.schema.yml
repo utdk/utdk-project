@@ -1,0 +1,21 @@
+# Schema for the theme setting configuration file of the Forty Acres theme.
+
+speedway.settings:
+  type: theme_settings
+  label: 'Speedway settings'
+  mapping:
+    header_secondary_display:
+      type: string
+      label: Header Secondary display
+    logo_height:
+      type: string
+      label: Logo Height
+    main_menu_alignment:
+      type: string
+      label: Main menu alignment
+    parent_link_title:
+      type: string
+      label: Parent Entity Name
+    parent_link:
+      type: string
+      label: Parent Entity Website

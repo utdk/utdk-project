@@ -1,0 +1,121 @@
+.background-accent .block {
+  background-color: #fff;
+  border: 1px solid #333f48;
+  padding: 1.25rem;
+  margin: 0;
+}
+
+/* Prevent images with height:100% from overflowing their container */
+/* Add space above and below block */
+.background-accent {
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 0;
+}
+@media only screen and (min-width: 1200px) {
+  .background-accent {
+    padding: 2rem 0;
+  }
+}
+.background-accent .layout__region .block {
+  margin-bottom: 1rem;
+}
+.background-accent .layout--utexas-onecol > div {
+  padding-top: 1rem;
+}
+.background-accent .utexas-layout--twocol .layout__region,
+.background-accent .utexas-layout--threecol .layout__region,
+.background-accent .utexas-layout--fourcol .layout__region {
+  margin-left: 1rem;
+}
+.background-accent .utexas-layout--twocol-wrapper,
+.background-accent .utexas-layout--threecol-wrapper,
+.background-accent .utexas-layout--fourcol-wrapper {
+  margin-left: -1rem;
+}
+
+/* Styling for no-padding layouts */
+.background-accent.utexas-layout-no-padding {
+  padding-left: 0;
+}
+.background-accent.utexas-layout-no-padding.container-fluid .utexas-layout--twocol-wrapper,
+.background-accent.utexas-layout-no-padding.container-fluid .utexas-layout--threecol-wrapper,
+.background-accent.utexas-layout-no-padding.container-fluid .utexas-layout--fourcol-wrapper {
+  margin-left: -1rem;
+}
+
+/* Pad all non-background accent regions that
+follow a background-accent region. */
+.background-accent + div {
+  padding-top: 2.5rem;
+}
+/* Set no padding for background accent regions that
+follow another background-accent region. */
+.background-accent + .background-accent {
+  padding: 1rem 0;
+}
+@media only screen and (min-width: 1200px) {
+  .background-accent + .background-accent {
+    padding: 2rem 0;
+  }
+}
+
+/* Give padding/spacing to widgets placed in sections with backgrounds. */
+.background-accent .layout__region--first,
+.background-accent .layout__region--second,
+.background-accent .layout__region--third,
+.background-accent .layout__region--fourth {
+  padding-top: 1rem;
+}
+.background-accent .utexas-layout--twocol > .layout__region--first {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+.background-accent .utexas-layout--twocol > .layout__region--second {
+  margin-left: 0;
+  margin-right: 0;
+}
+.background-accent .utexas-layout--onecol > .layout__region--main {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+/* Reduce vertical padding on widgets on small screens */
+@media screen and (max-width: 600px) {
+  .background-accent .utexas-layout--twocol > .layout__region--first,
+  .background-accent .utexas-layout--twocol > .layout__region--second,
+  .background-accent .utexas-layout--onecol > .layout__region--main {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+  .background-accent .utexas-layout--twocol > .layout__region--first {
+    padding-bottom: 0;
+  }
+  .background-accent .utexas-layout--twocol > .layout__region--second {
+    padding-top: 0;
+  }
+}
+
+/* Ensure that the "Configure" button is visible with blurred background images */
+#layout-builder .configure-section {
+  background: #fff;
+}
+#layout-builder .remove-section {
+  margin-left: 1rem;
+}
+.background-blur {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  -ms-filter: blur(5px);
+  margin: -10px;
+}
+.background-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1000;
+  background-size: cover;
+  bottom: 0;
+}

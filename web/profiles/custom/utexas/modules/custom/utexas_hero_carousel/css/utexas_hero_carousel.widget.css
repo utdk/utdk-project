@@ -1,0 +1,10 @@
+.field--type-utexas-hero table td details {
+  margin-right: 2rem;
+  float: left;
+  min-width: 81%;
+  max-width: 95%;
+  width: min-content;
+}
+.field--type-utexas-hero table td {
+  vertical-align: top;
+}

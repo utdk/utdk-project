@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_85w_85h
+label: '85w x 85h (1:1)'
+effects:
+  de16cf76-d60c-4cc8-bcfe-0fb3405c6bfd:
+    uuid: de16cf76-d60c-4cc8-bcfe-0fb3405c6bfd
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 170
+      height: 170
+      anchor: center-center

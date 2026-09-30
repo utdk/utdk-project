@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_image_ratio_opt
+    - node.type.utprof_profile
+id: node.utprof_profile.field_utprof_image_ratio_opt
+field_name: field_utprof_image_ratio_opt
+entity_type: node
+bundle: utprof_profile
+label: 'Crop image to square aspect ratio'
+description: 'Disabling this option will allow the image to render at its original proportions (no cropping). For consistency between profiles, it is recommended to leave this option enabled.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

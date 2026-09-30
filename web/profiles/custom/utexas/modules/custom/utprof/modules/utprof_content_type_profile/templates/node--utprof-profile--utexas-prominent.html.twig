@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Template for Profile node "Prominent" display.
+ *
+ * Available custom variables:
+ * - basic_media: a rendered responsive image from field_utprof_basic_media
+ * - directory_link: a UT button-styled link to the EID's directory page
+ * - building_information: array with building code and/or room number
+ *
+ * @see utprof_content_type_profile_preprocess_node()
+ *
+ */
+#}
+{%
+  set classes = [
+    'utprof__list',
+    'utexas-prominent-based',
+    view_mode ? view_mode|clean_class,
+    'p-3',
+  ]
+%}
+
+{% block content %}
+  <div{{ attributes.addClass(classes) }}>
+
+    <div class="utprof__list-img float-start me-3 mb-3">
+      {{ basic_media }}
+    </div>
+
+    <div class="data-wrapper me-3">
+      {% if prepared_title %}
+        <h3 class="utprof__title">
+          {{ prepared_title_prominent }}
+        </h3>
+      {% endif %}
+
+      {% if content.field_utprof_designation|render is not empty %}
+        <div class="utprof__designation">
+          {{ content.field_utprof_designation }}
+        </div>
+      {% endif %}
+
+      {% if content.field_utprof_add_basic_info|render is not empty %}
+        {{ content.field_utprof_add_basic_info }}
+      {% endif %}
+
+      {% if directory_link %}
+        <div class="utprof__directory-link">
+          {{ directory_link }}
+        </div>
+      {% endif %}
+
+      {% if email_link|render is not empty %}
+        <div class="utprof__email">
+          {{ email_link }}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+{% endblock %}

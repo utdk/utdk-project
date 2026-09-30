@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.utexas_video_external.field_media_oembed_video
+    - media.type.utexas_video_external
+  module:
+    - layout_builder
+    - media
+third_party_settings:
+  layout_builder:
+    sections: {  }
+id: media.utexas_video_external.default
+targetEntityType: media
+bundle: utexas_video_external
+mode: default
+content:
+  field_media_oembed_video:
+    type: oembed
+    weight: 0
+    label: hidden
+    settings:
+      max_width: 0
+      max_height: 0
+      loading:
+        attribute: eager
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

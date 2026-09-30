@@ -1,0 +1,2 @@
+parameters:
+  utexas_image_link.skip_procedural_hook_scan: true

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_quick_links
+label: 'Quick Links'
+revision: 0
+description: 'Provides a block implementation of the Quick Links widget.'

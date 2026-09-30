@@ -1,0 +1,29 @@
+bundle: utnews
+required:
+  - core.base_field_override.node.utnews_news.promote
+  - core.entity_form_display.node.utnews_news.default
+  - core.entity_view_display.node.utnews_news.default
+  - core.entity_view_display.node.utnews_news.teaser
+  - field.field.node.utnews_news.field_utnews_article_author
+  - field.field.node.utnews_news.field_utnews_body
+  - field.field.node.utnews_news.field_utnews_display_image
+  - field.field.node.utnews_news.field_utnews_external_link
+  - field.field.node.utnews_news.field_utnews_main_media
+  - field.field.node.utnews_news.field_utnews_news_categories
+  - field.field.node.utnews_news.field_utnews_news_tags
+  - field.field.node.utnews_news.field_utnews_publication_date
+  - field.field.node.utnews_news.field_utnews_metatags
+  - field.storage.node.field_utnews_body
+  - field.storage.node.field_utnews_display_image
+  - field.storage.node.field_utnews_external_link
+  - field.storage.node.field_utnews_main_media
+  - field.storage.node.field_utnews_news_categories
+  - field.storage.node.field_utnews_news_tags
+  - field.storage.node.field_utnews_publication_date
+  - field.storage.node.field_utnews_metatags
+  - field.storage.node.field_utnews_featured
+excluded:
+  - block.block.utnews_tags
+  - block.block.utnews_categories
+  - block.block.utnews_author
+  - utnews_view_listing_page.config

@@ -1,0 +1,9 @@
+utevent.configuration:
+  route_name: utevent.configuration
+  title: 'Display settings'
+  base_route: utevent.configuration
+utevent.permissions:
+  route_name: utevent.permissions
+  title: 'Permissions configuration'
+  base_route: utevent.configuration
+  weight: 100

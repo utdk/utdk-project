@@ -1,0 +1,111 @@
+.utexas-hero-carousel {
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    opacity: 0.9;
+    border-radius: 20px;
+    background: #1f262b;
+    outline: 3px solid #fff !important;
+
+    &:hover {
+      background-color: #fff;
+      outline: 3px solid #1f262b !important;
+
+      .carousel-control-prev-icon, .carousel-control-next-icon {
+        background-image: none;
+        background-color: #1f262b;
+      }
+    }
+
+    &:focus-visible {
+      outline: 6px solid #ff0 !important;
+      /* important used to override bootstrap.base.css button: focus:not(:focus-visible) */
+    }
+  }
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    mask-image: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M 20 100 L 90 30 Q 100 20 110 30 Q 120 40 110 50 L 75 85 L 140 85 Q 155 85 155 100 Q 155 115 140 115 L 75 115 L 110 150 Q 120 160 110 170 Q 100 180 90 170 Z"></path></svg>');
+    background-image: none;
+    background-color: currentColor;
+    content: "";
+    mask-repeat: no-repeat;
+    mask-position: -2px;
+    mask-size: cover;
+  }
+  .carousel-control-prev {
+    left: 40px;
+    padding-left: 7.5px;
+  }
+  .carousel-control-next {
+    right: 40px;
+    padding-right: 7.5px;
+
+    .carousel-control-next-icon {
+      transform: rotate(180deg);
+    }
+  }
+  .carousel-indicators {
+    position: relative;
+    width: 100%;
+    background: #ebeced;
+    padding: 0;
+    margin: 0;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    [data-bs-target] {
+      background-clip: inherit;
+      width: 17px;
+      outline: 3px solid #1f262b !important; /* important used to override bootstrap.base.css button: focus:not(:focus-visible) */
+      border-radius: 14px;
+      margin-right: 9px;
+      border-top: 7px;
+      height: 7px;
+      &.active {
+        transition: opacity 1.5s ease;
+      }
+      &:hover {
+        outline: 3px solid #fff !important; /* important used to override bootstrap.base.css button: focus:not(:focus-visible) */
+        background: #1f262b;
+        opacity: 1;
+      }
+      &:focus-visible {
+        outline: 5px solid blue !important;
+        /* important used to override bootstrap.base.css button: focus:not(:focus-visible) */
+      }
+    }
+  }
+  [data-autoplay] {
+    position: absolute;
+    left: 40px;
+    bottom: 11px;
+    background: #ebeced;
+    height: 20px;
+    width: 20px;
+    z-index: 3;
+  }
+  [data-autoplay="pause"] {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #1f262b;
+    border-right: 0;
+    border-radius: 3px;
+  }
+  [data-autoplay="cycle"] {
+    border-style: double;
+    border-width: 0 0 0 20px;
+    border-color: #1f262b;
+  }
+
+  container: carousel-container / inline-size;
+
+  @container carousel-container (max-width: 499px) {
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      top: 20%;
+    }
+  }
+}

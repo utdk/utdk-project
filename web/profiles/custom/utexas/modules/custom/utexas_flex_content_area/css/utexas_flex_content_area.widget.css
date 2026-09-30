@@ -1,0 +1,10 @@
+.field--type-utexas-flex-content-area table td details {
+  margin-right: 2rem;
+  float: left;
+  min-width: 81%;
+  width: min-content;
+}
+.field--type-utexas-flex-content-area table td input[value^="Remove"] {
+  margin-left: 16px;
+}
+

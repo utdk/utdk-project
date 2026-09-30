@@ -1,0 +1,5 @@
+services:
+  utevent.commands:
+    class: \Drupal\utevent\Commands\UteventPermissions
+    tags:
+      - { name: drush.command }

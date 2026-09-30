@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utevent_event_listing
+label: 'Event listing'
+revision: 1
+description: 'List events, filterable by tags or category, with multiple display options.'

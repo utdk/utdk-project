@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utnews_article_listing
+    - field.storage.block_content.field_utnews_footer
+  module:
+    - text
+id: block_content.utnews_article_listing.field_utnews_footer
+field_name: field_utnews_footer
+entity_type: block_content
+bundle: utnews_article_listing
+label: Footer
+description: 'Optionally display text below the list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

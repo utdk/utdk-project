@@ -1,0 +1,9 @@
+utprof.configuration:
+  route_name: utprof.configuration
+  title: 'Display settings'
+  base_route: utprof.configuration
+utprof.permissions:
+  route_name: utprof.permissions
+  title: 'Permissions configuration'
+  base_route: utprof.configuration
+  weight: 100

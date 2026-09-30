@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Promo Unit field.
+ *
+ * Available variables:
+ * - headline: The Promo Unit overall headline.
+ * - promo_unit_items: An array containing the Promo Unit individual item contents.
+ *   - image: The Promo Unit image.
+ *   - headline: The Promo Unit headline.
+ *   - copy: The Promo Unit copy field.
+ *   - link: The Promo Unit link field.
+ * - image_display: The Promo Unit image style (either Landscape, Portrait, Square, or none).
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="utexas-promo-unit-container">
+{% if headline %}
+  <h3 class="ut-headline ut-headline--underline">{{ headline }}</h3>
+{% endif %}
+  <div class="utexas-promo-unit-items">
+  {% for item in promo_unit_items %}
+    <div class="utexas-promo-unit">
+      {% if item.image %}
+        <div class="image-wrapper {{ image_display }}">
+          {{ item.image }}
+        </div>
+      {% endif %}
+      <div class="data-wrapper">
+        {% if item.headline %}
+          <h3 class="ut-headline">{{ item.headline }}</h3>
+        {% endif %}
+        {% if item.copy %}
+          {{ item.copy }}
+        {% endif %}
+        {% if item.link %}
+          {{ item.link }}
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>

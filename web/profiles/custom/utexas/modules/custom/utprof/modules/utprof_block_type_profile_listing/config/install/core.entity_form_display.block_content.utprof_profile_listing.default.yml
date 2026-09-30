@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utprof_profile_listing
+    - field.field.block_content.utprof_profile_listing.field_utprof_footer
+    - field.field.block_content.utprof_profile_listing.field_utprof_header
+    - field.field.block_content.utprof_profile_listing.field_utprof_list_method
+    - field.field.block_content.utprof_profile_listing.field_utprof_profile_groups
+    - field.field.block_content.utprof_profile_listing.field_utprof_profile_tags
+    - field.field.block_content.utprof_profile_listing.field_utprof_specific_profiles
+    - field.field.block_content.utprof_profile_listing.field_utprof_view_mode
+  module:
+    - text
+id: block_content.utprof_profile_listing.default
+targetEntityType: block_content
+bundle: utprof_profile_listing
+mode: default
+content:
+  field_utprof_footer:
+    weight: 7
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_utprof_header:
+    weight: 2
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_utprof_list_method:
+    type: options_buttons
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_utprof_profile_groups:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utprof_profile_tags:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utprof_specific_profiles:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_utprof_view_mode:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

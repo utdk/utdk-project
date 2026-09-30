@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_hero
+    - core.entity_view_mode.block_content.utexas_hero_3
+    - field.field.block_content.utexas_hero.field_block_hero
+  module:
+    - layout_builder
+    - utexas_hero
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: block_content.utexas_hero.utexas_hero_3
+targetEntityType: block_content
+bundle: utexas_hero
+mode: utexas_hero_3
+content:
+  field_block_hero:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_hero_3
+    region: content
+hidden: {  }

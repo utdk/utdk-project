@@ -1,0 +1,7 @@
+utevent_content_type_event.csv:
+  path: '/events/localist.csv'
+  defaults:
+    _controller: '\Drupal\utevent_content_type_event\Controller\LocalistCSV::endpoint'
+    _title: 'LocalistCSV'
+  requirements:
+    _permission: 'access content'

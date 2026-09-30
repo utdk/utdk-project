@@ -1,0 +1,58 @@
+.utexas-resource {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 0 20px;
+  background-color: var(--ut-limestone--t20);
+  border: 1px solid var(--ut-limestone--t40);
+
+  .image-wrapper {
+    flex: 1 1 25%;
+    min-width: 185px;
+    line-height: 0;
+    max-width: 900px;
+
+    img {
+      width: 100%;
+    }
+  }
+  .data-wrapper {
+    flex: 1 1 0;
+    padding: 20px;
+    min-width: 165px;
+  }
+  .link-list {
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 0;
+
+    li {
+      padding-bottom: 9px;
+    }
+  }
+}
+
+.stacked-display .utexas-resource > div {
+  flex: 0 0 100%;
+}
+
+/* Items Per Row Styles */
+.utexas-resource-items {
+  --ipr-grid-gap: 1vw;
+  --ipr-grid-min-min-size: 300px;
+  --ipr-grid-min-max-size: 300px;
+  display: grid;
+  grid-gap: var(--ipr-grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+}
+.utexas-onecol .utexas-resource-items {
+  --ipr-grid-min-max-size: 100%;
+}
+.utexas-twocol .utexas-resource-items {
+  --ipr-grid-min-max-size: calc(50% - var(--ipr-grid-gap));
+}
+.utexas-threecol .utexas-resource-items {
+  --ipr-grid-min-max-size: calc(33.333% - (2 * var(--ipr-grid-gap)));
+}
+.utexas-fourcol .utexas-resource-items {
+  --ipr-grid-min-max-size: calc(25% - (3 * var(--ipr-grid-gap)));
+}

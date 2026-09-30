@@ -1,0 +1,238 @@
+/* This file is an affordance for making content look like Speedway's styling
+within the `.ck-content` context. Unavoidably, these styles duplicate styling
+present in other CSS files in Speedway. They must be scoped within `.ck-content`
+so that they do display in CKEditor but don't affect the look and feel of content
+outside the editing frame. The choice to duplicate styling here was a calculated one,
+considered to be a less bad alternative to using a build process to generate a separate
+CSS file with the .ck-content nesting. See https: //github.austin.utexas.edu/eis1-wcs/speedway/issues/30
+
+IMPORTANT: when styling for tables, details/summary, or buttons is updated in Speedway's CSS, those changes
+need to be replayed in this file.
+*/
+
+.ck.ck-content {
+  /* CKEditor italicizes blockquotes, which is inconsistent with the theme design, so we revert it. */
+  blockquote,
+  address {
+    font-style: normal;
+  }
+
+  dd {
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+  }
+
+  kbd {
+    padding: 0.1875rem 0.375rem;
+    font-size: 0.875em;
+    color: var(--ut-white);
+    background-color: var(--ut-charcoal);
+    border-radius: 0.25rem;
+  }
+
+  mark {
+    padding: 0.1875em;
+    background-color: var(--ut-lightyellow);
+  }
+
+  hr {
+    height: 1px;
+  }
+
+  /* Override CKEditor-specific selectors for tables */
+  .table {
+    display: block;
+    margin: 0;
+    table {
+      margin: 0;
+      width: auto;
+
+      thead {
+        background: var(--ut-charcoal--t20);
+      }
+      th,
+      td {
+        padding: 0;
+        height: auto;
+        border: dotted 1px var(--ut-shade--t60);
+      }
+    }
+    table,
+    table tr,
+    table[border] th,
+    table[border] td {
+      border: dotted 1px var(--ut-shade--t60);
+    }
+    table[border="1"] th,
+    table[border="1"] td,
+    table.border-1 th,
+    table.border-1 td {
+      border: solid 1px var(--ut-limestone--t60);
+    }
+    table[border="2"] th,
+    table[border="2"] td,
+    table.border-2 th,
+    table.border-2 td {
+      border: solid 2px var(--ut-limestone--t60);
+    }
+    table.tablesaw th,
+    table.tablesaw td,
+    table:has(thead) td,
+    table:has(thead) th {
+      padding: .5em .7em;
+      height: auto;
+      border: dotted 1px var(--ut-shade--t60);
+    }
+    table.tablesaw,
+    table:has(thead) {
+      width: 100%;
+    }
+  }
+  figcaption.ck-editor__editable {
+    font-size: 0.875rem;
+    background-color: unset;
+  }
+   .ut-btn:not(.button--primary),
+   .ut-btn--small,
+   .ut-btn--large,
+   .ut-btn--disabled,
+   .ut-btn--secondary,
+   button:not(.trigger, .ui-button, .ck-button, .link-edit-summary, .navbar-toggler, .tablesaw-sortable-btn, [data-bs-target]) {
+     background-color: var(--ut-burntorange);
+     border: 2px solid var(--ut-burntorange);
+     border-radius: 4px;
+     display: inline-block;
+     font-weight: 600;
+     font-size: 1rem;
+     margin-bottom: .55rem;
+     padding: .5rem 1rem;
+     text-decoration: none !important;
+     transition: background-color, color, border-color, .33s ease-out !important;
+
+     &:hover,
+     &:focus-visible {
+       border: 2px solid var(--ut-burntorange--s20);
+       background-color: var(--ut-burntorange--s20);
+       color: var(--ut-white);
+       cursor: pointer;
+       text-decoration: none;
+     }
+   }
+
+   .ut-btn,
+   .ut-btn--small,
+   .ut-btn--large,
+   button:not(.trigger, .ui-button, .ck-button, .link-edit-summary, .navbar-toggler, .tablesaw-sortable-btn, [data-bs-target]) {
+     color: var(--ut-white);
+
+     &:link,
+     &:visited {
+       color: var(--ut-white);
+     }
+
+     &:active {
+       background-color: var(--ut-burntorange--s10);
+     }
+   }
+
+   .ut-btn--small {
+     font-size: 0.825rem;
+     line-height: 1.5;
+     padding: .25rem .75rem;
+     text-transform: uppercase;
+   }
+
+   .ut-btn--large {
+     padding: .75rem 1.25rem;
+     text-transform: uppercase;
+   }
+
+   .ut-btn--secondary,
+   .ut-btn--secondary.ut-btn--small,
+   .ut-btn--secondary.ut-btn--large {
+     background-color: var(--ut-white);
+     border-color: var(--ut-burntorange);
+     color: var(--ut-burntorange);
+
+     &:link,
+     &:visited {
+       color: var(--ut-burntorange);
+     }
+
+     &:hover,
+     &:focus-visible {
+       border: 2px solid var(--ut-burntorange--s20);
+       background-color: var(--ut-burntorange--s20);
+       color: var(--ut-white);
+     }
+
+   }
+
+   .ut-btn--disabled {
+     pointer-events: none;
+     background-color: var(--ut-shade--t40);
+     border-color: var(--ut-shade--t40);
+     opacity: var(--bs-btn-disabled-opacity);
+     color: var(--ut-burntorange);
+
+     &:link,
+     &:visited {
+       color: var(--ut-shade);
+     }
+   }
+
+   .corner--rounded {
+     border-radius: 4px !important;
+   }
+
+   .corner--square {
+     border-radius: 0 !important;
+   }
+
+   .corner--pill {
+     border-radius: 2rem !important;
+   }
+
+   /* Theme resets for Diff displays (#3150) */
+   .dropbutton-widget button[type="button"] {
+     color: inherit;
+     border: 0;
+     background-color: unset;
+
+     &:hover,
+     &:focus-visible {
+       color: inherit;
+       border: 0;
+       background-color: unset;
+     }
+   }
+
+  /* Replicate details/summary styling within .ck-content so that this styling
+  doesn't affect node editing vertical tabs */
+  details {
+    margin-bottom: 0.5rem;
+    background: var(--ut-white);
+    border: 1px solid var(--ut-limestone--t40);
+  }
+  details summary {
+    padding: 0.375rem 0.75em;
+    background: var(--ut-limestone--t40);
+    color: var(--ut-burntorange--s20);
+    font-size: 1.125rem;
+    font-weight: 600;
+    list-style: revert-layer;
+  }
+  details[open] {
+    padding: 0 1rem 0.5rem;
+    border: 1px solid var(--ut-burntorange--s20);
+  }
+  details[open] summary,
+  details summary:hover {
+    background: var(--ut-burntorange--s20);
+    text-decoration: none;
+    color: var(--ut-white);
+  }
+  details[open] summary {
+    margin: 0 -1rem 0.75rem;
+  }
+}

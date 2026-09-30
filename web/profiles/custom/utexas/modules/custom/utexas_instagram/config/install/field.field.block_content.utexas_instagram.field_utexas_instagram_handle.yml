@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_instagram
+    - field.storage.block_content.field_utexas_instagram_handle
+id: block_content.utexas_instagram.field_utexas_instagram_handle
+field_name: field_utexas_instagram_handle
+entity_type: block_content
+bundle: utexas_instagram
+label: 'Link headline text to Instagram account'
+description: 'Check this box to make the headline text a hyperlink to <code>https://instagram.com/[YOUR-INSTAGRAM-ACCOUNT]</code>'
+required: false
+translatable: false
+default_value: true
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

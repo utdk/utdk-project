@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utnews_body
+    - node.type.utnews_news
+  module:
+    - text
+id: node.utnews_news.field_utnews_body
+field_name: field_utnews_body
+entity_type: node
+bundle: utnews_news
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: true
+  allowed_formats: {  }
+field_type: text_with_summary

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_promo_list
+    - core.entity_view_mode.block_content.utexas_promo_list_4
+    - field.field.block_content.utexas_promo_list.field_block_pl
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: block_content.utexas_promo_list.utexas_promo_list_4
+targetEntityType: block_content
+bundle: utexas_promo_list
+mode: utexas_promo_list_4
+content:
+  field_block_pl:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_promo_list_4
+    region: content
+hidden: {  }

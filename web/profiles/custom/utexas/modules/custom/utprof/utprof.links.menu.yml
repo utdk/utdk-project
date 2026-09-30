@@ -1,0 +1,5 @@
+utprof.configuration:
+  title: 'Profile feature'
+  description: 'Configuration for the generalized "Profile" content type and supporting components'
+  route_name: utprof.configuration
+  parent: system.admin_config_content

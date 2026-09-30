@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Quick Links module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Issue #1030: Support custom link options in Quick Links links.
+ */
+function utexas_quick_links_update_8101() {
+  // Update 'url' value keys to 'uri' in the blob field. MySQL auto-converts it
+  // back to blob on execute ("save").
+  $database_connection = Database::getConnection();
+  $query = $database_connection->query(
+    "SELECT value FROM {key_value} WHERE name=:name",
+    [
+      ':name' => "block_content.field_schema_data.field_block_ql",
+    ]
+  );
+  $result = $query->fetchAssoc();
+  $fh_tables = array_keys(unserialize($result['value']));
+
+  foreach ($fh_tables as $table_name) {
+    $field_name = 'field_block_ql_links';
+    $old_value = '"url";';
+    $new_value = '"uri";';
+    $database_connection->update($table_name)
+      // ->condition($field_name, $old_value, 'LIKE')
+      ->expression($field_name, 'replace(CONVERT(' . $field_name . ' USING utf8), :old, :new)', [
+        ':old' => $old_value,
+        ':new' => $new_value,
+      ])
+      ->execute();
+  }
+}

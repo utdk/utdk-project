@@ -1,0 +1,209 @@
+<?php
+
+/**
+ * @file
+ * Event listing page installation file.
+ */
+
+/**
+ * Add time sensitive cache plugin.
+ */
+function utevent_view_listing_page_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Add ut-copy class to body field wrapper in listing page display.
+ */
+function utevent_view_listing_page_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Display past events.
+ */
+function utevent_view_listing_page_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+
+  $config = \Drupal::service('config.factory')->getEditable('utevent_view_listing_page.config');
+  $config->set('display_past_events', 1);
+  $config->save();
+}
+
+/**
+ * Enable field template for event location to make it a link.
+ */
+function utevent_view_listing_page_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Update styles to include icons.
+ */
+function utevent_view_listing_page_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Enable FullCalendar View module for calendar display.
+ */
+function utevent_view_listing_page_update_8106() {
+  if (\Drupal::moduleHandler()->moduleExists('fullcalendar_view') === FALSE) {
+    \Drupal::service('module_installer')->install(['fullcalendar_view']);
+  }
+}
+
+/**
+ * Add option to display calendar.
+ */
+function utevent_view_listing_page_update_8108() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+  // Disable calendar for existing sites.
+  $config = \Drupal::service('config.factory')->getEditable('utevent_view_listing_page.config');
+  $config->set('display_calendar', 0);
+  $config->save();
+}
+
+/**
+ * Event listing page doesn't include periods for "a.m." and "p.m." (#262).
+ */
+function utevent_view_listing_page_update_8109() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Add filters for upcoming event listing page.
+ */
+function utevent_view_listing_page_update_8110() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Add dropdown filter for utevent_location on the Calendar view.(#324)
+ */
+function utevent_view_listing_page_update_8111() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Add mechanism for invalidating page cache on upcoming/past events (#341).
+ */
+function utevent_view_listing_page_update_8112() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Calendar view changes to full year list on mobile screens (#355).
+ */
+function utevent_view_listing_page_update_8113() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Relocate event filters adjacent to events buttons (634b) (Issue #365).
+ */
+function utevent_view_listing_page_update_8114() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Set date range separator to "to" (Issue #369).
+ */
+function utevent_view_listing_page_update_8115() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Distinguish no results (#374).
+ */
+function utevent_view_listing_page_update_8116() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Events time for "midnight" or "noon" show incorrect times (#383).
+ */
+function utevent_view_listing_page_update_8117() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Install utevent_export view.
+ */
+function utevent_view_listing_page_update_8118() {
+  if (\Drupal::moduleHandler()->moduleExists('rest') === FALSE) {
+    \Drupal::service('module_installer')->install(['rest']);
+  }
+  if (\Drupal::moduleHandler()->moduleExists('serialization') === FALSE) {
+    \Drupal::service('module_installer')->install(['serialization']);
+  }
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Update event export separator (#418).
+ */
+function utevent_view_listing_page_update_8119() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Update data types for AP date fields in View (#424).
+ */
+function utevent_view_listing_page_update_8120() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Event Listings' "Location" and "Date and Time" icons text labels (Issue 423).
+ */
+function utevent_view_listing_page_update_8121() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}
+
+/**
+ * Include main image in event export (#420).
+ */
+function utevent_view_listing_page_update_8122() {
+  \Drupal::service('features.manager')->import([
+    'utevent_view_listing_page',
+  ], TRUE);
+}

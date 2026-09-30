@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utprof_profile_listing
+    - field.storage.block_content.field_utprof_profile_groups
+    - taxonomy.vocabulary.utprof_groups
+id: block_content.utprof_profile_listing.field_utprof_profile_groups
+field_name: field_utprof_profile_groups
+entity_type: block_content
+bundle: utprof_profile_listing
+label: 'Limit to profiles with the following group(s):'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      utprof_groups: utprof_groups
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

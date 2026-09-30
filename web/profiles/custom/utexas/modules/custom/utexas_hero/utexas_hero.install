@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Hero module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Issue #1035: Support custom link options in Hero CTA.
+ */
+function utexas_hero_update_8101() {
+  $link_options = [
+    'description' => 'Serialized array of options for the link.',
+    'type' => 'blob',
+    'size' => 'big',
+    'serialize' => TRUE,
+  ];
+  $database = Database::getConnection();
+  $query = $database->query(
+    "SELECT value FROM {key_value} WHERE name=:name",
+    [
+      ':name' => "block_content.field_schema_data.field_block_hero",
+    ]
+  );
+  $result = $query->fetchAssoc();
+  $tables = array_keys(unserialize($result['value']));
+  if (!empty($tables)) {
+    $schema = $database->schema();
+    foreach ($tables as $table_name) {
+      $schema->addField($table_name, 'field_block_hero_link_options', $link_options);
+    }
+  }
+}

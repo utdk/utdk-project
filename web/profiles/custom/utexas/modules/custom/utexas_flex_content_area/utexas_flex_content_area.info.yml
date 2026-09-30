@@ -1,0 +1,15 @@
+name: 'UTexas Flex Content Area'
+type: module
+description: 'Defines schema & configuration for Flex Content Area widget.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - block_content
+  - field
+  - layout_builder
+  - media_library
+  - media_library_form_element
+  - responsive_image
+  - utexas_flex_content_area
+  - utexas_form_elements
+  - utexas_image_styles

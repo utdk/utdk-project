@@ -1,0 +1,42 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+'utexas-instagram-feed',
+]
+%}
+<div{{attributes.addClass(classes)}}>
+  <div class="utexas-instagram-feed__header container">
+    <div class="row">
+      <div class="col">
+        {{ title_prefix }}
+        {% if label %}
+          <h2{{title_attributes}}>{{ label }}</h2>
+        {% endif %}
+        {{ title_suffix }}
+        {{ content.field_utexas_instagram_headline }}
+      </div>
+      <div class="col-md-3">
+        <div class="utexas-instagram-feed__controls" id="controls">
+          <span class="utexas-instagram-feed__controls-prev prev" aria-label="previous post" tabindex="0" role="button">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="xMidYMid meet" width="430.000000pt" height="569pt" viewbox="0 0 550 662">
+              <circle class="prev-1" cx="256" cy="256" r="256" stroke="#bf5700" fill="white" stroke-width="50"></circle>
+              <path class="prev-2" d="M199.955,168.598l32.263-32.107L352.154,257L232.218,377.51l-32.263-32.107L287.937,257L199.955,168.598z"></path>
+            </svg>
+          </span>
+          <span class="utexas-instagram-feed__controls-next next js-enabled" aria-label="next post" tabindex="0" role="button">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" preserveaspectratio="xMidYMid meet" width="430.000000pt" height="569pt" viewbox="0 0 550 662">
+              <circle class="next-1" cx="256" cy="256" r="256" stroke="#bf5700" fill="white" stroke-width="50"></circle>
+              <path class="next-2" d="M199.955,168.598l32.263-32.107L352.154,257L232.218,377.51l-32.263-32.107L287.937,257L199.955,168.598z"></path>
+
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="utexas-instagram-feed__content container">
+    {{ instagram_posts }}
+  </div>
+</div>

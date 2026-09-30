@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Utprof overrides module installation file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function utprof_overrides_install() {
+  module_set_weight('utprof_overrides', 10);
+}

@@ -1,0 +1,19 @@
+buttons_size: 32
+additional_html: "<a class=\"a2a_button_facebook\"></a>\r\n<a class=\"a2a_button_x\"></a>\r\n<a class=\"a2a_button_reddit\"></a>\r\n<a class=\"a2a_button_pinterest\"></a>\r\n<a class=\"a2a_button_linkedin\"></a>\r\n<a class=\"a2a_button_email\"></a>\r\n"
+additional_css: ''
+additional_js: 'a2a_config.icon_color = "#bf5700";'
+universal_button: none
+custom_universal_button: ''
+universal_button_placement: before
+no_3p: false
+entities:
+  media: 0
+  node: 0
+  comment: 0
+  block_content: 0
+  file: 0
+  menu_link_content: 0
+  path_alias: 0
+  redirect: 0
+  taxonomy_term: 0
+  user: 0
