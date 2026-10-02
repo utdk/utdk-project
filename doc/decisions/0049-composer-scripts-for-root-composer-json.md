@@ -1,4 +1,4 @@
-# 3. Use ComposerScripts to Modify the Root composer.json
+# 49. Use ComposerScripts to Modify the Root composer.json
 
 Date: 2026-07-17
 

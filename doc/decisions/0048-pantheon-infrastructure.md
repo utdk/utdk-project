@@ -1,4 +1,4 @@
-# 4. Pantheon is the only officially supported hosting platform
+# 48. Pantheon is the only officially supported hosting platform
 
 Date: 2026-08-17
 
