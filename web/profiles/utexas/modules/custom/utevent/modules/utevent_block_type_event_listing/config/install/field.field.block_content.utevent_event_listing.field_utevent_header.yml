@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utevent_event_listing
+    - field.storage.block_content.field_utevent_header
+  module:
+    - text
+id: block_content.utevent_event_listing.field_utevent_header
+field_name: field_utevent_header
+entity_type: block_content
+bundle: utevent_event_listing
+label: Header
+description: 'Optionally display text above the list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

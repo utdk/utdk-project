@@ -1,0 +1,101 @@
+{#
+/**
+ * @file
+ * Template for Profile node "full" display.
+ *
+ * Available custom variables:
+ * - basic_media: a rendered responsive image from field_utprof_basic_media
+ * - directory_link: a UT button-styled link to the EID's directory page
+ * - building_information: array with building code and/or room number
+ *
+ * @see utprof_content_type_profile_preprocess_node()
+ *
+ */
+#}
+{%
+  set classes = [
+    view_mode ? view_mode|clean_class,
+    not node.isPublished() ? 'is-unpublished',
+    node.bundle|clean_class,
+    'clearfix',
+    'row',
+  ]
+%}
+{% set has_main_content = content.field_utprof_content|render|trim %}
+<article{{ attributes.addClass(classes) }}>
+  <div class="utprof__wrapper col">
+    {% if basic_media %}
+      <div class="utprof__img">
+        {{ basic_media }}
+      </div>
+    {% endif %}
+    <div class="utprof__designation-add-basic">
+      <div class="utprof__designation">
+        {{ content.field_utprof_designation }}
+      </div>
+      <div class="utprof__add-basic-info">
+        {{ content.field_utprof_add_basic_info }}
+      </div>
+    </div>
+    {% if has_main_content %}
+      <div class="utprof__content pt-4">
+        {{ content.field_utprof_content }}
+      </div>
+    {% endif %}
+  </div>
+
+
+  {% if has_contact_info %}
+    <div class="utprof__contact-wrapper col-lg-3">
+      <h2 class="utprof__contact-wrapper-title">Contact Information</h2>
+
+      {% if contact_form_link|render is not empty %}
+        <div class="utprof__contact-link">
+          {{ contact_form_link }}
+        </div>
+      {% endif %}
+
+      {% if content.field_utprof_email_address|render is not empty %}
+        <div class="utprof__email-address">
+          {{ content.field_utprof_email_address }}
+        </div>
+      {% endif %}
+
+      {% if content.field_utprof_website_link|render is not empty %}
+        <div class="utprof__web-link">
+          {{ content.field_utprof_website_link }}
+        </div>
+      {% endif %}
+
+      {% if phone_link|render is not empty %}
+        <h3 class="ut-h5 field__label">Phone</h3>
+        <div class="utprof__ph-number">
+          {{ phone_link }}
+        </div>
+      {% endif %}
+
+      {% if content.field_utprof_fax_number|render is not empty %}
+        <div class="utprof__fax-number">
+          {{ content.field_utprof_fax_number }}
+        </div>
+      {% endif %}
+
+      {% if building_information.building_code %}
+        <div class="utprof__wrapper-code-rm">
+          <h3 class="ut-h5 field__label">Campus location</h3>
+          <div class="utprof__bldg-code">
+            {{ building_information.building_code }}
+            {{ building_information.room_number }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if content.field_utprof_add_contact_info|render is not empty %}
+        <div class="utprof__additional-contact-info">
+          {{ content.field_utprof_add_contact_info }}
+        </div>
+      {% endif %}
+
+    </div>
+  {% endif %}
+</article>

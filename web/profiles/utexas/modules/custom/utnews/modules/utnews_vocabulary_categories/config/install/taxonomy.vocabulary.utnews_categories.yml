@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - utnews_vocabulary_categories
+name: 'News categories'
+vid: utnews_categories
+description: 'Use News categories to categorize News articles.'
+weight: 0

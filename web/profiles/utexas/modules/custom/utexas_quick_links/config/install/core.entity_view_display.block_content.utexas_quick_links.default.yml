@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_quick_links
+    - field.field.block_content.utexas_quick_links.field_block_ql
+  module:
+    - utexas_quick_links
+id: block_content.utexas_quick_links.default
+targetEntityType: block_content
+bundle: utexas_quick_links
+mode: default
+content:
+  field_block_ql:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_quick_links
+    region: content
+hidden: {  }

@@ -1,0 +1,42 @@
+/**
+ * @file
+ * Target default Drupal class markup for Views pagers.
+ * This is based on core/themes/seven/css/components/pager.css.
+ */
+.pager__items {
+  margin: 0.25em 0 0.25em 1.5em;
+  padding: 0;
+  text-align: center;
+}
+
+.pager__item {
+  display: inline-block;
+  font-size: 0.875rem;
+  height: 1.5rem;
+  margin-left: 0.3125rem;
+
+  a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: var(--ut-shade--s40);
+    border-radius: 3px;
+    transition: background-color 300ms ease-out;
+    display: block;
+
+    &:hover,
+    &:focus {
+      background-color: var(--ut-shade--t40);
+      cursor: pointer;
+    }
+  }
+}
+
+.pager__item.is-active a {
+  background: var(--ut-burntorange);
+  font-weight: bold;
+  color: var(--ut-white);
+
+  &:hover {
+    background-color: var(--ut-burntorange--s20);
+  }
+}

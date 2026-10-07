@@ -1,0 +1,2 @@
+parameters:
+  utexas_flex_content_area.skip_procedural_hook_scan: true

@@ -1,0 +1,4 @@
+bundle: utexas
+required: true
+excluded:
+  - utexas_block_social_links.utexas_social_links_data.instagram

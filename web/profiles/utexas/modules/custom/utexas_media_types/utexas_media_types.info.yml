@@ -1,0 +1,16 @@
+name: 'UTexas Media Types'
+type: module
+description: 'Provides Media Types for use in the UTDK distribution.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:layout_builder'
+  - 'drupal:layout_discovery'
+  - 'drupal:media'
+  - 'drupal:path'
+  - 'drupal:user'
+  - 'utexas_image_styles:utexas_image_styles'
+core_incompatible: false

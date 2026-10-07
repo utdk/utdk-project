@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_image
+label: Image
+description: 'An image media type.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_utexas_media_image
+field_map: {  }

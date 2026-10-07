@@ -1,0 +1,2 @@
+parameters:
+  utnews_block_type_news_listing.skip_procedural_hook_scan: true

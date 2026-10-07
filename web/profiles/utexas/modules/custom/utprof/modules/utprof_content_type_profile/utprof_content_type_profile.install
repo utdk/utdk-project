@@ -1,0 +1,329 @@
+<?php
+
+/**
+ * @file
+ * Profile content type installation file.
+ */
+
+use Drupal\Core\Config\FileStorage;
+use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\utprof\Permissions;
+use Drupal\utprof_content_type_profile\Hook\Hooks;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function utprof_content_type_profile_install() {
+  // Add default Pathauto setting for content type.
+  _utprof_add_pathauto_pattern();
+  _utprof_add_metatags();
+
+  // Add standard permissions to "utexas_site_manager" & "utexas_content_editor"
+  // if those roles exist.
+  Permissions::assignPermissions('editor', 'utexas_content_editor');
+  Permissions::assignPermissions('manager', 'utexas_site_manager');
+
+  // Add utprof_profile to workflow config (#361).
+  Hooks::updateWorkflow();
+
+  // Set bootstrap_horizontal_tabs to Bootstrap 4 (#392).
+  $bootstrap_horizontal_tabs = \Drupal::configFactory()->getEditable('bootstrap_horizontal_tabs.settings');
+  $bootstrap_horizontal_tabs->set("version", '5');
+  $bootstrap_horizontal_tabs->save();
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function utprof_content_type_profile_update_dependencies() {
+  $dependencies['utprof_content_type_profile'][8114] = [
+    'utexas' => 8150,
+  ];
+  return $dependencies;
+}
+
+/**
+ * Check if a pathauto pattern has a condition for `utprof_profile`.
+ */
+function _utprof_no_existing_pathauto_pattern() {
+  $no_profile_pathauto_defined = TRUE;
+  // Load all pattern configuration entities.
+  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+    if ($pattern_config->get('type') == 'canonical_entities:node') {
+      $selection_criteria = $pattern_config->get('selection_criteria');
+      foreach ($selection_criteria as $uuid => $condition) {
+        if ($condition['id'] == 'node_type') {
+          $bundles = array_keys($selection_criteria[$uuid]['bundles']);
+          if (in_array('utprof_profile', $bundles)) {
+            $no_profile_pathauto_defined = FALSE;
+          }
+          break;
+        }
+      }
+    }
+  }
+  return $no_profile_pathauto_defined;
+}
+
+/**
+ * Helper function to create default metatag configuration.
+ *
+ * @return void
+ *   returns NULL
+ */
+function _utprof_add_metatags() {
+  $modules_to_install = [
+    'metatag_twitter_cards',
+    'metatag_open_graph',
+  ];
+  foreach ($modules_to_install as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+      \Drupal::service('module_installer')->install([$module]);
+    }
+  }
+  // Import default configuration that can subsequently be managed by sites.
+  // For SaaS-type sites to inherit changes to this configuration, an update
+  // hook needs to be added that will programmatically load the configuration
+  // entity and update it.
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('utprof_content_type_profile')->getPath();
+  $config = 'metatag.metatag_defaults.node__utprof_profile';
+  $config_path = $module_path . '/config/default/' . $config . '.yml';
+  $data = Yaml::parse(file_get_contents($config_path));
+  \Drupal::configFactory()->getEditable($config)->setData($data)->save();
+}
+
+/**
+ * Save a pathauto pattern configuration entity.
+ */
+function _utprof_add_pathauto_pattern() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if ($moduleHandler->moduleExists('pathauto')) {
+    if (_utprof_no_existing_pathauto_pattern()) {
+      $pattern = PathautoPattern::create([
+        'id' => 'utprof_profile',
+        'label' => 'Pathauto : Profile content type',
+        'type' => 'canonical_entities:node',
+        'pattern' => '/profiles/[node:title]',
+        'weight' => _utprof_set_pattern_weight_before_generic(),
+      ]);
+      $pattern->addSelectionCondition(
+        [
+          'id' => 'entity_bundle:node',
+          'bundles' => [
+            'utprof_profile' => 'utprof_profile',
+          ],
+          'negate' => FALSE,
+          'context_mapping' => [
+            'node' => 'node',
+          ],
+        ]
+      );
+      $pattern->save();
+    }
+  }
+}
+
+/**
+ * Provide weight that takes presedence over generic pattern.
+ *
+ * @return string
+ *   The weight of the custom pathauto pattern.
+ */
+function _utprof_set_pattern_weight_before_generic() {
+  // Default to -10 in case there is a generic pattern.
+  $weight = -10;
+  // If generic pattern present, place it 1 level above.
+  if ($generic = PathautoPattern::load('pathauto_node')) {
+    $weight = (int) $generic->get('weight') - 1;
+  }
+  return (string) $weight;
+}
+
+/**
+ * Enable the field_group module & update form config.
+ */
+function utprof_content_type_profile_update_8101() {
+  /** @var \Drupal\Core\Extension\ExtensionPathResolver $extension_path_resolver */
+  $extension_path_resolver = \Drupal::service('extension.path.resolver');
+
+  // Clear the cache so that the utexas_link_widget will be registered.
+  drupal_flush_all_caches();
+
+  // Ensure optional view modes provided by the UTexas profile are installed.
+  $required_view_modes = [
+    'core.entity_view_mode.node.utexas_name_only',
+    'core.entity_view_mode.node.utexas_prominent',
+    'core.entity_view_mode.node.utexas_basic',
+  ];
+  foreach ($required_view_modes as $view_mode) {
+    $existing_config = \Drupal::config($view_mode)->get('id');
+    if (is_null($existing_config)) {
+      $config_path = $extension_path_resolver->getPath('profile', 'utexas') . '/config/optional';
+      $config_source = new FileStorage($config_path);
+      \Drupal::service('config.installer')->installOptionalConfig($config_source);
+      break;
+    }
+  }
+
+  \Drupal::service('module_installer')->install(['field_group']);
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Add pathauto setting for Profile content type.
+ */
+function utprof_content_type_profile_update_8102() {
+  _utprof_add_pathauto_pattern();
+}
+
+/**
+ * Change label to 'Internal Profile tags' & change widget.
+ */
+function utprof_content_type_profile_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Revert Profile content type feature to standardize fields.
+ */
+function utprof_content_type_profile_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Allow link options in Contact form and Website links.
+ */
+function utprof_content_type_profile_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Update field label & description of UT EID.
+ *
+ * Update description on Profile Groups field (#124).
+ */
+function utprof_content_type_profile_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Add teaser view display configuration.
+ */
+function utprof_content_type_profile_update_8107() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Have profiles pattern above fallback content pattern.
+ */
+function utprof_content_type_profile_update_8108() {
+  $pattern = PathautoPattern::load('utprof_profile');
+  $pattern->set('weight', _utprof_set_pattern_weight_before_generic())->save();
+}
+
+/**
+ * Make metatag values overrideable on a per-node basis #134.
+ */
+function utprof_content_type_profile_update_8109() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Import display_email field #206.
+ */
+function utprof_content_type_profile_update_8110() {
+  \Drupal::service('features.manager')->import([
+    'utprof_content_type_profile',
+  ], TRUE);
+}
+
+/**
+ * Load all nodes and set value to FALSE for new field #206.
+ */
+function utprof_content_type_profile_update_8111() {
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'utprof_profile']);
+  foreach ($nodes as $node) {
+    $node->set('field_utprof_display_email', FALSE);
+    $node->save();
+  }
+}
+
+/**
+ * Add default metatags if none exist (#77).
+ */
+function utprof_content_type_profile_update_8112() {
+  $key = 'metatag.metatag_defaults.node__utprof_profile';
+  $config = \Drupal::config($key)->get('id');
+  if (!$config) {
+    _utprof_add_metatags();
+  }
+}
+
+/**
+ * Issue #324: Fatal error with Ctools update to 4.0.1 or 3.10.
+ *
+ * Copy of pathauto update hook 8107.
+ *
+ * @see https://www.drupal.org/project/pathauto/issues/3222776
+ */
+function utprof_content_type_profile_update_8113() {
+  // Load all pattern configuration entities.
+  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+
+    // Loop patterns and swap the node_type plugin by the entity_bundle:node
+    // plugin.
+    if ($pattern_config->get('type') === 'canonical_entities:node') {
+      $selection_criteria = $pattern_config->get('selection_criteria');
+      foreach ($selection_criteria as $uuid => $condition) {
+        if ($condition['id'] === 'node_type') {
+          $pattern_config->set("selection_criteria.$uuid.id", 'entity_bundle:node');
+          $pattern_config->save();
+          break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Add utprof_profile to workflow config (#361).
+ */
+function utprof_content_type_profile_update_8114() {
+  Hooks::updateWorkflow();
+}
+
+/**
+ * Set bootstrap_horizontal_tabs to Bootstrap 4 (#392).
+ */
+function utprof_content_type_profile_update_8115() {
+  $bootstrap_horizontal_tabs = \Drupal::configFactory()->getEditable('bootstrap_horizontal_tabs.settings');
+  $bootstrap_horizontal_tabs->set("version", '4');
+  $bootstrap_horizontal_tabs->save();
+}
+
+/**
+ * Set bootstrap_horizontal_tabs to Bootstrap 5 (utdk_profile#2572).
+ */
+function utprof_content_type_profile_update_8116() {
+  $bootstrap_horizontal_tabs = \Drupal::configFactory()->getEditable('bootstrap_horizontal_tabs.settings');
+  $bootstrap_horizontal_tabs->set("version", '5');
+  $bootstrap_horizontal_tabs->save();
+}

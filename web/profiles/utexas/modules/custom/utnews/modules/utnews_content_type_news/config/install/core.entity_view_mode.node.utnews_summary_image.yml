@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.utnews_summary_image
+label: 'Summary, Image'
+description: ''
+targetEntityType: node
+cache: true

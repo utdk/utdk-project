@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_hero_carousel
+label: 'Hero Carousel'
+revision: 1
+description: 'Display a rotating series of images, each with optional headline & call to action.'

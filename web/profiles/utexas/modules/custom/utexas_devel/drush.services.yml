@@ -1,0 +1,5 @@
+services:
+  utexas_devel.commands:
+    class: \Drupal\utexas_devel\Commands\UtexasDevel
+    tags:
+      - { name: drush.command }

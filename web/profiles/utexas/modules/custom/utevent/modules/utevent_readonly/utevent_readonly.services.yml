@@ -1,0 +1,13 @@
+parameters:
+  utevent_readonly.skip_procedural_hook_scan: true
+
+services:
+  utevent_readonly.route_subscriber:
+    class: Drupal\utevent_readonly\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  access_check.utevent:
+    class: Drupal\utevent_readonly\Access\EventReadOnlyAccess
+    arguments: ["@current_route_match"]
+    tags:
+      - { name: access_check, applies_to: _utevent }

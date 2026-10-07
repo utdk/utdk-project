@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - utexas_quick_links
+id: block_content.field_block_ql
+field_name: field_block_ql
+entity_type: block_content
+type: utexas_quick_links
+settings: {  }
+module: utexas_quick_links
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

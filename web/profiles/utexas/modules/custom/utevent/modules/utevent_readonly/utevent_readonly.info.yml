@@ -1,0 +1,7 @@
+name: Event Read Only
+type: module
+description: DO NOT UNINSTALL THIS MODULE UNLESS YOU UNDERSTAND THE CONSEQUENCES. THIS MODULE IS ENABLED BY DEFAULT TO PREVENT UNINTENDED CHANGES TO CONFIGURATION IN THIS FEATURE. IF YOU WISH TO MODIFY THIS FEATURE, START BY READING https://utexas.sharepoint.com/sites/UTDK/SitePages/Developers/Developers--What-configuration-can-and-cannot-be-modified.aspx.
+core_version_requirement: ^10 || ^11
+package: UT Drupal Kit Event Feature
+dependencies:
+  - utevent:utevent

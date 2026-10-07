@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Hero field with no Style selection.
+ *
+ * Available variables:
+ * - media: An image or video -- ensure that you handle display for either.
+ * - heading: a string of text meant to be prominently displayed.
+ * - subheading: a string of text, subsidiary to the heading.
+ * - caption: descriptive string for the media.
+ * - credit: attribution string for the media.
+ * - cta_uri: a URI. May be use to wrap other elements.
+ * - cta_title: a string of text meant to be displayed as a button.
+ *
+ */
+#}
+<div class="ut-hero">
+  {% if media %}
+    {{ media }}
+  {% endif %}
+  <p class="hero--caption-credit-wrapper">
+    {% if caption %}
+      <span class="hero-caption">{{ caption }}</span>
+    {% endif %}
+    {% if credit %}
+      <span class="credit">{{ credit }}</span>
+    {% endif %}
+  </p>
+</div>

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_hero
+    - field.field.block_content.utexas_hero.field_block_hero
+  module:
+    - utexas_hero
+id: block_content.utexas_hero.default
+targetEntityType: block_content
+bundle: utexas_hero
+mode: default
+content:
+  field_block_hero:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_hero
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

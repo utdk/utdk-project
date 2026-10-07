@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_hero_carousel
+    - field.storage.block_content.field_hero_carousel_autoplay
+id: block_content.utexas_hero_carousel.field_hero_carousel_autoplay
+field_name: field_hero_carousel_autoplay
+entity_type: block_content
+bundle: utexas_hero_carousel
+label: Autoplay
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

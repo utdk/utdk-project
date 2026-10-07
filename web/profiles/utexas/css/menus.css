@@ -1,0 +1,17 @@
+/*
+.main-menu__list-item targets Forty Acres
+.menu--main .menu-item a.access-protected targets generic Classy-classes
+*/
+#block-accessible-main-menu,
+[class*='block-system-menu-'],
+.block-menu-block {
+    > ul li a.access-protected {
+    background-color: #fff4f4 !important;
+    border: 1px dashed #dddddd !important;
+
+    &:hover {
+      color: #9d4700;
+      text-decoration: underline;
+    }
+  }
+}

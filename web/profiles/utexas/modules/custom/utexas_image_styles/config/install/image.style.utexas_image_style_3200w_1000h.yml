@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_3200w_1000h
+label: '3200w x 1000h (3.2:1)'
+effects:
+  0255779a-b2d6-407b-ad07-0262080a8131:
+    uuid: 0255779a-b2d6-407b-ad07-0262080a8131
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 3200
+      height: 1000
+      anchor: center-center

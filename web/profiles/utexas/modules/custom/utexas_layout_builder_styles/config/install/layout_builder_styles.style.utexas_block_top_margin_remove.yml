@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_block_top_margin_remove
+label: 'Remove top margin'
+classes: utexas-block-top-margin-remove
+type: component
+group: utexas_block_margins_padding
+weight: 10
+block_restrictions: {  }

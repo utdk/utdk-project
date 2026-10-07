@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_900w_1200h
+label: '900w x 1200h (1:1.33)'
+effects:
+  f03ecd09-c69e-4f4b-b491-65e1e1772a6b:
+    uuid: f03ecd09-c69e-4f4b-b491-65e1e1772a6b
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 900
+      height: 1200
+      anchor: center-center

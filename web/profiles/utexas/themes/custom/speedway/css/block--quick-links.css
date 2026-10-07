@@ -1,0 +1,57 @@
+/* Styling for Quick Link columns. */
+/* Items Per Row Styles */
+.utexas-quick-links {
+  ul.link-list {
+    --ipr-grid-gap: 1vw;
+    --ipr-grid-min-min-size: 200px;
+    --ipr-grid-min-max-size: 275px;
+    display: grid;
+    grid-gap: var(--ipr-grid-gap);
+    grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+
+    li {
+      box-sizing: border-box;
+      min-width: var(--ipr-grid-min-min-size);
+      padding-right: 1rem;
+    }
+  }
+}
+
+/* Use container query to narrow width so QLs do not break layout */
+.utexas-quick-links {
+  container-type: inline-size;
+  container-name: container-ql;
+}
+
+@container container-ql (min-width: 130px) and (max-width: 190px) {
+  .utexas-quick-links ul.link-list {
+    --ipr-grid-min-min-size: 170px;
+    --ipr-grid-min-max-size: 170px;
+  }
+}
+
+@container container-ql (min-width: 191px) and (max-width: 222px) {
+  .utexas-quick-links ul.link-list {
+    --ipr-grid-min-min-size: 200px;
+    --ipr-grid-min-max-size: 220px;
+  }
+}
+
+.utexas-onecol .utexas-quick-links ul.link-list {
+  --ipr-grid-min-max-size: 100%;
+}
+
+.utexas-twocol .utexas-quick-links ul.link-list {
+  --ipr-grid-min-max-size: calc(50% - var(--ipr-grid-gap));
+}
+
+.utexas-threecol .utexas-quick-links ul.link-list {
+  --ipr-grid-min-max-size: calc(33.333% - (2 * var(--ipr-grid-gap)));
+}
+
+.utexas-fourcol .utexas-quick-links ul.link-list {
+  --ipr-grid-min-max-size: calc(25% - (3 * var(--ipr-grid-gap)));
+}

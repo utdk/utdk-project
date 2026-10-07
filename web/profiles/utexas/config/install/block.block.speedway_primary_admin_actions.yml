@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - speedway
+id: speedway_primary_admin_actions
+theme: speedway
+region: highlighted
+weight: 1
+provider: null
+plugin: local_actions_block
+settings:
+  id: speedway_local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

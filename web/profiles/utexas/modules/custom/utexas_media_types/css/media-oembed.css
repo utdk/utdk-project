@@ -1,0 +1,28 @@
+/** Resolves issue in https://github.austin.utexas.edu/eis1-wcs/utdk_profile/issues/1395 */
+.media-oembed-content-wrapper {
+  padding-bottom: 56.25%;
+  position: relative;
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+iframe.media-oembed-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.ck .drupal-media .media-oembed-content-wrapper {
+  width: 50vw;
+}
+
+/* Put some space around streaming media in the rich text editor. */
+figure.drupal-media,
+figure.drupal-url {
+  padding: 1rem;
+  border: 2px dotted gray;
+}

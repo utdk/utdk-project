@@ -1,0 +1,7 @@
+parameters:
+	# PHPStan Level 1
+	level: 1
+includes:
+	# Add the phpstan-drupal extension
+	- ../../../../vendor/mglaman/phpstan-drupal/extension.neon
+	- ../../../../vendor/phpstan/phpstan-deprecation-rules/rules.neon

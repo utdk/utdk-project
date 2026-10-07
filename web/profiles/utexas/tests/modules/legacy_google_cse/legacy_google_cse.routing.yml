@@ -1,0 +1,7 @@
+legacy_google_cse.search:
+  path: '/google_cse_markup'
+  defaults:
+    _controller: '\Drupal\legacy_google_cse\Controller\MockGoogleMarkup::view'
+    _title: 'Search'
+  requirements:
+    _permission: 'access content'

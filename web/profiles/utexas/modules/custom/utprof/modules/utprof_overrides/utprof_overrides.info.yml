@@ -1,0 +1,5 @@
+name: 'Configuration - Overrides'
+description: 'Provides dynamic configuration overrides for the Profile feature.'
+core_version_requirement: ^10 || ^11
+type: module
+package: 'UT Drupal Kit Profile Feature'

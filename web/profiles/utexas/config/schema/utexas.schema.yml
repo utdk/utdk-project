@@ -1,0 +1,3 @@
+action.configuration.utexas_archive_action:
+  type: action_configuration_default
+  label: 'Workflow: Archive'

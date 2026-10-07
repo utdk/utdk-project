@@ -1,0 +1,9 @@
+administer utexas announcement icons:
+  title: 'Manage announcement icons'
+  description: 'View, edit and delete announcement icons.'
+administer utexas announcement color schemes:
+  title: 'Manage announcement color schemes'
+  description: 'View, edit and delete announcement color schemes.'
+manage utexas site announcement:
+  title: 'Manage site announcement'
+  description: 'Configure and enable/disable the site announcement.'

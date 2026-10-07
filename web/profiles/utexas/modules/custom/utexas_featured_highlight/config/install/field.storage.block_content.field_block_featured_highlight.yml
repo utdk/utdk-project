@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - utexas_featured_highlight
+id: block_content.field_block_featured_highlight
+field_name: field_block_featured_highlight
+entity_type: block_content
+type: utexas_featured_highlight
+settings: {  }
+module: utexas_featured_highlight
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

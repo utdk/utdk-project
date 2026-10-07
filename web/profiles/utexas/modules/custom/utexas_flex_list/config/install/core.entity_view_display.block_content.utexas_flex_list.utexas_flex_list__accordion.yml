@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_flex_list
+    - core.entity_view_mode.block_content.utexas_flex_list__accordion
+    - field.field.block_content.utexas_flex_list.field_utexas_flex_list_items
+  module:
+    - layout_builder
+    - utexas_flex_list
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: block_content.utexas_flex_list.utexas_flex_list__accordion
+targetEntityType: block_content
+bundle: utexas_flex_list
+mode: utexas_flex_list__accordion
+content:
+  field_utexas_flex_list_items:
+    type: utexas_flex_list_accordion
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      heading_level: h5
+    third_party_settings: {  }
+hidden: {  }

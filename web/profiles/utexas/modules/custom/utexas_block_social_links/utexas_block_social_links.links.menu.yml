@@ -1,0 +1,7 @@
+# UTexas Block Social Links menu items definition
+entity.utexas_social_links_data.collection:
+  title: 'Social Links'
+  route_name: entity.utexas_social_links_data.collection
+  description: 'Manage icons associated with social link accounts.'
+  parent: system.admin_structure
+  weight: 99

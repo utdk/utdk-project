@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utprof_profile_listing
+    - field.field.block_content.utprof_profile_listing.field_utprof_footer
+    - field.field.block_content.utprof_profile_listing.field_utprof_header
+    - field.field.block_content.utprof_profile_listing.field_utprof_list_method
+    - field.field.block_content.utprof_profile_listing.field_utprof_profile_groups
+    - field.field.block_content.utprof_profile_listing.field_utprof_profile_tags
+    - field.field.block_content.utprof_profile_listing.field_utprof_specific_profiles
+    - field.field.block_content.utprof_profile_listing.field_utprof_view_mode
+  module:
+    - text
+id: block_content.utprof_profile_listing.default
+targetEntityType: block_content
+bundle: utprof_profile_listing
+mode: default
+content:
+  field_utprof_footer:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_utprof_header:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_utprof_profile_groups:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utprof_profile_tags:
+    weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utprof_view_mode:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  field_utprof_list_method: true
+  field_utprof_specific_profiles: true

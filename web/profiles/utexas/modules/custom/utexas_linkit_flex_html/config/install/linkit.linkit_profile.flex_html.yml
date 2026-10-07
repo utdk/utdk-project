@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: flex_html
+label: 'Flex HTML'
+description: 'Linkit profile for Flex HTML text format.'
+matchers:
+  a2717477-f1c4-4678-a38f-01a80ecd5405:
+    uuid: a2717477-f1c4-4678-a38f-01a80ecd5405
+    id: 'entity:node'
+    weight: 0
+    settings:
+      include_unpublished: true
+      metadata: '[node:published_status]'
+      bundles: {  }
+      group_by_bundle: true
+      substitution_type: canonical
+      limit: 100
+  785d157f-eb72-4a67-a465-4cb567df29bf:
+    uuid: 785d157f-eb72-4a67-a465-4cb567df29bf
+    id: email
+    weight: 0
+    settings: {  }
+  28c24f80-9d86-4a13-8e94-d4ba0a4227e7:
+    uuid: 28c24f80-9d86-4a13-8e94-d4ba0a4227e7
+    id: front_page
+    weight: 0
+    settings: {  }
+  2a34b9b3-7239-4a8b-be42-f8893fc9ad50:
+    uuid: 2a34b9b3-7239-4a8b-be42-f8893fc9ad50
+    id: 'entity:media'
+    weight: 0
+    settings:
+      metadata: '[media:field_media_file:entity:size]'
+      bundles: {  }
+      group_by_bundle: false
+      substitution_type: media
+      limit: 100
+  7d2e50ca-6dd7-41c4-89af-09bf15f6021b:
+    id: external
+    uuid: 7d2e50ca-6dd7-41c4-89af-09bf15f6021b
+    settings: {  }
+    weight: 0

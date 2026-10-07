@@ -1,0 +1,13 @@
+utevent_content_type_event.config:
+  type: config_entity
+  label: 'UTEvent Content Configuration'
+  mapping:
+    department:
+      type: string
+      label: 'Department for calendar.utexas.edu'
+    automatically_archive_on:
+      type: bool
+      label: 'Whether past events should be archived'
+    automatically_archive_days:
+      type: int
+      label: 'Days after which a past event should be archived'

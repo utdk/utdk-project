@@ -1,0 +1,54 @@
+.fc-unthemed {
+  padding-top: 20px;
+
+  .fc-event-container {
+    border: 1px solid var(--ut-charcoal--t20);
+    border-radius: 0;
+  }
+  .fc-header-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .fc-left,
+  .fc-center,
+  .fc-right {
+    margin-bottom: 1.5rem;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+  .fc-button {
+    border-width: 1px;
+  }
+  .fc-button-primary {
+    background-color: var(--ut-burntorange);
+
+    &:not(:disabled).fc-button-active,
+    &:not(:disabled):active,
+    &:hover,
+    &:focus {
+      background-color: var(--ut-burntorange--s20) !important;
+    }
+    &:disabled {
+      background-color: var(--ut-white);
+      color: var(--ut-charcoal);
+      opacity: 1;
+    }
+  }
+  .fc-event {
+    color: var(--ut-burntorange--s20);
+    border: 1px solid var(--ut-charcoal--t20);
+    border-radius: 0;
+  }
+  .fc-event[style]:hover,
+  .fc-event[style]:focus {
+    color: var(--ut-burntorange--s20);
+    background-color: var(--ut-charcoal--t40) !important;
+    /* Important is needed to override inline style */
+  }
+}
+/* Ensure that long text titles wrap within the calendar day */
+.fc-day-grid-event .fc-content {
+  white-space: normal;
+}

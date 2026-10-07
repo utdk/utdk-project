@@ -1,0 +1,40 @@
+{% set section_attr = create_attribute() %}
+{% set image = create_attribute() %}
+{% if background_color %}
+  {%
+    set background_classes = [
+      'background-accent',
+      background_color,
+    ]
+  %}
+{% endif %}
+{% if background_image %}
+  {%
+    set background_classes = [
+      'background-accent',
+    ]
+  %}
+  {% set image = image.setAttribute('style', background_image) %}
+  {% set image = image.addClass('background-image') %}
+  {% if background_blur %}
+    {% set image = image.addClass('background-blur') %}
+  {% endif %}
+{% endif %}
+
+{%
+  set classes = [
+    'section-wrapper'
+  ]
+%}
+
+<div {{ section_attr.addClass(background_classes, classes) }}>
+  {% if background_image %}
+    <div {{ image }}></div>
+  {% endif %}
+  <div {{ attributes }}>
+    {% block layout %}
+      layout
+    {% endblock %}
+  </div>
+</div>
+

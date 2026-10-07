@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Demo content installation file.
+ */
+
+use Drupal\utnews_demo_content\DemoContent;
+
+/**
+ * Implements hook_install().
+ */
+function utnews_demo_content_install() {
+  DemoContent::createDemoContent();
+  // Set cron to run upon next page load by leveraging
+  // Drupal core's automated cron.
+  \Drupal::state()->set('system.cron_last', 1620648720);
+}

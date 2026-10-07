@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Event import installation file.
+ */
+
+use Drupal\utevent\Permissions;
+
+/**
+ * Implements hook_install().
+ */
+function utevent_import_install() {
+
+  $roles = Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role_id => $role) {
+    $role_permissions = $role->getPermissions();
+    foreach ($role_permissions as $permission) {
+      if ($permission == 'administer utevent') {
+        Permissions::assignPermissions('manager', $role_id);
+        Drupal::messenger()->addMessage(t('Feeds permissions set for %role role.', [
+          '%role' => $role->label(),
+        ]));
+      }
+    }
+  }
+
+}
+
+/**
+ * Add html entity decode on title field import.
+ */
+function utevent_import_update_10000() {
+  \Drupal::service('features.manager')->import([
+    'utevent_import',
+  ], TRUE);
+}
+
+/**
+ * Import main image (#420).
+ */
+function utevent_import_update_10001() {
+  \Drupal::service('features.manager')->import([
+    'utevent_import',
+  ], TRUE);
+}

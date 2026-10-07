@@ -1,0 +1,15 @@
+name: 'UTexas Resources'
+type: module
+description: 'Provides a headline, image, unlimited internal/external links. This includes a custom block type and view modes for custom inline blocks.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:layout_builder'
+  - 'drupal:media_library'
+  - 'drupal:responsive_image'
+  - 'media_library_form_element:media_library_form_element'
+  - 'utexas_form_elements:utexas_form_elements'
+  - 'utexas_image_styles:utexas_image_styles'
+  - 'utexas_resources:utexas_resources'

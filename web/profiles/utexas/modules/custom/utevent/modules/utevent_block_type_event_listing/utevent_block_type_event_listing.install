@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * @file
+ * Event block listing installation file.
+ */
+
+use Drupal\utexas_layout_builder_styles\StyleUpdateHelper;
+
+/**
+ * Implements hook_install().
+ */
+function utevent_block_type_event_listing_install() {
+  // Allow Profile Listings for 1, 2, 3, and 4 column Layout Builder Styles.
+  _utevent_block_type_event_listing_block_restriction_add();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function utevent_block_type_event_listing_uninstall() {
+  // Disallow Profile Listings for 1, 2, 3, and 4 column Layout Builder Styles.
+  _utevent_block_type_event_listing_block_restriction_remove();
+}
+
+/**
+ * Helper function to add block to Layout Builder Styles.
+ */
+function _utevent_block_type_event_listing_block_restriction_add() {
+  $layout_builder_styles = [
+    'layout_builder_styles.style.utexas_onecol',
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  foreach ($layout_builder_styles as $layout_builder_style) {
+    StyleUpdateHelper::modifyConfigValue($layout_builder_style, 'block_restrictions', 'inline_block:utevent_event_listing');
+  }
+}
+
+/**
+ * Helper function to remove block from Layout Builder Styles.
+ */
+function _utevent_block_type_event_listing_block_restriction_remove() {
+  $layout_builder_styles = [
+    'layout_builder_styles.style.utexas_onecol',
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  foreach ($layout_builder_styles as $layout_builer_style) {
+    StyleUpdateHelper::removeConfigArrayValue($layout_builer_style, 'block_restrictions', 'inline_block:utevent_event_listing');
+  }
+}
+
+/**
+ * Add time sensitive cache plugin.
+ */
+function utevent_block_type_event_listing_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utevent_block_type_event_listing',
+  ], TRUE);
+}
+
+/**
+ * Add ut-copy class to body field wrapper in listing block display.
+ */
+function utevent_block_type_event_listing_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utevent_block_type_event_listing',
+  ], TRUE);
+}
+
+/**
+ * Issue #82: Make 1-4 items per row available for Event Listing blocks.
+ */
+function utevent_block_type_event_listing_update_8103() {
+  _utevent_block_type_event_listing_block_restriction_add();
+}
+
+/**
+ * Issue #82: Update LBSs in existing Event Listing blocks one item per row.
+ */
+function utevent_block_type_event_listing_update_8104() {
+  StyleUpdateHelper::addStyleToBlock('utevent_event_listing', 'utexas_onecol');
+}
+
+/**
+ * Enable field template for event location to make it a link.
+ */
+function utevent_block_type_event_listing_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utevent_block_type_event_listing',
+  ], TRUE);
+}
+
+/**
+ * Update styles to include icons.
+ */
+function utevent_block_type_event_listing_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utevent_block_type_event_listing',
+  ], TRUE);
+}
+
+/**
+ * Issue #182: Exposed filters showing on event listing blocks.
+ */
+function utevent_block_type_event_listing_update_8107() {
+  \Drupal::service('features.manager')->import([
+    'utevent_block_type_event_listing',
+  ], TRUE);
+}
+
+/**
+ * Event Listings' "Location" and "Date and Time" icons text labels (Issue 423).
+ */
+function utevent_block_type_event_listing_update_8108() {
+  \Drupal::service('features.manager')->import([
+    'utevent_block_type_event_listing',
+  ], TRUE);
+}

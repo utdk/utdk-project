@@ -1,0 +1,11 @@
+parameters:
+  utexas_instagram_api.skip_procedural_hook_scan: true
+services:
+  utexas_instagram_api.ig_auth_service:
+    class: Drupal\utexas_instagram_api\Services\InstagramAuthService
+    arguments:
+      - '@config.factory'
+  utexas_instagram_api.ig_state_service:
+    class: Drupal\utexas_instagram_api\Services\InstagramStateService
+    arguments:
+      - '@state'

@@ -1,0 +1,6 @@
+.local-actions [data-drupal-link-system-path*="utexas"] {
+  display: none;
+}
+.local-actions [data-drupal-link-system-path*="call_to_action"] {
+  display: none;
+}

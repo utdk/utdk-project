@@ -1,0 +1,75 @@
+/* See .ut-cta-link--lock::after in speedway (TDS) */
+.ut-cta-link--lock::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"9\" height=\"14\" fill=\"rgb(191, 87, 0)\" viewBox=\"0 0 18 28\" aria-labelledby=\"lock-icon-title-id\"><title id=\"lock-icon-title-id\">Icon depicting a padlock</title><path d=\"M5 12h8v-3c0-2.203-1.797-4-4-4s-4 1.797-4 4v3zM18 13.5v9c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-9c0-0.828 0.672-1.5 1.5-1.5h0.5v-3c0-3.844 3.156-7 7-7s7 3.156 7 7v3h0.5c0.828 0 1.5 0.672 1.5 1.5z\"></path></svg>");
+  vertical-align: middle;
+}
+/* Set icon to appear correctly in CKEDitor. */
+.ck-content .ut-btn--secondary.ut-cta-link--lock:hover::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"9\" height=\"14\" fill=\"rgb(255,255,255)\" viewBox=\"0 0 18 28\" aria-labelledby=\"lock-icon-title-id\"><title id=\"lock-icon-title-id\">Icon depicting a padlock</title><path d=\"M5 12h8v-3c0-2.203-1.797-4-4-4s-4 1.797-4 4v3zM18 13.5v9c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-9c0-0.828 0.672-1.5 1.5-1.5h0.5v-3c0-3.844 3.156-7 7-7s7 3.156 7 7v3h0.5c0.828 0 1.5 0.672 1.5 1.5z\"></path></svg>");
+  vertical-align: middle;
+}
+/* Set icon to appear correctly in CKEDitor. */
+.ck-content .ut-btn.ut-cta-link--lock::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"9\" height=\"14\" fill=\"rgb(255,255,255)\" viewBox=\"0 0 18 28\" aria-labelledby=\"lock-icon-title-id\"><title id=\"lock-icon-title-id\">Icon depicting a padlock</title><path d=\"M5 12h8v-3c0-2.203-1.797-4-4-4s-4 1.797-4 4v3zM18 13.5v9c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-9c0-0.828 0.672-1.5 1.5-1.5h0.5v-3c0-3.844 3.156-7 7-7s7 3.156 7 7v3h0.5c0.828 0 1.5 0.672 1.5 1.5z\"></path></svg>");
+  vertical-align: middle;
+}
+
+/* See .ut-cta-link--external::after in speedway (TDS) */
+.ut-cta-link--external::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"16\" fill=\"rgb(191, 87, 0)\" viewBox=\"0 0 28 28\" aria-labelledby=\"external-icon-title-id\"><title id=\"external-icon-title-id\">Icon depicting an arrow pointing outward from a box</title><path d=\"M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13c-2.484 0-4.5-2.016-4.5-4.5v-13c0-2.484 2.016-4.5 4.5-4.5h11c0.281 0 0.5 0.219 0.5 0.5v1c0 0.281-0.219 0.5-0.5 0.5h-11c-1.375 0-2.5 1.125-2.5 2.5v13c0 1.375 1.125 2.5 2.5 2.5h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-0.281 0.219-0.5 0.5-0.5h1c0.281 0 0.5 0.219 0.5 0.5zM28 1v8c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.75-2.75-10.187 10.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l10.187-10.187-2.75-2.75c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h8c0.547 0 1 0.453 1 1z\"></path></svg>");
+  vertical-align: middle;
+}
+/* Adjust for Drupal messages context */
+.messages .ut-cta-link--external::after,
+.status-messages .ut-cta-link--external::after {
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"16\" fill=\"rgb(255, 255, 0)\" viewBox=\"0 0 28 28\" aria-labelledby=\"external-icon-title-id\"><title id=\"external-icon-title-id\">Icon depicting an arrow pointing outward from a box</title><path d=\"M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13c-2.484 0-4.5-2.016-4.5-4.5v-13c0-2.484 2.016-4.5 4.5-4.5h11c0.281 0 0.5 0.219 0.5 0.5v1c0 0.281-0.219 0.5-0.5 0.5h-11c-1.375 0-2.5 1.125-2.5 2.5v13c0 1.375 1.125 2.5 2.5 2.5h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-0.281 0.219-0.5 0.5-0.5h1c0.281 0 0.5 0.219 0.5 0.5zM28 1v8c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.75-2.75-10.187 10.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l10.187-10.187-2.75-2.75c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h8c0.547 0 1 0.453 1 1z\"></path></svg>");
+}
+/* Set icon to appear correctly in CKEDitor. */
+.ck-content .ut-btn.ut-cta-link--external::after {
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"16\" fill=\"rgb(255,255,255)\" viewBox=\"0 0 28 28\" aria-labelledby=\"external-icon-title-id\"><title id=\"external-icon-title-id\">Icon depicting an arrow pointing outward from a box</title><path d=\"M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13c-2.484 0-4.5-2.016-4.5-4.5v-13c0-2.484 2.016-4.5 4.5-4.5h11c0.281 0 0.5 0.219 0.5 0.5v1c0 0.281-0.219 0.5-0.5 0.5h-11c-1.375 0-2.5 1.125-2.5 2.5v13c0 1.375 1.125 2.5 2.5 2.5h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-0.281 0.219-0.5 0.5-0.5h1c0.281 0 0.5 0.219 0.5 0.5zM28 1v8c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.75-2.75-10.187 10.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l10.187-10.187-2.75-2.75c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h8c0.547 0 1 0.453 1 1z\"></path></svg>");
+}
+/* Set icon to appear correctly in CKEDitor. */
+.ck-content .ut-btn--secondary.ut-cta-link--external:hover::after {
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"11\" height=\"16\" fill=\"rgb(255,255,255)\" viewBox=\"0 0 28 28\" aria-labelledby=\"external-icon-title-id\"><title id=\"external-icon-title-id\">Icon depicting an arrow pointing outward from a box</title><path d=\"M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13c-2.484 0-4.5-2.016-4.5-4.5v-13c0-2.484 2.016-4.5 4.5-4.5h11c0.281 0 0.5 0.219 0.5 0.5v1c0 0.281-0.219 0.5-0.5 0.5h-11c-1.375 0-2.5 1.125-2.5 2.5v13c0 1.375 1.125 2.5 2.5 2.5h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-0.281 0.219-0.5 0.5-0.5h1c0.281 0 0.5 0.219 0.5 0.5zM28 1v8c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.75-2.75-10.187 10.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l10.187-10.187-2.75-2.75c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h8c0.547 0 1 0.453 1 1z\"></path></svg>");
+}
+
+/* This SVG was derived from (and is identical to) "angle-right: in ut-icons.svg in speedway */
+.ut-cta-link--angle-right::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"rgb(191, 87, 0)\" viewBox=\"0 0 9 28\" aria-labelledby=\"angle-right-icon-title-id\"><title id=\"angle-right-icon-title-id\">Icon depicting a right-facing arrow</title><path d=\"M9.297 15c0 0.125-0.063 0.266-0.156 0.359l-7.281 7.281c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-0.781-0.781c-0.094-0.094-0.156-0.219-0.156-0.359 0-0.125 0.063-0.266 0.156-0.359l6.141-6.141-6.141-6.141c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l0.781-0.781c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l7.281 7.281c0.094 0.094 0.156 0.234 0.156 0.359z\"></path></svg>");
+  vertical-align: middle;
+}
+/* Set icon to appear correctly in CKEDitor. */
+.ck-content .ut-btn.ut-cta-link--angle-right::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"rgb(255,255,255)\" viewBox=\"0 0 9 28\" aria-labelledby=\"angle-right-icon-title-id\"><title id=\"angle-right-icon-title-id\">Icon depicting a right-facing arrow</title><path d=\"M9.297 15c0 0.125-0.063 0.266-0.156 0.359l-7.281 7.281c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-0.781-0.781c-0.094-0.094-0.156-0.219-0.156-0.359 0-0.125 0.063-0.266 0.156-0.359l6.141-6.141-6.141-6.141c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l0.781-0.781c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l7.281 7.281c0.094 0.094 0.156 0.234 0.156 0.359z\"></path></svg>");
+  vertical-align: middle;
+}
+/* Set icon to appear correctly in CKEDitor. */
+.ck-content .ut-btn--secondary.ut-cta-link--angle-right:hover::after {
+  padding-left: 0.3125rem;
+  content: url("data:image/svg+xml;charset=UTF-8, <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"rgb(255,255,255)\" viewBox=\"0 0 9 28\" aria-labelledby=\"angle-right-icon-title-id\"><title id=\"angle-right-icon-title-id\">Icon depicting a right-facing arrow</title><path d=\"M9.297 15c0 0.125-0.063 0.266-0.156 0.359l-7.281 7.281c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-0.781-0.781c-0.094-0.094-0.156-0.219-0.156-0.359 0-0.125 0.063-0.266 0.156-0.359l6.141-6.141-6.141-6.141c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l0.781-0.781c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l7.281 7.281c0.094 0.094 0.156 0.234 0.156 0.359z\"></path></svg>");
+  vertical-align: middle;
+}
+/* Make links appear correctly in CKEDitor. */
+.ck-content a,
+.ck-content a:link,
+.ck-content a:visited {
+  color: #9d4700;
+}
+.ck-content a:hover,
+.ck-content a:focus {
+  color: #bf5700;
+  text-decoration: underline;
+}
+.ck-content a:active {
+  color: #ae4f00;
+}
+.utexas-link-options-attributes-target,
+.utexas-link-options-attributes-class {
+  flex: 100%;
+}

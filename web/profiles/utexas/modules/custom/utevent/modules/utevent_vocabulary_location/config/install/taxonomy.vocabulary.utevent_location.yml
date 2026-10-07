@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event location'
+vid: utevent_location
+description: 'Use Event location to specify where an event takes place.'
+weight: 0

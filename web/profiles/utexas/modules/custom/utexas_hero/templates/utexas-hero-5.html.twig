@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Hero field when Style 5 has been chosen.
+ *
+ * Available variables:
+ * - media_identifier: A dynamic ID that uniquely identifies the CSS for the background image.
+ * - heading: a string of text meant to be prominently displayed.
+ * - subheading: a string of text, subsidiary to the heading.
+ * - caption: descriptive string for the media.
+ * - credit: attribution string for the media.
+ * - cta_uri: a URI. May be use to wrap other elements.
+ * - cta_title: a string of text meant to be displayed as a button.
+ * - alt: the alt text as provided by the media entity.
+ *
+ */
+#}
+<div class="ut-hero hero--half-n-half">
+  <div class="hero-content">
+    {% if media_identifier %}
+    <div id="{{ media_identifier }}" class="hero-img {{ anchor_position }}">
+      <span class="visually-hidden">{{ alt }}</span>
+    </div>
+    {% endif %}
+    <div class="hero-callout">
+      <div class="text-box">
+        {% if heading %}
+          <h2 class="hero-headline">{{ heading }}</h2>
+        {% endif %}
+        {% if subheading %}
+          <div class="hero-subhead">{{ subheading }}</div>
+        {% endif %}
+      </div>
+      {% if cta %}
+        <div class="hero-cta">
+          {{ cta }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_400w_250h
+label: '400w x 250h (1.6:1)'
+effects:
+  0255779a-b2d6-407b-ad07-0262080a8131:
+    uuid: 0255779a-b2d6-407b-ad07-0262080a8131
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 250
+      anchor: center-center

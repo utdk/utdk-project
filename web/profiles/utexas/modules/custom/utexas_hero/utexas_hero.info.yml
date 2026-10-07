@@ -1,0 +1,13 @@
+name: 'UTexas Hero'
+type: module
+description: 'Defines a compound field with media, heading, subheading, link, caption and credit.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:layout_builder'
+  - 'drupal:responsive_image'
+  - 'media_library_form_element:media_library_form_element'
+  - 'utexas_hero:utexas_hero'
+  - 'utexas_image_styles:utexas_image_styles'

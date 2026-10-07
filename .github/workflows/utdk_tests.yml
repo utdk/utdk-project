@@ -1,0 +1,68 @@
+name: 'Run automated tests'
+on:
+  # Triggers the workflow when a new commit is pushed to the HEAD ref of a pull request
+  pull_request:
+    types: [opened, reopened, synchronize]
+  # Allows running this workflow manually from the Actions tab
+  workflow_dispatch:
+env:
+  REPO: ${{ github.event.repository.name }}
+  BRANCH: ${{ github.head_ref }}
+  GH_TOKEN: ${{ secrets.GH_CLI_PAT_FOR_VMS_USING_GITHUB_ACTIONS }}
+jobs:
+  unit_tests:
+    # Prevent the job from executing on downstream repositories.
+    if: ${{ github.repository == 'utexas-utdk/utdk-project' }}
+    runs-on: ubuntu-latest
+    name: Run automated tests
+    steps:
+      - name: Add SSH key for use with GitHub
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.ID_ED25519_DEVOPS }}
+          name: id_ed25519_devops
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: |
+            Host github.com
+            IdentityFile ~/.ssh/id_ed25519_devops
+
+      - uses: actions/checkout@v4
+      - name: Check Syntax
+        run: |
+          gh config set git_protocol ssh
+          bash .github/workflows/scripts/check_syntax.sh
+
+      - name: Setup Lando
+        uses: lando/setup-lando@v3
+
+      - uses: actions/checkout@v4
+      - name: Configure codebase
+        run: |
+          if [ -z "$BRANCH" ]; then
+            BRANCH="develop"
+          fi
+          composer create-project utexas/utdk-project:dev-$BRANCH --stability=dev --remove-vcs --no-install
+          cd utdk-project
+          composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer config --no-interaction allow-plugins.phpstan/extension-installer true
+          composer config --no-interaction allow-plugins.php-http/discovery true
+          composer config --no-plugins allow-plugins.symfony/runtime true
+          composer config --no-interaction preferred-install auto
+          composer require drupal/core-dev:^11 --no-update
+          composer install
+          gh repo clone utexas-utdk/utdk_localdev .vscode -- --depth=1
+          cp .vscode/.lando.yml .lando.yml
+
+      - name: Install Drupal Kit Site
+        run: |
+          cd utdk-project
+          lando start
+          lando drush si -y
+
+      - name: Run tests
+        run: |
+          cd utdk-project
+          lando test web/profiles/utexas/tests
+          lando test web/profiles/utexas/modules/custom/utnews
+          lando test web/profiles/utexas/modules/custom/utevent
+          lando test web/profiles/utexas/modules/custom/utprof

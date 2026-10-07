@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display the Flex Content Area field.
+ *
+ * Available custom variables:
+ * - image : The Flex Content Area Image field.
+ * - headline : The Flex Content Area headline field.
+ * - copy : The Flex Content Area copy field.
+ * - links: The array for the links field.
+ *   - url: The URL of the each link.
+ *   - title: The text of each link.
+ * - cta: call to action button.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% if media %}
+  <div data-ratio="{{ media_ratio }}" class="image-wrapper">
+    {{ media }}
+  </div>
+{% endif %}
+<div class="content-wrapper">
+  {% if headline %}
+    <h3 class="ut-headline">{{ headline }}</h3>
+  {% endif %}
+  {% if copy %}
+    <div class="ut-copy">
+        {{ copy }}
+    </div>
+  {% endif %}
+  {% if links %}
+    <ul class="link-list">
+      {% for link in links %}
+        <li>
+          {{ link }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {{ cta }}
+</div>

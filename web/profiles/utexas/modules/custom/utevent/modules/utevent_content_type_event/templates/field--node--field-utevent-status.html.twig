@@ -1,0 +1,22 @@
+{# Add a modifier to the class using the field value. #}
+{% set classes_additional = [
+    'utevent-event-field--status-'
+    ~ items.0.content['#markup']|clean_class
+  ]
+%}
+
+{% embed "field--node--utevent-event.html.twig" %}
+  {% block field_items_block %}
+    {# Add a modifier to a class in the array using the field value. #}
+    {% set item_classes = [
+        'field__item',
+        bem_block ~ '__item',
+        bem_block ~ '__item--' ~ items.0.content['#markup']|clean_class
+      ]
+    %}
+    {% for item in items %}
+      <div{{item.attributes.addClass(item_classes)}}>{{ item.content }}</div>
+    {% endfor %}
+  {% endblock field_items_block %}
+{% endembed %}
+

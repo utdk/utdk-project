@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utnews_article_listing
+label: 'News article listing'
+revision: 1
+description: 'List news, filterable by tags or category, with multiple display options.'

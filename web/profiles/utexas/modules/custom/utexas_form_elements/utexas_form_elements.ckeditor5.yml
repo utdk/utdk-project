@@ -1,0 +1,14 @@
+utexas_form_elements_linkStyles:
+  ckeditor5:
+    plugins: []
+    config: []
+  drupal:
+    label: Link options
+    class: Drupal\utexas_form_elements\Plugin\CKEditor5Plugin\LinkOptions
+    library: false
+    admin_library: false
+    elements:
+      - <a class _target rel>
+    conditions:
+      plugins:
+        - ckeditor5_link

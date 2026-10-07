@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for UTexas Flex Content Area.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Issue #1034: Support link options in Flex Content Area links and CTA.
+ */
+function utexas_flex_content_area_update_8101() {
+  // 1. Add CTA link options column.
+  $link_options = [
+    'description' => 'Serialized array of options for the link.',
+    'type' => 'blob',
+    'size' => 'big',
+    'serialize' => TRUE,
+  ];
+  $database_connection = Database::getConnection();
+  $schema = $database_connection->schema();
+  $schema->addField('block_content__field_block_fca', 'field_block_fca_link_options', $link_options);
+  $schema->addField('block_content_revision__field_block_fca', 'field_block_fca_link_options', $link_options);
+  // 2. Update 'url' value keys to 'uri' in the blob field for links.
+  // MySQL auto-converts it back to blob on execute ("save").
+  $field_name = 'field_block_fca_links';
+  $old_value = '"url";';
+  $new_value = '"uri";';
+  $tables = [
+    'block_content__field_block_fca',
+    'block_content_revision__field_block_fca',
+  ];
+  foreach ($tables as $table_name) {
+    $database_connection->update($table_name)
+      ->expression($field_name, 'replace(CONVERT(' . $field_name . ' USING utf8), :old, :new)', [
+        ':old' => $old_value,
+        ':new' => $new_value,
+      ])
+      ->execute();
+  }
+}
+
+/**
+ * Issue #2827: Use larger image styles 1x/2x desktop presentations.
+ */
+function utexas_flex_content_area_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_flex_content_area',
+  ], TRUE);
+}

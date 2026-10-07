@@ -1,0 +1,166 @@
+.views-field-field-utevent-location .location-icon::after {
+  content: '';
+  margin-right: 5px;
+  padding: 0 0.6em;
+  vertical-align: middle;
+  background-color: var(--ut-burntorange--s20);
+  font-size: 20px;
+  mask-image: url('data:image/svg+xml;charset=UTF-8, <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>location</title><path d="M16 0c-5.523 0-10 4.477-10 10 0 10 10 22 10 22s10-12 10-22c0-5.523-4.477-10-10-10zM16 16c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z"></path></svg>');
+  mask-position: 0;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+.views-field-field-utevent-datetime .calendar-icon::after {
+  content: '';
+  margin-right: 5px;
+  padding: 0 0.6em;
+  vertical-align: middle;
+  background-color: var(--ut-burntorange--s20);
+  font-size: 20px;
+  mask-image: url('data:image/svg+xml;charset=UTF-8, <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><title>calendar</title><path d="M10 12h4v4h-4zM16 12h4v4h-4zM22 12h4v4h-4zM4 24h4v4h-4zM10 24h4v4h-4zM16 24h4v4h-4zM10 18h4v4h-4zM16 18h4v4h-4zM22 18h4v4h-4zM4 18h4v4h-4zM26 0v2h-4v-2h-14v2h-4v-2h-4v32h30v-32h-4zM28 30h-26v-22h26v22z"></path></svg>');
+  mask-position: 0;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+.utevent-event-field--field-utevent-status {
+  .field__item {
+    background-color: var(--ut-charcoal);
+    color: var(--ut-white);
+    display: inline-block;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 600;
+    padding: 8px 10px;
+  }
+  /* Visually hide status label and when value is "Scheduled" */
+  .field__label,
+  .utevent-event-field__item--scheduled,
+  &.utevent-event-field--status-scheduled {
+    position: absolute !important;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    overflow-wrap: normal;
+  }
+  .utevent-event-field__item--scheduled:active,
+  .utevent-event-field__item--scheduled:focus {
+    position: static !important;
+    overflow: visible;
+    height: auto;
+    width: auto;
+  }
+}
+
+/* Do not display add to calendar option if cancelled */
+.event-status--canceled .utevent-event-field button {
+  display: none;
+}
+.field--name-field-utevent-location .utevent-event-field__label {
+  display: block;
+
+}
+/* Avoid excessive margin after last paragraph of event description */
+.utevent-event-field__item > p:last-of-type {
+  margin-bottom: 0;
+}
+.node--type-utevent-event .utevent-event-field--field-utevent-datetime button {
+  color: var(--ut-burntorange);
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  /** We must use !important here to override theme's !important
+  declaration on <button> HTML **/
+  &:hover,
+  &:focus {
+    border: 0;
+    color: var(--ut-burntorange--s20) !important;
+    text-decoration: underline !important;
+    background-color: inherit;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  &:focus-visible {
+    outline: none;
+    outline-offset: 3px;
+    box-shadow: none;
+  }
+}
+
+/* The following styles are used on both the /calendar and /events displays */
+.utevent--calendar,
+.utevent-listing-page {
+  display: flex;
+  flex-wrap: wrap;
+
+  header {
+    flex: 0 1 100%;
+    margin-right: 0;
+    margin-bottom: 3rem;
+
+    @media screen and (min-width: 576px) {
+      flex: 0 1 auto;
+      margin-right: 60px;
+    }
+  }
+
+  /* Button toggling */
+  .utevent-button-wrapper {
+    .ut-btn:link,
+    .ut-btn:visited {
+      background-color: var(--ut-limestone--t40);
+      border-color: var(--ut-burntorange--s20);
+      color: var(--ut-burntorange--s20) !important;
+      font-weight: bold;
+      margin: 0 -3px 1rem;
+      border-radius: 0;
+      width: 100%;
+      text-align: center;
+    }
+    .ut-btn--secondary:link,
+    .ut-btn--secondary:visited {
+      border: solid 2px var(--ut-charcoal--t60);
+      color: var(--ut-limestone--s60);
+      margin: 0 -3px 1rem;
+      border-radius: 0;
+      font-weight: normal;
+      width: 100%;
+      text-align: center;
+    }
+    .ut-btn--secondary:hover,
+    .ut-btn--secondary:focus-visible {
+      border: 2px solid var(--ut-burntorange--s20);
+      background-color: var(--ut-burntorange--s20);
+      color: var(--ut-white) !important;
+    }
+
+    @media screen and (min-width: 576px) {
+      .ut-btn:link,
+      .ut-btn:visited,
+      .ut-btn--secondary:link,
+      .ut-btn--secondary:visited {
+        width: auto;
+        text-align: left;
+      }
+      .upcoming-btn.ut-btn--secondary,
+      .past-btn.ut-btn--secondary {
+        width: auto;
+        text-align: left;
+      }
+      .ut-btn.upcoming-btn + .past-btn {
+        border-left: solid 2px var(--ut-burntorange--s20);
+      }
+      .ut-btn[href="/calendar"] {
+        border-right: 2px solid var(--ut-burntorange);
+        position: relative;
+        z-index: 2;
+      }
+    }
+  }
+}

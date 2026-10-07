@@ -1,0 +1,7 @@
+name: 'UTexas Instagram API'
+description: 'Provides an interface to the Instagram API for use in the UT Drupal Kit.'
+core_version_requirement: '^10 || ^11'
+type: module
+dependencies:
+  - 'drupal:system (>=8.6)'
+package: UTexas

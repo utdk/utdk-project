@@ -1,0 +1,5 @@
+entity.utexas_ig_auth.collection:
+  title: 'Instagram account authorization'
+  parent: system.admin_config_media
+  description: 'Configure Instagram account authorization'
+  route_name: entity.utexas_ig_auth.collection

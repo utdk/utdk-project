@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_instagram
+    - field.storage.block_content.field_utexas_instagram_acct
+id: block_content.utexas_instagram.field_utexas_instagram_acct
+field_name: field_utexas_instagram_acct
+entity_type: block_content
+bundle: utexas_instagram
+label: 'Instagram account'
+description: 'Connect a pre-configured Instagram account to display images from. An Instagram App must be registered in this site''s <a href="/admin/config/media/utexas-instagram-api/instagram-authorization">Instagram Configuration</a> to work.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:utexas_ig_auth'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

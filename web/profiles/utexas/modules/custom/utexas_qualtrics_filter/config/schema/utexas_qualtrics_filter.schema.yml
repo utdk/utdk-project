@@ -1,0 +1,7 @@
+filter_settings.filter_qualtrics:
+  type: filter
+  label: 'Qualtrics filter'
+  mapping:
+    qualtrics_css:
+      type: boolean
+      label: 'Add CSS'

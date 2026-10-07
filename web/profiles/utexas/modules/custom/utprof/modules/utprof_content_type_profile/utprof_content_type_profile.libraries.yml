@@ -1,0 +1,4 @@
+node-form:
+  css:
+    theme:
+      css/node-form.css: {}

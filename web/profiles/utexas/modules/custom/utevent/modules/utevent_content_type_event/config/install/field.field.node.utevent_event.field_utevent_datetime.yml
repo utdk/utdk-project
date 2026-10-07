@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utevent_datetime
+    - node.type.utevent_event
+  module:
+    - smart_date
+    - smart_date_recur
+third_party_settings:
+  smart_date_recur:
+    allow_recurring: true
+    month_limit: 24
+id: node.utevent_event.field_utevent_datetime
+field_name: field_utevent_datetime
+entity_type: node
+bundle: utevent_event
+label: 'Date and Time'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_duration: 60
+    default_duration_increments: "30\r\n60|1 hour\r\n90\r\n120|2 hours\r\ncustom"
+    default_date_type: next_hour
+    default_date: ''
+default_value_callback: ''
+settings: {  }
+field_type: smartdate

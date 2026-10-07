@@ -1,0 +1,10 @@
+name: UTexas Form Elements
+type: module
+description: General-use form elements not provided by Core
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'linkit:linkit'
+
+ckeditor5-stylesheets:
+  - css/link-options.css

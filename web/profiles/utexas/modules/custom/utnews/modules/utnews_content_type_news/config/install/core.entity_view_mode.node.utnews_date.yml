@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.utnews_date
+label: 'Date only'
+description: ''
+targetEntityType: node
+cache: true

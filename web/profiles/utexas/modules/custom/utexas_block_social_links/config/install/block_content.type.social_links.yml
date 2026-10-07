@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: social_links
+label: 'Social Links'
+revision: 0
+description: 'Provides a custom block type with a configurable list of social links.'

@@ -1,0 +1,1605 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall functions for the UTexas profile.
+ */
+
+use Drupal\Core\Config\Entity\ConfigEntityUpdater;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\block\Entity\Block;
+use Drupal\editor\Entity\Editor;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\search\Entity\SearchPage;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+use Drupal\user\UserInterface;
+use Drupal\utexas\InstallationHelper;
+use Drupal\utexas\Permissions;
+use Drupal\utexas_missing_blocks\BlockLayoutReferenceDeleter;
+use Drupal\utexas_missing_blocks\Defuser;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_preprocess_install_page().
+ */
+function utexas_preprocess_install_page(&$variables) {
+  // UTexas has custom styling for the install page.
+  $variables['#attached']['library'][] = 'utexas/utexas-install';
+}
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for UTexas Profile.
+ *
+ * @see system_install()
+ */
+function utexas_install() {
+  // Set front page to "node".
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/node')->save();
+  // Restrict user registration to admin role creation.
+  \Drupal::configFactory()
+    ->getEditable('user.settings')
+    ->set('register', UserInterface::REGISTER_ADMINISTRATORS_ONLY)->save();
+  // Set the admin and default theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('admin', 'claro')
+    ->set('default', 'speedway')->save();
+  \Drupal::configFactory()
+    ->getEditable('node.settings')
+    ->set('use_admin_theme', TRUE)->save();
+  // Set language to EN by default.
+  // This is not strictly necessary, since the default
+  // is EN.
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('langcode', 'en')->save();
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('default_langcode', 'en')->save();
+
+  // Set Media Library pager to 'full' instead of 'mini (#985).
+  \Drupal::configFactory()
+    ->getEditable('views.view.media_library')
+    ->set('display.default.display_options.pager.type', 'full')->save();
+
+  // Set page caching to 1 day #2752.
+  \Drupal::configFactory()
+    ->getEditable('system.performance')
+    ->set('cache.page.max_age', 86400)->save();
+
+  // Add permissions to anonymous role.
+  $anon_perms = [
+    'access content',
+    'use text format restricted_html',
+    'view media',
+  ];
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, $anon_perms);
+  // Add permissions to authenticated role.
+  $auth_perms = [
+    'access content',
+    'view media',
+  ];
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, $auth_perms);
+
+  // Add default manager and editor roles.
+  Role::create([
+    'id' => 'utexas_site_manager',
+    'label' => 'Site Manager',
+  ])->save();
+  Role::create([
+    'id' => 'utexas_content_editor',
+    'label' => 'Content Editor',
+  ])->save();
+  // Add editing permissions to "utexas_content_editor".
+  Permissions::assignPermissions('editor', 'utexas_content_editor');
+  // Add management permissions to "utexas_site_manager".
+  Permissions::assignPermissions('manager', 'utexas_site_manager');
+
+  // Add configuration for the Metatag Twitter module to set default
+  // page title and URL meta.
+  InstallationHelper::populateDefaultMetatags();
+  // Set /admin/people configuration to UT Drupal Kit default.
+  InstallationHelper::configurePeopleView();
+
+  // Set frontpage to use custom UTexas Frontpage view (#2328).
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/utexas-frontpage')->save();
+
+  // Disable page and feed display on default frontpage (#2328).
+  \Drupal::configFactory()
+    ->getEditable('views.view.frontpage')
+    ->set('display.feed_1.display_options.enabled', 0)
+    ->set('display.page_1.display_options.enabled', 0)->save();
+
+  $state_api = \Drupal::state();
+  // Set Full HTML configuration opt-in.
+  $state_api->set('full_html_updates', 1);
+
+  // Display Drupal Kit support links.
+  $state_api->set('display_links', 1);
+
+  // Remove rarely-used bulk actions.
+  $bulk_actions = [
+    'system.action.node_make_unsticky_action',
+    'system.action.node_make_sticky_action',
+    'system.action.node_promote_action',
+    'system.action.node_unpromote_action',
+  ];
+  foreach ($bulk_actions as $config) {
+    $config_handler = \Drupal::configFactory()->getEditable($config);
+    if (!is_null($config_handler)) {
+      $config_handler->delete(TRUE);
+    }
+  }
+}
+
+/**
+ * Add Twitter metatag defaults.
+ */
+function utexas_update_8101() {
+  if (\Drupal::moduleHandler()->moduleExists('metatag_twitter_cards') === FALSE) {
+    \Drupal::service('module_installer')->install(['metatag_twitter_cards']);
+  }
+  $new_metatag_defaults = [
+    'title' => '[current-page:title] | [site:name]',
+    'canonical_url' => '[current-page:url]',
+    'twitter_cards_page_url' => '[current-page:url] ',
+    'twitter_cards_title' => '[current-page:title] | [site:name]',
+  ];
+  $expected_metatag_defaults = [
+    'title' => '[current-page:title] | [site:name]',
+    'canonical_url' => '[current-page:url]',
+  ];
+  $metatag_config = \Drupal::configFactory()->getEditable('metatag.metatag_defaults.global');
+  $actual_metatag_values = $metatag_config->get('tags');
+  if ($actual_metatag_values == $expected_metatag_defaults) {
+    $metatag_config->set('tags', $new_metatag_defaults);
+    $metatag_config->save();
+  }
+}
+
+/**
+ * Fix display of admin menu items to match permissions.
+ */
+function utexas_update_8102() {
+  if (\Drupal::moduleHandler()->moduleExists('admin_toolbar_links_access_filter') === FALSE) {
+    \Drupal::service('module_installer')->install(['admin_toolbar_links_access_filter']);
+  }
+}
+
+/**
+ * Disable Big Pipe on sites installed prior to 3.0.0-beta.6.
+ */
+function utexas_update_8103() {
+  if (\Drupal::moduleHandler()->moduleExists('big_pipe') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['big_pipe']);
+  }
+}
+
+/**
+ * Add Google CSE permission to Authenticated role.
+ */
+function utexas_update_8104() {
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, ['search Google CSE']);
+}
+
+/**
+ * Enable Twitter Profile Widget on existing sites.
+ */
+function utexas_update_8105() {
+  if (\Drupal::moduleHandler()->moduleExists('twitter_profile_widget') === FALSE) {
+    \Drupal::service('module_installer')->install(['twitter_profile_widget']);
+  }
+}
+
+/**
+ * Enable AddToAny on existing sites.
+ */
+function utexas_update_8106() {
+  $module = 'addtoany';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Configure AddToAny settings.
+ */
+function utexas_update_8107() {
+  // Set existing sites' AddToAny configuration to the default state.
+  $config_name = 'addtoany.settings';
+  $config = \Drupal::configFactory()->getEditable($config_name);
+  $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+  if (!empty($config_path)) {
+    $data = Yaml::parse(file_get_contents($config_path));
+    if (is_array($data)) {
+      $config->setData($data)->save();
+    }
+  }
+}
+
+/**
+ * Enable XMLSitemap on existing sites.
+ */
+function utexas_update_8108() {
+  $module = 'xmlsitemap';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Configure XMLSitemap settings.
+ */
+function utexas_update_8109() {
+  // Set existing sites XMLSitemap configuration to the default state.
+  $config_names = [
+    'xmlsitemap.settings.node.utexas_flex_page',
+    'xmlsitemap.settings.node.page',
+    'xmlsitemap.settings.node.article',
+  ];
+  foreach ($config_names as $config_name) {
+    if (\Drupal::config($config_name)->get('status') === NULL) {
+      $config = \Drupal::configFactory()->getEditable($config_name);
+      $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+      if (!empty($config_path)) {
+        $data = Yaml::parse(file_get_contents($config_path));
+        if (is_array($data)) {
+          $config->setData($data)->save();
+        }
+      }
+    }
+    else {
+      $message = dt('XML Sitemap configuration object "@ct" found. No action taken.', ['@ct' => $config_name]);
+      \Drupal::messenger()->addMessage($message);
+      \Drupal::logger('utexas')->notice($message);
+    }
+  }
+}
+
+/**
+ * Uninstall editor_advanced_link contrib module from existing sites #1085.
+ */
+function utexas_update_8110() {
+  if (\Drupal::moduleHandler()->moduleExists('editor_advanced_link') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['editor_advanced_link']);
+  }
+}
+
+/**
+ * Install Claro theme and set it as admin theme.
+ */
+function utexas_update_8111() {
+  \Drupal::service('theme_installer')->install(['claro']);
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('admin', 'claro')->save();
+}
+
+/**
+ * Uninstall adminal_theme, seven, bartik, and adminimal_admin_toolbar: #1457.
+ */
+function utexas_update_8112() {
+  if (\Drupal::moduleHandler()->moduleExists('adminimal_admin_toolbar')) {
+    \Drupal::service('module_installer')->uninstall(['adminimal_admin_toolbar']);
+  }
+  if (\Drupal::service('theme_handler')->themeExists('adminimal_theme')) {
+    \Drupal::service('theme_installer')->uninstall(['adminimal_theme']);
+  }
+  if (\Drupal::service('theme_handler')->themeExists('seven')) {
+    \Drupal::service('theme_installer')->uninstall(['seven']);
+  }
+}
+
+/**
+ * Set page caching to 15 minutes #1464.
+ */
+function utexas_update_8113() {
+  // Set base value for max-age in Cache-Control header for reverse proxies.
+  $config = \Drupal::service('config.factory')->getEditable('system.performance');
+  // Only update max-age if is set to no caching.
+  if ($config->get('cache.page.max_age') === 0) {
+    $config->set('cache.page.max_age', 900);
+  }
+  $config->save();
+}
+
+/**
+ * Issue #1026: Restrict Content Editor access to the global Block Layout UI.
+ *
+ * Install module.
+ */
+function utexas_update_8114() {
+  // Get static services.
+  $messenger = Drupal::messenger();
+  $module_handler = Drupal::moduleHandler();
+  /** @var Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = Drupal::service('module_installer');
+
+  // Install utexas_block_library_access module.
+  $module_machine_name = 'utexas_block_library_access';
+  if (!$module_handler->moduleExists($module_machine_name)) {
+    $module_installer->install([$module_machine_name]);
+    $module_readable_name = \Drupal::service('extension.list.module')->getName($module_machine_name);
+    $messenger->addMessage(t('%module_name has been installed.', ['%module_name' => $module_readable_name]));
+  }
+}
+
+/**
+ * Issue #1026: Restrict Content Editor access to the global Block Layout UI.
+ *
+ * Manipulate roles.
+ */
+function utexas_update_8115() {
+  // Get static services.
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  /** @var Drupal\user\PermissionHandler $permission_handler */
+  $permission_handler = Drupal::service('user.permissions');
+
+  $target_role = 'utexas_content_editor';
+  /** @var Drupal\user\Entity\Role $role */
+  $role = $entity_type_manager->getStorage('user_role')->load($target_role);
+
+  // If target role does not exist, bail.
+  if (is_null($role)) {
+    return;
+  }
+
+  // Add new permission to target role.
+  $available_permissions = $permission_handler->getPermissions();
+  $new_permission = 'create and edit reusable blocks';
+  if (in_array($new_permission, array_keys($available_permissions))) {
+    $role->grantPermission($new_permission);
+    $role->save();
+    $messenger->addMessage(t('The %permission permission has been granted to the %role role.', [
+      '%role' => $role->label(),
+      '%permission' => $new_permission,
+    ]));
+  }
+
+  // Remove old permission from target role.
+  $old_permission = 'administer blocks';
+  if ($role->hasPermission($old_permission)) {
+    $role->revokePermission($old_permission);
+    $role->save();
+    $messenger->addMessage(t('The %permission permission has been revoked from the %role role.', [
+      '%role' => $role->label(),
+      '%permission' => $old_permission,
+    ]));
+  }
+}
+
+/**
+ * Enable Security Kit on existing sites.
+ */
+function utexas_update_8116() {
+  $module = 'seckit';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Enable URL embed on existing sites.
+ */
+function utexas_update_8117() {
+  $module = 'url_embed';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Add Flex list on existing sites.
+ */
+function utexas_update_8118() {
+  $module = 'utexas_flex_list';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Add core modules Workflows and Content Moderation on existing sites (#931).
+ */
+function utexas_update_8119() {
+  $modules = [
+    'content_moderation',
+    'workflows',
+  ];
+  \Drupal::service('module_installer')->install($modules);
+}
+
+/**
+ * Enable Updated on existing sites.
+ */
+function utexas_update_8120() {
+  $module = 'updated';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Relocate instance of Updated block on main content region.
+ */
+function utexas_update_8121() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('updated')) {
+    return;
+  }
+  $weight = 0;
+  if ($block = Block::load('lastupdateddateblock')) {
+    // Place this block directly above main page content.
+    if ($page_title = Block::load('main_page_content')) {
+      $weight = $page_title->getWeight();
+      $weight = $weight - 1;
+    }
+    $block->setWeight($weight);
+    $block->save();
+  }
+}
+
+/**
+ * Add filters & capabilities in Flex HTML to Full HTML.
+ */
+function utexas_update_8122() {
+  // Set existing sites' AddToAny configuration to the default state.
+  $config_names = [
+    'filter.format.full_html',
+    'editor.editor.full_html',
+  ];
+  foreach ($config_names as $config_name) {
+    $config = \Drupal::configFactory()->getEditable($config_name);
+    $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+    if (!empty($config_path)) {
+      $data = Yaml::parse(file_get_contents($config_path));
+      if (is_array($data)) {
+        $config->setData($data)->save();
+      }
+    }
+  }
+}
+
+/**
+ * Enable Pantheon Advanced Page Cache on existing sites (#1571).
+ */
+function utexas_update_8123() {
+  $module = 'pantheon_advanced_page_cache';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Enable metatag_verification on existing sites.
+ */
+function utexas_update_8124() {
+  $module = 'metatag_verification';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Enable diff on existing sites (#1734).
+ */
+function utexas_update_8125() {
+  $module = 'diff';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Enable entity_clone on existing sites (#1709).
+ */
+function utexas_update_8126() {
+  $module = 'entity_clone';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+    $config_names = [
+      'entity_clone.settings',
+    ];
+    foreach ($config_names as $config_name) {
+      $config = \Drupal::configFactory()->getEditable($config_name);
+      $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+      if (!empty($config_path)) {
+        $data = Yaml::parse(file_get_contents($config_path));
+        if (is_array($data)) {
+          $config->setData($data)->save();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Provide generic Social Sharing block (#1785).
+ */
+function utexas_update_8127() {
+  InstallationHelper::addSocialSharing();
+}
+
+/**
+ * Set Media Library pager to 'full' (#985).
+ */
+function utexas_update_8128() {
+  \Drupal::configFactory()
+    ->getEditable('views.view.media_library')
+    ->set('display.default.display_options.pager.type', 'full')->save();
+}
+
+/**
+ * Add Hero Carousel block type (#1798).
+ */
+function utexas_update_8129() {
+  if (\Drupal::moduleHandler()->moduleExists('utexas_hero_carousel') === FALSE) {
+    \Drupal::service('module_installer')->install(['utexas_hero_carousel']);
+  }
+}
+
+/**
+ * Enable 'UTexas Readonly' (#1548).
+ */
+function utexas_update_8130() {
+  if (\Drupal::moduleHandler()->moduleExists('utexas_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utexas_readonly']);
+  }
+}
+
+/**
+ * Add missing blocks report on existing sites (#2046).
+ */
+function utexas_update_8131() {
+  $module = 'utexas_missing_blocks';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Remediate inline blocks associated with cloned nodes (#2046).
+ */
+function utexas_update_8132() {
+  $data = Defuser::defuse();
+  $missing = [];
+  $remediated = [];
+  foreach ($data as $key => $values) {
+    if (isset($values['revisions_with_missing_blocks'])) {
+      $missing[] = $key;
+    }
+    else {
+      $remediated[] = $key;
+    }
+  }
+  \Drupal::state()->set('missing_inline_block_defusement_report', serialize($data));
+  \Drupal::logger('utexas')->notice('Entities remediated: ' . count($remediated));
+  \Drupal::logger('utexas')->notice('Node IDs (remediated): ' . implode(', ', $remediated));
+  \Drupal::logger('utexas')->notice('Entities with unrecoverable blocks: ' . count($missing));
+  \Drupal::logger('utexas')->notice('Node IDs (irremediable): ' . implode(', ', $missing));
+  \Drupal::logger('utexas')->notice('A full report has been written to the State API with key "missing_inline_block_defusement_report"');
+}
+
+/**
+ * Update entity_clone configuration (#2046).
+ */
+function utexas_update_8133() {
+  $config_name = 'entity_clone.settings';
+  $config = \Drupal::configFactory()->getEditable($config_name);
+  $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+  if (!empty($config_path)) {
+    $data = Yaml::parse(file_get_contents($config_path));
+    if (is_array($data)) {
+      $config->setData($data)->save();
+    }
+  }
+}
+
+/**
+ * Enable CKEditor 5 on existing sites (#2086).
+ */
+function utexas_update_8134() {
+  $module = 'ckeditor5';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Uninstall layout_builder_modal and media_library_theme_reset.
+ */
+function utexas_update_8135() {
+  // We directly modify the database because the modules are no
+  // longer in the codebase.
+  $modules = [
+    'layout_builder_modal',
+    'media_library_theme_reset',
+  ];
+  \Drupal::database()->delete('key_value')
+    ->condition('collection', 'system.schema')
+    ->condition('name', $modules, 'IN')
+    ->execute();
+  foreach ($modules as $module) {
+    $module_data = \Drupal::config('core.extension')->get('module');
+    unset($module_data[$module]);
+    \Drupal::configFactory()->getEditable('core.extension')->set('module', $module_data)->save();
+  }
+  $config = \Drupal::configFactory()->getEditable('layout_builder_modal.settings');
+  $config->delete();
+}
+
+/**
+ * Enable layout_builder_iframe_modal on existing sites (#1988).
+ */
+function utexas_update_8136() {
+  drupal_flush_all_caches();
+  $module = 'layout_builder_iframe_modal';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Enable stable9 on existing sites (#2133).
+ */
+function utexas_update_8137() {
+  $theme = 'stable9';
+  if (\Drupal::service('theme_handler')->themeExists($theme) === FALSE) {
+    \Drupal::service('theme_installer')->install([$theme]);
+  }
+}
+
+/**
+ * Uninstall stable and bartik on existing sites (#2135).
+ */
+function utexas_update_8138() {
+  $themes_to_uninstall = [
+    'bartik',
+    'stable',
+  ];
+  foreach ($themes_to_uninstall as $theme) {
+    if (\Drupal::service('theme_handler')->themeExists($theme)) {
+      \Drupal::service('theme_installer')->uninstall([$theme]);
+    }
+  }
+}
+
+/**
+ * Enable utexas_instagram and utexas_instagram_api on existing sites (#2114).
+ */
+function utexas_update_8139() {
+  drupal_flush_all_caches();
+  $modules = [
+    'utexas_instagram_api',
+    'utexas_instagram',
+  ];
+  foreach ($modules as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+      \Drupal::service('module_installer')->install([$module]);
+    }
+  }
+}
+
+/**
+ * Convert 'Basic HTML' and 'Full HTML' to CKEditor 5.
+ */
+function utexas_update_8140() {
+  $config_names = [
+    'filter.format.basic_html',
+    'editor.editor.basic_html',
+    'filter.format.full_html',
+    'editor.editor.full_html',
+  ];
+  foreach ($config_names as $config_name) {
+    $config = \Drupal::configFactory()->getEditable($config_name);
+    $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+    if (!empty($config_path)) {
+      $data = Yaml::parse(file_get_contents($config_path));
+      if (is_array($data)) {
+        $config->setData($data)->save();
+      }
+    }
+  }
+}
+
+/**
+ * Uninstall ckeditor4height on existing sites (#2137).
+ */
+function utexas_update_8141() {
+  $module = 'ckeditorheight';
+  if (\Drupal::moduleHandler()->moduleExists($module) === TRUE) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+  }
+}
+
+/**
+ * Uninstall CKEditor4 on existing sites (#2107).
+ */
+function utexas_update_8142() {
+  $module = 'ckeditor';
+  if (\Drupal::moduleHandler()->moduleExists($module) === TRUE) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+  }
+}
+
+/**
+ * Make Basic HTML and Full HTML match CKEditor 4 legacy (#2168).
+ */
+function utexas_update_8143() {
+  $config_names = [
+    'filter.format.basic_html',
+    'editor.editor.basic_html',
+    'filter.format.full_html',
+    'editor.editor.full_html',
+  ];
+  foreach ($config_names as $config_name) {
+    $config = \Drupal::configFactory()->getEditable($config_name);
+    $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+    if (!empty($config_path)) {
+      $data = Yaml::parse(file_get_contents($config_path));
+      if (is_array($data)) {
+        $config->setData($data)->save();
+      }
+    }
+  }
+}
+
+/**
+ * Convert incorrectly migrated metatags robots array to string.
+ */
+function utexas_update_8144() {
+  InstallationHelper::normalizeRobotsMetatags();
+}
+
+/**
+ * Discontinue utexas_block_library_access in favor of Drupal 10.1 permissions.
+ */
+function utexas_update_8145() {
+  // We need to simultaneously change utexas_block_library_access and google_tag
+  // due to #2282.
+  $permissions_changes = [
+    'create and edit reusable blocks' => [
+      'administer block content',
+      'access block library',
+    ],
+    'administer google tag manager' => [
+      'administer google_tag_container',
+    ],
+  ];
+  $available_permissions = \Drupal::service('user.permissions')->getPermissions();
+  // Get static services.
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    foreach ($permissions_changes as $old => $new) {
+      if ($role->hasPermission($old)) {
+        $role->revokePermission($old);
+        $messenger->addMessage(t('The outdated %permission permission has been removed from the %role role.', [
+          '%role' => $role->label(),
+          '%permission' => $old,
+        ]));
+        foreach ($new as $item) {
+          $role->grantPermission($item);
+          $messenger->addMessage(t('The new %permission permission has been granted to the %role role.', [
+            '%role' => $role->label(),
+            '%permission' => $item,
+          ]));
+        }
+        $needs_change = TRUE;
+      }
+    }
+    if ($needs_change) {
+      // Remove any other outdated permissions, as their presence will cause
+      // the update to fail.
+      $role_permissions = $role->getPermissions();
+      foreach ($role_permissions as $permission) {
+        if (!in_array($permission, array_keys($available_permissions))) {
+          $role->revokePermission($permission);
+          $messenger->addMessage(t('The outdated %permission permission has been removed from the %role role.', [
+            '%role' => $role->label(),
+            '%permission' => $permission,
+          ]));
+        }
+      }
+      // Finally, save the role.
+      $role->save();
+    }
+  }
+  // Now, safely uninstall the old module.
+  if (\Drupal::moduleHandler()->moduleExists('utexas_block_library_access') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['utexas_block_library_access']);
+  }
+}
+
+/**
+ * Delete Twitter Profile Widget references in layouts.
+ */
+function utexas_update_8146() {
+  $data = BlockLayoutReferenceDeleter::delete('twitter_widget');
+  \Drupal::state()->set('twitter_widget_deletion_report', serialize($data));
+  \Drupal::logger('utexas')->notice('Twitter widget references deleted: ' . count($data['layout']));
+  \Drupal::logger('utexas')->notice('Nodes affected: ' . count(array_unique($data['nodes'])));
+}
+
+/**
+ * Delete Twitter Profile Widget blocks.
+ */
+function utexas_update_8147() {
+  $query = \Drupal::entityQuery('block_content')
+    ->condition('type', 'twitter_widget')
+    ->condition('reusable', '1')
+    ->accessCheck(FALSE);
+  $results = $query->execute();
+  $storage_handler = \Drupal::entityTypeManager()->getStorage('block_content');
+  $entities = $storage_handler->loadMultiple($results);
+  $storage_handler->delete($entities);
+  \Drupal::logger('utexas')->notice('Reusable Twitter blocks deleted: ' . count($entities));
+  $query = \Drupal::entityQuery('block_content')
+    ->condition('type', 'twitter_widget')
+    ->condition('reusable', '0')
+    ->accessCheck(FALSE);
+  $results = $query->execute();
+  $storage_handler = \Drupal::entityTypeManager()->getStorage('block_content');
+  $entities = $storage_handler->loadMultiple($results);
+  $storage_handler->delete($entities);
+  \Drupal::logger('utexas')->notice('Inline Twitter blocks deleted: ' . count($entities));
+}
+
+/**
+ * Delete Twitter Profile Widget configuration.
+ */
+function utexas_update_8148() {
+  $configs = [
+    'block_content.type.twitter_widget',
+    'core.entity_form_display.block_content.twitter_widget.default',
+    'core.entity_view_display.block_content.twitter_widget.default',
+    'field.field.block_content.twitter_widget.field_twitter_profile_widget',
+    'field.storage.block_content.field_twitter_profile_widget',
+    'twitter_profile_widget.settings',
+  ];
+  foreach ($configs as $config) {
+    \Drupal::configFactory()->getEditable($config)->delete();
+  }
+}
+
+/**
+ * Uninstall twitter_profile_widget.
+ */
+function utexas_update_8149() {
+  $module = 'twitter_profile_widget';
+  if (\Drupal::moduleHandler()->moduleExists($module) === TRUE) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+  }
+}
+
+/**
+ * Install the standard workflow.
+ */
+function utexas_update_8150() {
+  // If a workflow exists, bail.
+  $config_list = \Drupal::configFactory()->listAll($prefix = "workflows");
+  if (count($config_list) >= 1) {
+    \Drupal::logger('utexas')->notice('A workflow configuration was found. Exiting.');
+    return;
+  }
+  // Install standard workflow config.
+  $install_config = [
+    'workflows.workflow.standard_workflow',
+    'views.view.moderated_content',
+  ];
+  foreach ($install_config as $config_name) {
+    $config = \Drupal::configFactory()->getEditable($config_name);
+    $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+    if (!empty($config_path)) {
+      $data = Yaml::parse(file_get_contents($config_path));
+      if (is_array($data)) {
+        $config->setData($data)->save();
+        \Drupal::logger('utexas')->notice('Installing standard workflow.');
+      }
+    }
+  }
+  // Update permissions.
+  $workflow_perms = [
+    'use standard_workflow transition archive',
+    'use standard_workflow transition create_new_draft',
+    'use standard_workflow transition publish',
+    'view latest version',
+    'view any unpublished content',
+  ];
+  $entity_type_manager = Drupal::entityTypeManager();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    if ($role->hasPermission('edit any page content') || $role->hasPermission('edit any utexas_flex_page content')) {
+      foreach ($workflow_perms as $perm) {
+        $role->grantPermission($perm);
+      }
+      $role->save();
+      \Drupal::logger('utexas')->notice('Updated permissions for role: ' . $role->label());
+    }
+  }
+}
+
+/**
+ * Set the default path exclusions for Google Tag Manager.
+ */
+function utexas_update_8151() {
+  $gtm_containers = \Drupal::entityTypeManager()
+    ->getStorage('google_tag_container')
+    ->loadMultiple();
+
+  // Set the default config.
+  $gtm_defaults = [
+    'conditions' => [
+      'request_path' => [
+        'id' => 'request_path',
+        'negate' => TRUE,
+        'pages' => "/admin\r\n/admin/*\r\n/batch\r\n/batch/*\r\n/node/add*\r\n/node/*/edit\r\n/node/*/delete\r\n/node/*/layout\r\n/taxonomy/term/*/edit\r\n/taxonomy/term/*/layout\r\n/user/*/edit*\r\n/user/*/cancel*\r\n/user/*/layout",
+      ],
+    ],
+  ];
+
+  // Update the container config and save it.
+  foreach ($gtm_containers as $gtm_container) {
+    if (is_array($gtm_defaults)) {
+      /** @var \Drupal\google_tag\Entity\TagContainer $gtm_container */
+      $gtm_container->set('conditions', $gtm_defaults['conditions']);
+      $gtm_container->save();
+    }
+  }
+}
+
+/**
+ * Enable Metatag Open Graph on existing sites.
+ */
+function utexas_update_8152() {
+  $module = 'metatag_open_graph';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Set the default path exclusions for Google Tag Manager.
+ */
+function utexas_update_8153() {
+  $gtm_containers = \Drupal::entityTypeManager()
+    ->getStorage('google_tag_container')
+    ->loadMultiple();
+
+  // Update the container config and save it.
+  foreach ($gtm_containers as $gtm_container) {
+    /** @var \Drupal\google_tag\Entity\TagContainer $gtm_container */
+    $gtm_defaults = $gtm_container->get('conditions');
+    if (empty($gtm_defaults)) {
+      continue;
+    }
+    $pages = $gtm_defaults["request_path"]["pages"];
+    if (!strstr($pages, '/layout_builder/*')) {
+      $gtm_defaults["request_path"]["pages"] = $pages . "\r\n/layout_builder/*";
+      $gtm_container->set('conditions', $gtm_defaults);
+      $gtm_container->save();
+    }
+  }
+}
+
+/**
+ * Add article to standard workflow.
+ */
+function utexas_update_8154() {
+
+  $node_types = \Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+  if (!array_key_exists('article', $node_types)) {
+    return;
+  }
+
+  $config = \Drupal::configFactory()->getEditable('workflows.workflow.standard_workflow');
+  $nodes = $config->get('type_settings.entity_types.node');
+  if (is_array($nodes) && !in_array('article', $nodes)) {
+    array_push($nodes, 'article');
+    $config->set('type_settings.entity_types.node', $nodes)->save();
+  }
+
+}
+
+/**
+ * Allow Basic HTML to display link classes and targets.
+ */
+function utexas_update_8155() {
+  $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/filter.format.basic_html.yml';
+  $data = Yaml::parse(file_get_contents($config_path));
+  if (isset($data['filters']['filter_html']['settings']['allowed_html'])) {
+    \Drupal::logger('utexas')->notice('Updating Basic HTML allowed HTML...');
+    $filter = \Drupal::configFactory()->getEditable('filter.format.basic_html');
+    $filter->set('filters.filter_html.settings.allowed_html', $data['filters']['filter_html']['settings']['allowed_html']);
+    $filter->save();
+  }
+  $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/editor.editor.basic_html.yml';
+  $data = Yaml::parse(file_get_contents($config_path));
+  if (isset($data['settings']['plugins']['ckeditor5_sourceEditing']['allowed_tags'])) {
+    \Drupal::logger('utexas')->notice('Updating Basic HTML allowed tags...');
+    $filter = \Drupal::configFactory()->getEditable('editor.editor.basic_html');
+    $filter->set('settings.plugins.ckeditor5_sourceEditing.allowed_tags', $data['settings']['plugins']['ckeditor5_sourceEditing']['allowed_tags']);
+    $filter->save();
+  }
+}
+
+/**
+ * Update sanitize filenames settings on existing sites.
+ */
+function utexas_update_8156() {
+  $config_names = [
+    'file.settings',
+  ];
+  foreach ($config_names as $config_name) {
+    $config = \Drupal::configFactory()->getEditable($config_name);
+    $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+    if (!empty($config_path)) {
+      $data = Yaml::parse(file_get_contents($config_path));
+      if (is_array($data)) {
+        $config->setData($data)->save();
+      }
+    }
+  }
+}
+
+/**
+ * Active menu trails for items not included in a menu. (#1663)
+ */
+function utexas_update_8157() {
+  $module = 'menu_trail_by_path';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Uninstall block_content.field_twitter_profile_widget field. (#2275)
+ */
+function utexas_update_8158() {
+  // Rebuild entity field definitions.
+  // See https://www.drupal.org/project/drupal/issues/3129179.
+  $entity_bundle_info = \Drupal::service('entity_type.bundle.info');
+  $entity_type_manager = \Drupal::service('entity_type.manager');
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+  $map = [];
+  foreach ($entity_type_manager->getDefinitions() as $entity_type_id => $entity_type) {
+    if (!$entity_type->entityClassImplements(FieldableEntityInterface::class)) {
+      continue;
+    }
+    foreach ($entity_bundle_info->getBundleInfo($entity_type_id) as $bundle => $bundle_info) {
+      foreach ($entity_field_manager->getFieldDefinitions($entity_type_id, $bundle) as $field_name => $field_definition) {
+        $map[$entity_type_id][$field_name]['type'] = $field_definition->getType();
+        $map[$entity_type_id][$field_name]['bundles'][] = $bundle;
+      }
+    }
+  }
+  $persistent_map = \Drupal::keyValue('entity.definitions.bundle_field_map');
+  $persistent_map->setMultiple($map);
+  if (\Drupal::moduleHandler()->moduleExists('twitter_profile_widget') === FALSE) {
+    // Remove Twitter from installed field definitions.
+    $installed = \Drupal::keyValue('entity.definitions.installed');
+    $all = $installed->getAll();
+    $field_storage = $all['block_content.field_storage_definitions'];
+    if (array_key_exists('field_twitter_profile_widget', $field_storage)) {
+      unset($field_storage['field_twitter_profile_widget']);
+      $all['block_content.field_storage_definitions'] = $field_storage;
+      $installed->setMultiple($all);
+    }
+    drupal_flush_all_caches();
+  }
+}
+
+/**
+ * Remove legacy forty_acres Bootstrap theme settings, if present (#456).
+ */
+function utexas_update_8159() {
+  $forty_acres_bootstrap = \Drupal::configFactory()
+    ->getEditable('forty_acres.settings');
+  if (isset($forty_acres_bootstrap)) {
+    $forty_acres_bootstrap->clear('bootstrap_components')->save();
+  }
+}
+
+/**
+ * Populate default Open Graph metatags (#2004 and #2005).
+ */
+function utexas_update_8160() {
+  InstallationHelper::populateDefaultMetatags();
+}
+
+/**
+ * Add 'full name' field to user accounts (#848).
+ */
+function utexas_update_8161() {
+  FieldStorageConfig::create([
+    'field_name' => 'field_utexas_full_name',
+    'entity_type' => 'user',
+    'type' => 'string',
+    'cardinality' => 1,
+  ])->save();
+
+  FieldConfig::create([
+    'field_name' => 'field_utexas_full_name',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'label' => 'Full name',
+    'description' => 'This name is displayed in the administrative interface, such as in the People listing, and to indicate authorship of content.',
+  ])->save();
+  // Manage form display.
+  $form_display = \Drupal::service('entity_display.repository')->getFormDisplay('user', 'user');
+  $form_display = $form_display->setComponent('field_utexas_full_name', [
+    'type' => 'string_textfield',
+    'weight' => -11,
+  ]);
+  $form_display->save();
+  // Manage view display.
+  $view_display = \Drupal::service('entity_display.repository')->getViewDisplay('user', 'user');
+  $view_display->setComponent('field_utexas_full_name', ['type' => 'string']);
+  $view_display->save();
+}
+
+/**
+ * Update People View (#848).
+ */
+function utexas_update_8162() {
+  InstallationHelper::configurePeopleView();
+}
+
+/**
+ * Rebuild cache to relocate utexas_qualtrics_filter (#2625).
+ */
+function utexas_update_8163() {
+  drupal_flush_all_caches();
+}
+
+/**
+ * Uninstall Layout Builder Expose Field Blocks (#2636).
+ */
+function utexas_update_8164() {
+  if (\Drupal::moduleHandler()->moduleExists('layout_builder_expose_all_field_blocks') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['layout_builder_expose_all_field_blocks']);
+  }
+}
+
+/**
+ * Set Bootstrap Horizontal Tabs version to 5 (#2572).
+ */
+function utexas_update_8165() {
+  if (\Drupal::moduleHandler()->moduleExists('bootstrap_horizontal_tabs') === TRUE) {
+    $bootstrap_horizontal_tabs = \Drupal::configFactory()->getEditable('bootstrap_horizontal_tabs.settings');
+    $bootstrap_horizontal_tabs->set("version", '5');
+    $bootstrap_horizontal_tabs->save();
+  }
+}
+
+/**
+ * Replace svg_upload_sanitizer contrib module with custom equivalent (#2682).
+ */
+function utexas_update_8166() {
+  if (\Drupal::moduleHandler()->moduleExists('svg_upload_sanitizer') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['svg_upload_sanitizer']);
+  }
+}
+
+/**
+ * Uninstall UTexas Beacon on existing sites (#2804).
+ */
+function utexas_update_8167() {
+  if (\Drupal::moduleHandler()->moduleExists('utexas_beacon') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['utexas_beacon']);
+  }
+}
+
+/**
+ * Add utexas_standard_workflow 'Archive' option to bulk operations (#2807).
+ */
+function utexas_update_8168() {
+  $config_name = 'system.action.utexas_archive_action';
+  $config = \Drupal::configFactory()->getEditable($config_name);
+  $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+  if (!empty($config_path)) {
+    $data = Yaml::parse(file_get_contents($config_path));
+    if (is_array($data)) {
+      $config->setData($data)->save();
+      \Drupal::logger('utexas')->notice('Adding "Archive" action to bulk operations.');
+    }
+  }
+}
+
+/**
+ * Remove rarely-used bulk actions (#2815).
+ */
+function utexas_update_8169() {
+  $bulk_actions = [
+    'system.action.node_make_unsticky_action',
+    'system.action.node_make_sticky_action',
+    'system.action.node_promote_action',
+    'system.action.node_unpromote_action',
+  ];
+  foreach ($bulk_actions as $config) {
+    $config_handler = \Drupal::configFactory()->getEditable($config);
+    if (!is_null($config_handler)) {
+      $config_handler->delete(TRUE);
+    }
+  }
+}
+
+/**
+ * Add toolbar links (#2816).
+ */
+function utexas_update_8170() {
+  \Drupal::state()->set('display_links', 1);
+}
+
+/**
+ * Remove Qualtrics CKEditor Plugin from Flex HTML and Full HTML (#2860).
+ */
+function utexas_update_8171() {
+  $full_html_default = \Drupal::state()->get('full_html_updates') ?? 0;
+  if ($full_html_default != 0) {
+    $config_name = 'editor.editor.full_html';
+    $config = \Drupal::configFactory()->getEditable($config_name);
+    $config_path = \Drupal::service('extension.list.profile')->getPath('utexas') . '/config/install/' . $config_name . '.yml';
+    if (!empty($config_path)) {
+      $data = Yaml::parse(file_get_contents($config_path));
+      if (is_array($data)) {
+        $config->setData($data)->save();
+      }
+    }
+  }
+}
+
+/**
+ * Ability to recover deleted content (#2915).
+ */
+function utexas_update_8172() {
+  if (\Drupal::moduleHandler()->moduleExists('trash') === FALSE) {
+    \Drupal::service('module_installer')->install(['trash']);
+  }
+}
+
+/**
+ * Grant trash bin access to roles with existing delete permission (#2915).
+ */
+function utexas_update_8173() {
+  // Get static services.
+  $trash_permissions = [
+    'access trash',
+    'purge node entities',
+    'restore node entities',
+    'view deleted entities',
+  ];
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    if ($role->hasPermission('delete any page content')) {
+      foreach ($trash_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $messenger->addMessage(t('Ability to use the trash bit has been granted to the %role role.', [
+        '%role' => $role->label(),
+      ]));
+      $needs_change = TRUE;
+    }
+    if ($needs_change) {
+      $role->save();
+    }
+  }
+}
+
+/**
+ * Track usage of media entities (#1747).
+ */
+function utexas_update_8174() {
+  $module_to_install = 'entity_usage';
+  if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
+    \Drupal::service('module_installer')->install([$module_to_install]);
+  }
+}
+
+/**
+ * Track usage of media entities -- customizations (#1747).
+ */
+function utexas_update_8175() {
+  $module_to_install = 'utexas_entity_usage';
+  if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
+    \Drupal::service('module_installer')->install([$module_to_install]);
+  }
+}
+
+/**
+ * Grant entity usage access to roles with create media permission (#1747).
+ */
+function utexas_update_8176() {
+  $existing_permission = 'create media';
+  $new_permissions = [
+    'access entity usage statistics',
+  ];
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    if ($role->hasPermission($existing_permission)) {
+      foreach ($new_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $messenger->addMessage(t('Ability to access media usage has been granted to the %role role', [
+        '%role' => $role->label(),
+      ]));
+      $needs_change = TRUE;
+    }
+    if ($needs_change) {
+      $role->save();
+    }
+  }
+}
+
+/**
+ * Build tracking information for existing site media (#1747).
+ */
+function utexas_update_8177() {
+  \Drupal::service('entity_usage.batch_manager')->recreate();
+}
+
+/**
+ * Uninstall Admin Toolbar Links Access Filter (#2951).
+ */
+function utexas_update_8178() {
+  if (\Drupal::moduleHandler()->moduleExists('admin_toolbar_links_access_filter') === TRUE) {
+    \Drupal::service('module_installer')->uninstall(['admin_toolbar_links_access_filter']);
+  }
+}
+
+/**
+ * Install the Media File Delete module on existing sites (#1667).
+ */
+function utexas_update_8179() {
+  $module_to_install = 'media_file_delete';
+  if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
+    \Drupal::service('module_installer')->install([$module_to_install]);
+  }
+}
+
+/**
+ * Grant file deletion to roles with media deletion permission (#1667).
+ */
+function utexas_update_8180() {
+  $existing_permission = 'delete media';
+  $new_permissions = [
+    'delete any file',
+    'delete any media',
+  ];
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    if ($role->hasPermission($existing_permission)) {
+      foreach ($new_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $messenger->addMessage(t('Ability to delete files associated with media entities has been granted to the %role role', [
+        '%role' => $role->label(),
+      ]));
+      $needs_change = TRUE;
+    }
+    if ($needs_change) {
+      $role->save();
+    }
+  }
+}
+
+/**
+ * Ensure correct keys on CKEditor list settings (#3062).
+ */
+function utexas_update_11000(array &$sandbox = []) {
+  $config_entity_updater = \Drupal::classResolver(ConfigEntityUpdater::class);
+  $config_entity_updater->update($sandbox, 'editor', function (Editor $editor): bool {
+    // Only try to update editors using CKEditor 5.
+    if ($editor->getEditor() !== 'ckeditor5') {
+      return FALSE;
+    }
+    $settings = $editor->getSettings();
+    if (isset($settings['plugins']['ckeditor5_list'])) {
+      if (!array_key_exists('properties', $settings['plugins']['ckeditor5_list'])) {
+        $properties = $settings['plugins']['ckeditor5_list'];
+        unset($settings['plugins']['ckeditor5_list']);
+        $settings['plugins']['ckeditor5_list'] = [
+          'properties' => $properties,
+        ];
+        $editor->setSettings($settings);
+      }
+    }
+    return TRUE;
+  });
+}
+
+/**
+ * Set page caching to 1 day #2752.
+ */
+function utexas_update_11001() {
+  $config = \Drupal::service('config.factory')->getEditable('system.performance');
+  $config->set('cache.page.max_age', 86400);
+  $config->save();
+}
+
+/**
+ * Uninstall ctools from sites without active dependencies #3112.
+ */
+function utexas_update_11002() {
+  if (InstallationHelper::moduleHasNoActiveDependencies('ctools')) {
+    \Drupal::service('module_installer')->uninstall(['ctools'], FALSE);
+  }
+}
+
+/**
+ * Uninstall ban module #3064.
+ */
+function utexas_update_11003() {
+  $module = 'ban';
+  if (InstallationHelper::moduleHasNoActiveDependencies($module)) {
+    \Drupal::service('module_installer')->uninstall([$module], FALSE);
+  }
+}
+
+/**
+ * Uninstall the utdk_saas module (#3147).
+ */
+function utexas_update_11004() {
+  $module = 'utdk_saas';
+  if (InstallationHelper::moduleHasNoActiveDependencies($module)) {
+    \Drupal::service('module_installer')->uninstall([$module], FALSE);
+  }
+}
+
+/**
+ * Replace "Administer content" with "Administer node published status" #3058.
+ */
+function utexas_update_11005() {
+  $old_permission = 'administer nodes';
+  $new_permission = 'administer node published status';
+  $available_permissions = \Drupal::service('user.permissions')->getPermissions();
+  // Get static services.
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $messenger = \Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    if ($role->hasPermission($old_permission)) {
+      $role->revokePermission($old_permission);
+      $needs_change = TRUE;
+      $messenger->addMessage(t('The old %permission permission has been removed from the %role role.', [
+        '%role' => $role->label(),
+        '%permission' => $old_permission,
+      ]));
+      if (isset($available_permissions[$new_permission])) {
+        $role->grantPermission($new_permission);
+        $messenger->addMessage(t('The new %permission permission has been granted to the %role role.', [
+          '%role' => $role->label(),
+          '%permission' => $new_permission,
+        ]));
+      }
+    }
+    if ($needs_change) {
+      $role->save();
+    }
+  }
+}
+
+/**
+ * Rebuild tracking information for existing site media (#3197).
+ */
+function utexas_update_11006() {
+  \Drupal::service('entity_usage.batch_manager')->recreate();
+}
+
+/**
+ * Explicitly mark existing sites' installation processes complete (#3301).
+ */
+function utexas_update_11007() {
+  $state_api = \Drupal::state();
+  $state_api->set('install_task', 'done');
+}
+
+/**
+ * Install UTexas Google Search existing sites (#3289).
+ */
+function utexas_update_11008() {
+  $module_to_install = 'utexas_google_search';
+  if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
+    \Drupal::service('module_installer')->install([$module_to_install]);
+  }
+}
+
+/**
+ * Remove legacy search elements if no search pages remain (#3289).
+ */
+function utexas_update_11009() {
+  if (!\Drupal::moduleHandler()->moduleExists('search')) {
+    return;
+  }
+  $search_implementations = SearchPage::loadMultiple();
+  if (empty($search_implementations)) {
+    $config = \Drupal::service('config.factory')->getEditable('search.settings');
+    $config->delete();
+    // Remove legacy search permissions.
+    foreach (Role::loadMultiple() as $role) {
+      if ($role->hasPermission('search content')) {
+        $role->revokePermission('search content');
+        $role->save();
+      }
+      if ($role->hasPermission('search Google CSE')) {
+        $role->revokePermission('search Google CSE');
+        $role->save();
+      }
+      if ($role->hasPermission('administer search')) {
+        $role->revokePermission('administer search');
+        $role->save();
+      }
+      if ($role->hasPermission('use advanced search')) {
+        $role->revokePermission('use advanced search');
+        $role->save();
+      }
+    }
+  }
+  $module = 'google_cse';
+  if (InstallationHelper::moduleHasNoActiveDependencies($module, FALSE)) {
+    \Drupal::service('module_installer')->uninstall([$module], FALSE);
+  }
+
+}
+
+/**
+ * Uninstall Layout Builder Restrictions (#3268).
+ */
+function utexas_update_11010() {
+  $module = 'layout_builder_restrictions';
+  if (InstallationHelper::moduleHasNoActiveDependencies($module)) {
+    \Drupal::service('module_installer')->uninstall([$module], FALSE);
+  }
+}
+
+/**
+ * Uninstall UTexas-provided role modules (#3333).
+ */
+function utexas_update_11011() {
+  $modules = [
+    'utexas_role_content_editor',
+    'utexas_role_site_manager',
+  ];
+  foreach ($modules as $module) {
+    if (InstallationHelper::moduleHasNoActiveDependencies($module)) {
+      \Drupal::service('module_installer')->uninstall([$module], FALSE);
+    }
+  }
+}
+
+/**
+ * Uninstall UTexas required links block (#3291).
+ */
+function utexas_update_11012() {
+  $module = 'utexas_block_required_links';
+  if (InstallationHelper::moduleHasNoActiveDependencies($module, FALSE)) {
+    \Drupal::service('module_installer')->uninstall([$module], FALSE);
+  }
+}

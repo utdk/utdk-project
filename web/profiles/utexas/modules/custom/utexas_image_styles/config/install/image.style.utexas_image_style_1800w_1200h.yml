@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_1800w_1200h
+label: '1800w x 1200h (3:2)'
+effects:
+  0255779a-b2d6-407b-ad07-0262080a8131:
+    uuid: 0255779a-b2d6-407b-ad07-0262080a8131
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1800
+      height: 1200
+      anchor: center-center

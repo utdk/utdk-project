@@ -1,0 +1,11 @@
+name: 'UTexas Hero Carousel'
+description: 'Defines a repeating compound field with media, heading and call-to-action.'
+type: module
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:responsive_image'
+  - 'utexas_hero:utexas_hero'
+  - 'utexas_image_styles:utexas_image_styles'
+package: UTexas

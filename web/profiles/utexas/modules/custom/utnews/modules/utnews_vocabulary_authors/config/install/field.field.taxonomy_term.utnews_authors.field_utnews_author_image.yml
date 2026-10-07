@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_utnews_author_image
+    - media.type.utexas_image
+    - taxonomy.vocabulary.utnews_authors
+id: taxonomy_term.utnews_authors.field_utnews_author_image
+field_name: field_utnews_author_image
+entity_type: taxonomy_term
+bundle: utnews_authors
+label: 'Author image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      utexas_image: utexas_image
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - utprof_content_type_profile
+  module:
+    - node
+id: node.field_utprof_email_address
+field_name: field_utprof_email_address
+entity_type: node
+type: email
+settings: {  }
+module: core
+locked: true
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

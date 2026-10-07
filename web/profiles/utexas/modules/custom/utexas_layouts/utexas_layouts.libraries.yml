@@ -1,0 +1,36 @@
+onecol:
+  css:
+    theme:
+      layouts/onecol/layout.css: {}
+      layouts/background-accent.css: {}
+twocol:
+  css:
+    theme:
+      layouts/twocol/twocol.css: {}
+      layouts/background-accent.css: {}
+threecol:
+  css:
+    theme:
+      layouts/threecol/threecol.css: {}
+      layouts/background-accent.css: {}
+fourcol:
+  css:
+    theme:
+      layouts/fourcol/fourcol.css: {}
+      layouts/background-accent.css: {}
+layout_builder_ui:
+  css:
+    theme:
+      theme/layout-builder-ui.css: {}
+  js:
+    js/layout-builder-form-error.js: {}
+    js/sectionBackground.js: {}
+background-colors:
+  css:
+    theme:
+      layouts/background-accent.css: {}
+      theme/background-colors.css: {}
+section-width:
+  css:
+    theme:
+      layouts/section-width.css: {}

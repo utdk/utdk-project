@@ -1,0 +1,276 @@
+.ut-header {
+  border-bottom: 1px solid var(--ut-limestone--t60);
+
+  .block {
+    margin: 0;
+  }
+
+  a[class*="ut-btn"],
+  p {
+    margin: 0;
+  }
+
+  nav>ul:not(.utexas-primary-menu) {
+    list-style: none;
+    display: flex;
+    gap: 21px;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+
+    li a {
+      border: none;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      font-weight: normal;
+      color: var(--ut-charcoal--s40);
+
+      &:hover {
+        text-decoration: underline;
+        background-color: transparent;
+        color: var(--ut-burntorange);
+      }
+    }
+  }
+
+  .ut-upper-header {
+    border-top: 4px solid var(--ut-burntorange);
+    background: var(--ut-limestone--t15);
+    height: 48px;
+
+    .ut-parent-entity {
+      a {
+        color: var(--ut-limestone--s50);
+        font-family: var(--ut-font--serif);
+        font-style: italic;
+        padding-left: 21px;
+        border-image: linear-gradient(transparent 20%, var(--ut-limestone) 20% 80%, transparent 80%) 0 0 0 1 / 1px;
+      }
+    }
+
+    a.ut-wordmark {
+      color: var(--ut-burntorange--s10);
+      font-weight: 700;
+      padding-right: 1rem;
+      text-transform: uppercase;
+      letter-spacing: .87px;
+      font-size: .875rem;
+      line-height: 1.25rem;
+    }
+  }
+
+  .utexas-menu-wrapper {
+    align-items: stretch;
+    z-index: 4;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
+  .region-utility-nav {
+
+    .block-menu-block .subnav {
+      li a {
+        color: var(--ut-limestone--s50);
+
+        &:hover {
+          color: var(--ut-limestone--s60);
+        }
+      }
+    }
+
+    .block__ut-social-links--items {
+      gap: 0 12px;
+
+      svg {
+        fill: var(--ut-limestone--s50);
+
+        &:hover {
+          fill: var(--ut-limestone--s60);
+        }
+      }
+    }
+
+    .ut-flex-content-area-wrapper {
+      display: flex;
+
+      --ipr-grid-min-min-size: 0;
+      gap: 0 10px;
+
+      .ut-flex-content-area {
+        margin-bottom: 0;
+      }
+    }
+
+    a[class*="ut-btn"] {
+      padding: .25rem .75rem;
+      font-size: .75rem;
+    }
+  }
+  .region-utility-nav,
+  .region-header-primary,
+  .region-header-tertiary,
+  .region-header-secondary {
+    display: flex;
+    gap: 0 30px;
+    nav > ul {
+      font-size: 0.875rem;
+      li a {
+        &:hover {
+          color: var(--ut-charcoal--s40);
+        }
+      }
+    }
+  }
+  .region-utility-nav,
+  .region-header-primary,
+  .region-header-tertiary {
+    align-items: center;
+  }
+  @media (width <1200px) {
+    background-color: var(--ut-limestone--t15);
+
+    .region-utility-nav,
+    .region-header-tertiary,
+    .region-header-secondary {
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav>ul:not(.utexas-primary-menu) {
+      gap: 20px;
+    }
+
+    .navbar-collapse {
+      border-top: 1px solid var(--ut-limestone--t60);
+      padding-left: 12px;
+      padding-bottom: 15px;
+
+      .ut-search-form .form-search {
+        width: 350px;
+        /* Must use important to override google-cse */
+        background-color: var(--ut-white) !important;
+      }
+    }
+    .utexas-navbar-inner {
+      margin-right: 0;
+    }
+    .utexas-menu-wrapper {
+      padding: 0;
+    }
+    .utexas-primary-wrapper {
+      padding-right: 0;
+    }
+    .mobile-header-primary-wrapper {
+      background-color: var(--ut-white);
+    }
+    .mobile-utility-nav .region-utility-nav {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Mobile menu toggle button */
+    .navbar-toggler {
+      background-color: var(--ut-white);
+      border-color: var(--ut-limestone--t15);
+      border-width: 0 0 0 1px;
+      border-radius: 0;
+      padding: 1.5rem 1.5rem 0;
+      width: 100px;
+
+      .navbar-text {
+        padding-top: 1rem;
+      }
+      .navbar-text-closed,
+      .navbar-text-open {
+        color: var(--ut-burntorange);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .navbar-text-open {
+        display: none;
+      }
+      .navbar-text-closed {
+        display: block;
+      }
+      /* The "opened" state of the mobile navigation */
+      &[aria-expanded="true"] {
+        background-color: var(--ut-limestone--t15);
+
+        .navbar-text-open {
+          display: block;
+        }
+        .navbar-text-closed {
+          display: none;
+        }
+        .navbar-visualisation-open::before,
+        .navbar-visualisation-open::after {
+          content: "";
+          display: block;
+          margin: -4px auto 0;
+          height: 4px;
+          background: var(--ut-burntorange);
+        }
+        .navbar-visualisation-open::before {
+          transform: rotate(-45deg);
+        }
+        .navbar-visualisation-open::after {
+          transform: rotate(45deg);
+        }
+        .navbar-visualisation-closed {
+          display: none;
+        }
+      }
+      .navbar-visualisation-open::before,
+      .navbar-visualisation-open::after {
+        display: none;
+      }
+      .navbar-visualisation-closed {
+        width: 100%;
+        position: relative;
+        display: block;
+        height: 13px;
+        border-top: 4px solid var(--ut-burntorange);
+        border-bottom: 4px solid var(--ut-burntorange);
+        margin-bottom: -0.25rem;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -13px;
+          left: 0;
+          width: 100%;
+          border-top: 4px solid var(--ut-burntorange);
+        }
+      }
+
+      &:hover {
+        background-color: var(--ut-burntorange);
+        .navbar-text {
+          color: var(--ut-white);
+        }
+        .navbar-visualisation-closed {
+          border-top: 4px solid var(--ut-white);
+          border-bottom: 4px solid var(--ut-white);
+          &::before {
+            border-top: 4px solid var(--ut-white);
+          }
+        }
+        .navbar-visualisation-open::before,
+        .navbar-visualisation-open::after {
+          background: var(--ut-white);
+        }
+      }
+      &:focus-visible {
+        box-shadow: 0 0 0 var(--ut-white);
+        border: 1px solid var(--ut-burntorange);
+      }
+      &:focus {
+        box-shadow: 0 0 0 var(--ut-white);
+      }
+    }
+  }
+}

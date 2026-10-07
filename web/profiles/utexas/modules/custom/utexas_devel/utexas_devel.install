@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Module for UTDK development.
+ */
+
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Language\Language;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\utexas_devel\DemoContent;
+
+/**
+ * Implements hook_install().
+ */
+function utexas_devel_install() {
+  /** @var \Drupal\file\FileRepositoryInterface $file_repository */
+  $file_repository = \Drupal::service('file.repository');
+  $file_system = \Drupal::service('file_system');
+  $filedir = 'public://utexas_devel/';
+  $file_system->prepareDirectory($filedir, FileSystemInterface::CREATE_DIRECTORY);
+  $path = \Drupal::service('extension.list.module')->getPath('utexas_devel') . '/assets/tower-lighting.gif';
+  $image = File::create();
+  $image->setFileUri($path);
+  $image->setOwnerId(\Drupal::currentUser()->id());
+  $image->setMimeType(\Drupal::service('file.mime_type.guesser')->guessMimeType($path));
+  $image->setFileName(basename($path));
+  $destination_dir = 'public://generated_sample';
+  $file_system->prepareDirectory($destination_dir, FileSystemInterface::CREATE_DIRECTORY);
+  $destination = $destination_dir . '/' . basename($path);
+  $file = $file_repository->copy($image, $destination);
+  $image_media = Media::create([
+    'name' => 'Image 1',
+    'bundle' => 'utexas_image',
+    'uid' => '1',
+    'langcode' => Language::LANGCODE_NOT_SPECIFIED,
+    'status' => '1',
+    'field_utexas_media_image' => [
+      'target_id' => $file->id(),
+      'alt' => t('Test Alt Text'),
+      'title' => t('Test Title Text'),
+    ],
+  ]);
+  $image_media->save();
+  $image_media = $image_media->id();
+
+  $featured_highlight = DemoContent::featuredHighlight($image_media);
+  DemoContent::createFromConfiguration('Featured Highlight', $featured_highlight['block1'], $featured_highlight['block2']);
+
+  $flex_content_area = DemoContent::flexContentArea($image_media);
+  DemoContent::createFromConfiguration('Flex Content Area', $flex_content_area['block1'], $flex_content_area['block2']);
+
+  $promo_list = DemoContent::promoList($image_media);
+  DemoContent::createFromConfiguration('Promo List', $promo_list['block1'], $promo_list['block2']);
+
+  $promo_unit = DemoContent::promoUnit($image_media);
+  DemoContent::createFromConfiguration('Promo Unit', $promo_unit['block1'], $promo_unit['block2']);
+
+  $photo_content_area = DemoContent::photoContentArea($image_media);
+  DemoContent::createFromConfiguration('Photo Content Area', $photo_content_area['block1'], $photo_content_area['block2']);
+
+  $hero = DemoContent::hero($image_media, 'utexas_hero');
+  DemoContent::createFromConfiguration('Hero Default', $hero['block1'], $hero['block2']);
+
+  $hero1 = DemoContent::hero($image_media, 'utexas_hero_1');
+  DemoContent::createFromConfiguration('Hero Style 1', $hero1['block1'], $hero1['block2']);
+
+  $hero2 = DemoContent::hero($image_media, 'utexas_hero_2');
+  DemoContent::createFromConfiguration('Hero Style 2', $hero2['block1'], $hero2['block2']);
+
+  $hero3 = DemoContent::hero($image_media, 'utexas_hero_3');
+  DemoContent::createFromConfiguration('Hero Style 3', $hero3['block1'], $hero3['block2']);
+
+  $hero4 = DemoContent::hero($image_media, 'utexas_hero_4');
+  DemoContent::createFromConfiguration('Hero Style 4', $hero4['block1'], $hero4['block2']);
+
+  $hero5 = DemoContent::hero($image_media, 'utexas_hero_5');
+  DemoContent::createFromConfiguration('Hero Style 5', $hero5['block1'], $hero5['block2']);
+
+  $quick_links = DemoContent::quickLinks();
+  DemoContent::createFromConfiguration('Quick Links', $quick_links['block1'], $quick_links['block2']);
+
+  $resources = DemoContent::resources($image_media);
+  DemoContent::createFromConfiguration('Resources', $resources['block1'], $resources['block2']);
+}

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_hero_carousel
+    - field.storage.block_content.field_hero_carousel_fade
+id: block_content.utexas_hero_carousel.field_hero_carousel_fade
+field_name: field_hero_carousel_fade
+entity_type: block_content
+bundle: utexas_hero_carousel
+label: FadeIn/Out
+description: 'If enabled, images will fade in rather than slide horizontally.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

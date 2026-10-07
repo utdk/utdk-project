@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utnews_article_listing
+    - field.storage.block_content.field_utnews_display_dates
+id: block_content.utnews_article_listing.field_utnews_display_dates
+field_name: field_utnews_display_dates
+entity_type: block_content
+bundle: utnews_article_listing
+label: 'Display publication dates'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

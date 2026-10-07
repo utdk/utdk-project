@@ -1,0 +1,7 @@
+name: 'UTexas Google Search'
+type: module
+description: 'Use Google Programmable Search to search your site and/or any other sites.'
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - 'drupal:block'
+package: UTexas

@@ -1,0 +1,58 @@
+global:
+  css:
+    base:
+      css/typography--fonts.css: {}
+      css/variables.css: {}
+      css/layout--align-override.css: {}
+      css/layout--base.css: {}
+      css/layout--footer.css: {}
+      css/layout--header.css: {}
+      css/layout--grid.css: {}
+      css/layout--main-logo.css: {}
+      css/layout--menu-main.css: {}
+      css/typography--base.css: {}
+      css/typography--details.css: {}
+      css/typography--facets.css: {}
+      css/typography--links.css: {}
+      css/typography--tabs.css: {}
+      css/buttons.css: {}
+      css/block--featured-highlight.css: {}
+      css/block--feed-block.css: {}
+      css/block--flex-content-area.css: {}
+      css/block--hero.css: {}
+      css/block--hero-carousel.css: {}
+      css/block--instagram.css: {}
+      css/block--photo-content-area.css: {}
+      css/block--promo-list.css: {}
+      css/block--promo-unit.css: {}
+      css/block--quick-links.css: {}
+      css/block--resources.css: {}
+      css/block--social-links.css: {}
+      css/layout--inner-rail.css: {}
+      css/search.css: {}
+      css/utevent/utevent--base.css: {}
+      css/utevent/utevent--calendar.css: {}
+      css/utevent/utevent--listing-block.css: {}
+      css/utevent/utevent--listing-page.css: {}
+      css/utevent/utevent--view-mode--full.css: {}
+      css/utnews/utnews--view-mode--full.css: {}
+      css/utnews/utnews--view-mode--teaser.css: {}
+      css/utnews/utnews--listings.css: {}
+      css/utprof/utprof--listing.css: {}
+      css/utprof/utprof--view-mode--full.css: {}
+      css/utprof/utprof--view-mode--utexas-basic.css: {}
+      css/utprof/utprof--view-mode--utexas-name-only.css: {}
+      css/utprof/utprof--view-mode--utexas-prominent.css: {}
+      css/drupal--action-tabs.css: {}
+      css/drupal--contrib--menu-block.css: {}
+      css/drupal--field-labels.css: {}
+      css/drupal--layout-builder-admin.css: {}
+      css/drupal--pager.css: {}
+      css/drupal--views-exposed-filters.css: {}
+      css/forms.css: {}
+  js:
+    js/search-facets.js: {}
+
+  dependencies:
+    # Load Bootstrap base CSS provided by the Drupal Kit kernel on all pages:
+    - utexas/bootstrap5-base

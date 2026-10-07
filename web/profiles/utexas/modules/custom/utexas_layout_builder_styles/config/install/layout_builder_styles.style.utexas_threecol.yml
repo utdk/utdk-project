@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_threecol
+label: 'Limit to 3 items per row'
+classes: utexas-threecol
+type: component
+group: utexas_items_per_row
+weight: 102
+block_restrictions:
+  - 'inline_block:social_links'
+  - 'inline_block:utexas_flex_content_area'
+  - 'inline_block:utexas_promo_unit'
+  - 'inline_block:utexas_quick_links'
+  - 'inline_block:utexas_resources'

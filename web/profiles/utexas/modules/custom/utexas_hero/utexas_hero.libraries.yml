@@ -1,0 +1,3 @@
+hero_formatters_split:
+  js:
+    js/hero-formatters-split.js: {}

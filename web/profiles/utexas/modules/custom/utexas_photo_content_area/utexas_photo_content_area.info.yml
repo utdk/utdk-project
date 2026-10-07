@@ -1,0 +1,13 @@
+name: 'UTexas Photo Content Area'
+type: module
+description: 'A field with photo, credit, headline, copy, and links.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:layout_builder'
+  - 'drupal:responsive_image'
+  - 'media_library_form_element:media_library_form_element'
+  - 'utexas_image_styles:utexas_image_styles'
+  - 'utexas_photo_content_area:utexas_photo_content_area'

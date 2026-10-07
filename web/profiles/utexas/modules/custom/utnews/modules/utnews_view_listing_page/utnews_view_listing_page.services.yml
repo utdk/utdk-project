@@ -1,0 +1,15 @@
+parameters:
+  utnews_view_listing_page.skip_procedural_hook_scan: true
+
+services:
+
+  utnews_view_listing_page.overrider:
+    class: Drupal\utnews_view_listing_page\Config\Overrider
+    tags:
+      - {name: config.factory.override, priority: 5}
+
+  utnews_view_listing_page.facet_cache_skip:
+    class: Drupal\utnews_view_listing_page\StackMiddleware\FacetCacheSkip
+    arguments: ['@cache.page', '@page_cache_request_policy', '@page_cache_response_policy', '@event_dispatcher']
+    tags:
+      - { name: http_middleware, priority: 250 }

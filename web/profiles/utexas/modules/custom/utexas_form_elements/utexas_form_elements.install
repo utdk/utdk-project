@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Form Elements module.
+ */
+
+/**
+ * Enable Media Library Form Element.
+ */
+function utexas_form_elements_update_8101() {
+  // Install the module.
+  // This replaces the previously used custom media_library_element.
+  // See https://github.austin.utexas.edu/eis1-wcs/utdk_profile/issues/775.
+  \Drupal::service('module_installer')->install(['media_library_form_element']);
+}

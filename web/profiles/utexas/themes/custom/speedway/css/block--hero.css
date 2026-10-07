@@ -1,0 +1,363 @@
+/* General defaults for Hero elements */
+.ut-hero {
+  position: relative;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Styling for image focal point */
+  &.center {
+    background-position: center;
+  }
+  &.left {
+    background-position: left;
+  }
+  &.right {
+    background-position: right;
+  }
+  /* This positional variant is used by Hero Styles 1 & 5 */
+  .hero-img {
+    &.center {
+      background-position: center;
+    }
+    &.left {
+      background-position: left;
+    }
+    &.right {
+      background-position: right;
+    }
+  }
+
+  .hero-caption {
+    padding-right: 0.5rem;
+  }
+  .hero-headline {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 0.5rem;
+    @media screen and (min-width: 1200px) {
+      font-size: 2.4375rem;
+    }
+  }
+  .hero-cta {
+    white-space: nowrap;
+  }
+  .credit {
+    font-style: italic;
+    color: var(--ut-shade--s40);
+  }
+  .hero--caption-credit-wrapper {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 0.9375;
+    padding: 0.625rem 0;
+  }
+  /* Increase font size slightly on non-mobile screens */
+  @media screen and (min-width: 600px) {
+    .hero--caption-credit-wrapper {
+      font-size: 0.875rem;
+      line-height: 1.25;
+    }
+  }
+}
+
+/* Hero Style 1 */
+.hero--photo-orange-insert {
+  /* On small screens, Hero 1 content sits below the image with solid background */
+  .hero-content {
+    background: var(--ut-burntorange);
+    height: auto;
+    margin: auto;
+    max-width: 73.75em;
+    padding: 0.75rem 1rem;
+    /* On tablet-width screens and larger, change the background to a gradient
+    and position the text box over the image */
+    @media screen and (min-width: 900px) {
+      align-self: center;
+      height: 80%;
+      padding: 2rem;
+      position: absolute;
+      right: 1rem;
+      top: 10%;
+      width: 44%;
+      background: rgb(157 71 0 / 85%);
+    }
+  }
+
+  .hero-callout,
+  .hero-headline,
+  .hero-subhead {
+    color: var(--ut-white);
+  }
+  .hero-subhead {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    @media screen and (min-width: 900px) {
+      font-size: 1.25rem;
+    }
+  }
+  .hero-img {
+    background-size: cover;
+    height: 300px;
+    @media screen and (min-width: 900px) {
+      height: 543px;
+    }
+  }
+  .hero-callout {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    @media screen and (min-width: 900px) {
+      height: 100%;
+    }
+  }
+  .hero-cta {
+    margin-top: auto;
+  }
+  .hero-cta .ut-btn {
+    border: 1px solid var(--ut-white);
+  }
+}
+
+/* Hero Style 2 */
+.hero--photo-gradient {
+  background-size: cover;
+  height: 300px;
+
+  @media screen and (min-width: 900px) {
+    height: 543px;
+  }
+  .hero-callout {
+    padding: 1rem;
+    max-width: 73.75em;
+    margin: auto;
+    @media screen and (min-width: 900px) {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+    @media screen and (min-width: 1200px) {
+      padding: 1.5rem 1.25rem;
+    }
+  }
+  .hero-headline {
+    color: var(--ut-white);
+    @media screen and (min-width: 900px) {
+      margin-right: 2rem;
+    }
+  }
+  .hero-content {
+    background: linear-gradient(
+      to bottom,
+      rgb(31 38 43 / 50%) 0%,
+      rgb(31 38 43 / 90%) 82%,
+      rgb(31 38 43 / 90%) 100%
+    );
+    bottom: 0;
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+/* Hero Style 3 */
+.hero--photo-white-notch {
+  background-size: cover;
+  height: 300px;
+
+  @media screen and (min-width: 900px) {
+    height: 543px;
+  }
+
+  .hero-content {
+    bottom: 0;
+    height: auto;
+    max-width: 100%;
+    position: absolute;
+    width: 100%;
+    /* Leave a "notch" on the left/right on small screens to distinguish the
+    white background of the content from other regions */
+    padding: 0 1rem;
+  }
+  .hero-callout {
+    /* On small screens, text elements vertically stack depending on space */
+    background-color: var(--ut-white);
+    margin: auto;
+    max-width: 73.75em;
+    padding: 1rem 1.25rem;
+    overflow: auto;
+    /* On medium screens and above, text elements are horizontally spaced */
+    @media screen and (min-width: 900px) {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+    @media screen and (min-width: 1200px) {
+      padding: 1.5rem 1.25rem;
+    }
+  }
+  .hero-callout > div:first-child {
+    /* Avoid Call To Action being too close to headline text */
+    margin-right: 1rem;
+  }
+  .hero-headline {
+    color: var(--ut-charcoal);
+    padding-bottom: 0.25rem;
+    font-size: 1.6875rem;
+    line-height: 1.25;
+    @media screen and (min-width: 1200px) {
+      padding-bottom: 0;
+      font-size: 2rem;
+    }
+  }
+  .hero-subhead {
+    font-size: 1em;
+    line-height: 1.25;
+    float: left;
+    padding-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    padding-right: 10px;
+    @media screen and (min-width: 1200px) {
+      font-size: 1.25rem;
+    }
+  }
+  .hero-cta {
+    display: inline-block;
+    /* On small screens, the CTA stacks below the headline and subhead */
+    @media screen and (min-width: 900px) {
+      display: block;
+    }
+  }
+  .ut-btn {
+    /* On small screens, the CTA displays like a link rather than button */
+    @media screen and (max-width: 900px) {
+      color: var(--ut-burntorange);
+      background-color: var(--ut-white);
+      font-style: italic;
+      border: none;
+      padding: inherit;
+      &:hover {
+        color: var(--ut-burntorange--s20) !important;
+      }
+    }
+  }
+}
+
+/* Hero Style 4 */
+.ut-hero.hero--blue-bar {
+  @media screen and (min-width: 900px) {
+    img {
+      width: 100%;
+    }
+  }
+  .hero-callout {
+    background-color: var(--ut-bluebonnet);
+    padding: 1rem 1rem 0;
+    overflow: auto;
+    @media screen and (min-width: 900px) {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 1.25rem;
+    }
+  }
+  .hero-headline {
+    color: var(--ut-white);
+    font-size: 1.6875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    padding-bottom: 0.5rem;
+    @media screen and (min-width: 900px) {
+      font-size: 1.9375rem;
+    }
+  }
+  .hero-subhead {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    color: var(--ut-limestone--t20);
+    margin-right: 6px;
+    @media screen and (min-width: 900px) {
+      font-size: 1.25rem;
+    }
+  }
+  .hero-cta {
+    /* On small screens, the CTA stacks below the headline and subhead */
+    display: block;
+    margin: 1rem 0;
+    @media screen and (min-width: 900px) {
+      display: inline;
+      margin: 0;
+    }
+  }
+  .text-box {
+    /* Avoid CTA being too close to headline/subhead */
+    @media screen and (min-width: 900px) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+/* Override Bootstrap gutters for full-width context. */
+.container-fluid .ut-hero.hero--blue-bar .hero-content {
+  padding: 0;
+}
+
+/* Hero Style 5 */
+.ut-hero.hero--half-n-half {
+  .hero-content {
+    height: 100%;
+    margin: auto;
+    display: flex;
+    /* On small screens, all content vertically stacks in one column */
+    flex-direction: column;
+    @media screen and (min-width: 900px) {
+      /* On larger screens, position textual content to left side of image */
+      flex-direction: row-reverse;
+    }
+  }
+  .hero-callout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+  }
+  .hero-headline {
+    color: var(--ut-charcoal);
+    padding: 0.625rem 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    @media screen and (min-width: 900px) {
+      font-size: 2rem;
+    }
+    @media screen and (min-width: 1200px) {
+      font-size: 2.5rem;
+    }
+  }
+  .hero-cta,
+  .text-box {
+    padding: 1rem;
+    width: 100%;
+    @media screen and (min-width: 900px) {
+      padding: 1rem 1.25rem;
+      width: 70%;
+    }
+  }
+  .hero-img {
+    background-size: cover;
+    height: 300px;
+    @media screen and (min-width: 900px) {
+      flex: 1;
+      height: 543px;
+    }
+  }
+}

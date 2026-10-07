@@ -1,0 +1,160 @@
+
+.utexas-instagram-feed {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.utexas-instagram-feed__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  align-items: flex-start;
+  display: flex;
+  min-width: auto;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.utexas-instagram-feed__list-item {
+  position: relative;
+  flex: 0 1 30%;
+  margin-left: 5%;
+  min-width: 30%;
+  z-index: 1;
+
+  @media screen and (max-width: 650px) {
+    flex: 0 0 100%;
+    padding: 0 20px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+}
+
+/* Controls */
+
+.utexas-instagram-feed__controls {
+  display: flex;
+  justify-content: flex-end;
+
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
+
+  span {
+    width: 60px;
+    display: block;
+    height: 60px;
+  }
+
+  svg {
+    height: 100%;
+    width: 100%;
+    overflow: visible;
+
+    path {
+      fill: var(--ut-burntorange);
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  svg:hover,
+  svg:focus {
+    circle {
+      fill: var(--ut-burntorange);
+    }
+    path {
+      fill: var(--ut-white);
+    }
+  }
+}
+
+.utexas-instagram-feed__controls-prev {
+  transform: rotate(180deg);
+  position: relative;
+  top:-12px;
+}
+
+/* Post */
+
+.utexas-instagram-feed-post {
+  max-width: 100%;
+  overflow: auto;
+  position: relative;
+  z-index: 10;
+
+  .utexas-instagram-feed-post__link {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    font-size: 0;
+    height: 100%;
+    width: 100%;
+
+    &:focus  {
+      border: 4px solid var(--ut-charcoal--s40);
+      outline: 2px dotted var(--ut-charcoal--t40);
+      outline-offset: -3px;
+    }
+  }
+}
+
+/* Other post data */
+
+.utexas-instagram-feed-post__other-data {
+  color: var(--ut-white);
+  font-size: 1.25rem;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  display: none;
+  background: rgb(0 0 0 / 75%);
+  cursor: pointer;
+  opacity: 1;
+  padding: 20px 30px;
+  width: 100%;
+
+  .name {
+    margin-bottom: 10px;
+  }
+
+  .caption p:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .utexas-instagram-feed-post__link:focus~.utexas-instagram-feed-post__other-data,
+  .utexas-instagram-feed-post__link:hover~.utexas-instagram-feed-post__other-data {
+    display: block;
+  }
+}
+
+
+/* Image */
+
+/* Ensure that all images are "cropped square." */
+.utexas-instagram-feed-post__image-wrapper {
+  position: relative;
+  &::after {
+    content: "";
+    display: block;
+    /* 100% is based on the width of the element, rather than the height */
+    padding-bottom: 100%;
+  }
+}
+
+.utexas-instagram-feed-post__image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+}

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_280w_152h
+label: '280w x 152h (1.84:1)'
+effects:
+  a8e34741-be30-4151-b85a-32f2073ffc81:
+    uuid: a8e34741-be30-4151-b85a-32f2073ffc81
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 280
+      height: 152
+      anchor: center-center

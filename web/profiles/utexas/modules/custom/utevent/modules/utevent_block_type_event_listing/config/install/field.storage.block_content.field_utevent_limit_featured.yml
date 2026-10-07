@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_utevent_limit_featured
+field_name: field_utevent_limit_featured
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: all
+      label: 'Do not limit events'
+    -
+      value: featured
+      label: 'Limit to events marked "Featured"'
+    -
+      value: not-featured
+      label: 'Limit to events <strong>not</strong> marked "Featured"'
+  allowed_values_function: ''
+module: options
+locked: true
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

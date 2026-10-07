@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_450w_600h
+label: '450w x 600h (1:1.33)'
+effects:
+  b345a3ed-6a5a-4619-9d3c-4e0bdd8e48b0:
+    uuid: b345a3ed-6a5a-4619-9d3c-4e0bdd8e48b0
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 450
+      height: 600
+      anchor: center-center

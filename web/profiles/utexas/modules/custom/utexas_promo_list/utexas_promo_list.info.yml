@@ -1,0 +1,13 @@
+name: 'UTexas Promo List'
+type: module
+description: 'Provide a compound field with repeatable content, along with a block type for usage.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:layout_builder'
+  - 'drupal:responsive_image'
+  - 'media_library_form_element:media_library_form_element'
+  - 'utexas_image_styles:utexas_image_styles'
+  - 'utexas_promo_list:utexas_promo_list'

@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * UT News base module installation file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function utnews_install() {
+  // Enable this feature's read-only functionality. We do this in a
+  // hook_install() implementation so that the module may be uninstalled.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_readonly']);
+  }
+  // Enable this feature's dynamic overrides module. We do this here so that the
+  // module may be uninstalled.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_overrides') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_overrides']);
+  }
+}
+
+/**
+ * Enable the utnews_readonly module.
+ */
+function utnews_update_8101() {
+  // Enable this features read-only functionality.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_readonly']);
+  }
+}
+
+/**
+ * Enable utnews_overrides by default on new & existing sites (#195).
+ */
+function utnews_update_8102() {
+  // Enable this features overrider functionality.
+  if (\Drupal::moduleHandler()->moduleExists('utnews_overrides') === FALSE) {
+    \Drupal::service('module_installer')->install(['utnews_overrides']);
+  }
+}

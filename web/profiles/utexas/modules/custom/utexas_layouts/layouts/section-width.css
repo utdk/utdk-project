@@ -1,0 +1,8 @@
+.readable.container,
+.readable.container-xl {
+  max-width: 830px;
+}
+
+.layout__region pre {
+  white-space: pre-wrap;
+}

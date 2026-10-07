@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_hero
+label: Hero
+revision: 1
+description: 'Provides a compound field with media, heading, subheading, link, caption and credit.'

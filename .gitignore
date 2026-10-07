@@ -150,6 +150,8 @@ web/sites/all/drush
 
 # Packages #
 ############
+node_modules
+/node_modules/
 *.7z
 *.dmg
 *.gz
@@ -171,12 +173,17 @@ web/sites/all/drush
 ######################
 .DS_Store*
 ehthumbs.db
+Icon
 Thumbs.db
 ._*
 
 # Vim generated files #
 ######################
 *.un~
+
+# PhpStorm generated files #
+###########################
+.idea
 
 # SASS #
 ##########

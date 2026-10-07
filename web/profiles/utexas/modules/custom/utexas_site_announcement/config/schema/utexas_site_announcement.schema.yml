@@ -1,0 +1,33 @@
+utexas_site_announcement.utexas_announcement_icon.*:
+  type: config_entity
+  label: 'UTexas Announcement Icon'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    icon:
+      type: string
+      label: 'Icon'
+    uuid:
+      type: string
+utexas_site_announcement.utexas_announcement_color_scheme.*:
+  type: config_entity
+  label: 'UTexas Announcement Color Scheme'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    background_color:
+      type: string
+      label: 'Background Color'
+    text_color:
+      type: string
+      label: 'Text Color'
+    uuid:
+      type: string

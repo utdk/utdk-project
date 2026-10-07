@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Instagram module.
+ */
+
+/**
+ * Add headline field (#2207).
+ */
+function utexas_instagram_update_10001() {
+  \Drupal::service('features.manager')->import([
+    'utexas_instagram',
+  ], TRUE);
+}

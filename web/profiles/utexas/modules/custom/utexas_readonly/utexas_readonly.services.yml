@@ -1,0 +1,16 @@
+services:
+  utexas_readonly.route_subscriber:
+    class: Drupal\utexas_readonly\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  access_check.utexas:
+    class: Drupal\utexas_readonly\Access\UtexasReadOnlyAccess
+    arguments: ["@current_route_match"]
+    tags:
+      - { name: access_check, applies_to: _utexas }
+  utexas_readonly.overrider:
+    class: Drupal\utexas_readonly\Config\ConfigOverrides
+    tags:
+      - {name: config.factory.override, priority: 5}
+parameters:
+  utexas_readonly.skip_procedural_hook_scan: true

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.utexas_hero_1
+label: 'Hero : Style 1'
+description: ''
+targetEntityType: block_content
+cache: true

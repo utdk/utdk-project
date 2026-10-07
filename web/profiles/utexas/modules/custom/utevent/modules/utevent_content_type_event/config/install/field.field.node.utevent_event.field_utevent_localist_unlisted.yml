@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utevent_localist_unlisted
+    - node.type.utevent_event
+id: node.utevent_event.field_utevent_localist_unlisted
+field_name: field_utevent_localist_unlisted
+entity_type: node
+bundle: utevent_event
+label: 'Do not display this event publicly on calendar.utexas.edu'
+description: 'When this checkbox is selected, events will be marked as "Unlisted" in <a href="https://calendar.utexas.edu">calendar.utexas.edu</a>. When unselected, events will be public.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

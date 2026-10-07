@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for UTexas Photo Content Area.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Issue #1028: Support custom link options in Photo Content Area links.
+ */
+function utexas_photo_content_area_update_8101() {
+  // Update 'url' value keys to 'uri' in the blob field. MySQL auto-converts it
+  // back to blob on execute ("save").
+  $database_connection = Database::getConnection();
+  $field_name = 'field_block_pca_links';
+  $old_value = '"url";';
+  $new_value = '"uri";';
+  $tables = ['block_content__field_block_pca', 'block_content_revision__field_block_pca'];
+  foreach ($tables as $table_name) {
+    $database_connection->update($table_name)
+      ->expression($field_name, 'replace(CONVERT(' . $field_name . ' USING utf8), :old, :new)', [
+        ':old' => $old_value,
+        ':new' => $new_value,
+      ])
+      ->execute();
+  }
+}

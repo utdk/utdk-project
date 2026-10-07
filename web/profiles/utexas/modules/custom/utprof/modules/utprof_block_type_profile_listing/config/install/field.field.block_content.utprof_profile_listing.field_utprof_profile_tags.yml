@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utprof_profile_listing
+    - field.storage.block_content.field_utprof_profile_tags
+    - taxonomy.vocabulary.utprof_tags
+id: block_content.utprof_profile_listing.field_utprof_profile_tags
+field_name: field_utprof_profile_tags
+entity_type: block_content
+bundle: utprof_profile_listing
+label: 'Limit to profiles with the following tag(s):'
+description: 'These tags do not display to end-users. Select one or more to further limit which Profiles are displayed.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      utprof_tags: utprof_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,14 @@
+name: 'View - Profiles'
+description: 'Provides the default listing view for profiles, filterable by tag and group, using view modes for display'
+type: module
+core_version_requirement: ^10 || ^11
+package: 'UT Drupal Kit Profile Feature'
+dependencies:
+  - 'drupal:node'
+  - 'drupal:taxonomy'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'utprof:utprof'
+  - 'utprof:utprof_content_type_profile'
+  - 'utprof:utprof_vocabulary_groups'
+  - 'utprof:utprof_vocabulary_tags'

@@ -1,0 +1,5 @@
+services:
+  utexas.commands:
+    class: \Drupal\utexas\Commands\UtexasPermissions
+    tags:
+      - { name: drush.command }

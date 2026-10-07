@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_promo_list
+    - field.storage.block_content.field_block_pl
+  module:
+    - utexas_promo_list
+id: block_content.utexas_promo_list.field_block_pl
+field_name: field_block_pl
+entity_type: block_content
+bundle: utexas_promo_list
+label: 'Promo List'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: utexas_promo_list

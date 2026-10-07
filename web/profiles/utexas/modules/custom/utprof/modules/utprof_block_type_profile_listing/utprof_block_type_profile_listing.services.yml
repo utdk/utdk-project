@@ -1,0 +1,2 @@
+parameters:
+  utprof_block_type_profile_listing.skip_procedural_hook_scan: true

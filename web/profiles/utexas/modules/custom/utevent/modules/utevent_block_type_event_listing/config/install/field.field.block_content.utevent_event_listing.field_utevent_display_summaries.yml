@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utevent_event_listing
+    - field.storage.block_content.field_utevent_display_summaries
+id: block_content.utevent_event_listing.field_utevent_display_summaries
+field_name: field_utevent_display_summaries
+entity_type: block_content
+bundle: utevent_event_listing
+label: 'Display event summaries'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

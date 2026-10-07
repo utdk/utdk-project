@@ -1,0 +1,48 @@
+/*
+ * @file
+ * Provides the layout styles for three-column layout section.
+ */
+
+.utexas-layout--threecol .utexas-layout--threecol-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3%;
+}
+
+.utexas-layout--threecol .utexas-layout--threecol-wrapper > .layout__region {
+  flex: 1 1 100%;
+  margin-left: 3%;
+}
+
+/* Reset for no-padding-column */
+.utexas-layout--threecol.utexas-layout-no-padding .utexas-layout--threecol-wrapper,
+.utexas-layout--threecol.utexas-layout-no-padding .utexas-layout--threecol-wrapper > * {
+  margin-left: 0;
+}
+
+@media screen and (min-width: 600px) and (max-width:991px) {
+  .utexas-layout--threecol .utexas-layout--threecol-wrapper>.layout__region {
+    flex: 1 1 40%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .utexas-layout--threecol.utexas-layout--threecol--25-50-25 .utexas-layout--threecol-wrapper > .layout__region--first,
+  .utexas-layout--threecol.utexas-layout--threecol--25-50-25 .utexas-layout--threecol-wrapper > .layout__region--third,
+  .utexas-layout--threecol.utexas-layout--threecol--25-25-50 .utexas-layout--threecol-wrapper > .layout__region--first,
+  .utexas-layout--threecol.utexas-layout--threecol--25-25-50 .utexas-layout--threecol-wrapper > .layout__region--second,
+  .utexas-layout--threecol.utexas-layout--threecol--50-25-25 .utexas-layout--threecol-wrapper > .layout__region--second,
+  .utexas-layout--threecol.utexas-layout--threecol--50-25-25 .utexas-layout--threecol-wrapper > .layout__region--third {
+    flex: 1 1 22%;
+  }
+  .utexas-layout--threecol.utexas-layout--threecol--25-50-25 .utexas-layout--threecol-wrapper > .layout__region--second,
+  .utexas-layout--threecol.utexas-layout--threecol--25-25-50 .utexas-layout--threecol-wrapper > .layout__region--third,
+  .utexas-layout--threecol.utexas-layout--threecol--50-25-25 .utexas-layout--threecol-wrapper > .layout__region--first {
+    flex: 1 1 47%;
+  }
+  .utexas-layout--threecol.utexas-layout--threecol--33-34-33 .utexas-layout--threecol-wrapper > .layout__region--first,
+  .utexas-layout--threecol.utexas-layout--threecol--33-34-33 .utexas-layout--threecol-wrapper > .layout__region--second,
+  .utexas-layout--threecol.utexas-layout--threecol--33-34-33 .utexas-layout--threecol-wrapper > .layout__region--third {
+    flex: 1 1 30.33%;
+  }
+}

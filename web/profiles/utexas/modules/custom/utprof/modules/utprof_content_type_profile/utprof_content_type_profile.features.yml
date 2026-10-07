@@ -1,0 +1,12 @@
+bundle: utprof
+required:
+  - breadcrumbs_visibility.content_type.utprof_profile
+  - page_title_visibility.content_type.utprof_profile
+  - core.base_field_override.node.utprof_profile.title
+  - field.field.node.utprof_profile.field_utprof_image_ratio_opt
+  - field.field.node.utprof_profile.field_utprof_listing_link
+  - field.field.node.utprof_profile.field_utprof_metatags
+  - field.field.node.utprof_profile.field_utprof_display_email
+  - field.storage.node.field_utprof_listing_link
+  - field.storage.node.field_utprof_display_email
+  - core.entity_view_display.node.utprof_profile.teaser

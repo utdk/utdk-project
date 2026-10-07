@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_quick_links
+    - field.storage.block_content.field_block_ql
+  module:
+    - utexas_quick_links
+id: block_content.utexas_quick_links.field_block_ql
+field_name: field_block_ql
+entity_type: block_content
+bundle: utexas_quick_links
+label: 'Quick Links'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    copy:
+      value: ''
+      format: flex_html
+    link-fieldset:
+      links: {  }
+      actions: {  }
+    headline: ''
+    copy_value: ''
+    links: 'a:0:{}'
+    copy_format: flex_html
+default_value_callback: ''
+settings: {  }
+field_type: utexas_quick_links

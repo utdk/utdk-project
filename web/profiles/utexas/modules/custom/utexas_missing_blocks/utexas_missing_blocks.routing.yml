@@ -1,0 +1,9 @@
+utexas_missing_blocks.report:
+  path: '/admin/config/content/utexas/missing'
+  defaults:
+    _controller: '\Drupal\utexas_missing_blocks\Controller\MissingBlockReport::content'
+    _title: 'Missing Block Report'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'access content overview'

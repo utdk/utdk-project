@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_flex_list
+    - field.field.block_content.utexas_flex_list.field_utexas_flex_list_items
+  module:
+    - utexas_flex_list
+id: block_content.utexas_flex_list.default
+targetEntityType: block_content
+bundle: utexas_flex_list
+mode: default
+content:
+  field_utexas_flex_list_items:
+    type: utexas_flex_list_default
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      heading_level: dl
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_utprof_list_method
+field_name: field_utprof_list_method
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: filter
+      label: 'Display profiles associated with tags'
+    -
+      value: pick
+      label: 'Pick specific profiles for this list'
+  allowed_values_function: ''
+module: options
+locked: true
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

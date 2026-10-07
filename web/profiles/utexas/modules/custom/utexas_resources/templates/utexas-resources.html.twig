@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Resources field.
+ *
+ * Available variables:
+ * - headline: The field headline.
+ * - resource_items: The collection of Resources content.
+ *   - image: The image for each collection item.
+ *   - links: An array containing the link title and link url for each item.
+ *     - url: The URL of the each link.
+ *     - title: The text of each link.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="ut-resources-wrapper">
+  {% if headline %}
+    <h3 class="ut-headline ut-headline--underline">{{ headline }}</h3>
+  {% endif %}
+  <div class="utexas-resource-items">
+  {% for item in resource_items %}
+    <div class="utexas-resource">
+      {% if item.image %}
+        <div class="image-wrapper">
+          {{ item.image }}
+        </div>
+      {% endif %}
+      <div class="data-wrapper">
+        {% if item.headline %}
+          <h3 class="ut-headline">{{ item.headline }}</h3>
+        {% endif %}
+        {% if item.links %}
+          <ul class="link-list">
+            {% for link in item.links %}
+                <li>{{ link }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>

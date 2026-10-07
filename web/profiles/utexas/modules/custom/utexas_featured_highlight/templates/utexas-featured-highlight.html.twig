@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Custom theme implementation to display a Featured Highlight field.
+ *
+ * Available custom variables:
+ * - headline : provides the headline text, with link from the call to
+ * action, if that URL has been defined.
+ * - media: An image or video field.
+ * - date: AP-style date field.
+ * - copy: The Featured Highlight copy field.
+ * - cta: A themed call-to-action button.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'utexas-featured-highlight',
+    style|clean_class,
+  ]
+%}
+<div id="{{ media_identifier }}" {{ attributes.addClass(classes) }}>
+  <div class="container utexas-featured-highlight-inner-wrapper">
+    {% if media %}
+      <div class="image-wrapper">
+        {{ media }}
+      </div>
+    {% endif %}
+    <div class="content-wrapper">
+      {{ date }}
+      {% if headline %}
+        <h2 class="ut-headline">{{ headline }}</h2>
+      {% endif %}
+    {% if copy %}
+      <div class="ut-copy">
+        {{ copy }}
+      </div>
+    {% endif %}
+      {{ cta }}
+    </div>
+  </div>
+</div>

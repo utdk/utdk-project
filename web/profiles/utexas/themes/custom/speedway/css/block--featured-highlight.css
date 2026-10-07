@@ -1,0 +1,154 @@
+.utexas-featured-highlight {
+  margin: 0 0 1.25rem;
+  /* Container query to control layout based on container width. */
+  container-type: inline-size;
+  /* Prevent content from becoming too narrow in small container e.g., multicolumn */
+  min-width: 176px;
+  /* Default view mode = Limestone (Light) */
+  background-color: var(--ut-limestone);
+  color: var(--ut-charcoal);
+
+  .ut-copy *:not(a.ut-btn--secondary, a.ut-btn),
+  .content-wrapper .ut-headline a {
+    color: var(--ut-charcoal);
+  }
+  .ut-copy blockquote {
+    background: transparent;
+    margin-left: 0;
+    margin-top: 1rem;
+    border-left: 5px solid var(--ut-shade--s60);
+  }
+  .utexas-featured-highlight-inner-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .content-wrapper {
+    padding: 0;
+    flex: 1;
+
+    .ut-headline {
+      font-size: 1.75rem;
+    }
+    .ut-headline a:hover {
+      text-decoration: underline;
+    }
+    a.ut-btn {
+      margin-bottom: 0;
+    }
+    @media (min-width: 576px) {
+      .ut-headline a,
+      .ut-headline {
+        font-size: 1.25rem;
+      }
+    }
+    @media all and (min-width: 992px) {
+      font-size: 1rem;
+
+      .ut-headline a,
+      .ut-headline {
+        font-size: 1.75rem;
+      }
+    }
+  }
+  .image-wrapper {
+    padding: 0;
+    max-width: none;
+    flex: 1;
+    margin-bottom: 2rem;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  /* Adjustments for multi-column usage and small screens */
+  @container (min-width: 576px) {
+    .content-wrapper {
+      flex: 1;
+    }
+    .utexas-featured-highlight-inner-wrapper {
+      display: flex;
+      flex-direction: row;
+    }
+    .image-wrapper {
+      padding: 0 2rem 0 0;
+    }
+  }
+  /* Adjustments for multi-column usage and small screens */
+  @container (min-width: 500px) {
+    .image-wrapper {
+      padding: 0 2rem 0 0;
+    }
+  }
+  /* Reduce wrapper padding if the container is less than 250px */
+  @container (max-width: 249px) {
+    .utexas-featured-highlight-inner-wrapper {
+      padding: 1rem;
+    }
+  }
+
+  /* Foreground colors for Medium & Dark styles */
+  &.medium,
+  &.dark {
+    background-color: var(--ut-bluebonnet);
+    color: var(--ut-white);
+    .ut-copy blockquote {
+      border-left: 5px solid #fff;
+    }
+    .content-wrapper .ut-headline,
+    .content-wrapper .ut-headline a,
+    .ut-copy *:not(.ut-btn--secondary) {
+      color: var(--ut-white);
+    }
+  }
+  /* Charcoal (Dark) */
+  &.dark {
+    background-color: var(--ut-charcoal);
+  }
+  /* Bluebonnet (Medium) */
+  &.medium {
+    background-color: var(--ut-bluebonnet);
+  }
+}
+
+/* One-column styles */
+.layout--utexas-onecol {
+  .utexas-featured-highlight {
+    .content-wrapper {
+      padding-left: 0;
+    }
+    @media (max-width: 576px) {
+      .utexas-featured-highlight-inner-wrapper {
+        padding: 2rem;
+        flex-direction: column;
+      }
+    }
+    @media (min-width: 576px) {
+      .utexas-featured-highlight-inner-wrapper {
+        flex-direction: row;
+        padding: 4rem 3rem;
+      }
+      .image-wrapper {
+        margin-bottom: 0;
+        max-width: 330px;
+      }
+    }
+    @media (min-width: 576px) and (max-width: 768px) {
+      .utexas-featured-highlight-inner-wrapper {
+        padding: 3rem;
+      }
+    }
+  }
+
+  &.container-fluid {
+    .utexas-featured-highlight-inner-wrapper {
+      padding: 4rem 0.925rem;
+
+      @media (max-width: 992px) {
+        /* Override Bootstrap .container behavior */
+        max-width: fit-content;
+      }
+    }
+  }
+}

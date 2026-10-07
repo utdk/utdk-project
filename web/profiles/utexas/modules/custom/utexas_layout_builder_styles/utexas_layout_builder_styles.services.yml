@@ -1,0 +1,2 @@
+parameters:
+  utexas_layout_builder_styles.skip_procedural_hook_scan: true

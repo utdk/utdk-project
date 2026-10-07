@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.utexas_image_style_128w_128h
+    - image.style.utexas_image_style_170w_170h
+    - image.style.utexas_image_style_64w_64h
+    - image.style.utexas_image_style_85w_85h
+  module:
+    - utexas_image_styles
+id: utexas_responsive_image_pl
+label: 'Promo List'
+image_style_mappings:
+  -
+    breakpoint_id: utexas_image_styles.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_85w_85h
+  -
+    breakpoint_id: utexas_image_styles.wide
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_170w_170h
+  -
+    breakpoint_id: utexas_image_styles.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_64w_64h
+  -
+    breakpoint_id: utexas_image_styles.narrow
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_128w_128h
+  -
+    breakpoint_id: utexas_image_styles.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_64w_64h
+  -
+    breakpoint_id: utexas_image_styles.mobile
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_128w_128h
+breakpoint_group: utexas_image_styles
+fallback_image_style: utexas_image_style_64w_64h

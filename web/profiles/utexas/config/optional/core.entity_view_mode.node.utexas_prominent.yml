@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.utexas_prominent
+label: Prominent
+targetEntityType: node
+cache: true

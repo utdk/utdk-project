@@ -1,0 +1,35 @@
+aside.inner-rail {
+  float: left;
+  width: 100%;
+  margin: 0 0 8px;
+  padding-right: 20px;
+  padding-left: 0;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+
+  h3 {
+      font-size: 1.25rem;
+      line-height: 1.5rem;
+      border-bottom: 2px solid #3c87a3;
+      padding-bottom: 5px;
+  }
+}
+
+aside.inner-rail.right {
+  float: right;
+  padding-left: 20px;
+  padding-right: 0;
+}
+
+@media (min-width: 768px) {
+  aside.inner-rail {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  aside.inner-rail {
+    width: 33%;
+  }
+}
+

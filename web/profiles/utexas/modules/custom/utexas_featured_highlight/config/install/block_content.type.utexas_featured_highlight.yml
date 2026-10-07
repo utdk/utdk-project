@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_featured_highlight
+label: 'Featured Highlight'
+revision: 1
+description: 'Provides a block implementation of the Featured Highlight widget.'

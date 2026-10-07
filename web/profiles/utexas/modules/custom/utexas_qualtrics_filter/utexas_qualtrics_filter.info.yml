@@ -1,0 +1,7 @@
+name: UTexas Qualtrics Filter
+type: module
+description: Custom text filter to allow Qualtrics forms into WYSIWYG fields
+core_version_requirement: ^10 || ^11
+package: UTexas
+dependencies:
+  - drupal:ckeditor5

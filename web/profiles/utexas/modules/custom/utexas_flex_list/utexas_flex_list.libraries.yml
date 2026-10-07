@@ -1,0 +1,7 @@
+widget:
+  css:
+    theme:
+      css/utexas_flex_list.widget.css: {}
+deep-link:
+  js:
+    js/deep-link.js: {}

@@ -1,0 +1,9 @@
+utexas.configuration:
+  route_name: utexas.configuration
+  title: 'Display settings'
+  base_route: utexas.configuration
+utexas.permissions:
+  route_name: utexas.permissions
+  title: 'Permissions configuration'
+  base_route: utexas.configuration
+  weight: 100

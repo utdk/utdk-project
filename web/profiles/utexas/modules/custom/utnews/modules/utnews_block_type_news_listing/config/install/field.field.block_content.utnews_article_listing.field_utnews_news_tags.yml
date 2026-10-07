@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utnews_article_listing
+    - field.storage.block_content.field_utnews_news_tags
+    - taxonomy.vocabulary.utnews_tags
+id: block_content.utnews_article_listing.field_utnews_news_tags
+field_name: field_utnews_news_tags
+entity_type: block_content
+bundle: utnews_article_listing
+label: 'Limit to articles with the following tag(s):'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      utnews_tags: utnews_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

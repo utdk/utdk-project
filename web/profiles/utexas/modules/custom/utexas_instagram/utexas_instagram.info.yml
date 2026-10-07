@@ -1,0 +1,11 @@
+name: 'UTDK Instagram'
+description: 'Provides settings and behaviors for the UTDK instagram module.'
+core_version_requirement: '^10 || ^11'
+type: module
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:system (>=8.6)'
+  - 'utexas_block_social_links:utexas_block_social_links'
+  - 'utexas_instagram_api:utexas_instagram_api'
+package: UTexas

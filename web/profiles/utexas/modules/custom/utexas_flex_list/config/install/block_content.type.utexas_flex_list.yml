@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_flex_list
+label: 'Flex List'
+revision: 1
+description: 'Display lists of header + content pairs in as traditional lists, accordions, or horizontal tabs.'

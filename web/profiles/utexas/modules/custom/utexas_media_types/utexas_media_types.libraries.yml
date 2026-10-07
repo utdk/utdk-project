@@ -1,0 +1,4 @@
+media-oembed:
+  css:
+    theme:
+      css/media-oembed.css: {}

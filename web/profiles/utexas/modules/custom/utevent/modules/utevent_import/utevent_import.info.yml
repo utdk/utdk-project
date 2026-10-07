@@ -1,0 +1,13 @@
+name: 'Event Import'
+type: module
+description: 'Provides feed types that parse json or xml.'
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - 'drupal:node'
+  - 'feeds:feeds'
+  - 'feeds_ex:feeds_ex'
+  - 'feeds_tamper:feeds_tamper'
+  - 'metatag:metatag'
+  - 'smart_date:smart_date'
+  - 'utevent_content_type_event:utevent_content_type_event'
+package: 'UT Drupal Kit Event Feature'

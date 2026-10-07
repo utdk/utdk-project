@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_promo_list
+label: 'Promo List'
+revision: 1
+description: 'Square image, headline, copy text & link, with column display variations.'

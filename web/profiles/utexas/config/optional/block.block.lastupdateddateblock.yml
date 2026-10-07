@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - updated
+  theme:
+    - speedway
+id: lastupdateddateblock
+theme: speedway
+region: content
+weight: -8
+provider: null
+plugin: updated_date_block
+settings:
+  id: updated_date_block
+  label: 'Last Updated date block'
+  provider: updated
+  label_display: '0'
+  date_prefix: 'Last updated on'
+  date_format: custom
+  custom_date_format: 'F j, Y g:i a'
+  timezone: ''
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }

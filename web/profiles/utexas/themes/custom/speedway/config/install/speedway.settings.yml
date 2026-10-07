@@ -1,0 +1,9 @@
+features:
+  favicon: true
+favicon:
+  use_default: false
+header_secondary_display: side_by_side
+logo_height: short_logo
+main_menu_alignment: full_width_centered
+parent_link: ''
+parent_link_title: ''

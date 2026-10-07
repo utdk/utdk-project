@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.utexas_image_style_1140w_616h
+    - image.style.utexas_image_style_1440w_778h
+    - image.style.utexas_image_style_1920w_1038h
+    - image.style.utexas_image_style_2280w_1232h
+    - image.style.utexas_image_style_720w_389h
+    - image.style.utexas_image_style_960w_519h
+  module:
+    - utexas_image_styles
+id: utexas_responsive_image_hi
+label: 'Hero Image'
+image_style_mappings:
+  -
+    breakpoint_id: utexas_image_styles.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_1140w_616h
+  -
+    breakpoint_id: utexas_image_styles.wide
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_2280w_1232h
+  -
+    breakpoint_id: utexas_image_styles.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_960w_519h
+  -
+    breakpoint_id: utexas_image_styles.narrow
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_1920w_1038h
+  -
+    breakpoint_id: utexas_image_styles.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_720w_389h
+  -
+    breakpoint_id: utexas_image_styles.mobile
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: utexas_image_style_1440w_778h
+breakpoint_group: utexas_image_styles
+fallback_image_style: utexas_image_style_720w_389h

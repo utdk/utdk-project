@@ -1,0 +1,48 @@
+.utprof-profile.full {
+  .utprof__contact-wrapper {
+    border: 1px solid var(--ut-shade--t40);
+    padding: 0 1.5rem 0.75rem;
+
+    .field__label,
+    .utprof__additional-contact-info p {
+      margin-top: 1rem;
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+  }
+  .utprof__contact-wrapper-title {
+    font-style: italic;
+    border-bottom: 1px solid var(--ut-shade--t40);
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    text-align: center;
+  }
+  .utprof__email-address a {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+  /* Stack image on small screens, float left on larger screens */
+  .utprof__img {
+    float: none;
+    max-width: 250px;
+    padding: 0 1.5rem 0.5rem 0;
+
+    @media all and (min-width: 576px) {
+      padding-bottom: 0;
+      float: left;
+    }
+  }
+  .utprof__content {
+    clear: both;
+  }
+}
+.utprof__contact-wrapper .utprof__bldg-code a {
+  text-decoration: underline;
+}
+
+.field--name-field-utprof-designation .ut-h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}

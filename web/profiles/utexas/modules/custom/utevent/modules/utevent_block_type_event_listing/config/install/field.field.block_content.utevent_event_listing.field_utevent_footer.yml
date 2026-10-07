@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utevent_event_listing
+    - field.storage.block_content.field_utevent_footer
+  module:
+    - text
+id: block_content.utevent_event_listing.field_utevent_footer
+field_name: field_utevent_footer
+entity_type: block_content
+bundle: utevent_event_listing
+label: Footer
+description: 'Optionally display text below the list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

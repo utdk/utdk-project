@@ -1,0 +1,146 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Layouts module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Remove 'Full width of page' style (#1227).
+ */
+function utexas_layouts_update_8101() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('layout_builder_styles.style.full_width_of_page');
+  $config->delete();
+}
+
+/**
+ * Convert existing nodes to new section width mechanism (#1227).
+ */
+function utexas_layouts_update_8102(&$sandbox) {
+  $connection = Database::getConnection();
+  // IMPORTANT: This is intended to affect *all* node revisions.
+  // The use case is limited to scenarios for applying a setting
+  // retroactively to *preserve* behavior on existing sites.
+  $table = 'node__layout_builder__layout';
+  if (!isset($sandbox['progress'])) {
+    $rows = $connection->query("SELECT * FROM {" . $table . "}")
+      ->fetchCol();
+    $sandbox['max'] = count($rows);
+    // If 'max' is empty, we have nothing to process.
+    if (empty($sandbox['max'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+    $sandbox['progress'] = 0;
+    $sandbox['rows_per_batch'] = 10;
+  }
+
+  // Calculates current batch range.
+  $range_end = $sandbox['progress'] + $sandbox['rows_per_batch'];
+  if ($range_end > $sandbox['max']) {
+    $range_end = $sandbox['max'];
+  }
+
+  $query = $connection->select($table, 'n')
+    ->fields('n', ['entity_id', 'revision_id', 'delta', 'layout_builder__layout_section'])
+    ->range($sandbox['progress'], $sandbox['rows_per_batch']);
+  $result = $query->execute();
+  foreach ($result as $row) {
+    $section = unserialize($row->layout_builder__layout_section);
+    $settings = $section->getLayoutSettings();
+    if (isset($settings['layout_builder_styles_style']['full_width_of_page'])) {
+      if ($settings['layout_builder_styles_style']['full_width_of_page'] === 'full_width_of_page') {
+        // Convert 'full width of page' to equivalent section setting.
+        $settings['section_width'] = 'container-fluid';
+      }
+      else {
+        // Preserve section width prior to #1227.
+        // All sections not set to 'full width' should be set to 'container'.
+        $settings['section_width'] = 'container';
+      }
+      // Remove outdated style setting for all sections.
+      unset($settings['layout_builder_styles_style']['full_width_of_page']);
+      $section->setLayoutSettings($settings);
+      $connection->update($table)->fields([
+        'layout_builder__layout_section' => serialize($section),
+      ])
+        ->condition('entity_id', $row->entity_id, '=')
+        ->condition('revision_id', $row->revision_id, '=')
+        ->condition('delta', $row->delta, '=')
+        ->execute();
+    }
+  }
+
+  $sandbox['progress'] = $range_end;
+  $progress_fraction = $sandbox['progress'] / $sandbox['max'];
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : $progress_fraction;
+  \Drupal::logger('utexas_layouts')->notice('Processed ' . (round($progress_fraction * 100)) . '% (' . $sandbox['progress'] . ' of ' . $sandbox['max'] . ' rows)');
+}
+
+/**
+ * Convert existing nodes to new section width mechanism (#1227).
+ */
+function utexas_layouts_update_8103(&$sandbox) {
+  $connection = Database::getConnection();
+  // IMPORTANT: This is intended to affect *all* node revisions.
+  // The use case is limited to scenarios for applying a setting
+  // retroactively to *preserve* behavior on existing sites.
+  $table = 'node_revision__layout_builder__layout';
+  if (!isset($sandbox['progress'])) {
+    $rows = $connection->query("SELECT * FROM {" . $table . "}")
+      ->fetchCol();
+    $sandbox['max'] = count($rows);
+    // If 'max' is empty, we have nothing to process.
+    if (empty($sandbox['max'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+    $sandbox['progress'] = 0;
+    $sandbox['rows_per_batch'] = 10;
+  }
+
+  // Calculates current batch range.
+  $range_end = $sandbox['progress'] + $sandbox['rows_per_batch'];
+  if ($range_end > $sandbox['max']) {
+    $range_end = $sandbox['max'];
+  }
+
+  $query = $connection->select($table, 'n')
+    ->fields('n', ['entity_id', 'revision_id', 'delta', 'layout_builder__layout_section'])
+    ->range($sandbox['progress'], $sandbox['rows_per_batch']);
+  $result = $query->execute();
+  // $result = $connection->query("SELECT * FROM {" . $table . "}")
+  foreach ($result as $row) {
+    $section = unserialize($row->layout_builder__layout_section);
+    $settings = $section->getLayoutSettings();
+    if (isset($settings['layout_builder_styles_style']['full_width_of_page'])) {
+      if ($settings['layout_builder_styles_style']['full_width_of_page'] === 'full_width_of_page') {
+        // Convert 'full width of page' to equivalent section setting.
+        $settings['section_width'] = 'container-fluid';
+      }
+      else {
+        // Preserve section width prior to #1227.
+        // All sections not set to 'full width' should be set to 'container'.
+        $settings['section_width'] = 'container';
+      }
+      // Remove outdated style setting for all sections.
+      unset($settings['layout_builder_styles_style']['full_width_of_page']);
+      $section->setLayoutSettings($settings);
+      $connection->update($table)->fields([
+        'layout_builder__layout_section' => serialize($section),
+      ])
+        ->condition('entity_id', $row->entity_id, '=')
+        ->condition('revision_id', $row->revision_id, '=')
+        ->condition('delta', $row->delta, '=')
+        ->execute();
+    }
+  }
+
+  $sandbox['progress'] = $range_end;
+  $progress_fraction = $sandbox['progress'] / $sandbox['max'];
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : $progress_fraction;
+  \Drupal::logger('utexas_layouts')->notice('Processed ' . (round($progress_fraction * 100)) . '% (' . $sandbox['progress'] . ' of ' . $sandbox['max'] . ' rows)');
+}

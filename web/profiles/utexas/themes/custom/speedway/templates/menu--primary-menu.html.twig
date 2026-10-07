@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu using the Bootstrap Navbar.
+#}
+
+{% if items %}
+  <ul{{ attributes.addClass('utexas-primary-menu navbar-nav my-xl-0 ms-xl-n3') }}>
+    {% for L1 in items %}
+      {%
+      set item_classes = [
+        menu_level == 0 ? 'nav-item',
+        L1.below ? 'dropdown' : '',
+        L1.in_active_trail ? 'active',
+      ]
+      %}
+      <li{{ create_attribute().addClass(item_classes) }}>
+        {% if L1.url %}
+          {{ link(L1.title, L1.url, L1.attributes.addClass('l1-link')) }}
+        {% endif %}
+        {% if L1.below %}
+          {% set thisNavId = (L1.title|clean_unique_id) %}
+          <a class="dropdown-toggle" href="#" id="{{ thisNavId }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">More {{ L1.title }} pages</span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="{{ thisNavId }}">
+            {% for L2 in L1.below %}
+              <li>{{ link(L2.title, L2.url, L2.attributes.addClass('dropdown-item')) }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

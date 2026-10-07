@@ -1,0 +1,14 @@
+utexas.configuration:
+  path: '/admin/config/content/utexas'
+  defaults:
+    _form: '\Drupal\utexas\Form\BaseConfigurationForm'
+    _title: 'Drupal Kit configuration'
+  requirements:
+    _permission: 'administer site configuration'
+utexas.permissions:
+  path: '/admin/config/content/utexas/permissions'
+  defaults:
+    _form: '\Drupal\utexas\Form\PermissionsConfigurationForm'
+    _title: 'Permissions configuration'
+  requirements:
+    _permission: 'administer drupalkit settings'

@@ -1,0 +1,59 @@
+/* Styles limited to the content-secondary region of the full node template */
+.utevent-event--full {
+  .utevent-event__content-secondary {
+    border: 1px solid var(--ut-shade--t40);
+  }
+  .utevent-event__content-label {
+    font-style: italic;
+    border-bottom: 1px solid var(--ut-shade--t40);
+    text-align: center;
+  }
+  .utevent-event-field {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .utevent-event-field__label {
+    font-weight: 600;
+
+  }
+  .utevent-event-field--field-utevent-main-media {
+    float: left;
+    margin: 0 2vw 10px 0;
+    max-width: 140px;
+  }
+  .utevent-event-field--field-utevent-datetime ul {
+    font-size: 1rem;
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      padding-bottom: 0.5rem;
+    }
+  }
+  .utevent-event-field--field-utevent-status {
+    margin-bottom: 2rem;
+  }
+  .add-to-calendar {
+    &.modal {
+      display: none;
+      width: fit-content;
+      height: fit-content;
+      position: relative;
+      border: 1px solid var(--ut-burntorange);
+      box-shadow: 0 4px 8px var(--ut-burntorange);
+    }
+    &.modal[open] {
+      display: inline-block;
+      overflow: hidden;
+      position: fixed;
+    }
+    button.close:focus {
+      box-shadow: none;
+      border: 1px solid var(--ut-burntorange);
+      border-radius: 5px;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+services:
+  utexas_http_response_subscriber:
+    class: '\Drupal\utexas\EventSubscriber\HttpResponseSubscriber'
+    tags:
+      - { name: 'event_subscriber' }

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_1600w_x_1000h
+label: '1600w x 1000h (1.6:1)'
+effects:
+  d4736838-5c50-47f3-848f-e7c19e0065bf:
+    uuid: d4736838-5c50-47f3-848f-e7c19e0065bf
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1600
+      height: 1000
+      anchor: center-center

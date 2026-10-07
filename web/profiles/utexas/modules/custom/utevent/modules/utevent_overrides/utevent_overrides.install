@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Utevent overrides module installation file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function utevent_overrides_install() {
+  module_set_weight('utevent_overrides', 10);
+}

@@ -1,0 +1,2 @@
+parameters:
+  utevent_block_type_event_listing.skip_procedural_hook_scan: true
