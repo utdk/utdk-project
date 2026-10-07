@@ -28,7 +28,8 @@ class Search extends ControllerBase {
     // phpcs:ignore
     $google_pse_id = \Drupal::state()->get('utexas.google_pse_id') ?? '';
     $build['#cache']['contexts'][] = 'url.query_args:keys';
-    $search_term = Html::escape($request->query->get('keys'));
+    $raw_search = $request->query->get('keys') ?? '';
+    $search_term = Html::escape($raw_search);
     $build['#title']['#markup'] = !empty($search_term) ? "Search for <q>$search_term</q>" : "Search";
     // Add the Google Programmable Search library itself, with ID as a param.
     $build['#attached']['html_head'][] = [
