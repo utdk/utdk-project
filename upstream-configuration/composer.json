@@ -2,7 +2,7 @@
     "name": "utexas/upstream-configuration",
     "description": "Defines requirements specific to the UT Drupal Kit.",
     "type": "project",
-    "version": "3.33.0",
+    "version": "3.33.1",
     "require": {
         "composer/installers": "^1.9 || ^2.0",
         "cweagans/composer-patches": "~1.0",
@@ -55,7 +55,7 @@
         "drupal/url_embed": "3.0.3",
         "drupal/xmlsitemap": "2.0.0",
         "drush/drush": "^13",
-        "enshrined/svg-sanitize": "~0.21",
+        "enshrined/svg-sanitize": "1.0.0",
         "oomphinc/composer-installers-extender": "2.0.1",
         "pantheon-systems/drupal-integrations": "^11",
         "php": ">=8.3",
