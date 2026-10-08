@@ -24,6 +24,7 @@ class Permissions {
    * @var array
    */
   public static $editor = [
+    'add scheduled transitions node utprof_profile',
     'create terms in utprof_groups',
     'create terms in utprof_tags',
     'create utprof_profile content',
@@ -36,7 +37,9 @@ class Permissions {
     'edit own utprof_profile content',
     'edit terms in utprof_groups',
     'edit terms in utprof_tags',
+    'reschedule scheduled transitions node utprof_profile',
     'revert utprof_profile revisions',
+    'view scheduled transitions node utprof_profile',
     'view utprof_profile revisions',
   ];
 
