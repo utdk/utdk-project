@@ -78,6 +78,9 @@
             },
             "drupal/entity_clone": {
                 "Inline Blocks on cloned nodes are deleted when originating nodes are deleted": "https://wcms.its.utexas.edu/patches/3050027-inline.2.2.0-beta1.patch"
+            },
+            "drupal/scheduled_transitions": {
+              "Simplify the UI": "https://wcms.its.utexas.edu/patches/70-simplify-ui-3418019-scheduled_transitions.patch"
             }
         },
         "drupal-scaffold": {
