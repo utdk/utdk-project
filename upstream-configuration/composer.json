@@ -46,6 +46,7 @@
         "drupal/redirect": "1.13.0",
         "drupal/responsive_tables_filter": "2.1.2",
         "drupal/role_delegation": "1.6.0",
+        "drupal/scheduled_transitions": "^2.9@beta",
         "drupal/search_api": "1.41.0",
         "drupal/seckit": "2.0.3",
         "drupal/schema_metatag": "3.0.4",
