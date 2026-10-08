@@ -2,7 +2,7 @@ name: UTexas
 type: profile
 description: Installation profile for the UT Drupal Kit.
 core_version_requirement: '^10 || ^11'
-version: '3.32.3'
+version: '3.33.0'
 distribution:
   name: UT Drupal Kit
 dependencies:
