@@ -1,0 +1,6 @@
+datetime_hour_restrict:
+  version: 1.0
+  js:
+    js/datetime-hour-restrict.js: {}
+  dependencies:
+    - core/drupal
