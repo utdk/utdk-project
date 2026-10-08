@@ -1,0 +1,5 @@
+services:
+  utnews_overrides.overrider:
+    class: Drupal\utnews_overrides\Config\ConfigOverrider
+    tags:
+      - { name: config.factory.override, priority: 10 }

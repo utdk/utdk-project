@@ -1,0 +1,9 @@
+name: 'UTexas Role Site Manager'
+type: module
+description: 'Defines a role and permissions for Site Manager'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:user'
+  - 'utexas_content_type_flex_page:utexas_content_type_flex_page'
+  - 'utexas_text_format_flex_html:utexas_text_format_flex_html'

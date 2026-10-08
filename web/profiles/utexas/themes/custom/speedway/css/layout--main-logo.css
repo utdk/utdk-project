@@ -1,0 +1,40 @@
+.ut-header .short-logo,
+.ut-header .tall-logo,
+.ut-footer.short-logo,
+.ut-footer.tall-logo {
+  max-width: 100%;
+  height: auto;
+}
+
+.ut-header {
+  .ut-logo--main {
+    max-height: 40px;
+    @media screen and (min-width: 992px) {
+      max-height: 60px;
+    }
+  }
+}
+
+.ut-footer {
+  .ut-logo--main {
+    max-height: 60px;
+  }
+}
+
+.short-logo {
+  .ut-logo--main {
+    max-height: 40px;
+    @media screen and (min-width: 992px) {
+      max-height: 60px;
+    }
+  }
+}
+
+.tall-logo {
+  .ut-logo--main {
+    max-height: 60px;
+    @media screen and (min-width: 992px) {
+      max-height: 100px;
+    }
+  }
+}

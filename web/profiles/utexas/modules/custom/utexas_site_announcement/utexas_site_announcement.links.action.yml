@@ -1,0 +1,10 @@
+entity.utexas_announcement_icon.add_form:
+  route_name: entity.utexas_announcement_icon.add_form
+  title: 'Add Announcement Icon'
+  appears_on:
+    - entity.utexas_announcement_icon.collection
+entity.utexas_announcement_color_scheme.add_form:
+  route_name: entity.utexas_announcement_color_scheme.add_form
+  title: 'Add Announcement Color Scheme'
+  appears_on:
+    - entity.utexas_announcement_color_scheme.collection

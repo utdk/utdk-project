@@ -1,0 +1,11 @@
+/* Styling for the Layout Builder Style to add/remove margin-top on sections. */
+.section-wrapper:has(.utexas-section-margin-top-add-space) {
+  margin-top: 5rem;
+}
+.section-wrapper:has(.utexas-section-margin-top-remove-space) {
+  margin-top: -2.5rem;
+}
+/* Style to hide effect of negative margin in layout builder mode. */
+.layout-builder__section .section-wrapper:has(.utexas-section-margin-top-remove-space) {
+  margin-top: 0;
+}

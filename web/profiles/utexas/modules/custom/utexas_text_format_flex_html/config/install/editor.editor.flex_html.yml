@@ -1,0 +1,154 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.flex_html
+  module:
+    - ckeditor5
+format: flex_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - strikethrough
+      - horizontalLine
+      - removeFormat
+      - undo
+      - redo
+      - '|'
+      - link
+      - '|'
+      - bulletedList
+      - numberedList
+      - outdent
+      - indent
+      - alignment
+      - '|'
+      - insertTable
+      - drupalMedia
+      - urlembed
+      - blockQuote
+      - heading
+      - style
+      - '|'
+      - specialCharacters
+      - subscript
+      - superscript
+      - underline
+      - sourceEditing
+      - fullscreen
+      - '-'
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading1
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_list:
+      properties:
+        reversed: false
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<a href hreflang class id name role title aria-controls aria-haspopup aria-label aria-expanded aria-selected data-* media rel target>'
+        - '<abbr title class id role>'
+        - '<address class id role>'
+        - '<article class id role>'
+        - '<aside class id role>'
+        - '<audio class id role autoplay buffered controls loop muted preload src volume>'
+        - '<blockquote class id role>'
+        - '<br class id role>'
+        - '<button type class id role aria-label aria-expanded aria-controls aria-haspopup data-* title>'
+        - '<caption class id role>'
+        - '<cite title class id role>'
+        - '<code class id role>'
+        - '<col class id role>'
+        - '<colgroup class id role>'
+        - '<del class id role>'
+        - '<details class id role>'
+        - '<dl class id role>'
+        - '<dt class id role>'
+        - '<dd class id role>'
+        - '<div role class id aria-label aria-labelledby aria-hidden data-* tabindex>'
+        - '<drupal-url data-*>'
+        - '<drupal-media data-* alt title>'
+        - '<em class id role>'
+        - '<figure class id role>'
+        - '<figcaption class id role>'
+        - '<footer class id role>'
+        - '<header class id role>'
+        - '<hr class id role>'
+        - '<h1 class id role>'
+        - '<h2 class id role>'
+        - '<h3 class id role>'
+        - '<h4 class id role>'
+        - '<h5 class id role>'
+        - '<h6 class id role>'
+        - '<img alt height width align class id role src data-* title>'
+        - '<i class id role>'
+        - '<li role class id aria-controls aria-current data-*>'
+        - '<mark class id role>'
+        - '<nav class id role aria-label>'
+        - '<ol class id role aria-labelledby type>'
+        - '<p class id role>'
+        - '<pre class id role>'
+        - '<q class id cite>'
+        - '<rowspan class id role>'
+        - '<s class id role>'
+        - '<section class id role>'
+        - '<small class id role>'
+        - '<span class id role aria-hidden>'
+        - '<source src type>'
+        - '<strike class id role>'
+        - '<strong class id role>'
+        - '<sub class id role>'
+        - '<summary class id role>'
+        - '<sup class id role>'
+        - '<table border class id role title>'
+        - '<tbody class id role>'
+        - '<td class id role colspan rowspan headers title>'
+        - '<tfoot class id role>'
+        - '<th colspan rowspan headers scope class id role>'
+        - '<thead class id role>'
+        - '<time class id role>'
+        - '<tr class id role>'
+        - '<track src sclang label default>'
+        - '<u class id role>'
+        - '<ul class id role background bgcolor aria-labelledby>'
+        - '<video width height controls autoplay buffered loop muted playsinline poster preload src>'
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Table border 1px'
+          element: '<table class="border-1">'
+        -
+          label: 'Table border 2px'
+          element: '<table class="border-2">'
+        -
+          label: 'Table padding'
+          element: '<table class="tablesaw">'
+    linkit_extension:
+      linkit_enabled: true
+      linkit_profile: flex_html
+    media_media:
+      allow_view_mode_override: true
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

@@ -1,0 +1,11 @@
+{
+    "name": "utexas/utexas_missing_blocks",
+    "type": "drupal-custom-module",
+    "extra": {
+        "drush": {
+            "services": {
+                "drush.services.yml": "^10"
+            }
+        }
+    }
+}

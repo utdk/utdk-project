@@ -1,0 +1,2 @@
+parameters:
+  utexas_photo_content_area.skip_procedural_hook_scan: true

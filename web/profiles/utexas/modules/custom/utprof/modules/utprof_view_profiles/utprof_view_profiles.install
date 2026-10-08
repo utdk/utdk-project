@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for Profile listings.
+ */
+
+/**
+ * Set the pager setting in the profiles listing to display all items. (#172)
+ */
+function utprof_view_profiles_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utprof_view_profiles',
+  ], TRUE);
+}
+
+/**
+ * Unpublished profile nodes appear in listing blocks (#302).
+ */
+function utprof_view_profiles_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utprof_view_profiles',
+  ], TRUE);
+}
+
+/**
+ * Add secondary sort by first/given name to utprof_profiles view (#416).
+ */
+function utprof_view_profiles_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utprof_view_profiles',
+  ], TRUE);
+}

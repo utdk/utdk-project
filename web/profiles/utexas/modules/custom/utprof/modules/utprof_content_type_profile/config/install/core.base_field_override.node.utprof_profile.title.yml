@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.utprof_profile
+id: node.utprof_profile.title
+field_name: title
+entity_type: node
+bundle: utprof_profile
+label: 'Preferred full name (shown as the title for this profile on pages and listings)'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

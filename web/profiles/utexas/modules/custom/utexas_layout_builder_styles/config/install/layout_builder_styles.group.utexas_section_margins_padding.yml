@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_section_margins_padding
+label: 'Section Margins and Padding'
+multiselect: multiple
+form_type: checkboxes
+required: false
+weight: -7

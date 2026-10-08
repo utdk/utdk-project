@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.call_to_action
+    - field.field.block_content.call_to_action.field_utexas_call_to_action_link
+  module:
+    - layout_builder
+    - utexas_call_to_action
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: block_content.call_to_action.default
+targetEntityType: block_content
+bundle: call_to_action
+mode: default
+content:
+  field_utexas_call_to_action_link:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_call_to_action_formatter
+    region: content
+hidden: {  }

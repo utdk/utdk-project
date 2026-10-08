@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - speedway
+id: speedway_site_branding_header
+theme: speedway
+region: header_primary
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: speedway_system_branding_block
+  label: 'Site branding (Header)'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

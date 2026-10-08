@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_image_link
+    - field.field.block_content.utexas_image_link.field_block_il
+id: block_content.utexas_image_link.default
+targetEntityType: block_content
+bundle: utexas_image_link
+mode: default
+content:
+  field_block_il:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_image_link
+    region: content
+hidden: {  }

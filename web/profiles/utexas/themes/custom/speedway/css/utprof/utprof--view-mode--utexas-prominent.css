@@ -1,0 +1,29 @@
+.utexas-prominent-based.teaser,
+.utprof__profile-item-prominent {
+  container-type: inline-size;
+  background-color: var(--ut-shade--t20);
+  border: 1px solid var(--ut-shade--t40);
+
+  a,
+  a:link,
+  a:visited {
+    color: var(--ut-burntorange--s20);
+  }
+  a:hover,
+  a:focus {
+    color: var(--ut-burntorange);
+  }
+  .utprof__designation .ut-h3 {
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+  }
+  /* Wrap text when the container is small */
+  @container (min-width: 500px) {
+    .data-wrapper {
+      display: flow-root;
+    }
+  }
+}
+

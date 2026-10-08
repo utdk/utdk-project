@@ -1,0 +1,4 @@
+administer social links data config:
+  title: 'Configure Social Links data'
+  description: 'View, edit and delete Social Links configuration data.'
+  restrict access: true

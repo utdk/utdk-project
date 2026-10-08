@@ -1,0 +1,3 @@
+administer utnews:
+  title: 'Administer News feature configuration'
+  description: 'Allows a user to configure News feature settings.'

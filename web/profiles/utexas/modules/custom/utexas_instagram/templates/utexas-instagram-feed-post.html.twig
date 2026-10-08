@@ -1,0 +1,16 @@
+<div{{attributes}}>
+  <a class="utexas-instagram-feed-post__link" href="{{ pic_link }}" target="_blank" rel="noopener">Instagram Post</a>
+  <div class="utexas-instagram-feed-post__image-wrapper">
+    <img class="utexas-instagram-feed-post__image" src="{{ pic_src }}" alt="{{ pic_alt }}"/>
+  </div>
+  <div class="utexas-instagram-feed-post__other-data">
+    <div class='name'>@{{ username }}</div>
+  {% if pic_text %}
+    <div class='caption'>
+      <p>
+        {{ pic_text|raw }}
+      </p>
+    </div>
+  {% endif %}
+  </div>
+</a>

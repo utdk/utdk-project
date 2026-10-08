@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.utexas_name_only
+label: 'Name Only'
+targetEntityType: node
+cache: true

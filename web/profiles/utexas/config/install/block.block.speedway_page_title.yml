@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - speedway
+id: speedway_page_title
+theme: speedway
+region: content
+weight: -9
+provider: null
+plugin: page_title_block
+settings:
+  id: speedway_page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

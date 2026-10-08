@@ -1,0 +1,84 @@
+.announcement-content {
+  text-align: center;
+  padding: 30px 0;
+  margin-bottom: 20px;
+}
+
+.announcement-content .announcement-body a {
+  text-decoration: underline;
+}
+
+.announcement-content .cta a {
+  color: white;
+  text-decoration: none;
+}
+
+.announcement-content .announcement-title {
+  color: #2d2a28;
+  font-size: 1.75rem;
+  line-height: 2.125rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.announcement-content .announcement-icon {
+  margin-right: 15px;
+}
+
+.announcement-content .announcement-body {
+  color: #282828;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  padding-right: 0.46875rem;
+  padding-left: 0.46875rem;
+}
+
+.announcement-content .announcement-body:hover {
+  color: #000;
+}
+
+.announcement-content .announcement-body > br {
+  margin-bottom: 10px;
+}
+
+.announcement-content .announcement-icon {
+  display: inline-block;
+  height: 100%;
+  width: 50px;
+  padding-bottom: 5px;
+}
+
+.announcement-content .announcement-icon svg {
+  width: 50px;
+  height: 50px;
+  margin-top: -5px;
+}
+
+@media only screen and (min-width: 600px) {
+  .announcement-content .announcement-title {
+    font-size: 2.25rem;
+    line-height: 2.625rem;
+  }
+  .announcement-content .announcement-body {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .announcement-content {
+    margin-bottom: 40px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .announcement-content {
+    margin-top: 82px;
+  }
+  .UT-header.theme1.tall_logo + .announcement-content {
+    margin-top: 102px;
+  }
+}

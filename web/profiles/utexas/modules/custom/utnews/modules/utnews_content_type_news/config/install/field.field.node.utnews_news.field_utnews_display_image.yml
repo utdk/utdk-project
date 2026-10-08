@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utnews_display_image
+    - node.type.utnews_news
+id: node.utnews_news.field_utnews_display_image
+field_name: field_utnews_display_image
+entity_type: node
+bundle: utnews_news
+label: 'Display image on article'
+description: 'Uncheck to suppress the display of the image at the top of a news article’s page display.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

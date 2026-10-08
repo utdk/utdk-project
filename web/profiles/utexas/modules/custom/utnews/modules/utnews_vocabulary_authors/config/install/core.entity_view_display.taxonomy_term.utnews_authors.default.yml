@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.utnews_authors.field_utnews_author_image
+    - taxonomy.vocabulary.utnews_authors
+  module:
+    - text
+id: taxonomy_term.utnews_authors.default
+targetEntityType: taxonomy_term
+bundle: utnews_authors
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_utnews_author_image:
+    type: entity_reference_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content

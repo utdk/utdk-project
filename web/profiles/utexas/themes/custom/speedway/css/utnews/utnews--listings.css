@@ -1,0 +1,49 @@
+/* Styles for News Listing page views grid */
+.utnews-listing-page {
+  .views-row {
+    padding-top: 30px;
+    margin-bottom: 32px;
+  }
+  .views-row:not(:first-child) {
+    border-top: 1px solid var(--ut-limestone);
+  }
+  .views-row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+.utnews-listing-block {
+  --ipr-grid-gap: 2.5vw;
+  --ipr-grid-min-min-size: 300px;
+  --ipr-grid-min-max-size: 325px;
+
+  display: grid;
+  grid-gap: var(--ipr-grid-gap);
+  grid-template-columns: repeat(auto-fit, minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr));
+  margin-bottom: 1.5rem;
+}
+.utexas-onecol .utnews-listing-block,
+.utexas-twocol .utnews-listing-block,
+.utexas-threecol .utnews-listing-block,
+.utexas-fourcol .utnews-listing-block {
+  /* Maximum total width of all grid gaps (gutters) possible at --ipr-grid-num-columns. */
+  --ipr-grid-gap-total: calc((var(--ipr-grid-num-columns) - 1) * var(--ipr-grid-gap));
+  /* Total width of the container minus the width of maximum total possible grid gaps. */
+  --ipr-grid-available-space: calc(100% - var(--ipr-grid-gap-total));
+  /* Total available space divided by the maximum number of columns. */
+  /* Subract 1px from total to prevent odd rounding behavior in Firefox. */
+  --ipr-grid-min-max-size: calc(var(--ipr-grid-available-space) / var(--ipr-grid-num-columns) - 1px);
+}
+.utexas-onecol .utnews-listing-block {
+  --ipr-grid-num-columns: 1;
+}
+.utexas-twocol .utnews-listing-block {
+  --ipr-grid-num-columns: 2;
+}
+.utexas-threecol .utnews-listing-block {
+  --ipr-grid-num-columns: 3;
+}
+.utexas-fourcol .utnews-listing-block {
+  --ipr-grid-num-columns: 4;
+}

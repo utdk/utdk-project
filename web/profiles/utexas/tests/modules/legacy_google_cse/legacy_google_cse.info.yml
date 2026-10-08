@@ -1,0 +1,8 @@
+name: 'Legacy Google CSE'
+type: module
+description: 'Provides legacy Google CSE for testing'
+package: Testing
+version: VERSION
+dependencies:
+  - drupal:search
+  - google_cse:google_cse

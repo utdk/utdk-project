@@ -1,0 +1,217 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.utevent_event.field_utevent_body
+    - field.field.node.utevent_event.field_utevent_datetime
+    - field.field.node.utevent_event.field_utevent_display_media
+    - field.field.node.utevent_event.field_utevent_featured
+    - field.field.node.utevent_event.field_utevent_localist_unlisted
+    - field.field.node.utevent_event.field_utevent_location
+    - field.field.node.utevent_event.field_utevent_main_media
+    - field.field.node.utevent_event.field_utevent_metatags
+    - field.field.node.utevent_event.field_utevent_status
+    - field.field.node.utevent_event.field_utevent_tags
+    - node.type.utevent_event
+  module:
+    - content_moderation
+    - media_library
+    - metatag
+    - path
+    - smart_date
+    - smart_date_recur
+    - text
+id: node.utevent_event.default
+targetEntityType: node
+bundle: utevent_event
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  display_breadcrumbs:
+    type: boolean_checkbox
+    weight: 14
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_page_title:
+    type: boolean_checkbox
+    weight: 13
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_updated:
+    type: boolean_checkbox
+    weight: 12
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_utevent_body:
+    type: text_textarea_with_summary
+    weight: 4
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_utevent_datetime:
+    type: smartdate_timezone
+    weight: 1
+    region: content
+    settings:
+      modal: false
+      default_duration: 60
+      default_duration_increments: |-
+        30
+        60|1 hour
+        90
+        120|2 hours
+        custom
+      show_extra: true
+      hide_date: false
+      allday: true
+      remove_seconds: false
+      duration_overlay: true
+      separator: to
+      default_tz: ''
+      custom_tz: America/Chicago
+      allowed_timezones: {  }
+      add_abbreviations: ''
+    third_party_settings:
+      smart_date_recur:
+        modal: true
+        allowed_recur_freq_values:
+          MINUTELY: '0'
+          HOURLY: '0'
+          DAILY: DAILY
+          WEEKLY: WEEKLY
+          MONTHLY: MONTHLY
+          YEARLY: YEARLY
+  field_utevent_display_media:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_utevent_featured:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_utevent_localist_unlisted:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_utevent_location:
+    type: entity_reference_autocomplete_tags
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_utevent_main_media:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_utevent_metatags:
+    type: metatag_firehose
+    weight: 20
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_utevent_status:
+    type: options_buttons
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_utevent_tags:
+    type: entity_reference_autocomplete_tags
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 21
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 19
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

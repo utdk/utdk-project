@@ -1,0 +1,12 @@
+utexas_site_announcement.icons:
+  route_name: entity.utexas_announcement_icon.collection
+  title: 'Icons'
+  base_route: utexas_announcement.configuration
+utexas_site_announcement.color_scheme:
+  route_name: entity.utexas_announcement_color_scheme.collection
+  title: 'Color Schemes'
+  base_route: utexas_announcement.configuration
+utexas_announcement.configuration:
+  route_name: utexas_announcement.configuration
+  title: 'Display'
+  base_route: utexas_announcement.configuration

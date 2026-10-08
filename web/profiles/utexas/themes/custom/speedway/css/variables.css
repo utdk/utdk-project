@@ -1,0 +1,69 @@
+
+:root {
+  /* Primary Color Palette */
+  --ut-burntorange: #bf5700;
+  --ut-charcoal: #333f48;
+  --ut-white: #fff;
+
+  /* Secondary Colors */
+  --ut-bluebonnet: #005f86;
+  --ut-turquoise: #00a9b7;
+  --ut-turtlepond: #579d42;
+  --ut-cactus: #a6cd57;
+  --ut-shade: #9cadb7;
+  --ut-tangerine: #f8971f;
+  --ut-limestone: #d6d2c4;
+  --ut-sunshine: #ffd600;
+
+  /* Web only utility colors */
+  --ut-error_red: #cd2026;
+  --ut-lightyellow: #fff3cd;
+
+  /* Tints and Shades of the Palette */
+  --ut-bluebonnet--s20: #074d6a;
+  --ut-floral-white: #fef7ed;
+  --ut-turquoise--s20: #138791;
+  --ut-shade--t20: #f9fafb;
+  --ut-shade--t40: #e6ebed;
+  --ut-shade--t60: #c4cdd4;
+  --ut-shade--s20: #7d8a92;
+  --ut-shade--s40: #5e686e;
+  --ut-shade--s60: #3e4549;
+  --ut-turtlepond--s20: #487d39;
+  --ut-burntorange--s10: #AE4F00;
+  --ut-burntorange--s20: #9d4700;
+  --ut-charcoal--t20: #ebeced;
+  --ut-charcoal--t40: #c2c5c8;
+  --ut-charcoal--t60: #858c91;
+  --ut-charcoal--s40: #1f262b;
+  --ut-limestone--t15: #f9f8f6;
+  --ut-limestone--t20: #fbfbf9;
+  --ut-limestone--t40: #f2f1ed;
+  --ut-limestone--t60: #e6e4dc;
+  --ut-limestone--s10: #c0bdb0;
+  --ut-limestone--s20: #aba89e;
+  --ut-limestone--s40: #807e76;
+  --ut-limestone--s50: #6a6861;
+  --ut-limestone--s60: #56544e;
+  --ut-limestone--t70: #e2dfd5;
+
+  /* Default settings for Font Colors */
+  --ut-body-font-color: var(--ut-charcoal--s40);
+  --ut-header-font-color: var(--ut-charcoal);
+  --input-bg-disabled: #e6e6e6;
+
+  /* Fonts */
+  --ut-font--serif: "CharisSil", Georgia, serif;
+  --ut-font--sans: "LibreFrank", Arial, Helvetica, sans-serif;
+  --bs-body-font-family: var(--ut-font--sans);
+  --bs-body-color: var(--ut-body-font-color);
+}
+
+/* Bootstrap breadcrumb variable overrides */
+.breadcrumb {
+  --bs-breadcrumb-divider: '';
+  --bs-breadcrumb-font-size: .75rem;
+  --bs-breadcrumb-padding-x: 1rem;
+  --bs-breadcrumb-padding-y: .5rem;
+  --bs-breadcrumb-margin-bottom: 0;
+}

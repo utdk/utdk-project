@@ -1,0 +1,6 @@
+utexas_announcement.configuration:
+  title: 'Site Announcement'
+  route_name: utexas_announcement.configuration
+  description: 'Display a prominent announcement on the site.'
+  parent: system.admin_config_system
+  weight: 98

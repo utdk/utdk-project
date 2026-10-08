@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_800w_500h
+label: '800w x 500h (1.6:1)'
+effects:
+  0255779a-b2d6-407b-ad07-0262080a8131:
+    uuid: 0255779a-b2d6-407b-ad07-0262080a8131
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 800
+      height: 500
+      anchor: center-center

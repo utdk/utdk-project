@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.utexas_image.field_utexas_media_image
+    - image.style.utexas_image_style_500w
+    - media.type.utexas_image
+  module:
+    - image
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: media.utexas_image.media_library
+targetEntityType: media
+bundle: utexas_image
+mode: media_library
+content:
+  created:
+    label: hidden
+    type: timestamp
+    weight: 1
+    region: content
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+    third_party_settings: {  }
+  thumbnail:
+    type: image
+    weight: 2
+    label: hidden
+    settings:
+      image_style: utexas_image_style_500w
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    region: content
+    third_party_settings: {  }
+  uid:
+    label: hidden
+    type: author
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_utexas_media_image: true
+  name: true

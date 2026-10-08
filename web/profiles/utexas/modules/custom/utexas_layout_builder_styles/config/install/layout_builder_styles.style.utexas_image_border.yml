@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_image_border
+label: 'Add border around image(s)'
+classes: utexas-image-border
+type: component
+group: utexas_borders
+block_restrictions:
+  - 'inline_block:utexas_flex_content_area'
+  - 'inline_block:utexas_photo_content_area'
+  - 'inline_block:utexas_promo_list'
+  - 'inline_block:utexas_promo_unit'
+  - 'inline_block:utexas_resources'

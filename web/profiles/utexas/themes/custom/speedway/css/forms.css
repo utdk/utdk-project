@@ -1,0 +1,94 @@
+/* Text inputs and text areas */
+input,
+optgroup,
+select,
+textarea {
+  background-color: var(--ut-white);
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid var(--ut-shade--s40);
+  color: var(--ut-charcoal--s40);
+  font-size: var(--ut-base-font-size);
+  line-height: var(--ut-text--line-height);
+  margin: 0.25em 0;
+  padding: 0.5rem 1em;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+  /* Placeholder */
+  &::placeholder {
+    color: var(--ut-shade--s40);
+    opacity: 1;
+  }
+
+  /* Disabled and read-only inputs
+
+  HTML5 says that controls under a fieldset > legend:first-child won't be
+  disabled if the fieldset is disabled. Due to implementation difficulty, we
+  don't honor that edge case; we style them as disabled anyway. */
+  &:disabled,
+  &[readonly] {
+    background-color: var(--input-bg-disabled);
+    opacity: 1;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* Labels in forms */
+label:has(~input[type="number"]),
+label:has(~input[type="tel"]),
+label:has(~input[type="email"]),
+label:has(~input[type="url"]),
+label:has(~input[type="password"]),
+label:has(~input[type="text"]),
+label:has(~select) {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 2.25rem;
+}
+
+input[type="checkbox"]:not(.facets-checkbox),
+input[type="radio"] {
+  height: 1.125rem;
+  margin-bottom: 0.25rem;
+  margin-right: 0.5em;
+  margin-top: 0.25rem;
+  vertical-align: middle;
+  width: 1.125rem;
+
+  ~label {
+    margin-top: 1.125rem;
+  }
+}
+
+select,
+input[type="tel"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="text"] {
+  max-width: 46rem;
+  width: 100%;
+}
+
+textarea {
+  height: 16rem;
+  overflow: auto;
+}
+
+/* Disabled inputs */
+[type="checkbox"]:disabled,
+[type="radio"]:disabled {
+
+  &+label {
+    color: var(--ut-charcoal--t20);
+  }
+
+  &+label::before {
+    background: var(--input-bg-disabled);
+    box-shadow: 0 0 0 1px var(--ut-charcoal--t40);
+    cursor: not-allowed;
+  }
+}

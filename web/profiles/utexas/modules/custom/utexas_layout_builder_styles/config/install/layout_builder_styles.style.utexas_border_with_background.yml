@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_border_with_background
+label: 'Border with background'
+classes: "utexas-field-border\r\nutexas-field-background"
+type: component
+group: utexas_borders
+block_restrictions: null

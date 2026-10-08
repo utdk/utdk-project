@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_flex_content_area
+label: 'Flex Content Area'
+revision: 0
+description: 'Image, headline, copy text & link(s), with column display variations.'

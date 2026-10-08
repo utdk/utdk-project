@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_add_basic_info
+    - node.type.utprof_profile
+  module:
+    - text
+id: node.utprof_profile.field_utprof_add_basic_info
+field_name: field_utprof_add_basic_info
+entity_type: node
+bundle: utprof_profile
+label: 'Additional basic information'
+description: 'Optionally add additional basic information that is not satisfied by the fields above.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

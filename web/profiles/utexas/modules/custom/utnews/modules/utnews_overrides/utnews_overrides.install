@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Utnews overrides module installation file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function utnews_overrides_install() {
+  module_set_weight('utnews_overrides', 10);
+}

@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for UTexas Featured Highlight module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Update configuration related to responsive image styles.
+ */
+function utexas_featured_highlight_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_featured_highlight',
+  ], TRUE);
+}
+
+/**
+ * Issue #1033: Support custom link options in Featured Highlight CTA.
+ */
+function utexas_featured_highlight_update_8102() {
+  $link_options = [
+    'description' => 'Serialized array of options for the link.',
+    'type' => 'blob',
+    'size' => 'big',
+    'serialize' => TRUE,
+  ];
+  $database = Database::getConnection();
+  $query = $database->query(
+    "SELECT value FROM {key_value} WHERE name=:name",
+    [
+      ':name' => "block_content.field_schema_data.field_block_featured_highlight",
+    ]
+  );
+  $result = $query->fetchAssoc();
+  // This serialized data is trusted from the component,
+  // so we do not restrict object types in unserialize().
+  // @codingStandardsIgnoreLine
+  $fh_tables = array_keys(unserialize($result['value']));
+  $schema = $database->schema();
+  foreach ($fh_tables as $table_name) {
+    $schema->addField($table_name, 'field_block_featured_highlight_link_options', $link_options);
+  }
+}
+
+/**
+ * Featured Highlight image styles change scale & crop to scale width (#1792).
+ */
+function utexas_featured_highlight_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_featured_highlight',
+  ], TRUE);
+}
+
+/**
+ * Padding is inconsistent in one-column and multi-column layouts (#2507).
+ */
+function utexas_featured_highlight_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utexas_featured_highlight',
+  ], TRUE);
+}

@@ -2,13 +2,133 @@
     "name": "utexas/upstream-configuration",
     "description": "Defines requirements specific to the UT Drupal Kit.",
     "type": "project",
-    "version": "3.32.3",
+    "version": "3.33.0",
     "require": {
-        "php": ">=8.3",
         "composer/installers": "^1.9 || ^2.0",
+        "cweagans/composer-patches": "~1.0",
+        "drupal/addtocal_augment": "1.2.6",
+        "drupal/addtoany": "2.0.7",
+        "drupal/admin_toolbar": "3.6.3",
+        "drupal/bootstrap_horizontal_tabs": "3.1.1",
+        "drupal/breadcrumbs_visibility": "2.0.1",
+        "drupal/config_update": "2.0.0-alpha4",
+        "drupal/core-composer-scaffold": "11.4.8",
+        "drupal/core-recommended": "11.4.8",
+        "drupal/date_ap_style": "3.0.0",
+        "drupal/date_augmenter": "1.1.3",
+        "drupal/diff": "2.1.1",
+        "drupal/editor_advanced_link": "2.3.4",
+        "drupal/entity_clone": "2.2.0-beta1",
+        "drupal/entity_usage": "5.0.1",
+        "drupal/facets": "3.0.7",
+        "drupal/features": "3.17.0",
+        "drupal/feed_block": "3.0.2",
+        "drupal/feeds": "3.2.0",
+        "drupal/feeds_ex": "1.0.0-beta5",
+        "drupal/feeds_tamper": "2.0.0-rc1",
+        "drupal/field_group": "4.0.0",
+        "drupal/fullcalendar_view": "5.2.5",
+        "drupal/google_cse": "5.0.5",
+        "drupal/google_tag": "2.0.9",
+        "drupal/iframe_title_filter": "3.1.2",
+        "drupal/layout_builder_iframe_modal": "1.3.8",
+        "drupal/layout_builder_styles": "2.1.0",
+        "drupal/linkit": "7.0.16",
+        "drupal/media_file_delete": "1.3.2",
+        "drupal/media_library_form_element": "2.1.5",
+        "drupal/menu_block": "1.14.0",
+        "drupal/menu_trail_by_path": "2.2.0",
+        "drupal/metatag": "2.2.0",
+        "drupal/page_title_visibility": "2.0.1",
+        "drupal/pantheon_advanced_page_cache": "2.4.1",
+        "drupal/pathauto": "1.15.0",
+        "drupal/pathologic": "2.0.0",
+        "drupal/redirect": "1.13.0",
+        "drupal/responsive_tables_filter": "2.1.2",
+        "drupal/role_delegation": "1.6.0",
+        "drupal/search_api": "1.41.0",
+        "drupal/seckit": "2.0.3",
+        "drupal/schema_metatag": "3.0.4",
+        "drupal/smart_date": "4.2.8",
+        "drupal/trash": "3.0.33",
+        "drupal/updated": "2.0.0",
+        "drupal/url_embed": "3.0.3",
+        "drupal/xmlsitemap": "2.0.0",
         "drush/drush": "^13",
-        "oomphinc/composer-installers-extender": "^2.0",
-        "utexas/utdk_profile": "3.32.3",
-        "pantheon-systems/drupal-integrations": "^11"
+        "enshrined/svg-sanitize": "~0.21",
+        "oomphinc/composer-installers-extender": "2.0.1",
+        "pantheon-systems/drupal-integrations": "^11",
+        "php": ">=8.3",
+        "utexas/utexas_pantheon_logs_http": "^2.0",
+        "utexas/utexas_saml_auth_helper": "^3.6",
+        "utexas/utexas_smtp_helper": "^1.0.0"
+    },
+    "conflict": {
+        "drupal/drupal": "*",
+        "utexas/utnews": "*",
+        "utexas/utevent": "*",
+        "utexas/utprof": "*"
+    },
+    "extra": {
+        "patches": {
+            "drupal/core": {
+                "Possible log noise as of Drupal 10.1.1: BadRequestHttpException: The theme must be passed as a query argument": "https://wcms.its.utexas.edu/patches/18-bad-request-2296.patch",
+                "Image Media thumbnail alt text cannot be changed without reuploading the image": "https://wcms.its.utexas.edu/patches/3232414-thumbnail-alt-text.patch"
+            },
+            "drupal/entity_clone": {
+                "Inline Blocks on cloned nodes are deleted when originating nodes are deleted": "https://wcms.its.utexas.edu/patches/3050027-inline.2.2.0-beta1.patch"
+            }
+        },
+        "drupal-scaffold": {
+            "file-mapping": {
+                "[web-root]/robots.txt": {
+                    "path": "assets/robots.txt"
+                },
+                "[web-root]/android-chrome-192x192.png": {
+                    "path": "assets/android-chrome-192x192.png",
+                    "overwrite": false
+                },
+                "[web-root]/android-chrome-512x512.png": {
+                    "path": "assets/android-chrome-512x512.png",
+                    "overwrite": false
+                },
+                "[web-root]/apple-touch-icon.png": {
+                    "path": "assets/apple-touch-icon.png",
+                    "overwrite": false
+                },
+                "[web-root]/browserconfig.xml": {
+                    "path": "assets/browserconfig.xml",
+                    "overwrite": false
+                },
+                "[web-root]/favicon.ico": {
+                    "path": "assets/favicon.ico",
+                    "overwrite": false
+                },
+                "[web-root]/favicon-32x32.png": {
+                    "path": "assets/favicon-32x32.png",
+                    "overwrite": false
+                },
+                "[web-root]/favicon-48x48.png": {
+                    "path": "assets/favicon-48x48.png",
+                    "overwrite": false
+                },
+                "[web-root]/mstile-150x150.png": {
+                    "path": "assets/mstile-150x150.png",
+                    "overwrite": false
+                },
+                "[web-root]/safari-pinned-tab.svg": {
+                    "path": "assets/safari-pinned-tab.svg",
+                    "overwrite": false
+                },
+                "[web-root]/site.webmanifest": {
+                    "path": "assets/site.webmanifest",
+                    "overwrite": false
+                }
+            }
+        }
+    },
+    "support": {
+        "email": "drupal-kit-support@utlists.utexas.edu",
+        "docs": "https://utexas.sharepoint.com/sites/UTDK"
     }
 }

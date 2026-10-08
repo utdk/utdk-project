@@ -1,0 +1,301 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for UTexas Layout Builder Styles.
+ */
+
+use Drupal\layout_builder_styles\Entity\LayoutBuilderStyleGroup;
+use Drupal\utexas_layout_builder_styles\StyleUpdateHelper;
+
+/**
+ * Implements hook_install().
+ */
+function utexas_layout_builder_styles_install() {
+  // Set label for default group.
+  StyleUpdateHelper::modifyConfigValue('layout_builder_styles.group.default', 'label', 'General Styles');
+}
+
+/**
+ * Import multi-column custom Layout Builder Styles.
+ */
+function utexas_layout_builder_styles_update_8101() {
+  $styles = [
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  // Import each file config individually.
+  foreach ($styles as $style) {
+    StyleUpdateHelper::modifyConfigValue($style, 'status', 'true');
+  }
+}
+
+/**
+ * Import custom Layout Builder Style for readable width.
+ */
+function utexas_layout_builder_styles_update_8102() {
+  StyleUpdateHelper::modifyConfigValue('layout_builder_styles.style.utexas_readable', 'status', 'true');
+}
+
+/**
+ * Issue #1239: Update 1-4 item per row labels.
+ */
+function utexas_layout_builder_styles_update_8103() {
+  $layout_builder_style_label = 'Limit to 1 item per row (if no limit is set, items will adjust to fit the available space)';
+  $layout_builer_style = 'layout_builder_styles.style.utexas_onecol';
+  StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'label', $layout_builder_style_label);
+
+  $layout_builder_style_label = 'Limit to 2 items per row (if no limit is set, items will adjust to fit the available space)';
+  $layout_builer_style = 'layout_builder_styles.style.utexas_twocol';
+  StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'label', $layout_builder_style_label);
+
+  $layout_builder_style_label = 'Limit to 3 items per row (if no limit is set, items will adjust to fit the available space)';
+  $layout_builer_style = 'layout_builder_styles.style.utexas_threecol';
+  StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'label', $layout_builder_style_label);
+
+  $layout_builder_style_label = 'Limit to 4 items per row (if no limit is set, items will adjust to fit the available space)';
+  $layout_builer_style = 'layout_builder_styles.style.utexas_fourcol';
+  StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'label', $layout_builder_style_label);
+}
+
+/**
+ * Issue #1255: Make 1-4 items per row available for Promo Units.
+ */
+function utexas_layout_builder_styles_update_8104() {
+  $layout_builder_styles = [
+    'layout_builder_styles.style.utexas_onecol',
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  foreach ($layout_builder_styles as $layout_builer_style) {
+    StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'block_restrictions', 'inline_block:utexas_promo_unit');
+  }
+}
+
+/**
+ * Issue #1255: Set initial items per row value to 1 for existing Promo Units.
+ */
+function utexas_layout_builder_styles_update_8105() {
+  StyleUpdateHelper::addStyleToBlock('utexas_promo_unit', 'utexas_onecol');
+}
+
+/**
+ * Issues #1303, #1312, #1317 : Make 1-4 items per row available for components.
+ *
+ * Items per row are now available for Quick Links, Flex Content Areas, and
+ * Resources.
+ */
+function utexas_layout_builder_styles_update_8106() {
+  $layout_builder_styles = [
+    'layout_builder_styles.style.utexas_onecol',
+    'layout_builder_styles.style.utexas_twocol',
+    'layout_builder_styles.style.utexas_threecol',
+    'layout_builder_styles.style.utexas_fourcol',
+  ];
+  foreach ($layout_builder_styles as $layout_builer_style) {
+    StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'block_restrictions', 'inline_block:utexas_quick_links');
+    StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'block_restrictions', 'inline_block:utexas_flex_content_area');
+    StyleUpdateHelper::modifyConfigValue($layout_builer_style, 'block_restrictions', 'inline_block:utexas_resources');
+  }
+}
+
+/**
+ * Issue #1303 : Update view modes to Layout Builder Styles for existing QLinks.
+ */
+function utexas_layout_builder_styles_update_8107() {
+  $style_map = [
+    'default' => 'utexas_onecol',
+    'utexas_quick_links_2' => 'utexas_twocol',
+    'utexas_quick_links_3' => 'utexas_threecol',
+    'utexas_quick_links_4' => 'utexas_fourcol',
+  ];
+
+  StyleUpdateHelper::migrateStyleToBlocksFromViewMode('utexas_quick_links', $style_map);
+}
+
+/**
+ * Issue #1312 : Update view modes to Layout Builder Styles for existing FCAs.
+ */
+function utexas_layout_builder_styles_update_8108() {
+  $style_map = [
+    'utexas_flex_content_area_1' => 'utexas_onecol',
+    'default' => 'utexas_twocol',
+    'utexas_flex_content_area_3' => 'utexas_threecol',
+    'utexas_flex_content_area_4' => 'utexas_fourcol',
+  ];
+
+  StyleUpdateHelper::migrateStyleToBlocksFromViewMode('utexas_flex_content_area', $style_map);
+}
+
+/**
+ * Issue #1317: Set initial items per row value to 1 for existing Resources.
+ *
+ * This only affects utexas_resources.
+ */
+function utexas_layout_builder_styles_update_8109() {
+  StyleUpdateHelper::addStyleToBlock('utexas_resources', 'utexas_onecol');
+}
+
+/**
+ * Add block margin styles (#846).
+ */
+function utexas_layout_builder_styles_update_8110() {
+  $styles = [
+    'layout_builder_styles.style.utexas_block_bottom_margin_increase',
+    'layout_builder_styles.style.utexas_block_bottom_margin_remove',
+    'layout_builder_styles.style.utexas_block_top_margin_increase',
+    'layout_builder_styles.style.utexas_block_top_margin_remove',
+  ];
+  $config_factory = \Drupal::configFactory();
+  foreach ($styles as $style) {
+    $config = $config_factory->getEditable($style);
+    if ($config->isNew()) {
+      StyleUpdateHelper::saveNewConfigurationFromYml($config, $style);
+    }
+  }
+}
+
+/**
+ * Add style option for border around images in components (#1780).
+ */
+function utexas_layout_builder_styles_update_8111() {
+  $styles = [
+    'layout_builder_styles.style.utexas_image_border',
+  ];
+  $config_factory = \Drupal::configFactory();
+  foreach ($styles as $style) {
+    $config = $config_factory->getEditable($style);
+    if ($config->isNew()) {
+      StyleUpdateHelper::saveNewConfigurationFromYml($config, $style);
+    }
+  }
+}
+
+/**
+ * Issue #1854: Implement use of new style grouping feature in Layout Builder...
+ */
+function utexas_layout_builder_styles_update_8112() {
+  $config_factory = \Drupal::configFactory();
+  // Add new LBS groups.
+  $groups = [
+    'layout_builder_styles.group.utexas_borders',
+    'layout_builder_styles.group.utexas_items_per_row',
+    'layout_builder_styles.group.utexas_block_margins_padding',
+    'layout_builder_styles.group.utexas_section_margins_padding',
+  ];
+  foreach ($groups as $group) {
+    $config = $config_factory->getEditable($group);
+    if ($config->isNew()) {
+      StyleUpdateHelper::saveNewConfigurationFromYml($config, $group);
+    }
+  }
+
+  // Assign group to styles.
+  $groups = [
+    'utexas_borders' => [
+      'layout_builder_styles.style.utexas_image_border',
+      'layout_builder_styles.style.utexas_border_with_background',
+      'layout_builder_styles.style.utexas_border_without_background',
+    ],
+    'utexas_block_margins_padding' => [
+      'layout_builder_styles.style.utexas_readable',
+      'layout_builder_styles.style.utexas_block_top_margin_remove',
+      'layout_builder_styles.style.utexas_block_bottom_margin_remove',
+      'layout_builder_styles.style.utexas_block_top_margin_increase',
+      'layout_builder_styles.style.utexas_block_bottom_margin_increase',
+    ],
+    'utexas_section_margins_padding' => [
+      'layout_builder_styles.style.utexas_no_padding',
+    ],
+    'utexas_items_per_row' => [
+      'layout_builder_styles.style.utexas_onecol',
+      'layout_builder_styles.style.utexas_twocol',
+      'layout_builder_styles.style.utexas_threecol',
+      'layout_builder_styles.style.utexas_fourcol',
+    ],
+  ];
+  foreach ($groups as $group => $styles) {
+    foreach ($styles as $style) {
+      $config_factory->getEditable($style)->set('group', $group)->save();
+    }
+  }
+
+  // Update labels key in current items_per_row styles.
+  foreach ($groups['utexas_items_per_row'] as $style) {
+    $new_data = StyleUpdateHelper::getConfigurationDataFromYml($style);
+    if (!empty($new_data)) {
+      $value = $new_data['label'];
+      StyleUpdateHelper::modifyConfigValue($style, 'label', $value);
+    }
+  }
+
+  // Create a default group in the manner that contrib module demonstrates and
+  // assign them where needed.
+  _utexas_layout_builder_styles_add_group();
+
+}
+
+/**
+ * Add "default" Layout Builder Style Group to pre-existing styles w/o a group.
+ *
+ * @see layout_builder_styles_post_update_add_group()
+ */
+function _utexas_layout_builder_styles_add_group() {
+  // Create a default group.
+  $group = LayoutBuilderStyleGroup::create([
+    'id' => 'default',
+    'label' => 'General Styles',
+    'weight' => 100,
+    'required' => FALSE,
+  ]);
+
+  // We can carry over some settings from our old config.
+  $legacy_config = \Drupal::configFactory()->getEditable('layout_builder_styles.settings');
+  if ($legacy_config) {
+    $group->set('multiselect', $legacy_config->get('multiselect') ?? 'single');
+    $group->set('form_type', $legacy_config->get('form_type') ?? 'checkboxes');
+  }
+  else {
+    // Unlikely scenario but covering bases if settings DNE.
+    $group->set('multiselect', 'single');
+    $group->set('form_type', 'checkboxes');
+  }
+  $group->save();
+
+  // Don't need old config anymore.
+  $legacy_config->delete();
+  \Drupal::logger('layout_builder_styles')->info('Legacy settings removed.');
+
+  // Set this new 'default' group to any existing styles, since all styles
+  // must have a group associated now.
+  $styles = \Drupal::entityTypeManager()
+    ->getStorage('layout_builder_style')
+    ->loadByProperties();
+  /** @var \Drupal\layout_builder_styles\Entity\LayoutBuilderStyle $style */
+  foreach ($styles as $style) {
+    if (empty($style->getGroup())) {
+      $style->set('group', $group->id());
+      $style->save();
+    }
+  }
+
+}
+
+/**
+ * Issue #2683: Add margin adjustment option to Layout Builder sections.
+ */
+function utexas_layout_builder_styles_update_8113() {
+  $styles = [
+    'layout_builder_styles.style.utexas_reduce_space_at_top_of_section',
+    'layout_builder_styles.style.utexas_add_space_at_top_of_section',
+  ];
+  $config_factory = \Drupal::configFactory();
+  foreach ($styles as $style) {
+    $config = $config_factory->getEditable($style);
+    if ($config->isNew()) {
+      StyleUpdateHelper::saveNewConfigurationFromYml($config, $style);
+    }
+  }
+}

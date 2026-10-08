@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for the UTexas Flex List.
+ */
+
+/**
+ * Add accordion option (#997) and horizontal tab option (#1626).
+ */
+function utexas_flex_list_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_flex_list',
+  ], TRUE);
+}
+
+/**
+ * Add DRAC functionality (#2299).
+ */
+function utexas_flex_list_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_flex_list',
+  ], TRUE);
+}
+
+/**
+ * Set definition list as default flex list mark up.
+ */
+function utexas_flex_list_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_flex_list',
+  ], TRUE);
+}

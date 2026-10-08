@@ -1,0 +1,5 @@
+entity.utexas_social_links_data.add_form:
+  route_name: entity.utexas_social_links_data.add_form
+  title: 'Add Social Link Icon'
+  appears_on:
+    - entity.utexas_social_links_data.collection

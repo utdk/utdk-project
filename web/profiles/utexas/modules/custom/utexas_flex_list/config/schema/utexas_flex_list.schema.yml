@@ -1,0 +1,7 @@
+field.formatter.settings.utexas_flex_list:
+  type: mapping
+  label: 'Flex list display options'
+  mapping:
+    heading_level:
+      type: string
+      label: 'Heading level'

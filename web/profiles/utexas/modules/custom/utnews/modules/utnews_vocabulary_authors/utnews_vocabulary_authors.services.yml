@@ -1,0 +1,2 @@
+parameters:
+  utnews_vocabulary_authors.skip_procedural_hook_scan: true

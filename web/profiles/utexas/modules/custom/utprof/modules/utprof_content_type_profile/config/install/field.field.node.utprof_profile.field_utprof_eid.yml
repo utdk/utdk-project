@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_eid
+    - node.type.utprof_profile
+id: node.utprof_profile.field_utprof_eid
+field_name: field_utprof_eid
+entity_type: node
+bundle: utprof_profile
+label: 'UT EID'
+description: 'Enter a UT EID to add a "View in Directory" link to certain profile displays, which will link directly to that EID''s record in <a class="ut-cta-link--external" href="https://directory.utexas.edu">https://directory.utexas.edu</a>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

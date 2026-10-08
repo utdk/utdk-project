@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_250w_150h
+label: '250w x 150h (1.66:1)'
+effects:
+  ab7d3330-416f-4b4e-8e05-a4df30d40f93:
+    uuid: ab7d3330-416f-4b4e-8e05-a4df30d40f93
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 250
+      height: 150
+      anchor: center-center

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_photo_content_area
+    - core.entity_view_mode.block_content.utexas_photo_content_area_2
+    - field.field.block_content.utexas_photo_content_area.field_block_pca
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    sections: {  }
+    allow_custom: false
+    enabled: false
+id: block_content.utexas_photo_content_area.utexas_photo_content_area_2
+targetEntityType: block_content
+bundle: utexas_photo_content_area
+mode: utexas_photo_content_area_2
+content:
+  field_block_pca:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_photo_content_area_2
+    region: content
+hidden: {  }

@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the utprof_demo_content module.
+ */
+
+use Drupal\utprof_demo_content\DemoContent;
+
+/**
+ * Implements hook_install().
+ */
+function utprof_demo_content_install() {
+  DemoContent::createDemoContent();
+}

@@ -1,0 +1,271 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.utevent_event.field_utevent_body
+    - field.field.node.utevent_event.field_utevent_datetime
+    - field.field.node.utevent_event.field_utevent_featured
+    - field.field.node.utevent_event.field_utevent_location
+    - field.field.node.utevent_event.field_utevent_main_media
+    - field.field.node.utevent_event.field_utevent_status
+    - field.field.node.utevent_event.field_utevent_tags
+    - node.type.utevent_event
+  module:
+    - feeds_ex
+    - feeds_tamper
+    - node
+    - smart_date
+third_party_settings:
+  feeds_tamper:
+    tampers:
+      28ecfdbc-73b5-4af7-872e-b9759368feea:
+        uuid: 28ecfdbc-73b5-4af7-872e-b9759368feea
+        plugin: strtotime
+        source: utevent_start_json
+        weight: 0
+        label: 'String to Unix Timestamp'
+      f01fbbac-9df8-43f5-843a-49bae06990a7:
+        uuid: f01fbbac-9df8-43f5-843a-49bae06990a7
+        plugin: strtotime
+        source: utevent_end_json
+        weight: 0
+        label: 'String to Unix Timestamp'
+      2ce21c56-d907-4e09-a22f-021c21472483:
+        separator: '|'
+        limit: null
+        uuid: 2ce21c56-d907-4e09-a22f-021c21472483
+        plugin: explode
+        source: utevent_tags_json
+        weight: -9
+        label: Explode
+      695143b5-4f46-4594-a055-3cff42356572:
+        uuid: 695143b5-4f46-4594-a055-3cff42356572
+        plugin: html_entity_decode
+        source: utevent_title_json
+        weight: 0
+        label: 'HTML entity decode'
+      547448a6-8239-4f4d-b4fa-2acf521763f8:
+        uuid: 547448a6-8239-4f4d-b4fa-2acf521763f8
+        plugin: html_entity_decode
+        source: utevent_ocation_json
+        weight: -9
+        label: 'HTML entity decode'
+      56199663-fb02-4300-9d9e-99611f0a2906:
+        uuid: 56199663-fb02-4300-9d9e-99611f0a2906
+        plugin: html_entity_decode
+        source: utevent_tags_json
+        weight: -8
+        label: 'HTML entity decode'
+      93879a9c-526e-4ba9-9150-124d459863a8:
+        uuid: 93879a9c-526e-4ba9-9150-124d459863a8
+        plugin: skip_on_empty
+        source: utevent_tags_json
+        weight: -10
+        label: 'Skip tampers on empty'
+      cb1186a0-69e7-412d-b6e4-c42db1402a54:
+        uuid: cb1186a0-69e7-412d-b6e4-c42db1402a54
+        plugin: utevent_create_media_tamper
+        source: utevent_image_url_json
+        weight: 0
+        label: 'Create Media Tamper'
+label: 'Events import JSON'
+id: utevent_import_json
+description: 'Imports a JSON file to the Event content type.'
+help: ''
+import_period: 3600
+import_period_per_feed: false
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: jsonpath
+parser_configuration:
+  context:
+    value: '$.*'
+  source_encoding:
+    - auto
+  display_errors: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: utevent_event
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  utevent_uuid_json:
+    value: uuid
+    label: UUID
+    machine_name: utevent_uuid_json
+    type: json
+  utevent_title_json:
+    value: title
+    label: Title
+    machine_name: utevent_title_json
+    type: json
+  utevent_path_json:
+    value: path
+    label: Path
+    machine_name: utevent_path_json
+    type: json
+  utevent_start_json:
+    value: start
+    label: Start
+    machine_name: utevent_start_json
+    type: json
+  utevent_end_json:
+    value: end
+    label: End
+    machine_name: utevent_end_json
+    type: json
+  utevent_duration_json:
+    value: duration
+    label: Duration
+    machine_name: utevent_duration_json
+    type: json
+  utevent_body_json:
+    value: body
+    label: Body
+    machine_name: utevent_body_json
+    type: json
+  utevent_summary_json:
+    value: summary
+    label: Summary
+    machine_name: utevent_summary_json
+    type: json
+  utevent_status_json:
+    value: status
+    label: Status
+    machine_name: utevent_status_json
+    type: json
+  utevent_ocation_json:
+    value: location
+    label: Location
+    machine_name: utevent_location_json
+    type: json
+  utevent_tags_json:
+    value: tags
+    label: Tags
+    machine_name: utevent_tags_json
+    type: json
+  utevent_featured_json:
+    value: featured
+    label: Featured
+    machine_name: utevent_featured_json
+    type: json
+  utevent_image_url_json:
+    value: image-url
+    label: 'Image URL'
+    machine_name: utevent_image_url_json
+    type: json
+  utevent_image_alt_json:
+    value: image-alt
+    label: 'Image alt'
+    machine_name: utevent_image_alt_json
+    type: json
+  utevent_image_title_json:
+    value: image-title
+    label: 'Image title'
+    machine_name: utevent_image_title_json
+    type: json
+mappings:
+  -
+    target: title
+    map:
+      value: utevent_title_json
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: path
+    map:
+      alias: utevent_path_json
+      pathauto: ''
+    settings:
+      language: null
+  -
+    target: field_utevent_datetime
+    map:
+      value: utevent_start_json
+      end_value: utevent_end_json
+      rrule: ''
+      duration: utevent_duration_json
+      timezone: ''
+    settings:
+      language: null
+  -
+    target: field_utevent_body
+    map:
+      value: utevent_body_json
+      summary: utevent_summary_json
+    settings:
+      language: ''
+      format: flex_html
+  -
+    target: field_utevent_status
+    map:
+      value: utevent_status_json
+    settings:
+      language: null
+  -
+    target: field_utevent_location
+    map:
+      target_id: utevent_ocation_json
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: utevent_location
+  -
+    target: field_utevent_tags
+    map:
+      target_id: utevent_tags_json
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: utevent_tags
+  -
+    target: field_utevent_featured
+    map:
+      value: utevent_featured_json
+    settings:
+      language: null
+  -
+    target: feeds_item
+    map:
+      url: ''
+      guid: utevent_uuid_json
+    settings: {  }
+    unique:
+      guid: 1
+  -
+    target: field_utevent_main_media
+    map:
+      target_id: utevent_image_url_json
+    settings:
+      language: ''
+      reference_by: mid
+      autocreate: 0
+      autocreate_bundle: utexas_image
+  -
+    target: temporary_target
+    map:
+      temporary: utevent_image_alt_json
+  -
+    target: temporary_target
+    map:
+      temporary: utevent_image_title_json

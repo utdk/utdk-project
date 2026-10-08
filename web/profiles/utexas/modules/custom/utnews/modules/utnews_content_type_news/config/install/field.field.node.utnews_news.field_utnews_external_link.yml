@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utnews_external_link
+    - node.type.utnews_news
+  module:
+    - link
+id: node.utnews_news.field_utnews_external_link
+field_name: field_utnews_external_link
+entity_type: node
+bundle: utnews_news
+label: 'External link'
+description: "To add a news listing item that links the title above directly to an external website, enter a URL here.\r\n<ul>\r\n<li>Visually indicate that this item links to an external website by selecting \"external link icon\" below.</li>\r\n<li>Since visitors will be sent to the external site, there is generally no need to populate the \"body\" field below.</li>\r\n<li>If your news listings display thumbnail images, you'll still need to upload an image.</li>\r\n</ul>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

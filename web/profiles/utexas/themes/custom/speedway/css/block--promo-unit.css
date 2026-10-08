@@ -1,0 +1,104 @@
+.utexas-promo-unit {
+  align-content: flex-start;
+  background-color: var(--ut-shade--t20);
+  border: 1px solid var(--ut-limestone--t40);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem;
+  /* Add padding for non-mobile screens */
+  @media (min-width: 768px) {
+    padding: 1rem;
+  }
+  @media (min-width: 1200px) {
+    padding: 1.25rem;
+  }
+  /* Ensure items do not exceed their container width in multi-column layouts */
+  @container (max-width: 1600px) {
+    max-width: 100cqw;
+  }
+
+  /* On small screens, the image stacks */
+  .image-wrapper {
+    flex-shrink: 1;
+    flex-grow: 1;
+    margin: 7px auto 2%;
+    /* Needed in case image derivative is smaller than its container's width. */
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .landscape-image {
+    flex-basis: 40%;
+    max-width: 190px;
+  }
+  .portrait-image {
+    flex-basis: 35%;
+    max-width: 130px;
+  }
+  .square-image {
+    flex-basis: 50%;
+    max-width: 140px;
+  }
+  /* Grow image dimensions for desktop screens */
+  @media (min-width: 1200px) {
+    .landscape-image {
+      max-width: 220px;
+    }
+    .portrait-image {
+      max-width: 150px;
+    }
+    .square-image {
+      max-width: 140px;
+    }
+  }
+  /* Text content responsively displays adjacent to image */
+  .data-wrapper {
+    flex: 1 1 0;
+    margin: 0 0 0 1.25rem;
+    min-width: 175px;
+  }
+  .data-wrapper > :last-child,
+  .data-wrapper > :last-child :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* For "stacked" display, always force one column flex-wrap. */
+.stacked-display .utexas-promo-unit {
+  .landscape-image,
+  .portrait-image,
+  .square-image {
+    flex: 0 0 100%;
+    max-width: initial;
+  }
+  .data-wrapper {
+    margin-left: 0;
+  }
+}
+
+/* Items Per Row Styles */
+.utexas-promo-unit-items {
+  --ipr-grid-gap: 1vw;
+  --ipr-grid-min-min-size: 275px;
+  --ipr-grid-min-max-size: 300px;
+  display: grid;
+  grid-gap: var(--ipr-grid-gap);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)), 1fr)
+  );
+  container-type: inline-size;
+}
+.utexas-onecol .utexas-promo-unit-items {
+  --ipr-grid-min-max-size: 100%;
+}
+.utexas-twocol .utexas-promo-unit-items {
+  --ipr-grid-min-max-size: calc(50% - var(--ipr-grid-gap));
+}
+.utexas-threecol .utexas-promo-unit-items {
+  --ipr-grid-min-max-size: calc(33.333% - (2 * var(--ipr-grid-gap)));
+}
+.utexas-fourcol .utexas-promo-unit-items {
+  --ipr-grid-min-max-size: calc(25% - (3 * var(--ipr-grid-gap)));
+}

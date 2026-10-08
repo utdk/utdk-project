@@ -1,0 +1,48 @@
+/*
+ * @file
+ * Provides the layout styles for two-column layout section.
+ */
+
+.utexas-layout--twocol .utexas-layout--twocol-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -3%;
+}
+
+.utexas-layout--twocol .utexas-layout--twocol-wrapper > .layout__region {
+  flex: 1 1 100%;
+  margin-left: 3%;
+}
+
+/* Reset for no-padding-column */
+.utexas-layout--twocol.utexas-layout-no-padding .utexas-layout--twocol-wrapper,
+.utexas-layout--twocol.utexas-layout-no-padding .utexas-layout--twocol-wrapper > * {
+  margin-left: 0;
+}
+
+@media screen and (min-width: 600px) {
+  .utexas-layout--twocol.utexas-layout--twocol--50-50 .utexas-layout--twocol-wrapper > .layout__region--first,
+  .utexas-layout--twocol.utexas-layout--twocol--50-50 .utexas-layout--twocol-wrapper > .layout__region--second {
+    flex: 1 1 47%;
+  }
+
+  .utexas-layout--twocol.utexas-layout--twocol--33-67 .utexas-layout--twocol-wrapper > .layout__region--first,
+  .utexas-layout--twocol.utexas-layout--twocol--67-33 .utexas-layout--twocol-wrapper > .layout__region--second {
+    flex: 1 1 30.5%;
+  }
+
+  .utexas-layout--twocol.utexas-layout--twocol--33-67 .utexas-layout--twocol-wrapper > .layout__region--second,
+  .utexas-layout--twocol.utexas-layout--twocol--67-33 .utexas-layout--twocol-wrapper > .layout__region--first {
+    flex: 1 1 63.5%;
+  }
+
+  .utexas-layout--twocol.utexas-layout--twocol--25-75 .utexas-layout--twocol-wrapper > .layout__region--first,
+  .utexas-layout--twocol.utexas-layout--twocol--75-25 .utexas-layout--twocol-wrapper > .layout__region--second {
+    flex: 1 1 22%;
+  }
+
+  .utexas-layout--twocol.utexas-layout--twocol--25-75 .utexas-layout--twocol-wrapper > .layout__region--second,
+  .utexas-layout--twocol.utexas-layout--twocol--75-25 .utexas-layout--twocol-wrapper > .layout__region--first {
+    flex: 1 1 72%;
+  }
+}

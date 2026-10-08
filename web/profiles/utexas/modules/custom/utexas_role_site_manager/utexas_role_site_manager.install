@@ -1,0 +1,155 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for UTexas Role Site Manager.
+ */
+
+use Drupal\user\Entity\Role;
+use Drupal\user\Entity\User;
+
+/**
+ * Reassign site manager role with new machine name.
+ */
+function utexas_role_site_manager_update_8101() {
+  $old_rid = 'utexas_role_site_manager';
+  $new_rid = 'utexas_site_manager';
+  $module_name = 'utexas_role_site_manager';
+  $added = 0;
+  $removed = 0;
+
+  // Find users that have the role.
+  $uids = \Drupal::entityQuery('user')
+    ->condition('status', 1)
+    ->condition('roles', $old_rid)
+    ->accessCheck(FALSE)
+    ->execute();
+  $site_managers = User::loadMultiple($uids);
+
+  if (!empty($site_managers)) {
+    // Remove that role from users.
+    foreach ($site_managers as $user) {
+      $user->removeRole($old_rid);
+      if ($user->save()) {
+        $removed++;
+      }
+    }
+  }
+  // Only perform the following if the role still exists in the system.
+  if ($role = Role::load($old_rid)) {
+    // Retrieve the existing role permissions as defined in the database.
+    $active_permissions = $role->getPermissions();
+    // Then delete the old role.
+    $role->delete();
+
+    // Import this module's updated configuration.
+    \Drupal::service('features.manager')->import([
+      $module_name,
+    ], TRUE);
+    // Load the newly created role & set the permissions based on whatever was
+    // defined in the site.
+    $new_role = Role::load($new_rid);
+    $config_permissions = $new_role->getPermissions();
+    if ($config_permissions != $active_permissions) {
+      foreach ($config_permissions as $permission) {
+        $new_role->revokePermission($permission);
+      }
+      foreach ($active_permissions as $permission) {
+        $new_role->grantPermission($permission);
+      }
+      $new_role->save();
+    }
+    else {
+      \Drupal::logger($module_name)->notice('Site permissions for @new_rid match configuration. No changes.', [
+        '@new_rid' => $new_rid,
+      ]);
+    }
+  }
+
+  if (!empty($site_managers)) {
+    // Assign the `utexas_site_manager` role to the identified users.
+    foreach ($site_managers as $user) {
+      $user->addRole($new_rid);
+      if ($user->save()) {
+        $added++;
+      }
+    }
+  }
+  \Drupal::logger('utexas_role_site_manager')->notice('@old_rid role removal count: @count.', [
+    '@old_rid' => $old_rid,
+    '@count' => $removed,
+  ]);
+  \Drupal::logger('utexas_role_site_manager')->notice('@new_rid role added count: @count.', [
+    '@new_rid' => $old_rid,
+    '@count' => $added,
+  ]);
+}
+
+/**
+ * Add the permission to administer AddToAny.
+ */
+function utexas_role_site_manager_update_8102() {
+  $rid = 'utexas_site_manager';
+  // Only perform the following if the role still exists in the system.
+  if ($role = Role::load($rid)) {
+    $role->grantPermission('administer addtoany');
+    $role->save();
+  }
+}
+
+/**
+ * Enable the role delegation module.
+ */
+function utexas_role_site_manager_update_8103() {
+  $module = 'role_delegation';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+}
+
+/**
+ * Add the role delegation permission to assign all roles.
+ */
+function utexas_role_site_manager_update_8104() {
+  $rid = 'utexas_site_manager';
+  // Only perform the following if the role still exists in the system.
+  if ($role = Role::load($rid)) {
+    $role->grantPermission('assign all roles');
+    $role->save();
+  }
+}
+
+/**
+ * Add permission to use full_html text format.
+ */
+function utexas_role_site_manager_update_8105() {
+  $rid = 'utexas_site_manager';
+  // Only perform the following if the role still exists in the system.
+  if ($role = Role::load($rid)) {
+    $role->grantPermission('use text format full_html');
+    $role->save();
+  }
+}
+
+/**
+ * Add permission to administer updated module in nodes.
+ */
+function utexas_role_site_manager_update_8106() {
+  $rid = 'utexas_site_manager';
+  // Only perform the following if the role still exists in the system.
+  if ($role = Role::load($rid)) {
+    $role->grantPermission('administer node last updated date');
+    $role->save();
+  }
+}
+
+/**
+ * Add the 'access toolbar' permission (#2090).
+ */
+function utexas_role_site_manager_update_8107() {
+  // Only perform the following if the role still exists in the system.
+  if ($role = Role::load('utexas_site_manager')) {
+    $role->grantPermission('access toolbar');
+    $role->save();
+  }
+}

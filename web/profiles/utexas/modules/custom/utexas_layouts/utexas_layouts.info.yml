@@ -1,0 +1,8 @@
+name: 'UTexas Layouts'
+type: module
+description: 'Layouts designed to work with the UT Drupal Kit'
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - 'layout_builder_styles:layout_builder_styles'
+  - 'drupal:media_library_form_element'
+package: UTexas

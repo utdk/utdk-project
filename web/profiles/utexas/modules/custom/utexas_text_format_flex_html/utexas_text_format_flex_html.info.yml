@@ -1,0 +1,19 @@
+name: 'UTexas Text Format Flex HTML'
+type: module
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:ckeditor5'
+  - 'drupal:editor'
+  - 'drupal:filter'
+  - 'drupal:media'
+  - 'iframe_title_filter:iframe_title_filter'
+  - 'linkit:linkit'
+  - 'pathologic:pathologic'
+  - 'responsive_tables_filter:responsive_tables_filter'
+  - 'url_embed:url_embed'
+  - 'utexas_linkit_flex_html:utexas_linkit_flex_html'
+  - 'utexas_media_types:utexas_media_types'
+  - 'utexas_qualtrics_filter:utexas_qualtrics_filter'
+core_incompatible: false
+description: 'Provides the flex HTML text format.'

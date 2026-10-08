@@ -1,0 +1,15 @@
+name: 'UTexas Call to Action'
+description: 'Provides a custom block type with a formatted link field.'
+type: module
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:layout_builder'
+  - 'drupal:layout_discovery'
+  - 'drupal:link'
+  - 'drupal:text'
+  - 'utexas_call_to_action:utexas_call_to_action'
+  - 'utexas_form_elements:utexas_form_elements'
+package: UTexas
+core_incompatible: false

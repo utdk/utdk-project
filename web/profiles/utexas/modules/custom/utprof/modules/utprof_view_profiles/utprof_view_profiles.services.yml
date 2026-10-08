@@ -1,0 +1,2 @@
+parameters:
+  utprof_view_profiles.skip_procedural_hook_scan: true

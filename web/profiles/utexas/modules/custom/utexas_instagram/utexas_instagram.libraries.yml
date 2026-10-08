@@ -1,0 +1,8 @@
+utexas_instagram_feed_block:
+  js:
+    js/swiped-events.min.js: {}
+    js/utexas-instagram.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal

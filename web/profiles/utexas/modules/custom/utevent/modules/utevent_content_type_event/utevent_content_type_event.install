@@ -1,0 +1,236 @@
+<?php
+
+/**
+ * @file
+ * Event content type installation file.
+ */
+
+use Drupal\metatag\Entity\MetatagDefaults;
+use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\utevent\Permissions;
+use Drupal\utevent_content_type_event\Hook\Hooks;
+use Drupal\utexas_layout_builder_styles\StyleUpdateHelper;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function utevent_content_type_event_update_dependencies() {
+  // Indicate that the utevent_content_type_event_update_8109() function
+  // provided by this module must run after the utexas_update_8150() function.
+  $dependencies['utevent_content_type_event'][8109] = [
+    'utexas' => 8150,
+  ];
+  return $dependencies;
+}
+
+/**
+ * Implements hook_install().
+ */
+function utevent_content_type_event_install() {
+  $modules_to_install = [
+    'metatag_twitter_cards',
+    'metatag_open_graph',
+    'schema_metatag',
+    'schema_event',
+  ];
+  foreach ($modules_to_install as $module) {
+    if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+      \Drupal::service('module_installer')->install([$module]);
+    }
+  }
+  // Import default configuration that can subsequently be managed by sites.
+  // For SaaS-type sites to inherit changes to this configuration, an update
+  // hook needs to be added that will programmatically load the configuration
+  // entity and update it.
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('utevent_content_type_event')->getPath();
+  $configurations = [
+    'metatag.metatag_defaults.node__utevent_event',
+    'pathauto.pattern.utevent_event',
+  ];
+  foreach ($configurations as $configuration) {
+    $config_path = $module_path . '/config/default/' . $configuration . '.yml';
+    $data = Yaml::parse(file_get_contents($config_path));
+    \Drupal::configFactory()->getEditable($configuration)->setData($data)->save();
+  }
+
+  // Add standard permissions to "utexas_site_manager" & "utexas_content_editor"
+  // if those roles exist.
+  Permissions::assignPermissions('editor', 'utexas_content_editor');
+  Permissions::assignPermissions('manager', 'utexas_site_manager');
+
+  // Add 'Standard workflow' to Event content type (#289).
+  Hooks::addStandardWorkflow();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function utevent_content_type_event_uninstall() {
+  if ($metatag = MetatagDefaults::load('node__utevent_event')) {
+    $metatag->delete();
+  }
+  if ($pattern = PathautoPattern::load('utevent_event')) {
+    $pattern->delete();
+  }
+}
+
+/**
+ * Issues #77 : Set Tag taxonomy reference field cardinality to unlimited.
+ */
+function utevent_content_type_event_update_8101() {
+  StyleUpdateHelper::modifyConfigValue('field.storage.node.field_utevent_tags', 'cardinality', '-1');
+}
+
+/**
+ * Set content type to revision by default (Issue #104).
+ */
+function utevent_content_type_event_update_8102() {
+  $config = \Drupal::service('config.factory')->getEditable('node.type.utevent_event');
+  if ($config->get('new_revision') != TRUE) {
+    $config->set('new_revision', TRUE);
+    $config->save();
+  }
+}
+
+/**
+ * Change metatag twitter_card_type to summary (Issue #124).
+ */
+function utevent_content_type_event_update_8103() {
+  $metatag = MetatagDefaults::load('node__utevent_event');
+  $tag = ['twitter_cards_type' => 'summary'];
+  $metatag->overwriteTags($tag);
+  $metatag->save();
+}
+
+/**
+ * Add schema.org location metatag (Issue #39).
+ */
+function utevent_content_type_event_update_8104() {
+  $metatag = MetatagDefaults::load('node__utevent_event');
+  $tag = [
+    'schema_event_location' => serialize([
+      '@type' => 'Place',
+      'name' => '[node:field_utevent_location:entity:name]',
+    ]),
+  ];
+  $metatag->overwriteTags($tag);
+  $metatag->save();
+}
+
+/**
+ * Make end date visible again (#167).
+ */
+function utevent_content_type_event_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utevent_content_type_event',
+  ], TRUE);
+}
+
+/**
+ * Add to Calendar functionality (#19).
+ */
+function utevent_content_type_event_update_8106() {
+  $module = 'addtocal_augment';
+  if (\Drupal::moduleHandler()->moduleExists($module) === FALSE) {
+    \Drupal::service('module_installer')->install([$module]);
+  }
+  \Drupal::service('features.manager')->import([
+    'utevent_content_type_event',
+  ], TRUE);
+}
+
+/**
+ * Re-import feature to set label change on "EventCancelled" status (#206).
+ */
+function utevent_content_type_event_update_8107() {
+  \Drupal::service('features.manager')->import([
+    'utevent_content_type_event',
+  ], TRUE);
+}
+
+/**
+ * Issue #223: Fatal error with Ctools update to 4.0.1 or 3.10.
+ *
+ * Copy of pathauto update hook 8107.
+ *
+ * @see https://www.drupal.org/project/pathauto/issues/3222776
+ */
+function utevent_content_type_event_update_8108() {
+  // Load all pattern configuration entities.
+  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+
+    // Loop patterns and swap the node_type plugin by the entity_bundle:node
+    // plugin.
+    if ($pattern_config->get('type') === 'canonical_entities:node') {
+      $selection_criteria = $pattern_config->get('selection_criteria');
+      foreach ($selection_criteria as $uuid => $condition) {
+        if ($condition['id'] === 'node_type') {
+          $pattern_config->set("selection_criteria.$uuid.id", 'entity_bundle:node');
+          $pattern_config->save();
+          break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Add 'Standard workflow' to Event content type (#289).
+ */
+function utevent_content_type_event_update_8109() {
+  Hooks::addStandardWorkflow();
+}
+
+/**
+ * Add 'Event link' to Event content type (#217).
+ */
+function utevent_content_type_event_update_8110() {
+
+  $config = \Drupal::service('config.factory')->getEditable('core.entity_view_display.node.utevent_event.full');
+  $date_aug = "content.field_utevent_datetime.third_party_settings.date_augmenter.";
+
+  $settings = [
+    "instances.settings.addtocal.",
+    "rule.settings.addtocal.",
+  ];
+
+  foreach ($settings as $setting) {
+    $description_setting = $date_aug . $setting . "description";
+    $retain_spacing_setting = $date_aug . $setting . "retain_spacing";
+
+    $description = $config->get($description_setting);
+    $config->set($description_setting, $description . "\n\nEvent link: [node:url:absolute]");
+    $config->set($retain_spacing_setting, TRUE);
+  }
+
+  $config->save();
+
+}
+
+/**
+ * Update schema.org date to ISO 8601 format (#239).
+ */
+function utevent_content_type_event_update_8111() {
+  $config = \Drupal::configFactory()->getEditable('metatag.metatag_defaults.node__utevent_event');
+  // Only update the schema.org values if the site has the configuration object.
+  // The date values are acceptable to overwrite on existing sites since they
+  // are currently nonfunctional.
+  if (isset($config)) {
+    $tags = $config->get('tags');
+    $tags['schema_event_start_date'] = '[node:field_utevent_datetime:0:value-custom:c]';
+    $tags['schema_event_end_date'] = '[node:field_utevent_datetime:0:end_value-custom:c]';
+    $config->set('tags', $tags)->save();
+  }
+}
+
+/**
+ * Add Localist CSV endpoint.
+ */
+function utevent_content_type_event_update_8112() {
+  \Drupal::service('features.manager')->import([
+    'utevent_content_type_event',
+  ], TRUE);
+}

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utevent_main_media
+    - media.type.utexas_image
+    - node.type.utevent_event
+id: node.utevent_event.field_utevent_main_media
+field_name: field_utevent_main_media
+entity_type: node
+bundle: utevent_event
+label: Image
+description: 'This image can be displayed both on the event page and as a thumbnail in lists of events. To accommodate retina screens, use an image with a width of 400x400 pixels or greater. The image will be automatically square-cropped when displayed as a thumbnail.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      utexas_image: utexas_image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

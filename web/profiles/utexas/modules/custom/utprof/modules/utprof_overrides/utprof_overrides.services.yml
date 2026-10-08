@@ -1,0 +1,5 @@
+services:
+  utprof_overrides.overrider:
+    class: Drupal\utprof_overrides\Config\ConfigOverrider
+    tags:
+      - { name: config.factory.override, priority: 10 }

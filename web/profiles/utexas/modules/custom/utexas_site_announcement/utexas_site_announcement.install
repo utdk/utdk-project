@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Installation file for utexas_site_announcement.
+ */
+
+use Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_install().
+ *
+ * @ingroup utexas_site_announcement
+ */
+function utexas_site_announcement_install() {
+  // Create default announcement icons.
+  /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+  $file_system = \Drupal::service('file_system');
+  $site_announcement_icon_entity_manager = \Drupal::entityTypeManager()->getStorage('utexas_announcement_icon');
+  $filedir = 'public://announcement_icons/';
+  $file_system->prepareDirectory($filedir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+  $dir = \Drupal::service('extension.list.module')->getPath('utexas_site_announcement') . '/assets/';
+  $default_icons = $file_system->scanDirectory($dir, '/^.*\.(svg)$/i', ['key' => 'name'], 0);
+  foreach ($default_icons as $key => $value) {
+    $uri = $value->uri;
+    $file = file_get_contents($uri);
+    $saved_file = \Drupal::service('file_system')->saveData($file, $filedir . $value->filename);
+    $site_announcement_icon_entity_manager->create([
+      'id' => $key,
+      'label' => ucwords($key),
+      'icon' => $saved_file,
+    ])
+      ->save();
+  }
+  // Create default color schemes.
+  $site_announcement_color_scheme_entity_manager = \Drupal::entityTypeManager()->getStorage('utexas_announcement_color_scheme');
+  $default_color_schemes = [
+    'yellow_black' => [
+      'label' => 'Yellow Background, Black Text',
+      'background_color' => '#ffeb63',
+      'text_color' => '#000000',
+    ],
+    'orange_black' => [
+      'label' => 'Orange Background, Black Text',
+      'background_color' => '#f2a900',
+      'text_color' => '#000000',
+    ],
+    'green_white' => [
+      'label' => 'Green Background, White Text',
+      'background_color' => '#43695b',
+      'text_color' => '#ffffff',
+    ],
+    'grey_white' => [
+      'label' => 'Grey Background, White Text',
+      'background_color' => '#666666',
+      'text_color' => '#ffffff',
+    ],
+  ];
+  foreach ($default_color_schemes as $key => $value) {
+    $site_announcement_color_scheme_entity_manager->create([
+      'id' => $key,
+      'label' => $value['label'],
+      'background_color' => $value['background_color'],
+      'text_color' => $value['text_color'],
+    ])
+      ->save();
+  }
+}
+
+/**
+ * Issue #1074: Support custom link options in Site Announcement links.
+ */
+function utexas_site_announcement_update_8101() {
+  $config_factory = \Drupal::configFactory();
+  // Loop through each block configuration.
+  foreach ($config_factory->listAll('block.block.') as $block_config_name) {
+    $block = $config_factory->getEditable($block_config_name);
+    $block_plugin_id = $block->get('plugin');
+    // Check for Site Announcement blocks.
+    if ($block_plugin_id === 'utexas_announcement') {
+      // Only process if configuration still uses 'url' key.
+      if ($block_url = $block->get('settings.cta.url')) {
+        // Create a new setting for 'uri'.
+        $block->set('settings.cta.uri', $block_url);
+        // Delete old setting for 'url'.
+        $block->clear('settings.cta.url');
+        $block->save();
+      }
+    }
+  }
+}
+
+/**
+ * Issue #1082: Update region for site announcement block.
+ */
+function utexas_site_announcement_update_8102() {
+  $config_factory = \Drupal::configFactory();
+  // Loop through each block configuration.
+  foreach ($config_factory->listAll('block.block.') as $block_config_name) {
+    $block = $config_factory->getEditable($block_config_name);
+    $block_plugin_id = $block->get('plugin');
+    // Check for Site Announcement blocks.
+    if ($block_plugin_id === 'utexas_announcement') {
+      // Only process if region still is "content".
+      if ($block->get('region') === 'content') {
+        // Update region to be "site_announcement".
+        $block->set('region', 'site_announcement');
+        $block->save();
+      }
+    }
+  }
+}

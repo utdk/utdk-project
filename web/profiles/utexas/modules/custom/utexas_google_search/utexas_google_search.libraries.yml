@@ -1,0 +1,5 @@
+accessibilityTweaks:
+  js:
+    js/accessibilityTweaks.js: {}
+  dependencies:
+    - core/drupal

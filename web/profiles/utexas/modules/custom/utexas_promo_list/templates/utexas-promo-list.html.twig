@@ -1,0 +1,51 @@
+ {#
+/**
+ * @file
+ * Custom theme implementation for the Promo List field.
+ *
+ * Available variables:
+ * - headline: The Promo List overall headline field.
+ * - promo_list_items: An array containing the Promo List individual item contents.
+ *   - image: The Promo List image.
+ *   - headline: The Promo List headline.
+ *   - copy: The Promo List copy field.
+ *   - link: The Promo List link field.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'ut-promo-list-wrapper',
+    wrapper|clean_class,
+  ]
+%}
+<div class="utexas-promo-list-container">
+  {% if wrapper != 'two-side-by-side' and headline %}
+    <h3 class="ut-headline ut-headline--underline">{{ headline }}</h3>
+  {% endif %}
+  <div{{ attributes.addClass(classes) }}>
+    {% if wrapper == 'two-side-by-side' and headline %}
+      <h3 class="ut-headline ut-headline--underline">{{ headline }}</h3>
+    {% endif %}
+    {% for item in promo_list_items %}
+      <div class="promo-list">
+        {% if item.image %}
+          <div class="image-wrapper">
+            {{ item.image }}
+          </div>
+        {% endif %}
+        <div class="content">
+          {% if item.headline %}
+            <h3 class="ut-headline">{{ item.headline }}</h3>
+          {% endif %}
+          {% if item.copy %}
+            <div class="ut-copy">
+              {{ item.copy }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Specialized page template for the visual Diff comparison. This template's
+ * contents remove the header and footer regions of the page to avoid
+ * interference in viewing the diff. Otherwise, the content in the "middle" of
+ * the page template should remain identical to page.html.twig over time.
+ */
+#}
+
+{% set sidebar_first_width = page.sidebar_first_width is null ? 'col-md-3' : page.sidebar_first_width %}
+{% set sidebar_second_width = page.sidebar_second_width is null ? 'col-md-3' : page.sidebar_second_width %}
+
+{% if page.sidebar_first or page.sidebar_second or not is_layout_builder_page %}
+  <div class="container-xl">
+    <div class="row">
+    {% endif %}
+    {% if page.sidebar_first %}
+      <aside class="layout-sidebar-first {{ sidebar_first_width }}" role="complementary">
+        {{ page.sidebar_first }}
+      </aside>
+    {% endif %}
+
+    {% set additional_main_classes = [ '' ] %}
+    {% if page.sidebar_first or page.sidebar_second %}
+      {% if is_layout_builder_page %}
+        {% set additional_main_classes = [ 'px-0' ] %}
+      {% endif %}
+    {% endif %}
+    <main {{ main_content_attributes.addClass(additional_main_classes) }}>
+      <a id="main-content" tabindex="-1"></a>
+      {# link is in html.html.twig #}
+      {{ page.content }}
+    </main>
+
+    {% if page.sidebar_second %}
+      <aside class="layout-sidebar-second {{ sidebar_second_width }}" role="complementary">
+        {{ page.sidebar_second }}
+      </aside>
+    {% endif %}
+    {% if page.sidebar_first or page.sidebar_second or not is_layout_builder_page %}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_2250w_900h
+label: '2250w x 900h (2.5:1)'
+effects:
+  6c67f6e4-1622-4862-917e-772a43eb90fb:
+    uuid: 6c67f6e4-1622-4862-917e-772a43eb90fb
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 2250
+      height: 900
+      anchor: center-center

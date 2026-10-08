@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.utexas_flex_list__accordion
+label: Accordion
+description: ''
+targetEntityType: block_content
+cache: true

@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * UT Event base module installation file.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function utevent_install() {
+  // Enable this feature's read-only functionality. We do this in a
+  // hook_install() implementation so that the module may be uninstalled.
+  if (\Drupal::moduleHandler()->moduleExists('utevent_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utevent_readonly']);
+  }
+  // Enable this feature's dynamic overrides module. We do this here so that the
+  // module may be uninstalled.
+  if (\Drupal::moduleHandler()->moduleExists('utevent_overrides') === FALSE) {
+    \Drupal::service('module_installer')->install(['utevent_overrides']);
+  }
+}
+
+/**
+ * Enable the utevent_readonly module.
+ */
+function utevent_update_8101() {
+  // Enable this feature's read-only functionality.
+  if (\Drupal::moduleHandler()->moduleExists('utevent_readonly') === FALSE) {
+    \Drupal::service('module_installer')->install(['utevent_readonly']);
+  }
+}
+
+/**
+ * HOTFIX: Allow field_utprof_basic_media node field to... (#198).
+ */
+function utevent_update_8102() {
+  // Enable this feature's overrider functionality.
+  if (\Drupal::moduleHandler()->moduleExists('utevent_overrides') === FALSE) {
+    \Drupal::service('module_installer')->install(['utevent_overrides']);
+  }
+}
+
+/**
+ * Enable the datetime_range module (Issue #216).
+ */
+function utevent_update_8103() {
+  if (\Drupal::moduleHandler()->moduleExists('datetime_range') === FALSE) {
+    \Drupal::service('module_installer')->install(['datetime_range']);
+  }
+}

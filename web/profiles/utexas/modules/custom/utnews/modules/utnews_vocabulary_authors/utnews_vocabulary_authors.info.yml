@@ -1,0 +1,15 @@
+name: 'Vocabulary - News Authors'
+description: 'Provides the ''News authors'' vocabulary component for the ''UT News'' module.'
+package: 'UT Drupal Kit News Feature'
+type: module
+core_version_requirement: ^10 || ^11
+dependencies:
+  - 'drupal:field'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:path'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'utexas_media_types:utexas_media_types'
+  - 'utnews:utnews'
+core_incompatible: false

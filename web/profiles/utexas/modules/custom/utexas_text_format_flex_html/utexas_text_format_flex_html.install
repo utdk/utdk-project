@@ -1,0 +1,177 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for UTexas Text Format Flex Html.
+ */
+
+use Drupal\filter\Entity\FilterFormat;
+
+/**
+ * Issue #777: Move URL filter after Qualtrics Filter.
+ */
+function utexas_text_format_flex_html_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #975: Add "start" and "type" to allowed attributes for nested <ol>s.
+ */
+function utexas_text_format_flex_html_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #1201: Missing iframe title on video embeds inserted via Media library.
+ */
+function utexas_text_format_flex_html_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #982: Allow add'l attributes on <a> tag related to Document media type.
+ */
+function utexas_text_format_flex_html_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #1225: Enable url_embed plugin.
+ */
+function utexas_text_format_flex_html_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #1625: Predefined image sizes embedded media library images.
+ */
+function utexas_text_format_flex_html_update_8106() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #1632: Add title attribute tu button html object.
+ */
+function utexas_text_format_flex_html_update_8107() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #1067: Advanced table properties in CKEditor (fixes #1067).
+ */
+function utexas_text_format_flex_html_update_8108() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Remove filter_html_image_secure from Full and Basic text formats (#1597).
+ */
+function utexas_text_format_flex_html_update_8109() {
+  $text_formats = [
+    'flex_html',
+  ];
+  foreach ($text_formats as $text_format) {
+    $flex_html = FilterFormat::load($text_format);
+    if ($flex_html->filters('filter_html_image_secure') !== NULL) {
+      $flex_html->removeFilter('filter_html_image_secure');
+      $flex_html->save();
+    }
+  }
+}
+
+/**
+ * Convert flex_html text format to CKEditor 5.
+ */
+function utexas_text_format_flex_html_update_8110() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Make Flex HTML match CKEditor 4 legacy (#2168).
+ */
+function utexas_text_format_flex_html_update_8111() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Manage table border through user interface in CKEditor5 (#2131).
+ */
+function utexas_text_format_flex_html_update_8112() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Make cells in tables w/o <thead> behave like ones that do in CKE5 (#2373).
+ */
+function utexas_text_format_flex_html_update_8113() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Allow name attribute on a tags in Flex HTML text format (#1873).
+ */
+function utexas_text_format_flex_html_update_8114() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Allow data-bs- attributes in Flex HTML text form (#2572).
+ */
+function utexas_text_format_flex_html_update_8115() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Remove Qualtrics CKEditor Plugin from Flex HTML and Full HTML (#2860).
+ */
+function utexas_text_format_flex_html_update_8116() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Allow <q> in Flex HTML text form (#2868).
+ */
+function utexas_text_format_flex_html_update_8117() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Allow fullscreen editing (#2876).
+ */
+function utexas_text_format_flex_html_update_8118() {
+  \Drupal::service('features.manager')->import([
+    'utexas_text_format_flex_html',
+  ], TRUE);
+}

@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_1800w_2400h
+label: '1800w x 2400h (1:1.33)'
+effects:
+  d0eaf1c1-b565-4a50-9cee-e134cbff17fe:
+    uuid: d0eaf1c1-b565-4a50-9cee-e134cbff17fe
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp

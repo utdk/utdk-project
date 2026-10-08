@@ -1,0 +1,19 @@
+utexas_instagram_api.account.*:
+  type: config_entity
+  label: 'UTexas Instagram API Instagram account authorization config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    client_id:
+      type: string
+      label: 'Client ID'
+    client_secret:
+      type: string
+      label: 'Client Secret'
+    redirect_uri_override:
+      type: string
+      label: 'URI Override'

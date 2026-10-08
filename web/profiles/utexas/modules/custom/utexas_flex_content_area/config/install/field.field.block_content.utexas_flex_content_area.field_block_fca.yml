@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_flex_content_area
+    - field.storage.block_content.field_block_fca
+  module:
+    - utexas_flex_content_area
+id: block_content.utexas_flex_content_area.field_block_fca
+field_name: field_block_fca
+entity_type: block_content
+bundle: utexas_flex_content_area
+label: 'Flex Content Area'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: utexas_flex_content_area

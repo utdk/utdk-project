@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_330w_200h
+label: '330w x 200h (1.65:1)'
+effects:
+  cb07fbe8-5bf2-4e58-8f61-44daf55f3f25:
+    uuid: cb07fbe8-5bf2-4e58-8f61-44daf55f3f25
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 330
+      height: 200
+      anchor: center-center

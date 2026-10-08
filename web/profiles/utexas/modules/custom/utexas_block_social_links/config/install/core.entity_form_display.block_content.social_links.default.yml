@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.social_links
+    - field.field.block_content.social_links.field_utexas_sl_social_links
+  module:
+    - utexas_block_social_links
+id: block_content.social_links.default
+targetEntityType: block_content
+bundle: social_links
+mode: default
+content:
+  field_utexas_sl_social_links:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: utexas_social_link_widget
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

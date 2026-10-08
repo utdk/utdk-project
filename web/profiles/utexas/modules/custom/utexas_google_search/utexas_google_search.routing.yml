@@ -1,0 +1,7 @@
+utexas_google_search.search:
+  path: '/search/google'
+  defaults:
+    _controller: '\Drupal\utexas_google_search\Controller\Search::view'
+    _title: 'Search'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,5 @@
+name: 'UTexas Devel'
+type: module
+description: 'Internal tools for testing & development'
+core_version_requirement: '^10 || ^11'
+package: UTexas

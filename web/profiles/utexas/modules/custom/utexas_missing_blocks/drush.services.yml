@@ -1,0 +1,5 @@
+services:
+  utexas_missing_blocks.commands:
+    class: \Drupal\utexas_missing_blocks\Commands\MissingInlineBlocks
+    tags:
+      - { name: drush.command }

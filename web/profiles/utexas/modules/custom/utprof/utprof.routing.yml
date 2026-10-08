@@ -1,0 +1,14 @@
+utprof.configuration:
+  path: '/admin/config/content/utprof'
+  defaults:
+    _form: '\Drupal\utprof\Form\BaseConfigurationForm'
+    _title: 'Profile feature'
+  requirements:
+    _permission: 'administer utprof'
+utprof.permissions:
+  path: '/admin/config/content/utprof/permissions'
+  defaults:
+    _form: '\Drupal\utprof\Form\PermissionsConfigurationForm'
+    _title: 'Permissions configuration'
+  requirements:
+    _permission: 'administer utprof'

@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Demo content installation file.
+ */
+
+use Drupal\utevent_demo_content\DemoContent;
+
+/**
+ * Implements hook_install().
+ */
+function utevent_demo_content_install() {
+  DemoContent::createDemoContent();
+}

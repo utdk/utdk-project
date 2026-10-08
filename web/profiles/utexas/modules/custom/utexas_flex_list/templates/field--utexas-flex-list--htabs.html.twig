@@ -1,0 +1,47 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for the Horizontal tabs field.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ *     - header: the field item header text.
+ *     - body: the field item main content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% extends "field--utexas-flex-list.html.twig" %}
+{% block field_items_block %}
+  <ul class="nav nav-tabs" id="{{ instance_id }}" role="tablist">
+    {% for item in items %}
+      {% set state = loop.first ? 'active' : '' %}
+      {% set selected = loop.first ? 'true' : 'false' %}
+      <li class="nav-item" role="presentation">
+        <a class="nav-link {{ state }}" role="tab" aria-selected="{{ selected }}" id="{{ item.content.id }}-tab" data-toggle="tab" data-bs-toggle="tab" data-bs-target="#{{ item.content.id }}" href="#{{ item.content.id }}">{{ item.content.header}}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="tab-content" id="{{ instance_id }}Content">
+    {% for item in items %}
+      {% set state = loop.first ? 'active in show' : '' %}
+      <div class="tab-pane fade {{ state }}" id="{{ item.content.id }}" role="tabpanel" aria-labelledby="{{ item.content.id }}-tab">
+        <div{{ item.attributes.addClass(item_classes) }}>
+          {{ item.content.body }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock field_items_block %}

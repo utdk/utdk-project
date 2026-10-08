@@ -1,0 +1,73 @@
+/* Default styles for Views with exposed filters */
+.utevent--calendar,
+.utevent-listing-page,
+.utnews-listing-page {
+
+  form.views-exposed-form {
+    /* Hack to horizontally align event buttons and select dropdowns */
+    margin-top: -33px;
+
+    label {
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+    }
+
+    select {
+      display: block;
+      background-color: var(--ut-white);
+      color: var(--ut-charcoal);
+      margin: 0.25em 0;
+      width: 200px;
+    }
+
+    select,
+    input {
+      padding: 0.5rem 1em;
+      border: 1px solid var(--ut-burntorange);
+      border-radius: 4px;
+      transition:
+        background-color,
+        color,
+        border-color,
+        0.33s ease-out !important;
+
+      /* Customize `:focus-visible` state to imitate native WebKit styles. */
+      &:focus-visible {
+        color: var(--ut-charcoal);
+        background-color: var(--ut-limestone--t40);
+        border: 1px solid var(--ut-charcoal);
+      }
+    }
+  }
+
+  input[type='submit']:hover {
+    border: 1px solid var(--ut-burntorange--s20);
+    background-color: var(--ut-burntorange--s20);
+    color: var(--ut-white);
+  }
+
+  .form-item,
+  input[type='submit'],
+  .form-actions {
+    display: inline-block;
+    width: auto;
+    margin-right: 1.5rem;
+    margin-bottom: 1rem;
+
+    @media screen and (max-width: 576px) {
+      margin-right: 0;
+    }
+  }
+
+  input[type='submit'] {
+    border: 1px solid var(--ut-burntorange);
+    background-color: var(--ut-burntorange);
+    color: var(--ut-white);
+    border-radius: 4px;
+  }
+
+  input[data-drupal-selector='edit-reset'] {
+    background-color: var(--ut-white);
+    color: var(--ut-burntorange);
+  }
+}

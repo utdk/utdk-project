@@ -1,0 +1,11 @@
+{% embed "field--node--utevent-event.html.twig" %}
+  {# If field_utevent_display_media is set to false, replace wrapping twig
+    block, effectively preventing the display of this field. #}
+  {% block field_display %}
+    {% if element['#object'].field_utevent_display_media.value == 0 %}
+      {# Don't display block #}
+    {% else %}
+      {{ parent() }}
+    {% endif %}
+  {% endblock field_display %}
+{% endembed %}

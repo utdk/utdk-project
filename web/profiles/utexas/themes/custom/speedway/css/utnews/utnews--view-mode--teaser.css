@@ -1,0 +1,10 @@
+.utnews--teaser-variation {
+  .utnews__thumbnail {
+    max-width: 190px;
+    width: 33%
+  }
+  .utnews__published {
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+}

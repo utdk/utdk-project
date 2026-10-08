@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utexas_photo_content_area
+    - field.storage.block_content.field_block_pca
+  module:
+    - utexas_photo_content_area
+id: block_content.utexas_photo_content_area.field_block_pca
+field_name: field_block_pca
+entity_type: block_content
+bundle: utexas_photo_content_area
+label: 'Photo Content Area'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: utexas_photo_content_area

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utprof_profile_listing
+    - field.storage.block_content.field_utprof_view_mode
+id: block_content.utprof_profile_listing.field_utprof_view_mode
+field_name: field_utprof_view_mode
+entity_type: block_content
+bundle: utprof_profile_listing
+label: 'Display profiles using the following format'
+description: 'See <a href="https://utexas.sharepoint.com/sites/UTDK/SitePages/profiles.aspx" target="blank">documentation on the default display types</a>.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\utprof_block_type_profile_listing\Hook\Hooks::viewModeDefaultValue'
+settings:
+  handler: 'default:entity_view_mode'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

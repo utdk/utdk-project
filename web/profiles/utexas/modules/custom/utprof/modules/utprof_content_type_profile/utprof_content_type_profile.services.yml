@@ -1,0 +1,2 @@
+parameters:
+  utprof_content_type_profile.skip_procedural_hook_scan: true

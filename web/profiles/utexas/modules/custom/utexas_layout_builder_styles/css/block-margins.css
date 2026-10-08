@@ -1,0 +1,36 @@
+/* Remove top margin */
+.layout__region .utexas-block-top-margin-remove {
+  margin-top: -2.5rem !important;
+}
+/* Remove bottom margin */
+.utexas-block-bottom-margin-remove {
+  margin-bottom: 0 !important;
+}
+/* Increase top margin */
+.utexas-block-top-margin-increase {
+  margin-top: 2.5rem !important;
+}
+/* Increase bottom margin (this is already 2.5rem by default so we bump it to 5rem here) */
+.utexas-block-bottom-margin-increase {
+  margin-bottom: 5rem !important;
+}
+
+/* Layout Builder UI only */
+/* Ensure "Configure" block pencil icon is visible */
+.utexas-block-top-margin-remove .contextual button.trigger {
+  margin-top: 2.5rem;
+}
+/* Ensure "Configure section" link is visible */
+.layout-builder__region .layout-builder-block.utexas-block-top-margin-remove {
+  margin-top: 0 !important;
+}
+/* This second declaration exempts subsequent blocks */
+.layout-builder__region .layout-builder-block.utexas-block-top-margin-remove ~ div.utexas-block-top-margin-remove {
+  margin-top: -2.5rem !important;
+}
+
+/* First section only: alter the default 'margin-remove' margin on the first block of any region in Section 1. */
+/* See #2159 */
+.section-wrapper:first-of-type .utexas-block-top-margin-remove:first-of-type {
+  margin-top: -1rem !important;
+}

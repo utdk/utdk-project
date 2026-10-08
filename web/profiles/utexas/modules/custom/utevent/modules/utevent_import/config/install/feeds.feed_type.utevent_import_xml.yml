@@ -1,0 +1,302 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.utevent_event.field_utevent_body
+    - field.field.node.utevent_event.field_utevent_datetime
+    - field.field.node.utevent_event.field_utevent_featured
+    - field.field.node.utevent_event.field_utevent_location
+    - field.field.node.utevent_event.field_utevent_main_media
+    - field.field.node.utevent_event.field_utevent_status
+    - field.field.node.utevent_event.field_utevent_tags
+    - node.type.utevent_event
+  module:
+    - feeds_ex
+    - feeds_tamper
+    - node
+    - smart_date
+third_party_settings:
+  feeds_tamper:
+    tampers:
+      b07addb9-5ec1-46d1-ad9d-270808bf981b:
+        uuid: b07addb9-5ec1-46d1-ad9d-270808bf981b
+        plugin: strtotime
+        source: utevent_start_xml
+        weight: 0
+        label: 'String to Unix Timestamp'
+      3c60c248-6817-4b00-84c8-b621a8f48b7f:
+        uuid: 3c60c248-6817-4b00-84c8-b621a8f48b7f
+        plugin: strtotime
+        source: utevent_end_xml
+        weight: 0
+        label: 'String to Unix Timestamp'
+      9cc5e7ff-718d-4da6-9a1b-cd5c28a4b93a:
+        separator: '|'
+        limit: null
+        uuid: 9cc5e7ff-718d-4da6-9a1b-cd5c28a4b93a
+        plugin: explode
+        source: utevent_tags_xml
+        weight: -9
+        label: Explode
+      0a9bc52a-f7f7-4821-9271-0f35585c3c9e:
+        uuid: 0a9bc52a-f7f7-4821-9271-0f35585c3c9e
+        plugin: html_entity_decode
+        source: utevent_title_xml
+        weight: 0
+        label: 'HTML entity decode'
+      bf897bab-c1a6-4933-946a-2cc2a6572b9d:
+        uuid: bf897bab-c1a6-4933-946a-2cc2a6572b9d
+        plugin: html_entity_decode
+        source: utevent_location_xml
+        weight: 1
+        label: 'HTML entity decode'
+      7fd14beb-cbb9-441e-98b1-8def207c9041:
+        uuid: 7fd14beb-cbb9-441e-98b1-8def207c9041
+        plugin: html_entity_decode
+        source: utevent_tags_xml
+        weight: -8
+        label: 'HTML entity decode'
+      da29dc45-2e80-40b4-b61e-2fbaa0893310:
+        uuid: da29dc45-2e80-40b4-b61e-2fbaa0893310
+        plugin: skip_on_empty
+        source: utevent_tags_xml
+        weight: -10
+        label: 'Skip tampers on empty'
+      76244bae-42f7-4a15-969c-9b14bd8383aa:
+        uuid: 76244bae-42f7-4a15-969c-9b14bd8383aa
+        plugin: utevent_create_media_tamper
+        source: utevent_image_url_xml
+        weight: 0
+        label: 'Create Media Tamper'
+label: 'Events import XML'
+id: utevent_import_xml
+description: 'Imports an XML file to the Event content type.'
+help: ''
+import_period: 3600
+import_period_per_feed: false
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: xml
+parser_configuration:
+  context:
+    value: /response/item
+  source_encoding:
+    - auto
+  display_errors: false
+  line_limit: 100
+  use_tidy: false
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: utevent_event
+  langcode: en
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  utevent_uuid_xml:
+    label: UUID
+    machine_name: utevent_uuid_xml
+    value: uuid
+    raw: false
+    inner: false
+    type: xml
+  utevent_title_xml:
+    label: Title
+    machine_name: utevent_title_xml
+    value: title
+    raw: false
+    inner: false
+    type: xml
+  utevent_path_xml:
+    label: Path
+    machine_name: utevent_path_xml
+    value: path
+    raw: false
+    inner: false
+    type: xml
+  utevent_start_xml:
+    label: Start
+    machine_name: utevent_start_xml
+    value: start
+    raw: false
+    inner: false
+    type: xml
+  utevent_end_xml:
+    label: End
+    machine_name: utevent_end_xml
+    value: end
+    raw: false
+    inner: false
+    type: xml
+  utevent_duration_xml:
+    label: Duration
+    machine_name: utevent_duration_xml
+    value: 'duration '
+    raw: false
+    inner: false
+    type: xml
+  utevent_body_xml:
+    label: Body
+    machine_name: utevent_body_xml
+    value: body
+    raw: false
+    inner: false
+    type: xml
+  utevent_summary_xml:
+    label: Summary
+    machine_name: utevent_summary_xml
+    value: summary
+    raw: false
+    inner: false
+    type: xml
+  utevent_status_xml:
+    label: Status
+    machine_name: utevent_status_xml
+    value: status
+    raw: false
+    inner: false
+    type: xml
+  utevent_location_xml:
+    label: Location
+    machine_name: utevent_location_xml
+    value: location
+    raw: false
+    inner: false
+    type: xml
+  utevent_tags_xml:
+    label: Tags
+    machine_name: utevent_tags_xml
+    value: tags
+    raw: false
+    inner: false
+    type: xml
+  utevent_featured_xml:
+    label: Featured
+    machine_name: utevent_featured_xml
+    value: featured
+    raw: false
+    inner: false
+    type: xml
+  utevent_image_url_xml:
+    label: 'Image URL'
+    machine_name: utevent_image_url_xml
+    value: image-url
+    raw: false
+    inner: false
+    type: xml
+  utevent_image_alt_xml:
+    label: 'Image alt'
+    machine_name: utevent_image_alt_xml
+    value: image-alt
+    raw: false
+    inner: false
+    type: xml
+  utevent_image_title_xml:
+    label: 'Image title'
+    machine_name: utevent_image_title_xml
+    value: image-title
+    raw: false
+    inner: false
+    type: xml
+mappings:
+  -
+    target: title
+    map:
+      value: utevent_title_xml
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: path
+    map:
+      alias: utevent_path_xml
+      pathauto: ''
+    settings:
+      language: null
+  -
+    target: field_utevent_datetime
+    map:
+      value: utevent_start_xml
+      end_value: utevent_end_xml
+      rrule: ''
+      duration: utevent_duration_xml
+      timezone: ''
+    settings:
+      language: null
+  -
+    target: field_utevent_body
+    map:
+      value: utevent_body_xml
+      summary: utevent_summary_xml
+    settings:
+      language: ''
+      format: flex_html
+  -
+    target: field_utevent_status
+    map:
+      value: utevent_status_xml
+    settings:
+      language: null
+  -
+    target: field_utevent_location
+    map:
+      target_id: utevent_location_xml
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: utevent_location
+  -
+    target: field_utevent_tags
+    map:
+      target_id: utevent_tags_xml
+    settings:
+      language: ''
+      reference_by: name
+      autocreate: 1
+      autocreate_bundle: utevent_tags
+  -
+    target: field_utevent_featured
+    map:
+      value: utevent_featured_xml
+    settings:
+      language: null
+  -
+    target: feeds_item
+    map:
+      url: ''
+      guid: utevent_uuid_xml
+    settings: {  }
+    unique:
+      guid: 1
+  -
+    target: field_utevent_main_media
+    map:
+      target_id: utevent_image_url_xml
+    settings:
+      language: ''
+      reference_by: mid
+      autocreate: 0
+      autocreate_bundle: utexas_image
+  -
+    target: temporary_target
+    map:
+      temporary: utevent_image_alt_xml
+  -
+    target: temporary_target
+    map:
+      temporary: utevent_image_title_xml

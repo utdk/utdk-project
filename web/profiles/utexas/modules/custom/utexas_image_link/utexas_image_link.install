@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Image Link module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Issue #1075: Support custom link options in Image Link links.
+ */
+function utexas_image_link_update_8101() {
+  $link_text = [
+    'description' => 'The link text.',
+    'type' => 'varchar',
+    'length' => 255,
+  ];
+  $link_options = [
+    'description' => 'Serialized array of options for the link.',
+    'type' => 'blob',
+    'size' => 'big',
+    'serialize' => TRUE,
+  ];
+
+  $database = Database::getConnection();
+  $query = $database->query(
+    "SELECT value FROM {key_value} WHERE name=:name",
+    [':name' => "block_content.field_schema_data.field_block_il"]
+  );
+  $result = $query->fetchAssoc();
+  $fh_tables = array_keys(unserialize($result['value']));
+  $schema = $database->schema();
+  foreach ($fh_tables as $table_name) {
+    $schema->addField($table_name, 'field_block_il_link_text', $link_text);
+    $schema->addField($table_name, 'field_block_il_link_options', $link_options);
+  }
+}
+
+/**
+ * Mismatched entity and/or field definitions.
+ */
+function utexas_image_link_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_image_link',
+  ], TRUE);
+}

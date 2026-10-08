@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utevent_display_media
+    - node.type.utevent_event
+id: node.utevent_event.field_utevent_display_media
+field_name: field_utevent_display_media
+entity_type: node
+bundle: utevent_event
+label: 'Display image on event'
+description: 'Uncheck to suppress the display of the image at the top of an event’s page display.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

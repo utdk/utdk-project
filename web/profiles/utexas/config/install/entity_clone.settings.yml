@@ -1,0 +1,44 @@
+form_settings:
+  taxonomy_term:
+    default_value: false
+    disable: false
+    hidden: true
+  block_content:
+    default_value: false
+    disable: false
+    hidden: true
+  file:
+    default_value: false
+    disable: false
+    hidden: true
+  node:
+    default_value: false
+    disable: false
+    hidden: true
+  user:
+    default_value: false
+    disable: false
+    hidden: true
+  menu_link_content:
+    default_value: false
+    disable: false
+    hidden: true
+  content_moderation_state:
+    hidden: true
+    default_value: false
+    disable: false
+  media:
+    hidden: true
+    default_value: false
+    disable: false
+  path_alias:
+    hidden: true
+    default_value: false
+    disable: false
+  redirect:
+    hidden: true
+    default_value: false
+    disable: false
+no_suffix: true
+take_ownership: false
+hide_layout_builder_referenced_entities: true

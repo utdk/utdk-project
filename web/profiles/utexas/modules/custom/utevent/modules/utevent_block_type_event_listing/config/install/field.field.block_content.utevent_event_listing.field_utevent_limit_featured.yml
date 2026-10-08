@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utevent_event_listing
+    - field.storage.block_content.field_utevent_limit_featured
+  module:
+    - options
+id: block_content.utevent_event_listing.field_utevent_limit_featured
+field_name: field_utevent_limit_featured
+entity_type: block_content
+bundle: utevent_event_listing
+label: 'Limit by "Featured" attribute'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: all
+default_value_callback: ''
+settings: {  }
+field_type: list_string

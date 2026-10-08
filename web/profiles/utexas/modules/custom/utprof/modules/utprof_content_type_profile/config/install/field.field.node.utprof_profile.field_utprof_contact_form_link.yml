@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utprof_contact_form_link
+    - node.type.utprof_profile
+  module:
+    - link
+id: node.utprof_profile.field_utprof_contact_form_link
+field_name: field_utprof_contact_form_link
+entity_type: node
+bundle: utprof_profile
+label: 'Contact form link'
+description: 'Provide website a contact form URL or email address.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

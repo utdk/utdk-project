@@ -1,0 +1,18 @@
+link-element:
+  css:
+    theme:
+      css/link-element.css: {}
+
+link-options:
+  css:
+    theme:
+      css/link-options.css: {}
+
+confirm-remove:
+  js:
+    js/confirmRemove.js: {}
+
+draggable-table:
+  css:
+    theme:
+      css/draggable-table.css: {}

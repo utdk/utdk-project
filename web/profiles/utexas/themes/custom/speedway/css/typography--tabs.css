@@ -1,0 +1,14 @@
+.nav-tabs {
+  margin-bottom: 1rem;
+}
+.nav-tabs .nav-link {
+  background-color: var(--ut-limestone--t40);
+  border: 1px solid var(--ut-shade--t40);
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  background: var(--ut-white);
+  color: var(--ut-charcoal);
+  font-weight: 600;
+}

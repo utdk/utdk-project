@@ -1,0 +1,2 @@
+parameters:
+  utexas_hero.skip_procedural_hook_scan: true

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - utnews_vocabulary_authors
+name: 'News authors'
+vid: utnews_authors
+description: 'Use News authors to attribute News articles.'
+weight: 0

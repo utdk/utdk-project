@@ -1,0 +1,128 @@
+<?php
+
+/**
+ * @file
+ * Install and update functions for the UTexas Promo Unit module.
+ */
+
+use Drupal\Core\Database\Database;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+
+/**
+ * Update configuration related to Layout Builder Restrictions.
+ */
+function utexas_promo_unit_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_promo_unit',
+  ], TRUE);
+}
+
+/**
+ * Issue #1032: Support custom link options in Promo Unit item URL.
+ */
+function utexas_promo_unit_update_8102() {
+  // Update 'url' value keys to 'uri' in the blob field. MySQL auto-converts it
+  // back to blob on execute ("save").
+  $database_connection = Database::getConnection();
+  $query = $database_connection->query(
+    "SELECT value FROM {key_value} WHERE name=:name",
+    [
+      ':name' => "block_content.field_schema_data.field_block_pu",
+    ]
+  );
+  $result = $query->fetchAssoc();
+  // Bypass requirement to specify allowed classes since they are unknown.
+  // phpcs:ignore
+  $fh_tables = array_keys(unserialize($result['value']));
+
+  foreach ($fh_tables as $table_name) {
+    $field_name = 'field_block_pu_promo_unit_items';
+    $old_value = '"url";';
+    $new_value = '"uri";';
+    $database_connection->update($table_name)
+      // ->condition($field_name, $old_value, 'LIKE')
+      ->expression($field_name, 'replace(CONVERT(' . $field_name . ' USING utf8), :old, :new)', [
+        ':old' => $old_value,
+        ':new' => $new_value,
+      ])
+      ->execute();
+  }
+}
+
+/**
+ * Issue #2237: Promo unit "Stacked Landscape" results in low-resolution images.
+ */
+function utexas_promo_unit_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_promo_unit',
+  ], TRUE);
+}
+
+/**
+ * Issue #2950: Increase column size on Promo Unit items.
+ */
+function utexas_promo_unit_update_8104() {
+  $entity_type_id = 'block_content';
+  $field_type = 'utexas_promo_unit';
+  $field_name = 'promo_unit_items';
+  $new_schema = [
+    'description' => 'Stored Promo Unit items',
+    'type' => 'blob',
+    'size' => 'big',
+    'not null' => FALSE,
+    'serialize' => TRUE,
+  ];
+  if (!$field_storage_configs = \Drupal::entityTypeManager()
+    ->getStorage('field_storage_config')
+    ->loadByProperties(['type' => $field_type])) {
+    throw new \Exception('Unable to find field type ' . $field_type);
+  }
+  // Loop through tables that employ the 'utexas_promo_list' field type.
+  foreach ($field_storage_configs as $field_storage) {
+    if (!($field_storage instanceof FieldStorageDefinitionInterface)) {
+      throw new \Exception('Unexpected entity type loaded: ' .
+        (is_object($field_storage) ? get_class($field_storage) : var_export($field_storage, TRUE)));
+    }
+    // Get the most updated schema from field storage.
+    $table_name = str_replace('.', '__', $field_storage->id());
+    $revision_table_name = str_replace('.', '_revision__', $field_storage->id());
+    // Should be something like 'field_block_pl_promo_list_items'.
+    $column_name = "{$field_storage->getName()}_{$field_name}";
+    // Get schema handler to alter table with.
+    $schema_handler = Database::getConnection()->schema();
+    // Update the schema (block_content.field_schema_data.field_block_pl).
+    $key_value = \Drupal::keyValue('entity.storage_schema.sql');
+    $key_name = $entity_type_id . '.field_schema_data.' . $field_storage->getName();
+    $storage_schema = $key_value->get($key_name);
+    // Update all tables where the field is present.
+    foreach ($storage_schema as &$table_schema) {
+      $table_schema['fields'][$column_name]['size'] = 'big';
+    }
+    $key_value->set($key_name, $storage_schema);
+    if ($schema_handler->fieldExists($table_name, $column_name)) {
+      $schema_handler->changeField(
+        $table_name,
+        $column_name,
+        $column_name,
+        $new_schema,
+      );
+    }
+    if ($schema_handler->fieldExists($revision_table_name, $column_name)) {
+      $schema_handler->changeField(
+        $revision_table_name,
+        $column_name,
+        $column_name,
+        $new_schema,
+      );
+    }
+  }
+}
+
+/**
+ * Issue #3258: Remove implicit dependencies on Layout Builder Restrictions.
+ */
+function utexas_promo_unit_update_8105() {
+  \Drupal::service('features.manager')->import([
+    'utexas_promo_unit',
+  ], TRUE);
+}

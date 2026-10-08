@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utevent_body
+    - node.type.utevent_event
+  module:
+    - text
+id: node.utevent_event.field_utevent_body
+field_name: field_utevent_body
+entity_type: node
+bundle: utevent_event
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: true
+  allowed_formats: {  }
+field_type: text_with_summary

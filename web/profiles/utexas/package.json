@@ -1,0 +1,34 @@
+{
+  "name": "@utexas/utdk_profile",
+  "version": "1.0.0",
+  "description": "NPM components provided by the UT Drupal Kit",
+  "repository": {
+    "type": "git",
+    "url": "git@github.austin.utexas.edu:eis1-wcs/speedway.git"
+  },
+  "author": {
+    "name": "Web Content Management Solutions Team, Information Technology Services, The University of Texas at Austin",
+    "email": "drupal-kit-support@utlists.utexas.edu",
+    "url": "https://drupalkit.its.utexas.edu"
+  },
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "postCSS": "npx postcss css/Bootstrap5/bootstrap-base.css --use autoprefixer -d css/Bootstrap5 --no-map",
+    "build": "sass --no-source-map --style=expanded scss:css/Bootstrap5 --silence-deprecation=slash-div,mixed-decls,call-string,color-functions,global-builtin,import && npm run postCSS && npm run copyJS",
+    "copyJS": "cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js js/Bootstrap5/bootstrap.bundle.min.js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "bootstrap": "^5.3.3",
+    "motion-ui": "1.2.3",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-drupal": "^5.0.2",
+    "eslint-plugin-yml": "^1.16.0",
+    "sass": "^1.85.1",
+    "stylelint": "^16.20.0",
+    "stylelint-config-standard": "^38.0.0"
+  }
+}

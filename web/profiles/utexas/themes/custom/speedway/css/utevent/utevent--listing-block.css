@@ -1,0 +1,91 @@
+/* Styles for Event Listing page views grid */
+.utevent-listing-block {
+  margin-bottom: 1.5rem;
+
+  .views-field-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .views-field-field-utevent-main-media {
+    float: right;
+    max-width: 100px;
+    margin: 0 0 1rem 1rem;
+  }
+  .views-field-field-utevent-datetime {
+    margin-bottom: 0.5rem;
+  }
+  /* datetime-1 here is the "recurring" information */
+  .views-field-field-utevent-datetime-1 {
+    margin: -0.5rem 0 0.5rem 30px;
+
+    .field-content:empty {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  .views-field-field-utevent-location .field-content {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    align-items: center;
+  }
+  .views-field-field-utevent-body p {
+    margin-bottom: 0;
+  }
+  .utevent__thumbnail img {
+    margin: 7.5px 0 5px 10px;
+  }
+  .views-field-field-utevent-datetime,
+  .views-field-field-utevent-datetime-1,
+  .views-field-field-utevent-location {
+    font-style: italic;
+    line-height: 1.375;
+    margin-top: 0.875rem;
+    font-size: 0.9rem;
+  }
+  .utevent-event-field--field-utevent-status .utevent-event-field__item {
+    margin-bottom: 15px;
+  }
+  .views-view-grid>div {
+    --ipr-grid-gap: 2.5vw;
+    --ipr-grid-min-min-size: 300px;
+    --ipr-grid-min-max-size: 325px;
+    display: grid;
+    grid-gap: var(--ipr-grid-gap);
+    grid-template-columns: repeat(auto-fit,
+        minmax(max(var(--ipr-grid-min-min-size), var(--ipr-grid-min-max-size)),
+          1fr));
+  }
+  /* Grid styles to align icons and content */
+  .views-field-field-utevent-datetime .field-content,
+  .views-field-field-utevent-location .field-content {
+    display: grid;
+    grid-template-columns: [col-start] 30px [col-end] auto;
+  }
+  .views-field-field-utevent-datetime .recurring-output--wrapper {
+    grid-column: col-end;
+  }
+}
+.utexas-onecol .utevent-listing-block .views-view-grid>div,
+.utexas-twocol .utevent-listing-block .views-view-grid>div,
+.utexas-threecol .utevent-listing-block .views-view-grid>div,
+.utexas-fourcol .utevent-listing-block .views-view-grid>div {
+  /* Maximum total width of all grid gaps (gutters) possible at --ipr-grid-num-columns. */
+  --ipr-grid-gap-total: calc((var(--ipr-grid-num-columns) - 1) * var(--ipr-grid-gap));
+  /* Total width of the container minus the width of maximum total possible grid gaps. */
+  --ipr-grid-available-space: calc(100% - var(--ipr-grid-gap-total));
+  /* Total available space divided by the maximum number of columns. */
+  /* Subract 1px from total to prevent odd rounding behavior in Firefox. */
+  --ipr-grid-min-max-size: calc(var(--ipr-grid-available-space) / var(--ipr-grid-num-columns) - 1px);
+}
+.utexas-onecol .utevent-listing-block .views-view-grid>div {
+  --ipr-grid-num-columns: 1;
+}
+.utexas-twocol .utevent-listing-block .views-view-grid>div {
+  --ipr-grid-num-columns: 2;
+}
+.utexas-threecol .utevent-listing-block .views-view-grid>div {
+  --ipr-grid-num-columns: 3;
+}
+.utexas-fourcol .utevent-listing-block .views-view-grid>div {
+  --ipr-grid-num-columns: 4;
+}

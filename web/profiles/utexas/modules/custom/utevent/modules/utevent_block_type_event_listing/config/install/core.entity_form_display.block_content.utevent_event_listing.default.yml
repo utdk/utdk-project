@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utevent_event_listing
+    - field.field.block_content.utevent_event_listing.field_utevent_display_count
+    - field.field.block_content.utevent_event_listing.field_utevent_display_cta
+    - field.field.block_content.utevent_event_listing.field_utevent_display_summaries
+    - field.field.block_content.utevent_event_listing.field_utevent_display_thumbnails
+    - field.field.block_content.utevent_event_listing.field_utevent_event_location
+    - field.field.block_content.utevent_event_listing.field_utevent_event_tags
+    - field.field.block_content.utevent_event_listing.field_utevent_footer
+    - field.field.block_content.utevent_event_listing.field_utevent_header
+    - field.field.block_content.utevent_event_listing.field_utevent_limit_featured
+  module:
+    - text
+id: block_content.utevent_event_listing.default
+targetEntityType: block_content
+bundle: utevent_event_listing
+mode: default
+content:
+  field_utevent_display_count:
+    weight: 8
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_utevent_display_cta:
+    weight: 10
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_utevent_display_summaries:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_utevent_display_thumbnails:
+    weight: 6
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_utevent_event_location:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utevent_event_tags:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utevent_footer:
+    weight: 9
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_utevent_header:
+    weight: 1
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_utevent_limit_featured:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

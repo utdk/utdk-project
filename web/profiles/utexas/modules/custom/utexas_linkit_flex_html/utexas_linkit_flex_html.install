@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions for the UTexas Linkit Flex module.
+ */
+
+/**
+ * Enable front page linkit matcher.
+ */
+function utexas_linkit_flex_html_update_8101() {
+  \Drupal::service('features.manager')->import([
+    'utexas_linkit_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #982: Enable media linkit matcher.
+ */
+function utexas_linkit_flex_html_update_8102() {
+  \Drupal::service('features.manager')->import([
+    'utexas_linkit_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #2085: Enable 'include unpublished nodes' setting.
+ */
+function utexas_linkit_flex_html_update_8103() {
+  \Drupal::service('features.manager')->import([
+    'utexas_linkit_flex_html',
+  ], TRUE);
+}
+
+/**
+ * Issue #2499: Add "external link" matcher to Linkit Flex HTML profile.
+ */
+function utexas_linkit_flex_html_update_8104() {
+  \Drupal::service('features.manager')->import([
+    'utexas_linkit_flex_html',
+  ], TRUE);
+}

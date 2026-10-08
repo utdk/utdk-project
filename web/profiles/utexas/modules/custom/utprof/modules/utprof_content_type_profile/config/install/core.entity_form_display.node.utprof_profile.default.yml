@@ -1,0 +1,272 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.utprof_profile.field_utprof_add_basic_info
+    - field.field.node.utprof_profile.field_utprof_add_contact_info
+    - field.field.node.utprof_profile.field_utprof_basic_media
+    - field.field.node.utprof_profile.field_utprof_building_code
+    - field.field.node.utprof_profile.field_utprof_building_room_numb
+    - field.field.node.utprof_profile.field_utprof_contact_form_link
+    - field.field.node.utprof_profile.field_utprof_content
+    - field.field.node.utprof_profile.field_utprof_designation
+    - field.field.node.utprof_profile.field_utprof_display_email
+    - field.field.node.utprof_profile.field_utprof_eid
+    - field.field.node.utprof_profile.field_utprof_email_address
+    - field.field.node.utprof_profile.field_utprof_fax_number
+    - field.field.node.utprof_profile.field_utprof_given_name
+    - field.field.node.utprof_profile.field_utprof_image_ratio_opt
+    - field.field.node.utprof_profile.field_utprof_listing_link
+    - field.field.node.utprof_profile.field_utprof_metatags
+    - field.field.node.utprof_profile.field_utprof_phone_number
+    - field.field.node.utprof_profile.field_utprof_profile_groups
+    - field.field.node.utprof_profile.field_utprof_profile_tags
+    - field.field.node.utprof_profile.field_utprof_surname
+    - field.field.node.utprof_profile.field_utprof_website_link
+    - node.type.utprof_profile
+  module:
+    - bootstrap_horizontal_tabs
+    - media_library
+    - metatag
+    - path
+    - text
+    - utexas_form_elements
+id: node.utprof_profile.default
+targetEntityType: node
+bundle: utprof_profile
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  display_breadcrumbs:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_page_title:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  display_updated:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_utprof_add_basic_info:
+    weight: 27
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_utprof_add_contact_info:
+    weight: 23
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_utprof_basic_media:
+    type: media_library_widget
+    weight: 14
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
+  field_utprof_building_code:
+    weight: 21
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_building_room_numb:
+    weight: 22
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_contact_form_link:
+    weight: 16
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: utexas_link_widget
+    region: content
+  field_utprof_content:
+    weight: 24
+    settings: {  }
+    third_party_settings: {  }
+    type: bootstrap_horizontal_tabs
+    region: content
+  field_utprof_designation:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_display_email:
+    weight: 30
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_utprof_eid:
+    weight: 4
+    settings:
+      size: 10
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_email_address:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_utprof_fax_number:
+    weight: 20
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_given_name:
+    weight: 1
+    settings:
+      size: 30
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_image_ratio_opt:
+    weight: 15
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_utprof_listing_link:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utprof_metatags:
+    weight: 29
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_utprof_phone_number:
+    weight: 19
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_profile_groups:
+    weight: 25
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utprof_profile_tags:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_utprof_surname:
+    weight: 2
+    settings:
+      size: 30
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_utprof_website_link:
+    weight: 18
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: utexas_link_widget
+    region: content
+  path:
+    type: path
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 9
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 13
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 10
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

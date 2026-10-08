@@ -1,0 +1,14 @@
+name: 'UTexas Promo Unit'
+type: module
+description: 'A compound field with image, headline, copy text, & link.'
+core_version_requirement: '^10 || ^11'
+package: UTexas
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:image'
+  - 'drupal:layout_builder'
+  - 'drupal:responsive_image'
+  - 'media_library_form_element:media_library_form_element'
+  - 'utexas_image_styles:utexas_image_styles'
+  - 'utexas_promo_unit:utexas_promo_unit'

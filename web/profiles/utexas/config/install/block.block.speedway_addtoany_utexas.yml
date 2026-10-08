@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - addtoany
+    - node
+  theme:
+    - speedway
+id: speedway_addtoany_utexas
+theme: speedway
+region: content
+weight: -8
+provider: null
+plugin: addtoany_block
+settings:
+  id: speedway_addtoany_block
+  label: 'Share this content'
+  label_display: visible
+  provider: addtoany
+  link_url: ''
+  link_title: ''
+  buttons_size: null
+  addtoany_html: ''
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      page: page

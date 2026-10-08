@@ -1,0 +1,30 @@
+{% set uniqueId = attributes.id %}
+
+<div class="carousel-inner">
+  {% for key, item in items %}
+    {% set classes = ['carousel-item'] %}
+    {% if key == '0' %}
+      {% set classes = classes|merge(['active']) %}
+    {% endif %}
+    <div{{ item.attributes.addClass(classes) }}>
+      {{ item.content }}
+    </div>
+  {% endfor %}
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#{{ uniqueId}}" data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#{{ uniqueId}}" data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</button>
+<button data-bs-target="{{ uniqueId}}" data-autoplay="cycle" type="button">
+  <span class="visually-hidden">Pause</span>
+</button>
+<ol class="carousel-indicators">
+{% for key, item in items %}
+  {% set counter = key + 1 %}
+  <button type="button" data-bs-target="#{{ uniqueId}}" data-bs-slide-to="{{ key }}" {% if key == '0' %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ counter }}"></button>
+{% endfor %}
+</ol>

@@ -1,0 +1,20 @@
+name: 'Block Type - Profile Listing'
+description: 'Provides a block type that displays a View, passing filter values for tags and groups.'
+type: module
+core_version_requirement: ^10 || ^11
+dependencies:
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'utprof:utprof'
+  - 'utprof:utprof_view_profiles'
+  - 'utprof:utprof_vocabulary_groups'
+  - 'utprof:utprof_vocabulary_tags'
+  - 'utprof_content_type_profile:utprof_content_type_profile'
+package: 'UT Drupal Kit Profile Feature'
+core_incompatible: false

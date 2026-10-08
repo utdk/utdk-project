@@ -1,0 +1,25 @@
+utexas_announcement.configuration:
+  path: '/admin/config/site-announcement'
+  defaults:
+    _form: '\Drupal\utexas_site_announcement\Form\AnnouncementConfigurationForm'
+    _title: 'Site Announcement'
+  requirements:
+    _permission: 'manage utexas site announcement'
+entity.utexas_announcement_icon.collection:
+  path: '/admin/config/site-announcement/icons'
+  defaults:
+    _entity_list: 'utexas_announcement_icon'
+    _title: 'Announcement Components'
+  requirements:
+    _permission: 'administer utexas announcement icons'
+  options:
+    _admin_route: TRUE
+entity.utexas_announcement_color_scheme.collection:
+  path: '/admin/config/site-announcement/color-scheme'
+  defaults:
+    _entity_list: 'utexas_announcement_color_scheme'
+    _title: 'Announcement Components'
+  requirements:
+    _permission: 'administer utexas announcement color schemes'
+  options:
+    _admin_route: TRUE

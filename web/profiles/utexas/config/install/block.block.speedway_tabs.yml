@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - speedway
+id: speedway_tabs
+theme: speedway
+region: highlighted
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: speedway_local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

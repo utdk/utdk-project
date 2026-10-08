@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_utnews_main_media
+    - media.type.utexas_image
+    - node.type.utnews_news
+id: node.utnews_news.field_utnews_main_media
+field_name: field_utnews_main_media
+entity_type: node
+bundle: utnews_news
+label: 'Main image'
+description: 'This image can be displayed both on the article page and as a thumbnail in lists of articles. For best results, use an image size of 1600x864px (1.85:1 ratio).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      utexas_image: utexas_image
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

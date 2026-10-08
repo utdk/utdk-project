@@ -1,0 +1,102 @@
+.block-bundle-utexas-promo-list {
+  .promo-list {
+    display: flex;
+    padding-bottom: 20px;
+    margin: 0 20px 0 0;
+
+    .ut-headline {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+  }
+  /* Add border divider between elements */
+  .promo-list + .promo-list {
+    border-top: 1px solid var(--ut-charcoal--t20);
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+  .content {
+    margin-top: 0;
+    flex: 1 1 0;
+  }
+  .image-wrapper {
+    flex: 0 0 64px;
+    margin-right: 12px;
+    margin-bottom: 0;
+    margin-top: 6px;
+    width: 100%;
+    @media (min-width: 900px) {
+      flex: 0 0 68px;
+    }
+    @media (min-width: 1200px) {
+      flex: 0 0 85px;
+    }
+  }
+  .ut-copy > :last-child,
+  .ut-copy > :last-child :last-child {
+    margin-bottom: 0;
+  }
+
+  .ut-promo-list-side-by-side-wrapper {
+    flex-basis: 100%;
+  }
+
+  /* Desktop-style displays */
+  @media (min-width: 1200px) {
+    .ut-promo-list-field-wrapper {
+      display: flex;
+    }
+
+    .two-column-responsive {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      -webkit-box-pack: justify;
+
+      .promo-list {
+        flex: 0 1 42%;
+        padding-bottom: 20px;
+        margin: 0 20px 0 0;
+        display: flex;
+        flex-direction: row;
+        border-top: 1px solid var(--ut-charcoal--t20);
+      }
+      .promo-list:nth-child(1),
+      .promo-list:nth-child(2) {
+        border-top: none;
+        padding-top: 0;
+      }
+    }
+    .ut-promo-list-side-by-side-wrapper {
+      flex: 0 0 47%;
+      margin-right: 5%;
+    }
+    .ut-promo-list-side-by-side-wrapper + .ut-promo-list-side-by-side-wrapper {
+      margin-right: 0;
+    }
+    .two-side-by-side .promo-list {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+/* Stacked display orients each item in a single vertical column */
+.stacked-display .utexas-promo-list-container {
+  .promo-list {
+    flex-direction: column;
+    flex: 0 0 100%;
+    margin: 0;
+    width: 100%;
+  }
+  .image-wrapper {
+    margin-right: 0;
+    margin-bottom: 15px;
+
+    img {
+      width: 100%;
+    }
+  }
+  .ut-copy {
+    margin-top: 15px;
+  }
+}

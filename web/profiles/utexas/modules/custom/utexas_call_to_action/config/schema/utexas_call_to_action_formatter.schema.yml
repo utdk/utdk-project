@@ -1,0 +1,21 @@
+# Schema for the configuration files of the UTexas Call to Action module.
+
+field.formatter.settings.utexas_call_to_action_formatter:
+  type: mapping
+  label: 'Link format settings'
+  mapping:
+    trim_length:
+      type: integer
+      label: 'Trim link text length'
+    url_only:
+      type: boolean
+      label: 'URL only'
+    url_plain:
+      type: boolean
+      label: 'Show URL as plain text'
+    rel:
+      type: string
+      label: 'Add rel="nofollow" to links'
+    target:
+      type: string
+      label: 'Open link in new window'

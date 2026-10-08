@@ -1,0 +1,323 @@
+div[role="search"] {
+  form.ut-search-form {
+    display: inline-block;
+    position: relative;
+    .form-type-search {
+      .form-search {
+        border: 1px solid var(--ut-limestone--s10);
+        width: 224px;
+        height: 32px;
+        padding: 8px 16px;
+        border-radius: 16px;
+        &[placeholder] {
+          font-style: italic;
+          color: var(--ut-limestone--s50);
+        }
+        &[type="search"]::-webkit-search-cancel-button {
+          appearance: none;
+        }
+        &:focus-visible {
+          outline: 1px solid #999;
+          outline-offset: -3px;
+        }
+      }
+    }
+    [data-drupal-selector="edit-actions"] {
+      position: absolute;
+      top: 2px;
+      bottom: 1px;
+      right: 3px;
+      &:focus-visible {
+        outline: none;
+      }
+      &::after {
+        background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 1000 1000' class='svg-inline--fa fa-magnifying-glass' focusable='false' data-prefix='fas' data-icon='magnifying-glass' role='img' xmlns='http://www.w3.org/2000/svg' data-fa-i2svg=''%3E%3Cpath fill='%23bf5700' shape-rendering='geometricPrecision' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: 30px 37px;
+        background-position: 5px 0;
+        content: "";
+        display: inline-block;
+        margin-left: 5px;
+        position: absolute;
+        top: 7px;
+        right: -1px;
+        height: 30px;
+        width: 30px;
+      }
+      input {
+        background: transparent;
+        color: transparent;
+        border: 0;
+        position: absolute;
+        top: 1px;
+        border-radius: 13px;
+        width: 40px;
+        z-index: 60;
+        right: 0;
+        padding-right: 0;
+        &:focus-visible {
+          outline: 1px solid #999;
+          outline-offset: 0;
+          padding-bottom: 0;
+          padding-top: 2px;
+        }
+      }
+    }
+  }
+}
+form.search-form,
+form.in-page-google-search {
+  display: block;
+  position: relative;
+  max-width: 830px;
+
+  .container-inline div {
+    display: block;
+  }
+
+  [data-drupal-selector="edit-actions"],
+  [data-drupal-selector="edit-basic"] {
+
+    &::after {
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 1000 1000' class='svg-inline--fa fa-magnifying-glass' focusable='false' data-prefix='fas' data-icon='magnifying-glass' role='img' xmlns='http://www.w3.org/2000/svg' data-fa-i2svg=''%3E%3Cpath fill='%23bf5700' shape-rendering='geometricPrecision' d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 85px 80px;
+      background-position: 5px 0;
+      content: "";
+      display: inline-block;
+      margin-left: 5px;
+      position: absolute;
+      top: 20px;
+      right: -20px;
+      height: 80px;
+      width: 80px;
+    }
+
+  }
+
+  input {
+    max-width: unset;
+    padding: 0 65px 0 10px;
+    margin: 10px 0 2px;
+    line-height: 1.125rem;
+    color: var(--ut-shade--s40);
+    font-size: 1.375rem;
+    margin-bottom: 4px;
+    height: 60px;
+    width: 100%;
+    border: 1px solid #e1ddd2;
+
+    @media screen and (min-width: 600px) {
+      padding: 5px 65px 5px 20px;
+      line-height: 1.875rem;
+      font-size: 1.875rem;
+    }
+
+    &:focus-visible {
+      outline: 2px #F9F9F9 solid;
+      outline-offset: 0;
+      box-shadow: 0 0 0 4px #193146;
+    }
+  }
+
+  /* Clears the X from Chrome and Safari. */
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  #edit-submit {
+    position: absolute;
+    width: 56px;
+    top: 10px;
+    right: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    background: transparent;
+    color: transparent;
+    border: none;
+    z-index: 2;
+  }
+
+  #edit-help-link {
+    margin-top: 1rem;
+  }
+}
+
+/* Google PSE results page styles. */
+.google-cse {
+
+  .search-help-link {
+    font-size: 0.8125rem;
+  }
+}
+
+.search-results-page {
+
+  /* Reduce standard 2.5rem margin bottom on page title in this context. */
+  .block-page-title-block {
+    margin-bottom: 0;
+  }
+
+  /* Visually hide the search results title. */
+  h2 {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .gsc-control-cse {
+    padding: 0;
+  }
+
+  .gsc-result-info {
+    color: var(--ut-limestone--s60);
+    font-size: 0.8125rem;
+    margin: 0;
+    padding: 4px 4px 10px 0;
+    text-align: left;
+  }
+
+  .gsc-thumbnail-inside,
+  .gsc-url-top,
+  .gsc-table-result {
+    padding-left: 0;
+  }
+
+  .gsc-orderby-container {
+    vertical-align: top;
+  }
+
+  .gsc-url-top {
+    margin: 20px 0 0;
+  }
+
+  .gsc-above-wrapper-area {
+    border-bottom: 0;
+    padding: 5px 0 15px;
+    max-width: 830px;
+  }
+  .gsc-wrapper {
+    max-width: 830px;
+  }
+
+  .gsc-webResult .gsc-result {
+    margin-left: 0;
+    padding: 20px 0 5px;
+    border-top: 1px solid var(--ut-shade--t60);
+  }
+
+  .gs-imageResult a.gs-title:link,
+  .gs-webResult.gs-result a.gs-title:link,
+  .gs-imageResult a.gs-title:link b,
+  .gs-webResult.gs-result a.gs-title:link b,
+  .gs-result .gs-title *,
+  .gs-spelling a,
+  .gcsc-more-maybe-branding-root .gcsc-find-more-on-google {
+    color: var(--ut-burntorange);
+  }
+
+  .gs-webResult.gs-result a.gs-title:visited,
+  .gs-webResult.gs-result a.gs-title:visited b,
+  .gs-imageResult a.gs-title:visited,
+  .gs-imageResult a.gs-title:visited b {
+    color: var(--ut-burntorange--s20);
+  }
+
+  .gs-webResult.gs-result,
+  .gcsc-find-more-on-google-magnifier {
+    fill: var(--ut-burntorange);
+  }
+
+  .gsc-control-cse .gs-spelling,
+  .gsc-control-cse .gs-result .gs-title,
+  .gsc-control-cse .gs-result .gs-title * {
+    text-decoration: none;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+
+  .gsc-control-cse .gs-spelling {
+    padding-bottom: 12px;
+  }
+
+  .gs-webResult div.gs-visibleUrl-long {
+    display: block;
+  }
+
+  .gs-webResult div.gs-visibleUrl {
+    color: var(--ut-limestone--s60);
+    font-size: 0.875rem;
+    margin: 7px 0 5px;
+  }
+
+  .gs-webResult .gs-snippet,
+  .gs-imageResult div.gs-visibleUrl,
+  .gs-fileFormatType {
+    font-size: 1rem;
+    line-height: 1.625rem;
+    margin: 14px 0;
+    padding-left: 1px;
+    color: var(--ut-limestone--s60);
+    font-family: var(--ut-font--sans);
+  }
+
+  .gs-webResult .gs-image {
+    display: none;
+  }
+
+  /* Pager styling. */
+  .gsc-results .gsc-cursor-box {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    max-width: 100%;
+  }
+
+  .gsc-results .gsc-cursor-box .gsc-cursor-page {
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--ut-limestone--s60);
+    display: inline-block;
+    font-family: var(--ut-font--sans);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.875rem;
+    height: 1.5rem;
+    line-height: 1;
+    margin-left: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+  }
+
+  .gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+    background: var(--ut-burntorange);
+    color: var(--ut-white);
+    font-weight: bold;
+  }
+
+  .gsc-results .gsc-cursor-box .gsc-cursor-page:hover,
+  .gsc-results .gsc-cursor-box .gsc-cursor-page:focus {
+    background: var(--ut-shade--t40);
+  }
+
+  .gs-no-results-result .gs-snippet,
+  .gs-error-result .gs-snippet {
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    margin: 5px;
+    padding: 15px;
+    font-weight: bold;
+  }
+}
+

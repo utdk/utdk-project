@@ -1,0 +1,35 @@
+core_version_requirement: '>=10'
+type: theme
+base theme: false
+name: 'Speedway'
+description: Default theme for the Drupal Kit, implementing the University of Texas brand guidelines.
+screenshot: images/screenshot.png
+
+regions:
+  hidden: Hidden
+  utility_nav: Utility Navigation
+  header_primary: Header Primary
+  header_secondary: Header Secondary
+  header_tertiary: Header Tertiary
+  primary_menu: Primary Menu
+  site_announcement: Site Announcement
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  sidebar_first: Left Sidebar
+  content: Content
+  sidebar_second: Right Sidebar
+  footer_left: Left Footer
+  footer_middle: Middle Footer
+  footer_right: Right Footer
+  page_top: Page top
+  page_bottom: Page bottom
+
+libraries:
+  - speedway/global
+
+ckeditor5-stylesheets:
+  - css/typography--fonts.css
+  - css/variables.css
+  - css/typography--base.css
+  - css/drupal--ckeditor-customizations.css

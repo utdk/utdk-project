@@ -1,0 +1,87 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.utevent_event.field_utevent_body
+    - field.field.node.utevent_event.field_utevent_datetime
+    - field.field.node.utevent_event.field_utevent_display_media
+    - field.field.node.utevent_event.field_utevent_featured
+    - field.field.node.utevent_event.field_utevent_localist_unlisted
+    - field.field.node.utevent_event.field_utevent_location
+    - field.field.node.utevent_event.field_utevent_main_media
+    - field.field.node.utevent_event.field_utevent_metatags
+    - field.field.node.utevent_event.field_utevent_status
+    - field.field.node.utevent_event.field_utevent_tags
+    - image.style.utexas_image_style_280w_280h
+    - node.type.utevent_event
+  module:
+    - media
+    - options
+    - user
+    - utevent_content_type_event
+id: node.utevent_event.teaser
+targetEntityType: node
+bundle: utevent_event
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_utevent_datetime:
+    type: utevent_smartdate_recurring
+    label: visually_hidden
+    settings:
+      format: default
+      force_chronological: false
+      format_type: medium
+      timezone_override: ''
+      past_display: '2'
+      upcoming_display: '2'
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_utevent_location:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_utevent_main_media:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: utexas_image_style_280w_280h
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_utevent_status:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_utevent_tags:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  display_breadcrumbs: true
+  display_page_title: true
+  display_updated: true
+  field_utevent_body: true
+  field_utevent_display_media: true
+  field_utevent_featured: true
+  field_utevent_localist_unlisted: true
+  field_utevent_metatags: true
+  links: true

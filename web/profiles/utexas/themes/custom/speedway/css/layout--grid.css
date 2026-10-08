@@ -1,0 +1,10 @@
+/* To provide full bleed display, override the default
+Bootstrap padding on "container-fluid". This applies only
+in the context of the "main_content" region.  */
+.region-content .container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+div:not(.row) > main.col {
+  padding: 0;
+}

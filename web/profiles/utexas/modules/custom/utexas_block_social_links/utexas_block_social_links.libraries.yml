@@ -1,0 +1,8 @@
+form:
+  css:
+    theme:
+      css/social_links_form.css: {}
+display:
+  css:
+    theme:
+      css/social_links_display.css: {}

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.utexas_hero_5_right
+label: 'Hero Style 5 : Right'
+description: ''
+targetEntityType: block_content
+cache: true

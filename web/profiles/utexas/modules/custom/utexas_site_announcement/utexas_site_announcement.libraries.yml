@@ -1,0 +1,4 @@
+announcements:
+  css:
+    theme:
+      css/announcement.css: {}

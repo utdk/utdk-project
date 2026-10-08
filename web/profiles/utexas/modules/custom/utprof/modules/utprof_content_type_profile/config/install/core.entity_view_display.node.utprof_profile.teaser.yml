@@ -1,0 +1,195 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.utprof_profile.field_utprof_add_basic_info
+    - field.field.node.utprof_profile.field_utprof_add_contact_info
+    - field.field.node.utprof_profile.field_utprof_basic_media
+    - field.field.node.utprof_profile.field_utprof_building_code
+    - field.field.node.utprof_profile.field_utprof_building_room_numb
+    - field.field.node.utprof_profile.field_utprof_contact_form_link
+    - field.field.node.utprof_profile.field_utprof_content
+    - field.field.node.utprof_profile.field_utprof_designation
+    - field.field.node.utprof_profile.field_utprof_display_email
+    - field.field.node.utprof_profile.field_utprof_eid
+    - field.field.node.utprof_profile.field_utprof_email_address
+    - field.field.node.utprof_profile.field_utprof_fax_number
+    - field.field.node.utprof_profile.field_utprof_given_name
+    - field.field.node.utprof_profile.field_utprof_image_ratio_opt
+    - field.field.node.utprof_profile.field_utprof_listing_link
+    - field.field.node.utprof_profile.field_utprof_metatags
+    - field.field.node.utprof_profile.field_utprof_phone_number
+    - field.field.node.utprof_profile.field_utprof_profile_groups
+    - field.field.node.utprof_profile.field_utprof_profile_tags
+    - field.field.node.utprof_profile.field_utprof_surname
+    - field.field.node.utprof_profile.field_utprof_website_link
+    - node.type.utprof_profile
+  module:
+    - bootstrap_horizontal_tabs
+    - layout_builder
+    - link
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.utprof_profile.teaser
+targetEntityType: node
+bundle: utprof_profile
+mode: teaser
+content:
+  field_utprof_add_basic_info:
+    weight: 17
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_utprof_add_contact_info:
+    weight: 14
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_utprof_basic_media:
+    type: entity_reference_entity_id
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_utprof_building_code:
+    weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_building_room_numb:
+    weight: 8
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_contact_form_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 130
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_utprof_content:
+    weight: 16
+    label: hidden
+    settings:
+      tab_display: tabs
+    third_party_settings: {  }
+    type: bootstrap_horizontal_tabs
+    region: content
+  field_utprof_designation:
+    weight: 9
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_eid:
+    weight: 10
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_email_address:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: email_mailto
+    region: content
+  field_utprof_fax_number:
+    weight: 11
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_given_name:
+    weight: 12
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_phone_number:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_profile_groups:
+    weight: 5
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utprof_profile_tags:
+    weight: 6
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_utprof_surname:
+    weight: 15
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_utprof_website_link:
+    weight: 3
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  display_breadcrumbs: true
+  display_page_title: true
+  display_updated: true
+  field_utprof_display_email: true
+  field_utprof_image_ratio_opt: true
+  field_utprof_listing_link: true
+  field_utprof_metatags: true

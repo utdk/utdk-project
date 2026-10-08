@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.utprof_profile_listing
+    - field.storage.block_content.field_utprof_list_method
+  module:
+    - options
+id: block_content.utprof_profile_listing.field_utprof_list_method
+field_name: field_utprof_list_method
+entity_type: block_content
+bundle: utprof_profile_listing
+label: 'List method'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: filter
+default_value_callback: ''
+settings: {  }
+field_type: list_string

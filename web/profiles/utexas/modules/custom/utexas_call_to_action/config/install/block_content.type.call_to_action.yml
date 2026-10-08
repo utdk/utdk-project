@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: call_to_action
+label: 'Call to Action'
+revision: 0
+description: 'Provides a link field with title and URL using a custom field formatter.'

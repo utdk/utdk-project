@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - utnews_vocabulary_tags
+name: 'News tags'
+vid: utnews_tags
+description: 'Use News tags to categorize News articles.'
+weight: 0

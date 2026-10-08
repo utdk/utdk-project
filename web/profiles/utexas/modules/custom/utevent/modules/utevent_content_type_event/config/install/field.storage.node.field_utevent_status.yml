@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_utevent_status
+field_name: field_utevent_status
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: EventScheduled
+      label: Scheduled
+    -
+      value: EventCancelled
+      label: Canceled
+    -
+      value: EventMovedOnline
+      label: 'Moved online'
+    -
+      value: EventPostponed
+      label: Postponed
+    -
+      value: EventRescheduled
+      label: Rescheduled
+  allowed_values_function: ''
+module: options
+locked: true
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

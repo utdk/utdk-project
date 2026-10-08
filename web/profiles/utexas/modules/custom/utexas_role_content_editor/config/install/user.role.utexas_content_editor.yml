@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utexas_content_editor
+label: 'Content Editor'
+weight: 0
+is_admin: null
+permissions: { }

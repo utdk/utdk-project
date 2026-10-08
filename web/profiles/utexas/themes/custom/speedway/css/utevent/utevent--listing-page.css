@@ -1,0 +1,49 @@
+.utevent-listing-page {
+  .views-row {
+    border-top: 1px solid var(--ut-shade--t40);
+    padding-top: 30px;
+    margin-bottom: 32px;
+
+    &:first-child {
+      border-top: 0;
+    }
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+
+  .views-view-grid {
+    width: 100%;
+  }
+  nav.pager {
+    margin: 0 auto;
+  }
+  .views-field-title {
+    font-size: 1.5rem;
+  }
+  .views-field-field-utevent-main-media {
+    float: right;
+    max-width: 100px;
+    margin: 7.5px 0 5px 10px;
+  }
+  .views-field {
+    margin-bottom: 0.5rem;
+  }
+  .views-field-field-utevent-datetime-1 {
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+
+    .field-content:empty {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  .views-field-field-utevent-body p {
+    margin-bottom: 0;
+  }
+  .no-results {
+    width: 100%;
+  }
+}

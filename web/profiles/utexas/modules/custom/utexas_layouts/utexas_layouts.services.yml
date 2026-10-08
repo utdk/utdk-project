@@ -1,0 +1,7 @@
+services:
+  utexas_layouts.render_block_component_subscriber:
+    class: Drupal\utexas_layouts\EventSubscriber\BlockComponentRenderArray
+    tags:
+      - { name: event_subscriber }
+parameters:
+  utexas_layouts.skip_procedural_hook_scan: true

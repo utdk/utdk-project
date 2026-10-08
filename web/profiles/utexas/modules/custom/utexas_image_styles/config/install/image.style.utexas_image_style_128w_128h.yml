@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: utexas_image_style_128w_128h
+label: '128w x 128h (1:1)'
+effects:
+  33bacdd1-9ddd-442b-9ce7-d97e685e8689:
+    uuid: 33bacdd1-9ddd-442b-9ce7-d97e685e8689
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 128
+      height: 128
+      anchor: center-center

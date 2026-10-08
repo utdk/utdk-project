@@ -1,0 +1,12 @@
+parameters:
+  utevent_view_listing_page.skip_procedural_hook_scan: true
+
+services:
+  utevent_view_listing_page.route_subscriber:
+    class: Drupal\utevent_view_listing_page\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  utevent_view_listing_page.overrider:
+    class: Drupal\utevent_view_listing_page\Config\Overrider
+    tags:
+      - {name: config.factory.override, priority: 5}

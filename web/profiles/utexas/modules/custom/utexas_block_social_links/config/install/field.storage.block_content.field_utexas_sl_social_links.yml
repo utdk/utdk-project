@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - utexas_block_social_links
+id: block_content.field_utexas_sl_social_links
+field_name: field_utexas_sl_social_links
+entity_type: block_content
+type: utexas_social_link_field
+settings: {  }
+module: utexas_block_social_links
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

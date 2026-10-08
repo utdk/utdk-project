@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node__utexas_flex_page
+label: 'Content: Flex Page'
+tags:
+  description: '[node:field_flex_page_summary]'
+  og_description: '[node:field_flex_page_summary]'
+  twitter_cards_description: '[node:field_flex_page_summary]'

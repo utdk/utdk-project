@@ -1,0 +1,111 @@
+/* Styles for Layout Builder form controls-buttons, dropdowns, checkbox, etc */
+.node-layout-builder-form {
+  display: flex;
+  flex-flow: column wrap;
+  .form-actions {
+    flex: 1 1 100%;
+    order: 2;
+    display: flex;
+    flex-wrap:wrap;
+    #edit-submit {
+      order: 1;
+    }
+    #edit-discard-changes {
+      order: 2;
+      background-color: var(--ut-lightyellow);
+    }
+    #edit-rebuild-layout {
+      order: 3;
+    }
+    #edit-preview-toggle {
+      order: 4;
+      margin: 1.5rem 0 1rem;
+      flex: 1 1 100%;
+    }
+  }
+  #edit-moderation-state-wrapper {
+    flex: 1 1 100%;
+    order: 1;
+    font-family: system-ui;
+    .form-item-moderation-state-0-current label {
+      margin-top: 0;
+      font-weight: 700;
+      &::after {
+        content: ":";
+      }
+    }
+    .js-form-item-moderation-state-0-state {
+      select {
+        padding: .75rem 1.75rem .75rem .75rem;
+        display: inline-block;
+        max-width: fit-content;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 9'%3E %3Cpath fill='none' stroke-width='1.5' d='M1 1l6 6 6-6' stroke='%23545560' /%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 110% 50%;
+        background-size: 2.75rem 0.5625rem;
+        appearance: none;
+      }
+      label {
+        font-weight: 700;
+        &::after {
+          content: ":";
+        }
+      }
+    }
+  }
+  .layout-builder__message {
+    order: 0;
+  }
+  .form-type-vertical-tabs {
+    order: 4;
+    flex: 1 1 100%;
+
+  }
+  /* Claro admin styling for buttons scoped to Layout Builder */
+  .button {
+    margin-right: .75rem;
+    padding: 15px 23px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    background-color: #d4d4dacc;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1rem;
+  }
+  .button--primary {
+    color: #fff;
+    background-color: #003ecc;
+  }
+  .button--danger {
+    color: #fff;
+    background-color: #dc2323;
+  }
+}
+
+/* Hide vertical tabs but only on Flex pages. */
+.node-utexas-flex-page-layout-builder-form {
+  ul.vertical-tabs__menu {
+    display: none;
+  }
+  .vertical-tabs {
+    margin: 1rem 0;
+    border: 0;
+
+    details {
+      border: 0;
+      padding-left: 0;
+      & > .form-item-revision {
+        display: none;
+      }
+
+    }
+  }
+}
+
+form.layout-builder-discard-changes.confirmation {
+  input.ut-btn {
+    color: var(--ut-charcoal--s40);
+  }
+}

@@ -1,0 +1,100 @@
+name: UTexas
+type: profile
+description: Installation profile for the UT Drupal Kit.
+core_version_requirement: '^10 || ^11'
+version: '3.33.0'
+distribution:
+  name: UT Drupal Kit
+dependencies:
+  # Core
+  - drupal:block
+  - drupal:breakpoint
+  - drupal:block_content
+  - drupal:ckeditor5
+  - drupal:config
+  - drupal:contextual
+  - drupal:datetime
+  - drupal:editor
+  - drupal:image
+  - drupal:file
+  - drupal:media_library
+  - drupal:menu_link_content
+  - drupal:menu_ui
+  - drupal:node
+  - drupal:options
+  - drupal:path
+  - drupal:taxonomy
+  - drupal:toolbar
+  - drupal:views
+install:
+  # Core
+  - drupal:automated_cron
+  - drupal:content_moderation
+  - drupal:dblog
+  - drupal:dynamic_page_cache
+  - drupal:inline_form_errors
+  - drupal:page_cache
+  - drupal:workflows
+  # Contrib
+  - drupal:addtoany
+  - drupal:admin_toolbar
+  - drupal:breadcrumbs_visibility
+  - drupal:diff
+  - drupal:entity_clone
+  - drupal:entity_usage
+  - drupal:features
+  - drupal:feed_block
+  - drupal:google_tag
+  - drupal:iframe_title_filter
+  - drupal:layout_builder_iframe_modal
+  - drupal:layout_builder_styles
+  - drupal:menu_trail_by_path
+  - drupal:media_file_delete
+  - drupal:metatag
+  - drupal:metatag_open_graph
+  - drupal:metatag_twitter_cards
+  - drupal:metatag_verification
+  - drupal:menu_block
+  - drupal:pantheon_advanced_page_cache
+  - drupal:pathauto
+  - drupal:page_title_visibility
+  - drupal:pathologic
+  - drupal:redirect
+  - drupal:responsive_tables_filter
+  - drupal:role_delegation
+  - drupal:seckit
+  - drupal:trash
+  - drupal:updated
+  - drupal:url_embed
+  - drupal:xmlsitemap
+  # Custom
+  - utexas_block_social_links
+  - utexas_call_to_action
+  - utexas_content_type_flex_page
+  - utexas_entity_usage
+  - utexas_favicons
+  - utexas_featured_highlight
+  - utexas_flex_content_area
+  - utexas_flex_list
+  - utexas_google_search
+  - utexas_hero
+  - utexas_hero_carousel
+  - utexas_image_link
+  - utexas_layouts
+  - utexas_layout_builder_styles
+  - utexas_media_types
+  - utexas_missing_blocks
+  - utexas_photo_content_area
+  - utexas_promo_list
+  - utexas_promo_unit
+  - utexas_quick_links
+  - utexas_readonly
+  - utexas_resources
+  - utexas_site_announcement
+  - utexas_smtp_helper
+  - utexas_text_format_flex_html
+  - utexas_instagram_api
+  - utexas_instagram
+themes:
+  - claro
+  - speedway

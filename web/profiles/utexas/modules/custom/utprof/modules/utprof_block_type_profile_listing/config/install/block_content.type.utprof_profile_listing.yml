@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: utprof_profile_listing
+label: 'Profile Listing'
+revision: 1
+description: 'List profiles, filterable by tags or groups, with multiple display options.'

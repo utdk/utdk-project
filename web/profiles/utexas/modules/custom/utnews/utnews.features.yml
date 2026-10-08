@@ -1,0 +1,7 @@
+bundle: utnews
+required: false
+excluded:
+  - block.block.utnews_tags
+  - block.block.utnews_categories
+  - block.block.utnews_author
+  - utnews_view_listing_page.config

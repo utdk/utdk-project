@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.social_links
+    - field.storage.block_content.field_utexas_sl_social_links
+  module:
+    - utexas_block_social_links
+id: block_content.social_links.field_utexas_sl_social_links
+field_name: field_utexas_sl_social_links
+entity_type: block_content
+bundle: social_links
+label: 'Social Links'
+description: 'Only external URLs allowed.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: utexas_social_link_field

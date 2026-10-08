@@ -1,0 +1,37 @@
+auto-anchors:
+  js:
+    js/autoAnchors.js: {}
+    js/linkAccessibility.js: []
+  dependencies:
+    - core/once
+utexas-install:
+  css:
+    theme:
+      css/utexas.css: {}
+menus:
+  css:
+    theme:
+      css/menus.css: {}
+status-messages:
+  css:
+    theme:
+      css/status-messages.css: {}
+bootstrap5-base:
+  css:
+    base:
+      css/Bootstrap5/bootstrap-base.css: {}
+bootstrap5-css:
+  css:
+    base:
+      css/Bootstrap5/bootstrap-variables.css: {}
+      css/Bootstrap5/alert.css: {}
+      css/Bootstrap5/carousel.css: {}
+      css/Bootstrap5/collapse.css: {}
+      css/Bootstrap5/dropdown.css: {}
+      css/Bootstrap5/modal.css: {}
+      css/Bootstrap5/tab.css: {}
+      css/Bootstrap5/tooltip.css: {}
+bootstrap5-js:
+  js:
+    js/Bootstrap5/bootstrap.bundle.min.js: {}
+    js/Bootstrap5/tooltip-initialize.js: {}

@@ -1,0 +1,5 @@
+bundle: utexas
+excluded:
+  - workflows.workflow.standard_workflow
+  - views.view.moderated_content
+required: true
