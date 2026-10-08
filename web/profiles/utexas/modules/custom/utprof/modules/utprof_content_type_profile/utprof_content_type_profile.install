@@ -19,13 +19,15 @@ function utprof_content_type_profile_install() {
   _utprof_add_pathauto_pattern();
   _utprof_add_metatags();
 
+  // Add utprof_profile to workflow config (#361). This must happen before
+  // permissions are assigned below, since the scheduled transitions
+  // permissions for this bundle only exist once it is under moderation.
+  Hooks::updateWorkflow();
+
   // Add standard permissions to "utexas_site_manager" & "utexas_content_editor"
   // if those roles exist.
   Permissions::assignPermissions('editor', 'utexas_content_editor');
   Permissions::assignPermissions('manager', 'utexas_site_manager');
-
-  // Add utprof_profile to workflow config (#361).
-  Hooks::updateWorkflow();
 
   // Set bootstrap_horizontal_tabs to Bootstrap 4 (#392).
   $bootstrap_horizontal_tabs = \Drupal::configFactory()->getEditable('bootstrap_horizontal_tabs.settings');
