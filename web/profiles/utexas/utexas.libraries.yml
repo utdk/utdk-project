@@ -4,6 +4,7 @@ auto-anchors:
     js/linkAccessibility.js: []
   dependencies:
     - core/once
+    - core/jquery
 utexas-install:
   css:
     theme:
