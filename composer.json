@@ -85,7 +85,13 @@
             "drupal/core-composer-scaffold": true,
             "oomphinc/composer-installers-extender": true,
             "simplesamlphp/composer-module-installer": true,
-            "utexas/*": true
+            "utexas/*": true,
+            "symfony/runtime": true,
+            "drupal/core-recipe-unpack": true,
+            "tbachert/spi": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
