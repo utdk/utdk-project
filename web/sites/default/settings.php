@@ -63,6 +63,8 @@ $config['system.performance']['fast_404']['enabled'] = TRUE;
 
 $settings['rebuild_access'] = FALSE;
 
+$settings['enable_html5_validation'] = FALSE;
+
 /**
  * Skipping permissions hardening will make scaffolding
  * work better, but will also raise a warning when you
