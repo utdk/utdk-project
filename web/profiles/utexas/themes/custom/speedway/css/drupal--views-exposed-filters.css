@@ -4,9 +4,6 @@
 .utnews-listing-page {
 
   form.views-exposed-form {
-    /* Hack to horizontally align event buttons and select dropdowns */
-    margin-top: -33px;
-
     label {
       margin-bottom: 0.5rem;
       margin-top: 0;
