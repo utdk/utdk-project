@@ -53,16 +53,6 @@ function utexas_install() {
   \Drupal::configFactory()
     ->getEditable('node.settings')
     ->set('use_admin_theme', TRUE)->save();
-  // Set language to EN by default.
-  // This is not strictly necessary, since the default
-  // is EN.
-  \Drupal::configFactory()
-    ->getEditable('system.site')
-    ->set('langcode', 'en')->save();
-  \Drupal::configFactory()
-    ->getEditable('system.site')
-    ->set('default_langcode', 'en')->save();
-
   // Set Media Library pager to 'full' instead of 'mini (#985).
   \Drupal::configFactory()
     ->getEditable('views.view.media_library')

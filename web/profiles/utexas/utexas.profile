@@ -143,12 +143,3 @@ function utexas_install_cleanup(&$install_state) {
   \Drupal::state()->delete('utexas_installation_options.install_news');
   \Drupal::state()->delete('utexas_installation_options.install_scheduled_transitions');
 }
-
-/**
- * Implements hook_install_tasks_alter().
- */
-function utexas_install_tasks_alter(array &$tasks, array $install_state) {
-  if (!$install_state['interactive']) {
-    unset($tasks['install_select_language']);
-  }
-}

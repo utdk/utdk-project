@@ -63,6 +63,8 @@ $config['system.performance']['fast_404']['enabled'] = TRUE;
 
 $settings['rebuild_access'] = FALSE;
 
+$settings['enable_html5_validation'] = FALSE;
+
 /**
  * Skipping permissions hardening will make scaffolding
  * work better, but will also raise a warning when you
@@ -87,7 +89,7 @@ if (file_exists($pantheon_settings)) {
 /**
  * Place the config directory outside of the Drupal root.
  */
-$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config';
+$settings['config_sync_directory'] = getenv('DOCROOT') ? '../config' : 'sites/default/config';
 
 /**
  * If using Enterprise Login with Pantheon, this file is required.
