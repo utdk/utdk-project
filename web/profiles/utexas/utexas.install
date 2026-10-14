@@ -1593,3 +1593,26 @@ function utexas_update_11012() {
     \Drupal::service('module_installer')->uninstall([$module], FALSE);
   }
 }
+
+/**
+ * Uninstall Stable 9 theme (#278).
+ */
+function utexas_update_11013() {
+  $theme = 'stable9';
+  $theme_handler = \Drupal::service('theme_handler');
+  if ($theme_handler->themeExists($theme) === FALSE) {
+    return;
+  }
+  // Skip if any installed theme uses Stable 9 as a base theme.
+  $installed_themes = $theme_handler->listInfo();
+  $sub_themes = $installed_themes[$theme]->sub_themes ?? [];
+  $installed_sub_themes = array_intersect_key($sub_themes, $installed_themes);
+  if (!empty($installed_sub_themes)) {
+    \Drupal::logger('utexas')->notice('@theme has installed sub-themes (@sub_themes) and cannot be uninstalled.', [
+      '@theme' => $theme,
+      '@sub_themes' => implode(', ', array_keys($installed_sub_themes)),
+    ]);
+    return;
+  }
+  \Drupal::service('theme_installer')->uninstall([$theme]);
+}
