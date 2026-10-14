@@ -13,7 +13,9 @@
   function modifyLink(el) {
     const classes = el.getAttribute("class");
     const target = el.getAttribute("target");
-    let label = el.getAttribute("aria-label") ?? el.innerText;
+    let label =
+      el.getAttribute("aria-label") ??
+      el.textContent.replace(/\s+/g, " ").trim();
     let labelAppendage = "";
     if (classes) {
       if (classes.includes("ut-cta-link--external")) {

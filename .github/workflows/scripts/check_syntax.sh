@@ -59,6 +59,7 @@ if [ ! -z "$CSS_LIST" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  cp web/profiles/utexas/package.json package.json
   nvm install 20 && nvm use 20
   npm install
   echo "*** Changed CSS files ****"

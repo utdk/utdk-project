@@ -130,22 +130,6 @@ class ComposerScripts {
       $composerJson['extra']['enable-patching'] = TRUE;
     }
 
-    // Populate allowed Composer plugins.
-    $allowed_composer_plugins = [
-      'phpstan/extension-installer' => 'Drupal core-dev requires phpstan/extension-installer (https://www.drupal.org/docs/develop/development-tools/phpstan/getting-started)',
-      'php-http/discovery' => 'Drupal 10.2 requires php-http/discovery (https://www.drupal.org/project/drupal/issues/3393151)',
-      'dealerdirect/phpcodesniffer-composer-installer' => 'Drupal 9.3 requires dealerdirect/phpcodesniffer-composer-installer (https://www.drupal.org/project/drupal/issues/3255749)',
-      'tbachert/spi' => 'Drupal core 10.4 requires tbachert/spi (https://www.drupal.org/node/3492353)',
-      'drupal/core-recipe-unpack' => 'Drupal core 11.2 requires drupal/core-recipe-unpack (https://www.drupal.org/node/3522189)',
-      'symfony/*' => 'Drupal 11.4 requires symfony/runtime (https://www.drupal.org/node/3553275)',
-    ];
-    foreach ($allowed_composer_plugins as $plugin => $description) {
-      if (!isset($composerJson['config']['allow-plugins'][$plugin])) {
-        $io->write("<info>$description</info>");
-        $composerJson['config']['allow-plugins'][$plugin] = TRUE;
-      }
-    }
-
     if (serialize($composerJson) == serialize($originalComposerJson)) {
       return;
     }
