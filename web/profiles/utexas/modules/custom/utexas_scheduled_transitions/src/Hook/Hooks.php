@@ -38,7 +38,7 @@ class Hooks {
    * Grants administer scheduled transitions permission.
    */
   public function grantAdministerPermission() {
-    $indicator_permission = 'administer node published status';
+    $proxy_permission = 'administer site configuration';
     $permissions = [
       'administer scheduled transitions',
       'view all scheduled transitions',
@@ -48,7 +48,7 @@ class Hooks {
     $roles = \Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
     /** @var \Drupal\user\Entity\Role $role */
     foreach ($roles as $role) {
-      if (!$role->hasPermission($indicator_permission)) {
+      if (!$role->hasPermission($proxy_permission)) {
         continue;
       }
       foreach ($permissions as $permission) {
