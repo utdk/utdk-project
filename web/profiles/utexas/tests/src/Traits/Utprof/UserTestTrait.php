@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\utprof\Traits;
+namespace Drupal\Tests\utexas\Traits\Utprof;
 
 use Drupal\user\Entity\Role;
 

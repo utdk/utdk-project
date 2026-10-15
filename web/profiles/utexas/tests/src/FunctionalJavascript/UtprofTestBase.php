@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\utprof\FunctionalJavascript;
+namespace Drupal\Tests\utexas\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\Tests\TestFileCreationTrait;
-use Drupal\Tests\utprof\Traits\EntityTestTrait;
-use Drupal\Tests\utprof\Traits\ProfileTestTrait;
-use Drupal\Tests\utprof\Traits\UserTestTrait;
-use Drupal\Tests\utprof\Traits\ViewModeTests\ProfileViewModeBasicTrait;
-use Drupal\Tests\utprof\Traits\ViewModeTests\ProfileViewModeDefaultTrait;
-use Drupal\Tests\utprof\Traits\ViewModeTests\ProfileViewModeFullTrait;
-use Drupal\Tests\utprof\Traits\ViewModeTests\ProfileViewModeNameOnlyTrait;
-use Drupal\Tests\utprof\Traits\ViewModeTests\ProfileViewModeProminentTrait;
-use Drupal\Tests\utprof\Traits\ViewModeTests\ProfileViewModeTeaserTrait;
+use Drupal\Tests\utexas\Traits\Utprof\EntityTestTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ProfileTestTrait;
+use Drupal\Tests\utexas\Traits\Utprof\UserTestTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ViewModeTests\ProfileViewModeBasicTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ViewModeTests\ProfileViewModeDefaultTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ViewModeTests\ProfileViewModeFullTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ViewModeTests\ProfileViewModeNameOnlyTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ViewModeTests\ProfileViewModeProminentTrait;
+use Drupal\Tests\utexas\Traits\Utprof\ViewModeTests\ProfileViewModeTeaserTrait;
 
 /**
  * Base class for Functional Javascript tests.
  */
-abstract class TestBase extends WebDriverTestBase {
+abstract class UtprofTestBase extends WebDriverTestBase {
 
   use TestFileCreationTrait;
   use EntityTestTrait;

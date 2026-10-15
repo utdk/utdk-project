@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\utprof\Traits\ViewModeTests;
+namespace Drupal\Tests\utexas\Traits\Utprof\ViewModeTests;
 
 /**
  * Method for verfiying display of node view mode.

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\utnews\Functional;
+namespace Drupal\Tests\utexas\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
 /**
  * Functional test for query parameter caching.
  */
-class CacheTest extends BrowserTestBase {
+class UtnewsCacheTest extends BrowserTestBase {
 
   /**
    * Use the 'utexas' installation profile.

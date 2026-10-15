@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\utevent\FunctionalJavascript;
+namespace Drupal\Tests\utexas\FunctionalJavascript;
 
 use Drupal\Core\Language\Language;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;

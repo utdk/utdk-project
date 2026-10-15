@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\utprof\Traits;
+namespace Drupal\Tests\utexas\Traits\Utprof;
 
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;

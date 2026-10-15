@@ -1,21 +1,21 @@
 <?php
 
-namespace Drupal\Tests\utprof\Traits\ViewModeTests;
+namespace Drupal\Tests\utexas\Traits\Utprof\ViewModeTests;
 
 /**
  * Method for verfiying display of node view mode.
  */
-trait ProfileViewModeProminentTrait {
+trait ProfileViewModeDefaultTrait {
 
   /**
-   * Test Profile node "Prominent" view mode.
+   * Test Profile node "Default" view mode.
    */
-  public function verifyProfileViewModeProminent($node) {
-    $build = $this->entityTypeManager->getViewBuilder('node')->view($node, 'utexas_prominent');
+  public function verifyProfileViewModeDefault($node) {
+    $build = $this->entityTypeManager->getViewBuilder('node')->view($node, 'default');
     $output = (string) $this->renderer->renderPlain($build);
 
     $fields_contains = [
-      'title' => 'Test Profile Page title',
+      'title' => 'Test Profile Page',
       'field_utprof_add_basic_info' => 'Basic info text',
       'field_utprof_designation-0' => 'Designation 1',
       'field_utprof_designation-1' => 'Designation 2',

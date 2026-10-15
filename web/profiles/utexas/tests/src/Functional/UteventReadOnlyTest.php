@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\utevent_readonly\Functional;
+namespace Drupal\Tests\utexas\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
  */
 #[RunTestsInSeparateProcesses]
 #[Group('utexas')]
-class ReadOnlyTest extends BrowserTestBase {
+class UteventReadOnlyTest extends BrowserTestBase {
 
   /**
    * Use the 'utexas' installation profile.

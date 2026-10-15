@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\utprof\FunctionalJavascript;
+namespace Drupal\Tests\utexas\FunctionalJavascript;
 
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
  * Test all aspects of Profile Node creation functionality.
  */
 #[RunTestsInSeparateProcesses]
-class NodeCreationTest extends TestBase {
+class UtprofNodeCreationTest extends UtprofTestBase {
 
   /**
    * Test Profile content type and output.

@@ -63,6 +63,3 @@ jobs:
         run: |
           cd utdk-project
           lando test web/profiles/utexas/tests
-          lando test web/profiles/utexas/modules/custom/utnews
-          lando test web/profiles/utexas/modules/custom/utevent
-          lando test web/profiles/utexas/modules/custom/utprof
