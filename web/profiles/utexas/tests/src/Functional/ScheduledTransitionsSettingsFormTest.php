@@ -25,7 +25,7 @@ class ScheduledTransitionsSettingsFormTest extends FunctionalTestBase {
     $bundles = array_keys(
       \Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple()
     );
-    $permissions = ['administer node published status'];
+    $permissions = ['administer site configuration'];
     foreach ($bundles as $bundle) {
       $permissions[] = "create $bundle content";
     }
@@ -37,7 +37,7 @@ class ScheduledTransitionsSettingsFormTest extends FunctionalTestBase {
     $this->drupalLogin($user);
     $this->drupalGet('/admin/config/workflow/scheduled-transitions');
     // 'administer scheduled transitions' is granted automatically to any
-    // role with 'administer node published status'; no explicit grant here.
+    // role with 'administer site configuration'; no explicit grant here.
     $this->assertSession()->statusCodeEquals(200);
   }
 
