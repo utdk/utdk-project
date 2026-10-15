@@ -28,6 +28,14 @@ composer validate --no-check-all
 # https://git-scm.com/docs/git-merge-base#_discussion
 TO_MERGE=$(git merge-base develop HEAD)
 
+# Local development files must not be committed.
+LOCAL_DEV_FILES=$( git diff $TO_MERGE --name-only --diff-filter=ACMR -- composer.lock .lando.yml .vscode)
+if [ ! -z "$LOCAL_DEV_FILES" ]; then
+  echo "*** Local development files must not be committed ***"
+  echo "$LOCAL_DEV_FILES"
+  exit 1
+fi
+
 PHP_EXTENSIONS="php,inc,module,install,profile,theme,yml"
 PHP_LIST=$( git diff $TO_MERGE --name-only --diff-filter=ACMRX -- "*.php" "*.inc" "*.yml" "*.module" "*.install" "*.profile" "*.theme")
 if [ ! -z "$PHP_LIST" ]; then
