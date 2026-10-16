@@ -6,7 +6,6 @@ namespace Drupal\Tests\utexas\Functional;
 
 use Drupal\node\Entity\Node;
 use Drupal\scheduled_transitions\Form\ScheduledTransitionsSettingsForm;
-use Drupal\scheduled_transitions\ScheduledTransitionsPermissions as Permissions;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
@@ -32,7 +31,6 @@ class ScheduledTransitionsAccessTest extends FunctionalTestBase {
 
     \Drupal::service('module_installer')
       ->install(['utexas_scheduled_transitions']);
-
 
     // getBundles() caches its result permanently; parent::setUp() already
     // creates users (computing an empty cache) before this config is saved,
