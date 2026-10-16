@@ -7,13 +7,15 @@ namespace Drupal\Tests\utexas\Functional;
 use Drupal\node\Entity\Node;
 use Drupal\scheduled_transitions\Form\ScheduledTransitionsSettingsForm;
 use Drupal\scheduled_transitions\ScheduledTransitionsPermissions as Permissions;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests that the Scheduled Transitions UI is gated by permission.
- *
- * @group utexas
- * @group scheduled_transitions
  */
+#[RunTestsInSeparateProcesses]
+#[Group('utexas')]
+#[Group('scheduled_transitions')]
 class ScheduledTransitionsAccessTest extends FunctionalTestBase {
 
   /**

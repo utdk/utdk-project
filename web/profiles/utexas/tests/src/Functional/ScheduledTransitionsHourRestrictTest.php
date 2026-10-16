@@ -7,13 +7,15 @@ namespace Drupal\Tests\utexas\Functional;
 use Drupal\node\Entity\Node;
 use Drupal\scheduled_transitions\Entity\ScheduledTransition;
 use Drupal\scheduled_transitions\ScheduledTransitionsPermissions as Permissions;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
  * Tests the top-of-the-hour restriction on scheduled transition forms.
- *
- * @group utexas
- * @group scheduled_transitions
  */
+#[RunTestsInSeparateProcesses]
+#[Group('utexas')]
+#[Group('scheduled_transitions')]
 class ScheduledTransitionsHourRestrictTest extends FunctionalTestBase {
 
   /**

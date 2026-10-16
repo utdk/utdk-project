@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\utexas\Functional;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+
 /**
  * Tests that installing utexas_scheduled_transitions configures the UI.
- *
- * @group utexas
- * @group scheduled_transitions
  */
+#[RunTestsInSeparateProcesses]
+#[Group('utexas')]
+#[Group('scheduled_transitions')]
 class ScheduledTransitionsSettingsFormTest extends FunctionalTestBase {
 
   /**
