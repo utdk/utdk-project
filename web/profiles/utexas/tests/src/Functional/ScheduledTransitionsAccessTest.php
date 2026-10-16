@@ -30,20 +30,9 @@ class ScheduledTransitionsAccessTest extends FunctionalTestBase {
     parent::setUp();
     $this->drupalPlaceBlock('local_tasks_block');
 
-    // 'page' is on standard_workflow by default; also enable it for
-    // scheduled transitions. Without 'mirror_operations', the dedicated
-    // permission alone never grants access — see
-    // ScheduledTransitionsEntityHooks::entityAccess().
-    \Drupal::configFactory()->getEditable('scheduled_transitions.settings')
-      ->set('bundles', [
-        ['entity_type' => 'node', 'bundle' => 'page'],
-      ])
-      ->set('mirror_operations', [
-        'view scheduled transition' => 'update',
-        'add scheduled transition' => 'update',
-        'reschedule scheduled transitions' => 'update',
-      ])
-      ->save(TRUE);
+    \Drupal::service('module_installer')
+      ->install(['utexas_scheduled_transitions']);
+
 
     // getBundles() caches its result permanently; parent::setUp() already
     // creates users (computing an empty cache) before this config is saved,
@@ -87,16 +76,7 @@ class ScheduledTransitionsAccessTest extends FunctionalTestBase {
     ]);
     $node->save();
 
-    $user = $this->drupalCreateUser([
-      'access content',
-      'edit any page content',
-      // Content Moderation blocks 'update' without a valid transition
-      // permission; scheduled_transitions mirrors onto 'update'.
-      'use standard_workflow transition create_new_draft',
-      Permissions::viewScheduledTransitionsPermission('node', 'page'),
-      Permissions::addScheduledTransitionsPermission('node', 'page'),
-    ]);
-    $this->drupalLogin($user);
+    $this->drupalLogin($this->testContentEditorUser);
 
     // Check route access first to isolate route vs. tab-rendering issues.
     $this->assertAllowed($node->toUrl('scheduled_transitions'));

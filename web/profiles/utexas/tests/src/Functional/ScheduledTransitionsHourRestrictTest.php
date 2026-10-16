@@ -36,18 +36,8 @@ class ScheduledTransitionsHourRestrictTest extends FunctionalTestBase {
   protected function setUp(): void {
     parent::setUp();
 
-    // utexas_scheduled_transitions_install() already registers 'page' into
-    // 'bundles'. It does not set 'mirror_operations', though, and without a
-    // mirror the dedicated permission alone never grants access — see
-    // ScheduledTransitionsEntityHooks::entityAccess(). Real gap in the
-    // module, not just test setup.
-    \Drupal::configFactory()->getEditable('scheduled_transitions.settings')
-      ->set('mirror_operations', [
-        'view scheduled transition' => 'update',
-        'add scheduled transition' => 'update',
-        'reschedule scheduled transitions' => 'update',
-      ])
-      ->save(TRUE);
+    \Drupal::service('module_installer')
+      ->install(['utexas_scheduled_transitions']);
 
     $this->node = Node::create([
       'type' => 'page',
@@ -56,15 +46,7 @@ class ScheduledTransitionsHourRestrictTest extends FunctionalTestBase {
     ]);
     $this->node->save();
 
-    $user = $this->drupalCreateUser([
-      'access content',
-      'edit any page content',
-      Permissions::viewScheduledTransitionsPermission('node', 'page'),
-      Permissions::addScheduledTransitionsPermission('node', 'page'),
-      Permissions::rescheduleScheduledTransitionsPermission('node', 'page'),
-      'use standard_workflow transition publish',
-    ]);
-    $this->drupalLogin($user);
+    $this->drupalLogin($this->testContentEditorUser);
   }
 
   /**
