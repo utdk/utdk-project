@@ -37,7 +37,7 @@ jobs:
         run: |
           gh repo clone "utexas-utdk/utdk-project"
           cd utdk-project
-          git remote add "public" "https://$PUBLIC_TOKEN@github.com/utdk/utdk-project.git"
+          git remote add "public" "https://x-access-token:$PUBLIC_TOKEN@github.com/utdk/utdk-project.git"
           if [ "$TRIGGER" == "push" ]; then
             echo "Syncing $REF..."
             git fetch && git checkout $REF
@@ -60,7 +60,7 @@ jobs:
             git fetch --all
             echo "Branches found:"
             git branch
-            git remote add "public" "https://$PUBLIC_TOKEN@github.com/utdk/utdk-project.git"
+            git remote add "public" "https://x-access-token:$PUBLIC_TOKEN@github.com/utdk/utdk-project.git"
             git push public --all
             git push public --tags
           fi
