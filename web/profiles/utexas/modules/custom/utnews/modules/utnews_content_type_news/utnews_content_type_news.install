@@ -24,12 +24,15 @@ function utnews_content_type_news_install() {
   // Add social sharing block.
   NewsContentTypeHelper::addSocialSharing();
 
+  // This must happen before permissions are assigned below, since the
+  // scheduled transitions permissions for this bundle only exist once it is
+  // under moderation.
+  Hooks::addStandardWorkflow();
+
   // Add standard permissions to "utexas_site_manager" & "utexas_content_editor"
   // if those roles exist.
   Permissions::assignPermissions('editor', 'utexas_content_editor');
   Permissions::assignPermissions('manager', 'utexas_site_manager');
-
-  Hooks::addStandardWorkflow();
 }
 
 /**

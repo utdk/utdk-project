@@ -38,7 +38,7 @@ function utexas_install_tasks() {
 }
 
 /**
- * Batch install News/Event/Profile modules selected during installation.
+ * Batch install selected News/Event/Profile/Scheduled Transitions modules.
  */
 function utexas_install_features(&$install_state) {
   $state = \Drupal::state();
@@ -83,6 +83,13 @@ function utexas_install_features(&$install_state) {
       'utprof_vocabulary_groups',
       'utprof_vocabulary_tags',
       'utprof_overrides',
+    ]);
+  }
+  if ($state->get('utexas_installation_options.install_scheduled_transitions', FALSE)) {
+    // We allow non-dependency injection calls.
+    // phpcs:ignore
+    \Drupal::service('module_installer')->install([
+      'utexas_scheduled_transitions',
     ]);
   }
 }
@@ -134,4 +141,5 @@ function utexas_install_cleanup(&$install_state) {
   \Drupal::state()->delete('utexas_installation_options.install_profile');
   \Drupal::state()->delete('utexas_installation_options.install_event');
   \Drupal::state()->delete('utexas_installation_options.install_news');
+  \Drupal::state()->delete('utexas_installation_options.install_scheduled_transitions');
 }

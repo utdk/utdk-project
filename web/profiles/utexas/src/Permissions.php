@@ -56,6 +56,8 @@ class Permissions {
     'access taxonomy overview',
     'access toolbar',
     'access trash',
+    'add scheduled transitions node page',
+    'add scheduled transitions node utexas_flex_page',
     'administer block content',
     'administer breadcrumbs visibility config',
     'administer menu',
@@ -93,6 +95,8 @@ class Permissions {
     'edit terms in tags',
     'link to any page',
     'purge node entities',
+    'reschedule scheduled transitions node page',
+    'reschedule scheduled transitions node utexas_flex_page',
     'restore node entities',
     'revert all revisions',
     'revert article revisions',
@@ -109,6 +113,7 @@ class Permissions {
     'use text format restricted_html',
     'view all media revisions',
     'view all revisions',
+    'view all scheduled transitions',
     'view any unpublished content',
     'view latest version',
     'view article revisions',
@@ -118,6 +123,8 @@ class Permissions {
     'view page revisions',
     'view the administration theme',
     'view utexas_flex_page revisions',
+    'view scheduled transitions node page',
+    'view scheduled transitions node utexas_flex_page',
   ];
 
   /**

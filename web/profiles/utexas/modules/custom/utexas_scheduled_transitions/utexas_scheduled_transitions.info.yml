@@ -1,0 +1,9 @@
+name: 'UTexas Scheduled Transitions'
+type: module
+description: 'Restricts scheduled transitions to top-of-hour times (00 minutes, 00 seconds).'
+package: UTexas
+core_version_requirement: ^11 || ^12
+dependencies:
+  - drupal:system
+  - drupal:datetime
+  - scheduled_transitions:scheduled_transitions

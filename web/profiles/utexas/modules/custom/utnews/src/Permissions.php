@@ -24,6 +24,7 @@ class Permissions {
    * @var array
    */
   public static $editor = [
+    'add scheduled transitions node utnews_news',
     'create terms in utnews_authors',
     'create terms in utnews_categories',
     'create terms in utnews_tags',
@@ -39,9 +40,10 @@ class Permissions {
     'edit terms in utnews_authors',
     'edit terms in utnews_categories',
     'edit terms in utnews_tags',
+    'reschedule scheduled transitions node utnews_news',
     'revert utnews_news revisions',
+    'view scheduled transitions node utnews_news',
     'view utnews_news revisions',
-
   ];
 
   /**
