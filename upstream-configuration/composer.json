@@ -2,7 +2,7 @@
     "name": "utexas/upstream-configuration",
     "description": "Defines requirements specific to the UT Drupal Kit.",
     "type": "project",
-    "version": "3.33.2",
+    "version": "3.33.3",
     "require": {
         "composer/installers": "^1.9 || ^2.0",
         "cweagans/composer-patches": "~1.0",
@@ -27,7 +27,7 @@
         "drupal/feeds_ex": "1.0.0-beta5",
         "drupal/feeds_tamper": "2.0.0-rc1",
         "drupal/field_group": "4.0.0",
-        "drupal/fullcalendar_view": "5.2.5",
+        "drupal/fullcalendar_view": "5.2.6",
         "drupal/google_cse": "5.0.5",
         "drupal/google_tag": "2.0.9",
         "drupal/iframe_title_filter": "3.1.2",
