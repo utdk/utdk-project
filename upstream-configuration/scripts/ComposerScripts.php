@@ -30,7 +30,7 @@ class ComposerScripts {
   public static function preUpdate(Event $event) {
     $io = $event->getIO();
 
-    // We will only set the root version if it has not already been overriden
+    // We will only set the root version if it has not already been overriden.
     if (!getenv('COMPOSER_ROOT_VERSION')) {
       // This is not an error; rather, we are writing to stderr.
       $io->writeError("<info>Using version 'dev-main' for path repositories.</info>");
@@ -38,21 +38,21 @@ class ComposerScripts {
       putenv('COMPOSER_ROOT_VERSION=dev-main');
     }
 
-    // Apply updates to top-level composer.json
+    // Apply updates to top-level composer.json.
     static::applyComposerJsonUpdates($event);
   }
 
   /**
-   * postUpdate.
+   * Post Update.
    *
    * After "composer update" runs, we have the opportunity to do additional
    * fixups to the project files.
    *
    * @param Composer\Script\Event $event
-   *   The Event object passed in from Composer
+   *   The Event object passed in from Composer.
    */
   public static function postUpdate(Event $event) {
-    // for future use
+    // For future use.
   }
 
   /**
@@ -85,7 +85,8 @@ class ComposerScripts {
     $requires = $package->getRequires();
     foreach ($packages_to_remove as $value) {
       if (isset($composerJson['require'][$value])) {
-        $io->write("<info>Removing Composer requirement for $value. It is now provided by the UTexas installation profile.</info>");
+        $io->write("<info>Removing Composer requirement for $value.
+        It is now provided by the UTexas installation profile.</info>");
         unset($composerJson['require'][$value]);
         unset($requires[$value]);
         $needs_rebuild = TRUE;
@@ -95,10 +96,10 @@ class ComposerScripts {
       $package->setRequires($requires);
     }
 
-    // Check to see if the platform PHP version (which should be major.minor.patch)
-    // is the same as the Pantheon PHP version (which is only major.minor).
-    // If they do not match, force an update to the platform PHP version. If they
-    // have the same major.minor version, then
+    // Check to see if the platform PHP version (which should be
+    // major.minor.patch) is the same as the Pantheon PHP version
+    // (which is only major.minor). If they do not match, force an
+    // update to the platform PHP version.
     $platformPhpVersion = static::getCurrentPlatformPhp($event);
     $pantheonPhpVersion = static::getPantheonPhpVersion($event);
     $updatedPlatformPhpVersion = static::bestPhpPatchVersion($pantheonPhpVersion);
@@ -130,22 +131,6 @@ class ComposerScripts {
       $composerJson['extra']['enable-patching'] = TRUE;
     }
 
-    // Populate allowed Composer plugins.
-    $allowed_composer_plugins = [
-      'phpstan/extension-installer' => 'Drupal core-dev requires phpstan/extension-installer (https://www.drupal.org/docs/develop/development-tools/phpstan/getting-started)',
-      'php-http/discovery' => 'Drupal 10.2 requires php-http/discovery (https://www.drupal.org/project/drupal/issues/3393151)',
-      'dealerdirect/phpcodesniffer-composer-installer' => 'Drupal 9.3 requires dealerdirect/phpcodesniffer-composer-installer (https://www.drupal.org/project/drupal/issues/3255749)',
-      'tbachert/spi' => 'Drupal core 10.4 requires tbachert/spi (https://www.drupal.org/node/3492353)',
-      'drupal/core-recipe-unpack' => 'Drupal core 11.2 requires drupal/core-recipe-unpack (https://www.drupal.org/node/3522189)',
-      'symfony/*' => 'Drupal 11.4 requires symfony/runtime (https://www.drupal.org/node/3553275)',
-    ];
-    foreach ($allowed_composer_plugins as $plugin => $description) {
-      if (!isset($composerJson['config']['allow-plugins'][$plugin])) {
-        $io->write("<info>$description</info>");
-        $composerJson['config']['allow-plugins'][$plugin] = TRUE;
-      }
-    }
-
     if (serialize($composerJson) == serialize($originalComposerJson)) {
       return;
     }
@@ -156,12 +141,12 @@ class ComposerScripts {
   }
 
   /**
-   * jsonEncodePretty.
+   * Json Encode Pretty.
    *
    * Convert a nested array into a pretty-printed json-encoded string.
    *
    * @param array $data
-   *   The data array to encode
+   *   The data array to encode.
    *
    * @return string
    *   The pretty-printed encoded string version of the supplied data.
@@ -217,7 +202,7 @@ class ComposerScripts {
   }
 
   /**
-   * Determine which patch version to use when the user changes their platform php version.
+   * Determine patch version to use when user changes platform php version.
    */
   private static function bestPhpPatchVersion($pantheonPhpVersion) {
     // Drupal 11 requires PHP 8.3 at a minimum.
