@@ -27,8 +27,8 @@ class Search extends ControllerBase {
     // We allow static calls to Drupal methods.
     // phpcs:ignore
     $google_pse_id = \Drupal::state()->get('utexas.google_pse_id') ?? '';
-    $build['#cache']['contexts'][] = 'url.query_args:keys';
-    $raw_search = $request->query->get('keys') ?? '';
+    $build['#cache']['contexts'][] = 'url.query_args:q';
+    $raw_search = $request->query->get('q') ?? '';
     $search_term = Html::escape($raw_search);
     $build['#title']['#markup'] = !empty($search_term) ? "Search for <q>$search_term</q>" : "Search";
     // Add the Google Programmable Search library itself, with ID as a param.

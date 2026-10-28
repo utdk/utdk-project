@@ -40,7 +40,7 @@ class GoogleSearchTest extends FunctionalJavascriptTestBase {
     $this->drupalGet('<front>');
     $page->fillField('google-cse-query', 'Web Content Management Office Hours');
     $this->submitForm([], 'Search');
-    $this->assertStringContainsString('/search/google?keys=Web+Content+Management+Office+Hours', $this->getUrl(), 'Site search submits to /search/google');
+    $this->assertStringContainsString('/search/google?q=Web+Content+Management+Office+Hours', $this->getUrl(), 'Site search submits to /search/google');
     $this->assertStringNotContainsString('form_build_id', $this->getUrl(), 'Form build information is omitted from GET parameters per formUtexasSearchFormAlter');
     $assert->pageTextContains("Search for Web Content Management Office Hours");
     // The breadcrumb block is suppressed from the search page.

@@ -82,9 +82,9 @@ class UtexasGoogleSearchForm extends FormBase {
     }
     // We allow static calls to Drupal methods.
     // phpcs:ignore
-    $user_input = \Drupal::request()->query->get('keys') ?? '';
+    $user_input = \Drupal::request()->query->get('q') ?? '';
     $form['#action'] = Url::fromRoute('utexas_google_search.search')->toString();
-    $form['keys'] = [
+    $form['q'] = [
       '#type' => 'search',
       '#title' => $this->t('Search'),
       '#title_display' => 'invisible',
@@ -94,7 +94,7 @@ class UtexasGoogleSearchForm extends FormBase {
       '#placeholder' => 'Search the site...',
       '#attributes' => ['title' => $this->t('Enter the terms you wish to search for.')],
     ];
-    $form['#cache']['contexts'][] = 'url.query_args:keys';
+    $form['#cache']['contexts'][] = 'url.query_args:q';
     $form['actions'] = ['#type' => 'actions'];
     $form['#method'] = 'get';
     $form['actions']['submit'] = [
