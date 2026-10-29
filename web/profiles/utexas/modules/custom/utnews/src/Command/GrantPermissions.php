@@ -2,12 +2,15 @@
 
 namespace Drupal\utnews\Command;
 
-use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Attribute\Argument;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
 use Drupal\utnews\Permissions;
+use Symfony\Component\Console\Attribute\Argument;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Assigns predefined permissions to specified role.
+ */
 #[AsCommand(
   name: 'utnews:grant',
   description: 'Assigns predefined permissions to specified role.'
@@ -38,4 +41,5 @@ class GrantPermissions {
     }
     return Command::SUCCESS;
   }
+
 }

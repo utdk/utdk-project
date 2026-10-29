@@ -2,12 +2,15 @@
 
 namespace Drupal\utprof\Command;
 
-use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Attribute\Argument;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
 use Drupal\utevent\Permissions;
+use Symfony\Component\Console\Attribute\Argument;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Assigns predefined permissions to specified role.
+ */
 #[AsCommand(
   name: 'utprof:grant',
   description: 'Assigns predefined permissions to specified role.'
@@ -38,4 +41,5 @@ class GrantPermissions {
     }
     return Command::SUCCESS;
   }
+
 }
