@@ -1626,3 +1626,34 @@ function utexas_update_11014() {
     \Drupal::service('module_installer')->install([$module_to_install]);
   }
 }
+
+/**
+ * Grant Editoria11y permissions (#298).
+ */
+function utexas_update_11015() {
+  $editoria11y_permissions = [
+    'view editoria11y checker',
+    'manage editoria11y results',
+    'mark as hidden in editoria11y',
+    'mark as ok in editoria11y',
+  ];
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    if ($role->hasPermission('access content overview')) {
+      foreach ($editoria11y_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $messenger->addMessage(t('Editoria11y permissions have been granted to the %role role.', [
+        '%role' => $role->label(),
+      ]));
+      $needs_change = TRUE;
+    }
+    if ($needs_change) {
+      $role->save();
+    }
+  }
+}
