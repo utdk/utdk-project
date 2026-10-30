@@ -128,6 +128,12 @@ function utexas_install() {
       $config_handler->delete(TRUE);
     }
   }
+
+  // Disable select Editoria11y tests (#298).
+  \Drupal::configFactory()
+    ->getEditable('editoria11y.settings')
+    ->set('tests_off', 'CONTRAST_WARNING_GRAPHIC,LINK_CLICK_HERE,HEADING_SKIPPED_LEVEL,LINK_IMAGE_ALT')
+    ->save();
 }
 
 /**
@@ -1618,12 +1624,17 @@ function utexas_update_11013() {
 }
 
 /**
- * Install Editoria11y module on existing sites (#298).
+ * Install and configure Editoria11y module on existing sites (#298).
  */
 function utexas_update_11014() {
   $module_to_install = 'editoria11y';
   if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
     \Drupal::service('module_installer')->install([$module_to_install]);
+    // Disable select Editoria11y tests.
+    \Drupal::configFactory()
+      ->getEditable('editoria11y.settings')
+      ->set('tests_off', 'CONTRAST_WARNING_GRAPHIC,LINK_CLICK_HERE,HEADING_SKIPPED_LEVEL,LINK_IMAGE_ALT')
+      ->save();
   }
 }
 
