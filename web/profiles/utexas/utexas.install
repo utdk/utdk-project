@@ -1616,3 +1616,13 @@ function utexas_update_11013() {
   }
   \Drupal::service('theme_installer')->uninstall([$theme]);
 }
+
+/**
+ * Install Editoria11y module on existing sites (#298).
+ */
+function utexas_update_11014() {
+  $module_to_install = 'editoria11y';
+  if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
+    \Drupal::service('module_installer')->install([$module_to_install]);
+  }
+}
