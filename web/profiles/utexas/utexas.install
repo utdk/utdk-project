@@ -128,6 +128,12 @@ function utexas_install() {
       $config_handler->delete(TRUE);
     }
   }
+
+  // Disable select Editoria11y tests (#298).
+  \Drupal::configFactory()
+    ->getEditable('editoria11y.settings')
+    ->set('tests_off', 'CONTRAST_WARNING_GRAPHIC,LINK_CLICK_HERE,HEADING_SKIPPED_LEVEL,LINK_IMAGE_ALT')
+    ->save();
 }
 
 /**
@@ -1615,4 +1621,50 @@ function utexas_update_11013() {
     return;
   }
   \Drupal::service('theme_installer')->uninstall([$theme]);
+}
+
+/**
+ * Install and configure Editoria11y module on existing sites (#298).
+ */
+function utexas_update_11014() {
+  $module_to_install = 'editoria11y';
+  if (\Drupal::moduleHandler()->moduleExists($module_to_install) === FALSE) {
+    \Drupal::service('module_installer')->install([$module_to_install]);
+    // Disable select Editoria11y tests.
+    \Drupal::configFactory()
+      ->getEditable('editoria11y.settings')
+      ->set('tests_off', 'CONTRAST_WARNING_GRAPHIC,LINK_CLICK_HERE,HEADING_SKIPPED_LEVEL,LINK_IMAGE_ALT')
+      ->save();
+  }
+}
+
+/**
+ * Grant Editoria11y permissions (#298).
+ */
+function utexas_update_11015() {
+  $editoria11y_permissions = [
+    'view editoria11y checker',
+    'manage editoria11y results',
+    'mark as hidden in editoria11y',
+    'mark as ok in editoria11y',
+  ];
+  $entity_type_manager = Drupal::entityTypeManager();
+  $messenger = Drupal::messenger();
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  /** @var Drupal\user\Entity\Role $role */
+  foreach ($roles as $role) {
+    $needs_change = FALSE;
+    if ($role->hasPermission('access content overview')) {
+      foreach ($editoria11y_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+      $messenger->addMessage(t('Editoria11y permissions have been granted to the %role role.', [
+        '%role' => $role->label(),
+      ]));
+      $needs_change = TRUE;
+    }
+    if ($needs_change) {
+      $role->save();
+    }
+  }
 }
