@@ -209,13 +209,18 @@
           z-index: 2;
         }
       }
-      /* Right-align last item's dropdown to avoid going off-screen */
-      &:last-child .dropdown-menu,
-      &:nth-last-child(2):not(:first-child) .dropdown-menu {
-        right: 0;
-        left: unset;
-        margin-left: -1px;
-        margin-right: -1px;
+    }
+    /* "Hang-left" last 2 items dropdown to avoid going off-screen */
+    /* This is scoped only to center-aligned and right-aligned menus */
+    &:not(.justify-content-start) {
+      .dropdown {
+        &:last-child .dropdown-menu,
+        &:nth-last-child(2):not(:first-child) .dropdown-menu {
+          right: 0;
+          left: unset;
+          margin-left: -1px;
+          margin-right: -1px;
+        }
       }
     }
   }
