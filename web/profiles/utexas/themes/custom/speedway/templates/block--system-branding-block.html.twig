@@ -15,7 +15,6 @@
 #}
 {% block content %}
   {% if site_logo %}
-    <span class="site-title visually-hidden">{{ site.title }}</span>
     <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
       <img class="ut-logo--main" src="{{ site_logo }}" alt="{{ logo_alt_text ~ ' home'|t}}" fetchpriority="high"/>
     </a>
