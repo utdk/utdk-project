@@ -107,7 +107,6 @@ class Permissions {
     'revert utexas_flex_page revisions',
     'update any media',
     'update media',
-    'use advanced search',
     'use standard_workflow transition archive',
     'use standard_workflow transition create_new_draft',
     'use standard_workflow transition publish',

@@ -1668,3 +1668,13 @@ function utexas_update_11015() {
     }
   }
 }
+
+/**
+ * Uninstall core Search module (#306).
+ */
+function utexas_update_11016() {
+  $module = 'search';
+  if (InstallationHelper::moduleHasNoActiveDependencies($module)) {
+    \Drupal::service('module_installer')->uninstall([$module], FALSE);
+  }
+}

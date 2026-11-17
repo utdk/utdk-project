@@ -1,0 +1,7 @@
+name: 'UTexas Google Search test'
+type: module
+description: 'Provides mock Google search markup for testing UTexas Google Search accessibility tweaks'
+package: Testing
+core_version_requirement: ^10 || ^11
+dependencies:
+  - utexas_google_search:utexas_google_search

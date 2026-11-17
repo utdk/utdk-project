@@ -1,0 +1,7 @@
+utexas_google_search_test.markup:
+  path: '/google_cse_markup'
+  defaults:
+    _controller: '\Drupal\utexas_google_search_test\Controller\MockGoogleMarkup::view'
+    _title: 'Search'
+  requirements:
+    _permission: 'access content'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\legacy_google_cse\Controller;
+namespace Drupal\utexas_google_search_test\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class MockGoogleMarkup extends ControllerBase {
    */
   public function view(Request $request) {
     $module_handler = \Drupal::service('module_handler');
-    $module_path = $module_handler->getModule('legacy_google_cse')->getPath();
+    $module_path = $module_handler->getModule('utexas_google_search_test')->getPath();
     $build['#markup'] = file_get_contents($module_path . '/assets/test-content.html');
     $build['#attached']['library'][] = 'utexas_google_search/accessibilityTweaks';
     return $build;

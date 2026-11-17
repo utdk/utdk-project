@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\Tests\utexas\FunctionalJavascript;
 
 use Drupal\Tests\utexas\Traits\TextFormatsTestTraits\TextFormatsTestTrait;
-use Drupal\user\RoleInterface;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 
 /**
@@ -56,45 +55,8 @@ class GoogleSearchTest extends FunctionalJavascriptTestBase {
     $assert->fieldValueEquals('google_pse_id', 'user-entered-string');
     $this->drupalLogout();
 
-    // Simulate an update from a site with Google CSE.
-    // @todo Remove this after all sites have updated to 3.32.0.
-    $module_installer = $this->container->get('module_installer');
-    $module_installer->uninstall(['utexas_google_search']);
-    $module_installer->install(['legacy_google_cse']);
-    $config = \Drupal::configFactory()->getEditable('search.settings');
-    $config->set('default_page', 'google_cse_search');
-    $config->save();
-    // Add permissions to anonymous role.
-    $anon_perms = [
-      'access content',
-      'search Google CSE',
-      'search content',
-    ];
-    $entity_type_manager = \Drupal::entityTypeManager();
-    /** @var Drupal\user\Entity\Role $anon */
-    $anon = $entity_type_manager->getStorage('user_role')->load(RoleInterface::ANONYMOUS_ID);
-    foreach ($anon_perms as $perm) {
-      $anon->grantPermission($perm);
-    }
-    $anon->save();
-    $this->drupalGet('<front>');
-    // Confirm Legacy Google CSE search is present in header tertiary.
-    $assert->elementTextContains('css', '.region-header-tertiary', 'Search');
-    $assert->elementTextContains('css', '.search-block-form', 'Search');
-    $module_installer->install(['utexas_google_search']);
-    $this->drupalGet('<front>');
-    drupal_flush_all_caches();
-    // Confirm that the hook_install() for utexas_google_search...
-    // (A) Migrates the Google PSE ID.
-    $google_pse_id = \Drupal::state()->get('utexas.google_pse_id') ?? '';
-    $this->assertEquals('testonlyvalue', $google_pse_id, 'Google PSE ID migrated to the Drupal state value');
-    // (B) Removes the legacy search block
-    $assert->elementNotExists('css', '.search-block-form');
-    // (c) Replaces it with the new Utexas Google Search block
-    $assert->elementTextContains('css', '.region-header-tertiary', 'Search');
-    $assert->elementTextContains('css', '.utexas-search-form', 'Search');
-
     // Confirm our Accessibility tweaks to Google markup work.
+    $this->container->get('module_installer')->install(['utexas_google_search_test']);
     $this->drupalGet('/google_cse_markup');
     $el = $assert->waitForElement('css', '.gsc-result-info[role="status"]', 10000);
     $this->assertNotEmpty($el, 'The .gsc-result-info element did not get the status role within 10 seconds.');
