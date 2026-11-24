@@ -5,7 +5,7 @@ namespace Drupal\utexas_site_announcement\Plugin\Block;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\Markup;
@@ -32,7 +32,7 @@ class AnnouncementBlock extends BlockBase implements ContainerFactoryPluginInter
   /**
    * The EntityTypeManager.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
@@ -45,10 +45,10 @@ class AnnouncementBlock extends BlockBase implements ContainerFactoryPluginInter
    *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\Entity\EntityTypeManager $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ?EntityTypeManager $entity_type_manager = NULL) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ?EntityTypeManagerInterface $entity_type_manager = NULL) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $entity_type_manager;
   }

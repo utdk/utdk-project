@@ -103,6 +103,16 @@ class Hooks {
 
         $form['date']['#suffix'] = $help_text;
       }
+
+      // With simplified_ui.only_latest_revision enabled (set in configure()),
+      // the 'revision' element is a hidden field with no #options, but
+      // ScheduledTransitionsHooks::preprocessFormAdd() unconditionally loops
+      // over $form['revision']['#options'], triggering a PHP warning. An empty
+      // array is ignored by the hidden element and keeps the loop safe.
+      if (isset($form['scheduled_transitions']['revision']) &&
+          ($form['scheduled_transitions']['revision']['#type'] ?? NULL) === 'hidden') {
+        $form['scheduled_transitions']['revision']['#options'] ??= [];
+      }
     }
   }
 
