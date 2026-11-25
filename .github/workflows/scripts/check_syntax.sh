@@ -48,7 +48,11 @@ if [ ! -z "$PHP_LIST" ]; then
   vendor/bin/phpcs --standard="vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" $PHP_LIST --extensions=$PHP_EXTENSIONS --exclude=$EXCLUDE_RULES
 fi
 
-JS_LIST=$( git diff $TO_MERGE --name-only --diff-filter=ACMRX -- "*.js")
+# Vendored/minified files to skip when linting.
+JS_EXCLUDE=(
+  ":(exclude)web/profiles/utexas/js/Bootstrap5/bootstrap.bundle.min.js"
+)
+JS_LIST=$( git diff $TO_MERGE --name-only --diff-filter=ACMRX -- "*.js" "${JS_EXCLUDE[@]}")
 if [ ! -z "$JS_LIST" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
